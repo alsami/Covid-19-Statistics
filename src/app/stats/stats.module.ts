@@ -9,6 +9,7 @@ import { LatestStatsEffects } from '@covid19/stats/+state/effects';
 import { LatestStatsOverviewComponent } from '@covid19/stats/containers';
 import { LatestStatsCardComponent } from '@covid19/stats/components';
 import { MaterialModule } from '@covid19/material/material.module';
+import { SharedModule } from '@covid19/shared/shared.module';
 
 const COMPONENTS = [LatestStatsOverviewComponent, LatestStatsCardComponent];
 
@@ -18,6 +19,7 @@ const COMPONENTS = [LatestStatsOverviewComponent, LatestStatsCardComponent];
     CommonModule,
     StatsRoutingModule,
     MaterialModule,
+    SharedModule,
     StoreModule.forFeature('stats', fromStats.reducers),
     EffectsModule.forFeature([LatestStatsEffects])
   ],

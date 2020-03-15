@@ -1,0 +1,19 @@
+<div class="component-loader-container">
+  <ng-content></ng-content>
+  <div
+    *ngIf="loading"
+    class="component-loader-overlay cdk-overlay-dark-backdrop"
+  >
+    <div
+      class="component-loader-overlay-container flex-container flex-flow-column flex-center-center"
+    >
+      <mat-progress-spinner
+        color="accent"
+        mode="indeterminate"
+      ></mat-progress-spinner>
+      <div *ngIf="message" class="component-loader-overlay-message-container">
+        {{ message }} {{ dots$ | async }}
+      </div>
+    </div>
+  </div>
+</div>

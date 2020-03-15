@@ -30,3 +30,8 @@ export const getLatestStats = createSelector(
   getLatestStatsState,
   fromLatests.latestStats
 );
+
+export const getLatestStatsLoading = createSelector(
+  getLatestStatsState,
+  fromLatests.loading
+);

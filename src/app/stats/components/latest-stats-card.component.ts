@@ -2,7 +2,9 @@ import {
   Component,
   OnInit,
   Input,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { LatestStats } from '@covid19/stats/models';
 
@@ -14,6 +16,8 @@ import { LatestStats } from '@covid19/stats/models';
 })
 export class LatestStatsCardComponent implements OnInit {
   @Input() latestStats: LatestStats;
+
+  @Output() refresh = new EventEmitter();
 
   constructor() {}
 

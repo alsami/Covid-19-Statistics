@@ -12,12 +12,20 @@ import { LatestStats } from '@covid19/stats/models';
 })
 export class LatestStatsOverviewComponent implements OnInit {
   latestStats$: Observable<LatestStats>;
+  latestStatsLoading$: Observable<boolean>;
 
   public constructor(private readonly store: Store<fromStats.StatsState>) {}
 
   public ngOnInit(): void {
-    this.store.dispatch(load());
     this.latestStats$ = this.store.pipe(select(fromStats.getLatestStats));
-    this.latestStats$.subscribe(s => console.log('latest', s));
+    this.latestStatsLoading$ = this.store.pipe(
+      select(fromStats.getLatestStatsLoading)
+    );
+
+    this.loadLatestStats();
+  }
+
+  public loadLatestStats(): void {
+    this.store.dispatch(load());
   }
 }

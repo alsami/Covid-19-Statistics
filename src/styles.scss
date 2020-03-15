@@ -1,15 +1,31 @@
 @import '@angular/material/prebuilt-themes/purple-green.css';
+@import './scss/breakpoints.scss';
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 html {
-    font: {
-        font-family: "Roboto", "Helvetica Neue", sans-serif;
-    }
+  font: {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  }
 }
 
 body {
-    margin: 0px;
+  margin: 0px;
+}
+
+.page-content {
+  padding: 16px;
+}
+
+@media #{ $xs } {
+  .page-content {
+    padding: 0px;
+  }
+
+  .page-content-pad-xs {
+    padding: 8px;
+  }
 }
