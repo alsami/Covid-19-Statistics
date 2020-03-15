@@ -12,7 +12,7 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "covid19",
       "camelCase"
     ],
     "component-selector": [

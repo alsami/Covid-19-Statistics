@@ -1,0 +1,10 @@
+{
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "typescript.suggest.autoImports": true,
+    "typescript.preferences.quoteStyle": "single",
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "tslint.autoFixOnSave": true,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+}
