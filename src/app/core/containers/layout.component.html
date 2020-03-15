@@ -1,12 +1,12 @@
 <covid19-toolbar (toggle)="toggleSidenav()"></covid19-toolbar>
 <mat-sidenav-container
   class="main-sidenav-container"
-  (backdropClick)="opened = !opened"
+  (backdropClick)="toggleSidenav()"
 >
   <mat-sidenav
     [mode]="'side'"
     [opened]="opened"
-    [fixedInViewport]="true"
+    [fixedInViewport]="fixedInViewport"
     [fixedTopGap]="layoutGap"
   >
     <covid19-sidenav-content></covid19-sidenav-content>

@@ -35,12 +35,7 @@ export class LayoutComponent implements OnInit {
   }
 
   public toggleSidenav(): void {
-    if (!this.opened) {
-      this.opened = true;
-      return;
-    }
-
-    this.opened = false;
+    this.opened = !this.opened;
   }
 
   private determineSidenavMode(): void {
