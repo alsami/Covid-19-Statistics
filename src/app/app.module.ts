@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '@covid19/app-routing.module';
 import { TitleEffects } from '@covid19/core/+state/effects';
 import { reducers, metaReducers } from '@covid19/+state';
+
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
