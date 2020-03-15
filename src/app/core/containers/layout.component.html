@@ -1,9 +1,15 @@
-<covid19-toolbar></covid19-toolbar>
-<mat-sidenav-container class="main-sidenav-container">
-    <mat-sidenav #sidenav [mode]="mode" [opened]="true" [fixedInViewport]="fixedInViewport" [fixedTopGap]="layoutGap">
-        <covid19-sidenav-content></covid19-sidenav-content>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
+<covid19-toolbar (toggle)="toggleSidenav()"></covid19-toolbar>
+<mat-sidenav-container
+  class="main-sidenav-container"
+  (backdropClick)="opened = !opened"
+>
+  <mat-sidenav
+    [mode]="'side'"
+    [opened]="opened"
+    [fixedInViewport]="true"
+    [fixedTopGap]="layoutGap"
+  >
+    <covid19-sidenav-content></covid19-sidenav-content>
+  </mat-sidenav>
+  <router-outlet></router-outlet>
 </mat-sidenav-container>
