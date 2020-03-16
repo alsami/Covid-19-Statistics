@@ -1,5 +1,5 @@
 import * as fromRoot from '@covid19/+state';
-import * as fromLatests from './latest-stats.reducer';
+import * as fromGlobalStats from './global-stats.reducer';
 
 import {
   ActionReducerMap,
@@ -8,30 +8,30 @@ import {
 } from '@ngrx/store';
 
 export interface StatsState {
-  latest: fromLatests.LatestStatsState;
+  global: fromGlobalStats.LatestStatsState;
 }
 
 export interface State extends fromRoot.AppState {
-  latest: StatsState;
+  global: StatsState;
 }
 
 export const reducers: ActionReducerMap<StatsState> = {
-  latest: fromLatests.reducer
+  global: fromGlobalStats.reducer
 };
 
 export const getStatsState = createFeatureSelector<StatsState>('stats');
 
 export const getLatestStatsState = createSelector(
   getStatsState,
-  state => state.latest
+  state => state.global
 );
 
 export const getLatestStats = createSelector(
   getLatestStatsState,
-  fromLatests.latestStats
+  fromGlobalStats.globalStats
 );
 
 export const getLatestStatsLoading = createSelector(
   getLatestStatsState,
-  fromLatests.loading
+  fromGlobalStats.loading
 );

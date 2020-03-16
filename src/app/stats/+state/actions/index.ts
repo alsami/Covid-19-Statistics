@@ -1,2 +1,2 @@
-import * as latestStatsActions from './latest-stats.actions';
-export { latestStatsActions };
+import * as globalStatsActions from './global-stats.actions';
+export { globalStatsActions };

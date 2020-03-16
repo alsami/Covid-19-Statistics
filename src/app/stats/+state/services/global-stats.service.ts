@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { LatestStats } from '@covid19/stats/models';
+import { GlobalStats } from '@covid19/stats/models';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class LatestStatsService {
+export class GlobalStatsService {
   private readonly baseUrl = environment.apiUrl;
 
   public constructor(private readonly http: HttpClient) {}
 
-  public load(): Observable<LatestStats> {
-    return this.http.get<LatestStats>(`${this.baseUrl}stats`);
+  public load(): Observable<GlobalStats> {
+    return this.http.get<GlobalStats>(`${this.baseUrl}stats`);
   }
 }

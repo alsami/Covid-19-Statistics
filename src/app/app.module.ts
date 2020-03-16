@@ -1,16 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { MaterialModule } from '@covid19/material/material.module';
-import { CoreModule } from '@covid19/core/core.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { metaReducers, reducers } from '@covid19/+state';
 import { AppRoutingModule } from '@covid19/app-routing.module';
 import { TitleEffects } from '@covid19/core/+state/effects';
-import { reducers, metaReducers } from '@covid19/+state';
-
-import { StoreModule } from '@ngrx/store';
+import { CoreModule } from '@covid19/core/core.module';
+import { MaterialModule } from '@covid19/material/material.module';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],

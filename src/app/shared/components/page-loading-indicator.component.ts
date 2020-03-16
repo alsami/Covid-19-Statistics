@@ -1,22 +1,22 @@
+import { Breakpoints } from '@angular/cdk/layout';
 import {
-  Component,
-  OnInit,
-  OnDestroy,
+  Overlay,
+  OverlayPositionBuilder,
+  OverlayRef
+} from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import {
   AfterViewInit,
+  Component,
   Input,
-  ViewChild,
+  OnDestroy,
+  OnInit,
   TemplateRef,
+  ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {
-  OverlayRef,
-  Overlay,
-  OverlayPositionBuilder
-} from '@angular/cdk/overlay';
-import { Subscription } from 'rxjs';
 import { BreakpointService } from '@covid19/core/services';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { Breakpoints } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'covid19-page-loading-indicator',

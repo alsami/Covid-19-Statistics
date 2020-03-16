@@ -1,12 +1,12 @@
+import { fromTitle } from '@covid19/core/+state/reducers';
 import {
   ActionReducer,
   ActionReducerMap,
-  MetaReducer,
   createFeatureSelector,
-  createSelector
+  createSelector,
+  MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { fromTitle } from '@covid19/core/+state/reducers';
 
 export interface AppState {
   title: fromTitle.TitleState;

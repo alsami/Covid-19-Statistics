@@ -1,1 +1,1 @@
-export * from './latest-stats.model';
+export * from './global-stats.model';

@@ -1,0 +1,10 @@
+<covid19-page-loading-indicator
+  [loading]="globalStatsLoading$ | async"
+></covid19-page-loading-indicator>
+<div class="page-content">
+  <covid19-global-stats-card
+    *ngIf="globalStats$ | async"
+    [globalStats]="globalStats$ | async"
+    (refresh)="loadGlobalStats()"
+  ></covid19-global-stats-card>
+</div>

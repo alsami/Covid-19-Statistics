@@ -1,13 +1,13 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutComponent } from '@covid19/core/containers';
-import {
-  ToolbarComponent,
-  SidenavContentComponent
-} from '@covid19/core/components';
-import { MaterialModule } from '@covid19/material/material.module';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import {
+  SidenavContentComponent,
+  ToolbarComponent
+} from '@covid19/core/components';
+import { LayoutComponent } from '@covid19/core/containers';
+import { MaterialModule } from '@covid19/material/material.module';
 
 const COMPONENTS = [LayoutComponent, ToolbarComponent, SidenavContentComponent];
 

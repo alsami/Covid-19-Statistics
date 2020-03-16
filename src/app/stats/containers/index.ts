@@ -1,1 +1,1 @@
-export * from './latest-stats-overview.component';
+export * from './global-stats-overview.component';

@@ -1,1 +1,1 @@
-export * from './latest-stats.service';
+export * from './global-stats.service';

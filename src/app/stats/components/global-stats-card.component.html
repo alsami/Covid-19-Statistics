@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-content
+    style="display: flex; flex-direction: column; align-content: center;"
+  >
+    <h3 mat-sub-header>Global</h3>
+    <mat-card-title>
+      Cases:
+      {{ globalStats.total }}
+    </mat-card-title>
+    <br />
+    Last reported at: {{ globalStats.fetchedAt | date: 'dd.MM.yyyy hh:MM:ss' }}
+  </mat-card-content>
+</mat-card>
+<div style="margin-top: 10px; margin-bottom: 10px;">
+  <mat-card>
+    <mat-card-content
+      style="display: flex; flex-direction: column; align-content: center;"
+    >
+      <h3 mat-sub-header>Global</h3>
+      <mat-card-title>
+        Deaths:
+        {{ globalStats.deaths }}
+      </mat-card-title>
+      <br />
+      Last reported at:
+      {{ globalStats.fetchedAt | date: 'dd.MM.yyyy hh:MM:ss' }}
+    </mat-card-content>
+  </mat-card>
+  <div style="margin-top: 10px; margin-bottom: 10px;"></div>
+  <mat-card>
+    <mat-card-content
+      style="display: flex; flex-direction: column; align-content: center;"
+    >
+      <h3 mat-sub-header>Global</h3>
+      <mat-card-title>
+        Recovered:
+        {{ globalStats.recovered }}
+      </mat-card-title>
+      <br />
+      Last reported at:
+      {{ globalStats.fetchedAt | date: 'dd.MM.yyyy hh:MM:ss' }}
+    </mat-card-content>
+  </mat-card>
+</div>

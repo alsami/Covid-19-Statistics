@@ -1,1 +1,1 @@
-export * from './latest-stats.effects';
+export * from './global-stats.effects';

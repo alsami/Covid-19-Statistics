@@ -1,10 +1,10 @@
-import { LatestStats } from '@covid19/stats/models';
+import { GlobalStats } from '@covid19/stats/models';
 import { createReducer, on } from '@ngrx/store';
-import { latestStatsActions } from '@covid19/stats/+state/actions';
+import { globalStatsActions } from '@covid19/stats/+state/actions';
 
 export interface LatestStatsState {
   loading: boolean;
-  stats: LatestStats;
+  stats: GlobalStats;
 }
 
 const initialState: LatestStatsState = {
@@ -14,15 +14,15 @@ const initialState: LatestStatsState = {
 
 const _reducer = createReducer(
   initialState,
-  on(latestStatsActions.load, state => ({
+  on(globalStatsActions.load, state => ({
     ...state,
     loading: true
   })),
-  on(latestStatsActions.loaded, (_, { latestStats }) => ({
+  on(globalStatsActions.loaded, (_, { latestStats }) => ({
     stats: latestStats,
     loading: false
   })),
-  on(latestStatsActions.loadFailed, state => ({
+  on(globalStatsActions.loadFailed, state => ({
     ...state,
     loading: false
   }))
@@ -33,4 +33,4 @@ export function reducer(state: LatestStatsState, action: any) {
 }
 
 export const loading = (state: LatestStatsState) => state.loading;
-export const latestStats = (state: LatestStatsState) => state.stats;
+export const globalStats = (state: LatestStatsState) => state.stats;
