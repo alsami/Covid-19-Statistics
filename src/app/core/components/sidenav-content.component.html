@@ -1,21 +1,21 @@
 <mat-nav-list>
   <h4 mat-subheader>Statistics</h4>
-  <mat-list-item routerLink="/stats/global">
+  <mat-list-item routerLink="/stats/global" (click)="linkClicked.emit()">
     <mat-icon mat-list-icon>public</mat-icon>
     <h4 mat-line>Global</h4>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item routerLink="/cases/active">
+  <mat-list-item routerLink="/cases/active" (click)="linkClicked.emit()">
     <mat-icon mat-list-icon>arrow_upward</mat-icon>
     <h4 mat-line>Active cases</h4>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item routerLink="/cases/closed">
+  <mat-list-item (click)="linkClicked.emit()">
     <mat-icon mat-list-icon>arrow_downward</mat-icon>
     <h4 mat-line>Closed cases</h4>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item>
+  <mat-list-item (click)="linkClicked.emit()">
     <mat-icon mat-list-icon>flag</mat-icon>
     <h4 mat-line>Countries</h4>
   </mat-list-item>

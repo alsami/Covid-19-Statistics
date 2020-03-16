@@ -12,7 +12,9 @@
     [fixedInViewport]="fixedInViewport"
     [fixedTopGap]="layoutGap"
   >
-    <covid19-sidenav-content></covid19-sidenav-content>
+    <covid19-sidenav-content
+      (linkClicked)="toggleSidenavBasedOnSize()"
+    ></covid19-sidenav-content>
   </mat-sidenav>
   <router-outlet></router-outlet>
 </mat-sidenav-container>

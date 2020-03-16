@@ -49,6 +49,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.opened = !this.opened;
   }
 
+  public toggleSidenavBasedOnSize(): void {
+    if (this.isExtraSmallDevice() || this.isSmallDevice()) {
+      this.opened = false;
+    }
+  }
+
   private determineSidenavMode(): void {
     if (this.isExtraSmallDevice() || this.isSmallDevice()) {
       this.fixedInViewport = false;
