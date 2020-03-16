@@ -39,4 +39,4 @@ const COMPONENTS = [
   exports: [...COMPONENTS],
   providers: [GlobalStatsService, GlobalStatsHistoryService]
 })
-export class LatestStatsModule {}
+export class StatsModule {}

@@ -16,7 +16,12 @@ import { RouterModule } from '@angular/router';
         {
           path: 'stats',
           loadChildren: async () =>
-            (await import('./stats/stats.module')).LatestStatsModule
+            (await import('./stats/stats.module')).StatsModule
+        },
+        {
+          path: 'cases',
+          loadChildren: async () =>
+            (await import('./cases/cases.module')).CasesModule
         }
       ],
       {

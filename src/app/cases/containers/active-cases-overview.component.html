@@ -1,0 +1,20 @@
+<covid19-page-loading-indicator
+  [loading]="loading$ | async"
+></covid19-page-loading-indicator>
+<mat-tab-group mat-stretch-tabs (selectedTabChange)="tabChanged($event)">
+  <mat-tab [label]="tabLabelsFunc[0].label">
+    <div class="page-content">
+      <covid19-active-cases-stats-card
+        *ngIf="activeCasesStats$ | async"
+        [activeCasesStats]="activeCasesStats$ | async"
+      ></covid19-active-cases-stats-card>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[1].label">
+    <div class="page-content">
+      <covid19-active-cases-stats-history-table
+        [activeCasesStats]="activeCasesStatsHistory$ | async"
+      ></covid19-active-cases-stats-history-table>
+    </div>
+  </mat-tab>
+</mat-tab-group>
