@@ -6,17 +6,29 @@
 >
   <ng-container matColumnDef="total">
     <mat-header-cell *matHeaderCellDef>Cases</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.total }}</mat-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.total }}
+      <br />
+      ({{ getPreviousTotalDiff(element) }})
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="deaths">
     <mat-header-cell *matHeaderCellDef>Deaths</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.deaths }}</mat-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.deaths }}
+      <br />
+      ({{ getPreviousDeathsDiff(element) }})
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="recovered">
     <mat-header-cell *matHeaderCellDef>Recovered</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.recovered }}</mat-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.recovered }}
+      <br />
+      ({{ getPreviousRecoveredDiff(element) }})
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="fetchedAt">

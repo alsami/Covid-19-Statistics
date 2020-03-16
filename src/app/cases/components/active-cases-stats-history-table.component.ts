@@ -38,4 +38,18 @@ export class ActiveCasesStatsHistoryTable implements OnInit, OnChanges {
   public trackBy(globalStats: ActiveCaseStats): string {
     return globalStats.fetchedAt;
   }
+
+  public getPreviousTotalDiff(current: ActiveCaseStats): number {
+    const index = this.activeCasesStats.findIndex(stat => stat === current);
+
+    if (index === -1 || index === this.activeCasesStats.length - 1) {
+      return;
+    }
+
+    const previous = this.activeCasesStats[index + 1];
+
+    const diff = current.total - previous.total;
+
+    return diff;
+  }
 }

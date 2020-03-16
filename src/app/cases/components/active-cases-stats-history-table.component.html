@@ -6,7 +6,11 @@
 >
   <ng-container matColumnDef="total">
     <mat-header-cell *matHeaderCellDef>Cases</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.total }}</mat-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.total }}
+      <br />
+      ({{ getPreviousTotalDiff(element) }})
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="mild">
