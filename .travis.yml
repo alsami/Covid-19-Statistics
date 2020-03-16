@@ -1,0 +1,22 @@
+dist: bionic
+sudo: required
+language: node_js
+node_js: 12
+stages:
+  - build
+  - publish
+jobs:
+  include:
+    - stage: build
+      name: build app
+      before_script: npm i
+      script: ng build --prod
+      if: tag IS NOT present
+    - stage: publish
+      name: publish-app
+      if: tag IS present
+      before_script:
+        - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+        - sh create-environment-prod-file.sh "$ETDB_USERSERVICE_URL" "$ETDB_CLIENT_ID" "$GOOGLE_CLIENT_ID" "${TRAVIS_TAG}"
+        - npm i
+      script: sh publish.sh "$CONTAINER_NAME" "$ACCOUNT_NAME" "$ACCOUNT_KEY"
