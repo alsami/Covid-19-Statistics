@@ -31,6 +31,7 @@ export class GlobalStatsHistoryTableComponent implements OnInit, OnChanges {
     }
 
     this.dataSource.data = this.globalStats;
+    console.log(this.dataSource.data);
   }
 
   public trackBy(globalStats: GlobalStats): string {
