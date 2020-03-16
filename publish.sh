@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo build application in production mode, this might take a while
 
-ng build --prod --output-hashing bundles --aot
+ng build --prod --output-hashing bundles
 
 echo done building client, clearing container now
 
