@@ -1,19 +1,26 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import * as fromRoot from '@covid19/+state';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, AfterViewInit {
   mode = 'side';
   opened = true;
   layoutGap = '64';
   fixedInViewport = true;
+  title$: Observable<string>;
 
-  public constructor(private bpo: BreakpointObserver) {}
+  public constructor(
+    private bpo: BreakpointObserver,
+    private store: Store<fromRoot.AppState>
+  ) {}
 
   public ngOnInit(): void {
     const breakpoints = Object.keys(Breakpoints).map(key => Breakpoints[key]);
@@ -32,6 +39,10 @@ export class LayoutComponent implements OnInit {
           this.mode
         );
       });
+  }
+
+  public ngAfterViewInit(): void {
+    this.title$ = this.store.pipe(delay(0), select(fromRoot.getTitle));
   }
 
   public toggleSidenav(): void {

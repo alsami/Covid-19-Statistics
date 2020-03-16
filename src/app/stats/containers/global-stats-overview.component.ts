@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { TitleActions } from '@covid19/core/+state/actions';
 import {
   globalStatsActions,
   globalStatsHistoryActions
@@ -21,10 +22,12 @@ export class GlobalStatsOverviewComponent implements OnInit {
   loading$: Observable<boolean>;
 
   public loadGlobalStats = (): void => {
+    this.store.dispatch(new TitleActions.SetTitle('Global'));
     this.store.dispatch(globalStatsActions.load());
   };
 
   public loadGlobalStatsHistory = (): void => {
+    this.store.dispatch(new TitleActions.SetTitle('Global History'));
     this.store.dispatch(globalStatsHistoryActions.load());
   };
 

@@ -6,6 +6,7 @@ import {
 } from '@covid19/cases/+state/actions';
 import * as fromCases from '@covid19/cases/+state/reducer';
 import { ActiveCaseStats } from '@covid19/cases/models';
+import { TitleActions } from '@covid19/core/+state/actions';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -21,10 +22,12 @@ export class ActiveCasesOverviewComponent implements OnInit {
   loading$: Observable<boolean>;
 
   public loadGlobalStats = (): void => {
+    this.store.dispatch(new TitleActions.SetTitle('Active cases'));
     this.store.dispatch(activeCasesStatsActions.load());
   };
 
   public loadGlobalStatsHistory = (): void => {
+    this.store.dispatch(new TitleActions.SetTitle('Active cases history'));
     this.store.dispatch(activeCasesStatsHistoryActions.load());
   };
 
