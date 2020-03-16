@@ -2,14 +2,14 @@
   <mat-card-content
     style="display: flex; flex-direction: column; align-content: center;"
   >
-    <h3 mat-sub-header>Active</h3>
+    <h3 mat-sub-header>Closed</h3>
     <mat-card-title>
       Cases:
-      {{ activeCasesStats.total }}
+      {{ closedCasesStats.total }}
     </mat-card-title>
     <br />
     Last reported at:
-    {{ activeCasesStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
+    {{ closedCasesStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
   </mat-card-content>
 </mat-card>
 <div style="margin-top: 10px; margin-bottom: 10px;">
@@ -17,16 +17,15 @@
     <mat-card-content
       style="display: flex; flex-direction: column; align-content: center;"
     >
-      <h3 mat-sub-header>Active</h3>
+      <h3 mat-sub-header>Closed</h3>
       <mat-card-title>
-        Mild condition:
-        {{ activeCasesStats.mild }} ({{
-          activeCasesStats.mildPercentage | number
+        Deaths: {{ closedCasesStats.deaths }} ({{
+          closedCasesStats.deathsPercentage | number
         }}%)
       </mat-card-title>
       <br />
       Last reported at:
-      {{ activeCasesStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
+      {{ closedCasesStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
     </mat-card-content>
   </mat-card>
   <div style="margin-top: 10px; margin-bottom: 10px;"></div>
@@ -34,15 +33,16 @@
     <mat-card-content
       style="display: flex; flex-direction: column; align-content: center;"
     >
-      <h3 mat-sub-header>Active</h3>
+      <h3 mat-sub-header>Closed</h3>
       <mat-card-title>
-        Serious condition: {{ activeCasesStats.serious }} ({{
-          activeCasesStats.seriousPercentage | number
+        Recovered:
+        {{ closedCasesStats.recovered }} ({{
+          closedCasesStats.recoveredPercentage | number
         }}%)
       </mat-card-title>
       <br />
       Last reported at:
-      {{ activeCasesStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
+      {{ closedCasesStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
     </mat-card-content>
   </mat-card>
 </div>

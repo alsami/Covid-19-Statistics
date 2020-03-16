@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ActiveCasesOverviewComponent } from '@covid19/cases/containers';
+import {
+  ActiveCasesOverviewComponent,
+  ClosedCasesOverviewComponent
+} from '@covid19/cases/containers';
 
 @NgModule({
   imports: [
@@ -15,6 +18,10 @@ import { ActiveCasesOverviewComponent } from '@covid19/cases/containers';
       {
         path: 'active',
         component: ActiveCasesOverviewComponent
+      },
+      {
+        path: 'closed',
+        component: ClosedCasesOverviewComponent
       }
     ])
   ]

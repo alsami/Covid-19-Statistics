@@ -10,7 +10,7 @@
     <h4 mat-line>Active cases</h4>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item (click)="linkClicked.emit()">
+  <mat-list-item routerLink="/cases/closed" (click)="linkClicked.emit()">
     <mat-icon mat-list-icon>arrow_downward</mat-icon>
     <h4 mat-line>Closed cases</h4>
   </mat-list-item>
