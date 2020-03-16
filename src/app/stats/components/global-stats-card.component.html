@@ -5,7 +5,7 @@
     <h3 mat-sub-header>Global</h3>
     <mat-card-title>
       Cases:
-      {{ globalStats.total }}
+      {{ globalStats.total | number }}
     </mat-card-title>
     <br />
     Last reported at: {{ globalStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
@@ -19,7 +19,7 @@
       <h3 mat-sub-header>Global</h3>
       <mat-card-title>
         Deaths:
-        {{ globalStats.deaths }}
+        {{ globalStats.deaths | number }}
       </mat-card-title>
       <br />
       Last reported at:
@@ -34,7 +34,7 @@
       <h3 mat-sub-header>Global</h3>
       <mat-card-title>
         Recovered:
-        {{ globalStats.recovered }}
+        {{ globalStats.recovered | number }}
       </mat-card-title>
       <br />
       Last reported at:

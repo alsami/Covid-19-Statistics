@@ -5,7 +5,7 @@
     <h3 mat-sub-header>Closed</h3>
     <mat-card-title>
       Cases:
-      {{ closedCasesStats.total }}
+      {{ closedCasesStats.total | number }}
     </mat-card-title>
     <br />
     Last reported at:
@@ -19,7 +19,7 @@
     >
       <h3 mat-sub-header>Closed</h3>
       <mat-card-title>
-        Deaths: {{ closedCasesStats.deaths }} ({{
+        Deaths: {{ closedCasesStats.deaths | number }} ({{
           closedCasesStats.deathsPercentage | number
         }}%)
       </mat-card-title>
@@ -36,7 +36,7 @@
       <h3 mat-sub-header>Closed</h3>
       <mat-card-title>
         Recovered:
-        {{ closedCasesStats.recovered }} ({{
+        {{ closedCasesStats.recovered | number }} ({{
           closedCasesStats.recoveredPercentage | number
         }}%)
       </mat-card-title>

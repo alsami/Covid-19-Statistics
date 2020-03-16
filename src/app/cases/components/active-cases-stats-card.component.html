@@ -5,7 +5,7 @@
     <h3 mat-sub-header>Active</h3>
     <mat-card-title>
       Cases:
-      {{ activeCasesStats.total }}
+      {{ activeCasesStats.total | number }}
     </mat-card-title>
     <br />
     Last reported at:
@@ -20,7 +20,7 @@
       <h3 mat-sub-header>Active</h3>
       <mat-card-title>
         Mild condition:
-        {{ activeCasesStats.mild }} ({{
+        {{ activeCasesStats.mild | number }} ({{
           activeCasesStats.mildPercentage | number
         }}%)
       </mat-card-title>
@@ -36,7 +36,7 @@
     >
       <h3 mat-sub-header>Active</h3>
       <mat-card-title>
-        Serious condition: {{ activeCasesStats.serious }} ({{
+        Serious condition: {{ activeCasesStats.serious | number }} ({{
           activeCasesStats.seriousPercentage | number
         }}%)
       </mat-card-title>

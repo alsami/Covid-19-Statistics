@@ -7,7 +7,7 @@
   <ng-container matColumnDef="total">
     <mat-header-cell *matHeaderCellDef>Cases</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{ element.total }}
+      {{ element.total | number }}
       <br />
       ({{ getPreviousTotalDiff(element) }})
     </mat-cell>
@@ -16,7 +16,7 @@
   <ng-container matColumnDef="deaths">
     <mat-header-cell *matHeaderCellDef>Deaths</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{ element.deaths }}
+      {{ element.deaths | number }}
       <br />
       ({{ getPreviousDeathsDiff(element) }})
     </mat-cell>
@@ -25,7 +25,7 @@
   <ng-container matColumnDef="recovered">
     <mat-header-cell *matHeaderCellDef>Recovered</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{ element.recovered }}
+      {{ element.recovered | number }}
       <br />
       ({{ getPreviousRecoveredDiff(element) }})
     </mat-cell>
