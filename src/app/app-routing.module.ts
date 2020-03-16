@@ -6,18 +6,23 @@ import { RouterModule } from '@angular/router';
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot([
+    RouterModule.forRoot(
+      [
+        {
+          path: '',
+          redirectTo: 'stats',
+          pathMatch: 'full'
+        },
+        {
+          path: 'stats',
+          loadChildren: async () =>
+            (await import('./stats/stats.module')).LatestStatsModule
+        }
+      ],
       {
-        path: '',
-        redirectTo: 'stats',
-        pathMatch: 'full'
-      },
-      {
-        path: 'stats',
-        loadChildren: async () =>
-          (await import('./stats/stats.module')).LatestStatsModule
+        useHash: true
       }
-    ])
+    )
   ],
   exports: [RouterModule]
 })
