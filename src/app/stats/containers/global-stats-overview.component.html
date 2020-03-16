@@ -1,10 +1,21 @@
 <covid19-page-loading-indicator
-  [loading]="globalStatsLoading$ | async"
+  [loading]="loading$ | async"
 ></covid19-page-loading-indicator>
-<div class="page-content">
-  <covid19-global-stats-card
-    *ngIf="globalStats$ | async"
-    [globalStats]="globalStats$ | async"
-    (refresh)="loadGlobalStats()"
-  ></covid19-global-stats-card>
-</div>
+<mat-tab-group mat-stretch-tabs (selectedTabChange)="tabChanged($event)">
+  <mat-tab [label]="tabLabelsFunc[0].label">
+    <div class="page-content">
+      <covid19-global-stats-card
+        *ngIf="globalStats$ | async"
+        [globalStats]="globalStats$ | async"
+        (refresh)="loadGlobalStats()"
+      ></covid19-global-stats-card>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[1].label">
+    <div class="page-content">
+      <covid19-global-stats-history-table
+        [globalStats]="globalStatsHistory$ | async"
+      ></covid19-global-stats-history-table>
+    </div>
+  </mat-tab>
+</mat-tab-group>
