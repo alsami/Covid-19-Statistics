@@ -10,5 +10,5 @@ The app can be found [here](https://covid19web.z6.web.core.windows.net/).
 
 ### Global stats
 
-![img](./screenshots/current_global.png)
-![img](./screenshots/history_global.png)
+![test](./screenshots/current_global.png | width=200)
+![test2](./screenshots/history_global.png | width=200)
