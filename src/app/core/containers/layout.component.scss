@@ -3,14 +3,6 @@
   height: 100%;
 }
 
-.div-scrollable {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: yellow;
-  height: 4000px;
-}
-
 @media screen and (max-width: 599px) {
   .main-sidenav-container {
     width: 100%;
