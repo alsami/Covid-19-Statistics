@@ -7,5 +7,7 @@ echo writing new environment file
 
 echo "export const environment = {
     production: true,
-    apiUrl: ${apiUrl}
+    apiUrl: '${apiUrl}'
 };" > src/environments/environment.prod.ts
+
+cat src/environments/environment.prod.ts
