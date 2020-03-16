@@ -1,0 +1,7 @@
+<covid19-page-loading-indicator
+  [loading]="loading$ | async"
+></covid19-page-loading-indicator>
+<div *ngFor="let countryStats of countryStats$ | async; let last = last">
+  <covid19-country-card [countryStats]="countryStats"></covid19-country-card>
+  <div *ngIf="!last" style="margin-top: 10px; margin-bottom: 10px;"></div>
+</div>

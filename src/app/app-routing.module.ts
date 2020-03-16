@@ -22,6 +22,11 @@ import { RouterModule } from '@angular/router';
           path: 'cases',
           loadChildren: async () =>
             (await import('./cases/cases.module')).CasesModule
+        },
+        {
+          path: 'countries',
+          loadChildren: async () =>
+            (await import('./countries/countries.module')).CountriesModule
         }
       ],
       {

@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title>
+    {{ countryStats.country }}
+  </mat-card-title>
+  <mat-card-content>
+    <h3 mat-sub-header>Total cases: {{ countryStats.totalCases | number }}</h3>
+    <h3 mat-sub-header>
+      Serious cases: {{ countryStats.seriousCases | number }}
+    </h3>
+    <h3 mat-sub-header>
+      Total deaths: {{ countryStats.totalDeaths | number }}
+    </h3>
+    <h3 mat-sub-header>New deaths: {{ countryStats.newDeaths | number }}</h3>
+    <h3 mat-sub-header>
+      Active cases: {{ countryStats.activeCases | number }}
+    </h3>
+    <h3 mat-sub-header>New cases: {{ countryStats.newCases | number }}</h3>
+    <h3 mat-sub-header>
+      Recovered cases: {{ countryStats.recoveredCases | number }}
+    </h3>
+  </mat-card-content>
+</mat-card>
