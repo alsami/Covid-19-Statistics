@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import * as fromStats from '@covid19/stats/+state/reducer';
-import { Store, select } from '@ngrx/store';
 import { globalStatsActions } from '@covid19/stats/+state/actions/';
-import { Observable } from 'rxjs';
+import * as fromStats from '@covid19/stats/+state/reducer';
 import { GlobalStats } from '@covid19/stats/models';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'covid-global-stats-overview',
   templateUrl: './global-stats-overview.component.html',
   styleUrls: ['./global-stats-overview.component.scss']
 })
-export class LatestStatsOverviewComponent implements OnInit {
+export class GlobalStatsOverviewComponent implements OnInit {
   globalStats$: Observable<GlobalStats>;
   globalStatsLoading$: Observable<boolean>;
 

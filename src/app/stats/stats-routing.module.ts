@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LatestStatsOverviewComponent } from '@covid19/stats/containers';
+import { GlobalStatsOverviewComponent } from '@covid19/stats/containers';
 
 @NgModule({
   imports: [
@@ -9,7 +9,12 @@ import { LatestStatsOverviewComponent } from '@covid19/stats/containers';
     RouterModule.forChild([
       {
         path: '',
-        component: LatestStatsOverviewComponent
+        redirectTo: 'global',
+        pathMatch: 'full'
+      },
+      {
+        path: 'global',
+        component: GlobalStatsOverviewComponent
       }
     ])
   ]

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -9,11 +9,11 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: 'latest-stats',
+        redirectTo: 'stats',
         pathMatch: 'full'
       },
       {
-        path: 'latest-stats',
+        path: 'stats',
         loadChildren: async () =>
           (await import('./stats/stats.module')).LatestStatsModule
       }

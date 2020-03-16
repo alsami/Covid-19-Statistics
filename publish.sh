@@ -5,8 +5,8 @@ ng build --prod --output-hashing bundles --aot
 
 echo done building client, clearing container now
 
-az storage blob delete-batch --source ${1} --account-name ${2} --account-key ${3}
+az storage blob delete-batch --source ${STORAGE} --account-name ${ACCOUNT_NAME} --account-key ${ACCOUNT_KEY}
 
 echo publishing web-content
 
-az storage blob upload-batch --source ./dist/** --destination ${1} --account-name ${2} --account-key ${3}
+az storage blob upload-batch --source ./dist/** --destination ${STORAGE} --account-name ${ACCOUNT_NAME} --account-key ${ACCOUNT_KEY}
