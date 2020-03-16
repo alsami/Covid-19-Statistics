@@ -2,6 +2,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { NgModule } from '@angular/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -54,7 +55,8 @@ const modules = [
   MatChipsModule,
   MatGridListModule,
   MatBadgeModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatAutocompleteModule
 ];
 
 @NgModule({

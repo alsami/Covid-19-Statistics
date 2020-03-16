@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CountryStatsEffects } from '@covid19/countries/+state/effects';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountryCardComponent } from '@covid19/countries/components';
@@ -20,6 +21,7 @@ const COMPONENTS = [CountryStatsOverviewComponent, CountryCardComponent];
     CountriesRoutingModule,
     MaterialModule,
     SharedModule,
+    ReactiveFormsModule,
     StoreModule.forFeature('countries', fromCountries.reducers),
     EffectsModule.forFeature([CountryStatsEffects])
   ],
