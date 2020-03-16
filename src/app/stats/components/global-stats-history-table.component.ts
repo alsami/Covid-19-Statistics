@@ -21,7 +21,7 @@ export class GlobalStatsHistoryTableComponent implements OnInit, OnChanges {
     []
   );
 
-  public displayedColumns = ['total', 'recovered', 'deaths', 'fetchedAt'];
+  public displayedColumns = ['total', 'deaths', 'recovered', 'fetchedAt'];
 
   public ngOnInit(): void {}
 
