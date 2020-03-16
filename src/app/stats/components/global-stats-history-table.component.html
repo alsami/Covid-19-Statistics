@@ -22,7 +22,7 @@
   <ng-container matColumnDef="fetchedAt">
     <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{ element.fetchedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
+      {{ element.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
     </mat-cell>
   </ng-container>
 
