@@ -1,5 +1,11 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   MatAutocomplete,
@@ -10,7 +16,7 @@ import { countryStatsActions } from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
@@ -18,7 +24,7 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: './country-stats-overview.component.html',
   styleUrls: ['./country-stats-overview.component.scss']
 })
-export class CountryStatsOverviewComponent implements OnInit {
+export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
   public loading$: Observable<boolean>;
   public countryStats$: Observable<CountryStats[]>;
   visible = true;
@@ -30,13 +36,16 @@ export class CountryStatsOverviewComponent implements OnInit {
   selectedCountries$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   allCountries: string[] = [];
   filteredCountryStats$: Observable<CountryStats[]>;
+  countryStatsSub: Subscription;
 
   @ViewChild('countryInput', { static: false }) countryInput: ElementRef<
     HTMLInputElement
   >;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
-  public constructor(private store: Store<fromCountries.CountryState>) {
+  public constructor(private store: Store<fromCountries.CountryState>) {}
+
+  public ngOnInit(): void {
     this.filteredCountries$ = this.countriesCtrl.valueChanges.pipe(
       startWith(null),
       map((filter: string | null) =>
@@ -45,16 +54,14 @@ export class CountryStatsOverviewComponent implements OnInit {
           : this.allCountries.slice()
       )
     );
-  }
 
-  public ngOnInit(): void {
     this.loading$ = this.store.pipe(
       select(fromCountries.getCountryStatsLoading)
     );
 
     this.countryStats$ = this.store.pipe(select(fromCountries.getCountryStats));
 
-    this.countryStats$
+    this.countryStatsSub = this.countryStats$
       .pipe(
         map(stats =>
           stats
@@ -80,6 +87,12 @@ export class CountryStatsOverviewComponent implements OnInit {
     );
 
     this.store.dispatch(countryStatsActions.load());
+  }
+
+  public ngOnDestroy(): void {
+    if (this.countryStatsSub) {
+      this.countryStatsSub.unsubscribe();
+    }
   }
 
   add(event: MatChipInputEvent): void {
