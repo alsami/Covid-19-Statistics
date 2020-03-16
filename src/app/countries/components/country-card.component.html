@@ -3,20 +3,20 @@
     {{ countryStats.country }}
   </mat-card-title>
   <mat-card-content>
-    <h3 mat-sub-header>Total cases: {{ countryStats.totalCases | number }}</h3>
-    <h3 mat-sub-header>
-      Serious cases: {{ countryStats.seriousCases | number }}
-    </h3>
-    <h3 mat-sub-header>
-      Total deaths: {{ countryStats.totalDeaths | number }}
-    </h3>
-    <h3 mat-sub-header>New deaths: {{ countryStats.newDeaths | number }}</h3>
-    <h3 mat-sub-header>
-      Active cases: {{ countryStats.activeCases | number }}
-    </h3>
-    <h3 mat-sub-header>New cases: {{ countryStats.newCases | number }}</h3>
-    <h3 mat-sub-header>
-      Recovered cases: {{ countryStats.recoveredCases | number }}
-    </h3>
+    Total cases: {{ countryStats.totalCases | number }}
+    <br />
+    Active cases: {{ countryStats.activeCases | number }}
+    <br />
+    New cases: {{ countryStats.newCases | number }}
+    <br />
+    Recovered cases: {{ countryStats.recoveredCases | number }}
+    <br />
+    Serious cases: {{ countryStats.seriousCases | number }}
+    <br />
+    Total deaths: {{ countryStats.totalDeaths | number }}
+    <br />
+    New deaths: {{ countryStats.newDeaths | number }}
+    <br />
+    Last changed: {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
   </mat-card-content>
 </mat-card>
