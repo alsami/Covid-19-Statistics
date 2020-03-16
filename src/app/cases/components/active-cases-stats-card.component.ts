@@ -6,7 +6,7 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { GlobalStats as activeCasesStats } from '@covid19/stats/models';
+import { ActiveCaseStats } from '@covid19/cases/models';
 
 @Component({
   selector: 'covid19-active-cases-stats-card',
@@ -15,7 +15,7 @@ import { GlobalStats as activeCasesStats } from '@covid19/stats/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActiveCasesStatsCardComponent implements OnInit {
-  @Input() activeCasesStats: activeCasesStats;
+  @Input() activeCasesStats: ActiveCaseStats;
 
   @Output() refresh = new EventEmitter();
 
