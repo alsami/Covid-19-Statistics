@@ -12,6 +12,7 @@ import {
   MatAutocompleteSelectedEvent
 } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { TitleActions } from '@covid19/core/+state/actions';
 import { countryStatsActions } from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountryStats } from '@covid19/countries/models';
@@ -46,47 +47,17 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
   public constructor(private store: Store<fromCountries.CountryState>) {}
 
   public ngOnInit(): void {
-    this.filteredCountries$ = this.countriesCtrl.valueChanges.pipe(
-      startWith(null),
-      map((filter: string | null) =>
-        filter && filter.length
-          ? this.filterCountries(filter)
-          : this.allCountries.slice()
-      )
-    );
+    this.store.dispatch(new TitleActions.SetTitle('Countries'));
+    this.store.dispatch(countryStatsActions.load());
 
     this.loading$ = this.store.pipe(
       select(fromCountries.getCountryStatsLoading)
     );
-
     this.countryStats$ = this.store.pipe(select(fromCountries.getCountryStats));
 
-    this.countryStatsSub = this.countryStats$
-      .pipe(
-        map(stats =>
-          stats
-            .filter(stat => stat.country && stat.country.length)
-            .map(stat => stat.country)
-        )
-      )
-      .subscribe(countries => {
-        this.allCountries = countries;
-      });
-
-    this.filteredCountryStats$ = combineLatest(
-      this.selectedCountries$,
-      this.countryStats$
-    ).pipe(
-      map(([a, b]) => {
-        if (!a || !a.length) {
-          return b;
-        }
-
-        return b.filter(s => a.indexOf(s.country) > -1);
-      })
-    );
-
-    this.store.dispatch(countryStatsActions.load());
+    this.subscribeFormControlChanges();
+    this.subscribeCountryStatsChanges();
+    this.subscribeFilterCountryStatsChanges();
   }
 
   public ngOnDestroy(): void {
@@ -128,6 +99,46 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
     this.selectedCountries$.next(current);
     this.countryInput.nativeElement.value = '';
     this.countriesCtrl.setValue(null);
+  }
+
+  private subscribeFilterCountryStatsChanges(): void {
+    this.filteredCountryStats$ = combineLatest(
+      this.selectedCountries$,
+      this.countryStats$
+    ).pipe(
+      map(([a, b]) => {
+        if (!a || !a.length) {
+          return b;
+        }
+
+        return b.filter(s => a.indexOf(s.country) > -1);
+      })
+    );
+  }
+
+  private subscribeCountryStatsChanges(): void {
+    this.countryStatsSub = this.countryStats$
+      .pipe(
+        map(stats =>
+          stats
+            .filter(stat => stat.country && stat.country.length)
+            .map(stat => stat.country)
+        )
+      )
+      .subscribe(countries => {
+        this.allCountries = countries;
+      });
+  }
+
+  private subscribeFormControlChanges(): void {
+    this.filteredCountries$ = this.countriesCtrl.valueChanges.pipe(
+      startWith(null),
+      map((filter: string | null) =>
+        filter && filter.length
+          ? this.filterCountries(filter)
+          : this.allCountries.slice()
+      )
+    );
   }
 
   private filterCountries(value: string): string[] {
