@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Covid19Web": {
+    "covid19-statistics": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,19 +17,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Covid19Web",
+            "outputPath": "dist/covid19-statistics",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -66,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Covid19Web:build"
+            "browserTarget": "covid19-statistics:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Covid19Web:build:production"
+              "browserTarget": "covid19-statistics:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Covid19Web:build"
+            "browserTarget": "covid19-statistics:build"
           }
         },
         "test": {
@@ -87,13 +82,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
@@ -105,27 +95,25 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Covid19Web:serve"
+            "devServerTarget": "covid19-statistics:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Covid19Web:serve:production"
+              "devServerTarget": "covid19-statistics:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Covid19Web",
+  "defaultProject": "covid19-statistics",
   "cli": {
     "defaultCollection": "@ngrx/schematics"
   }
