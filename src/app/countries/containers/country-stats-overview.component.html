@@ -2,44 +2,46 @@
   [loading]="loading$ | async"
 ></covid19-page-loading-indicator>
 <div class="page-content">
-  <div style="margin-top: 2%;"></div>
-  <mat-form-field>
-    <mat-chip-list #chipList>
-      <mat-chip
-        *ngFor="let country of selectedCountries$ | async"
-        [selectable]="selectable"
-        [removable]="removable"
-        (removed)="remove(country)"
+  <div class="sticky-container">
+    <mat-form-field>
+      <mat-chip-list #chipList>
+        <mat-chip
+          *ngFor="let country of selectedCountries$ | async"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(country)"
+        >
+          {{ country }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Select countries... "
+          #countryInput
+          [formControl]="countriesCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selected($event)"
       >
-        {{ country }}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-      <input
-        placeholder="Select countries... "
-        #countryInput
-        [formControl]="countriesCtrl"
-        [matAutocomplete]="auto"
-        [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        (matChipInputTokenEnd)="add($event)"
-      />
-    </mat-chip-list>
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      (optionSelected)="selected($event)"
-    >
-      <mat-option
-        *ngFor="let fruit of filteredCountries$ | async"
-        [value]="fruit"
-      >
-        {{ fruit }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-  <div
+        <mat-option
+          *ngFor="let fruit of filteredCountries$ | async"
+          [value]="fruit"
+        >
+          {{ fruit }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div style="margin-top: 10px;"></div>
+  <ng-container
     *ngFor="let countryStats of filteredCountryStats$ | async; let last = last"
   >
     <covid19-country-card [countryStats]="countryStats"></covid19-country-card>
     <div *ngIf="!last" style="margin-top: 10px; margin-bottom: 10px;"></div>
-  </div>
+  </ng-container>
 </div>

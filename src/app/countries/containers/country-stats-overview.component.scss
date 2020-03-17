@@ -1,3 +1,11 @@
+.sticky-container {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  background: #424242;
+}
+
 mat-form-field {
   width: 100%;
 }
