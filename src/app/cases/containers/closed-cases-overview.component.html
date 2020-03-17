@@ -1,7 +1,11 @@
 <covid19-page-loading-indicator
   [loading]="loading$ | async"
 ></covid19-page-loading-indicator>
-<mat-tab-group mat-stretch-tabs (selectedTabChange)="tabChanged($event)">
+<mat-tab-group
+  mat-stretch-tabs
+  (selectedTabChange)="tabChanged($event)"
+  class="tab-custom-overflow"
+>
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
       <covid19-closed-cases-stats-card

@@ -12,7 +12,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'covid-global-stats-overview',
+  selector: 'covid19-global-stats-overview',
   templateUrl: './global-stats-overview.component.html',
   styleUrls: ['./global-stats-overview.component.scss']
 })
