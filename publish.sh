@@ -2,11 +2,11 @@
 function build_app() {
     echo build application in production mode, this might take a while
     ng build --prod --output-hashing bundles
-    return {?}
+    return ${?}
 }
 
 function create_image() {
-    docker build -t covid19.statistics:latest -t ${REGISTRY}/covid19.statistics:latest -t ${REGISTRY}/covid19.statistics:${TRAVIS_TAG} -f ./Dockerfile .
+    docker build -t ${REGISTRY}/covid19.statistics:${TRAVIS_TAG} -f ./Dockerfile .
     return ${?}
 }
 
