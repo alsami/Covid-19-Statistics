@@ -28,7 +28,7 @@ export class DiffNumberColorDirective implements AfterViewInit {
 
     if (value < 0) {
       htmlElement.style.color = decreaseColor;
-      htmlElement.innerHTML = `-${value}`;
+      htmlElement.innerHTML = `${value}`;
       return;
     }
   }
