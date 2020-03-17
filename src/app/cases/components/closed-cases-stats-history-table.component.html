@@ -7,27 +7,32 @@
   <ng-container matColumnDef="total">
     <mat-header-cell *matHeaderCellDef>Cases</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{ element.total | number }}
-      <br />
-      ({{ getPreviousTotalDiff(element) }})
+      <div style="display: flex; flex-direction: column;">
+        <span>{{ element.total | number }}</span>
+        <span covid19DiffNumberColor>{{ getPreviousTotalDiff(element) }}</span>
+      </div>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="deaths">
     <mat-header-cell *matHeaderCellDef>Deaths</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{ element.deaths | number }}
-      <br />
-      ({{ element.deathsPercentage | number }}%)
+      <div style="display: flex; flex-direction: column;">
+        <span>{{ element.deaths | number }}</span>
+        <span covid19DiffNumberColor>{{ getPreviousDeathsDiff(element) }}</span>
+      </div>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="recovered">
     <mat-header-cell *matHeaderCellDef>Recovered</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{ element.recovered | number }}
-      <br />
-      ({{ element.recoveredPercentage | number }}%)
+      <div style="display: flex; flex-direction: column;">
+        <span>{{ element.recovered | number }}</span>
+        <span [covid19DiffNumberColor]="true">
+          {{ getPreviousRecoveredDiff(element) }}
+        </span>
+      </div>
     </mat-cell>
   </ng-container>
 

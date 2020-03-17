@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { MaterialModule } from '@covid19/material/material.module';
 import {
-  PageLoadingIndicatorComponent,
-  ComponentLoaderOverlayComponent
+  ComponentLoaderOverlayComponent,
+  PageLoadingIndicatorComponent
 } from '@covid19/shared/components';
+import { DiffNumberColorDirective } from '@covid19/shared/directives';
 
 const COMPONENTS = [
   PageLoadingIndicatorComponent,
-  ComponentLoaderOverlayComponent
+  ComponentLoaderOverlayComponent,
+  DiffNumberColorDirective
 ];
 
 @NgModule({

@@ -52,4 +52,32 @@ export class ActiveCasesStatsHistoryTable implements OnInit, OnChanges {
 
     return diff;
   }
+
+  public getPreviousMildlDiff(current: ActiveCaseStats): number {
+    const index = this.activeCasesStats.findIndex(stat => stat === current);
+
+    if (index === -1 || index === this.activeCasesStats.length - 1) {
+      return;
+    }
+
+    const previous = this.activeCasesStats[index + 1];
+
+    const diff = current.mild - previous.mild;
+
+    return diff;
+  }
+
+  public getPreviousSeriousDiff(current: ActiveCaseStats): number {
+    const index = this.activeCasesStats.findIndex(stat => stat === current);
+
+    if (index === -1 || index === this.activeCasesStats.length - 1) {
+      return;
+    }
+
+    const previous = this.activeCasesStats[index + 1];
+
+    const diff = current.serious - previous.serious;
+
+    return diff;
+  }
 }

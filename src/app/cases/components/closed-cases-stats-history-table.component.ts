@@ -52,4 +52,32 @@ export class ClosedCasesStatsHistoryTable implements OnInit, OnChanges {
 
     return diff;
   }
+
+  public getPreviousDeathsDiff(current: ClosedCaseStats): number {
+    const index = this.closedCasesStats.findIndex(stat => stat === current);
+
+    if (index === -1 || index === this.closedCasesStats.length - 1) {
+      return;
+    }
+
+    const previous = this.closedCasesStats[index + 1];
+
+    const diff = current.deaths - previous.deaths;
+
+    return diff;
+  }
+
+  public getPreviousRecoveredDiff(current: ClosedCaseStats): number {
+    const index = this.closedCasesStats.findIndex(stat => stat === current);
+
+    if (index === -1 || index === this.closedCasesStats.length - 1) {
+      return;
+    }
+
+    const previous = this.closedCasesStats[index + 1];
+
+    const diff = current.recovered - previous.recovered;
+
+    return diff;
+  }
 }

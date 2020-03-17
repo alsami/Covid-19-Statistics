@@ -16,8 +16,8 @@ export class TitleEffects {
     ofType(TitleActionTypes.SetTitle),
     tap((action: titleActions.SetTitle) => {
       const newTitle = action.suffix
-        ? `Covid19 | ${action.section} | ${action.suffix}`
-        : `Covid19 | ${action.section}`;
+        ? `COVID19 | ${action.section} | ${action.suffix}`
+        : `COVID19 | ${action.section}`;
 
       this.title.setTitle(newTitle);
     })
