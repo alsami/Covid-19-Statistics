@@ -30,7 +30,7 @@ import { RouterModule } from '@angular/router';
         }
       ],
       {
-        useHash: true
+        useHash: false
       }
     )
   ],
