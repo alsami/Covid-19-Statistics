@@ -34,13 +34,8 @@ function restart_app() {
 build_app
 create_image
 publish_image
+authenticate
+set_container
+restart_app
 
 
-
-echo done building client, clearing container now
-
-az storage blob delete-batch --source '$web' --account-name ${ACCOUNT_NAME} --account-key ${ACCOUNT_KEY}
-
-echo publishing web-content
-
-az storage blob upload-batch --source ./dist/** --destination '$web' --account-name ${ACCOUNT_NAME} --account-key ${ACCOUNT_KEY}
