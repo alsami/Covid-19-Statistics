@@ -39,3 +39,12 @@ body {
 .tab-custom-overflow .mat-tab-body-content {
   overflow: visible !important;
 }
+
+covid19-country-stats-stacked-barchart .ngx-charts {
+  text {
+    fill: #fff !important;
+  }
+  font: {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  }
+}

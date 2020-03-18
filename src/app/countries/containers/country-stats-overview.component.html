@@ -1,50 +1,63 @@
 <covid19-page-loading-indicator
   [loading]="loading$ | async"
 ></covid19-page-loading-indicator>
-<div class="page-content">
-  <div class="sticky-container">
-    <mat-form-field>
-      <mat-chip-list #chipList>
-        <mat-chip
-          *ngFor="let country of selectedCountries$ | async"
-          [selectable]="selectable"
-          [removable]="removable"
-          (removed)="remove(country)"
-        >
-          {{ country }}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input
-          placeholder="Select countries... "
-          #countryInput
-          [formControl]="countriesCtrl"
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="add($event)"
-        />
-      </mat-chip-list>
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        (optionSelected)="selected($event)"
+<mat-tab-group #matTabGroup mat-stretch-tabs class="tab-custom-overflow">
+  <mat-tab [label]="tabLabelsFunc[0].label">
+    <div class="page-content">
+      <div class="sticky-container">
+        <mat-form-field>
+          <mat-chip-list #chipList>
+            <mat-chip
+              *ngFor="let country of selectedCountries$ | async"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(country)"
+            >
+              {{ country }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Select countries... "
+              #countryInput
+              [formControl]="countriesCtrl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="selected($event)"
+          >
+            <mat-option
+              *ngFor="let fruit of filteredCountries$ | async"
+              [value]="fruit"
+            >
+              {{ fruit }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div style="margin-top: 5px;"></div>
+      <ng-container
+        *ngFor="
+          let countryStats of filteredCountryStats$ | async;
+          let last = last
+        "
       >
-        <mat-option
-          *ngFor="let fruit of filteredCountries$ | async"
-          [value]="fruit"
-        >
-          {{ fruit }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </div>
-  <div style="margin-top: 10px;"></div>
-  <ng-container
-    *ngFor="let countryStats of filteredCountryStats$ | async; let last = last"
-  >
-    <covid19-country-card
-      [countryStats]="countryStats"
-      (addCountryOfInterest)="storeCountryOfInterest(countryStats.country)"
-    ></covid19-country-card>
-    <div *ngIf="!last" style="margin-top: 10px; margin-bottom: 10px;"></div>
-  </ng-container>
-</div>
+        <covid19-country-card
+          [countryStats]="countryStats"
+          (addCountryOfInterest)="storeCountryOfInterest(countryStats.country)"
+        ></covid19-country-card>
+        <div *ngIf="!last" style="margin-top: 10px; margin-bottom: 10px;"></div>
+      </ng-container>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[1].label">
+    <covid19-country-stats-stacked-barchart
+      [countryStats]="countryStats$ | async"
+      [adjustSize]="adjustSize$ | async"
+    ></covid19-country-stats-stacked-barchart>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,21 @@
+<div
+  *ngIf="countryStats?.length > 10"
+  style="display: flex; justify-content: center; margin-top: 10px;"
+>
+  <span>Showing top 10 countries</span>
+</div>
+<div class="scale-container" [style.width.vw]="viewWidth">
+  <ngx-charts-bar-vertical-stacked
+    #chart
+    *ngIf="data?.length"
+    [scheme]="colorScheme"
+    [results]="data"
+    [xAxis]="true"
+    [yAxis]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [showDataLabel]="false"
+  ></ngx-charts-bar-vertical-stacked>
+</div>

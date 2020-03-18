@@ -1,5 +1,6 @@
 import {
   fromCountriesOfInterest,
+  fromLayout,
   fromTitle
 } from '@covid19/core/+state/reducers';
 import {
@@ -14,11 +15,13 @@ import { environment } from '../../environments/environment';
 export interface AppState {
   title: fromTitle.TitleState;
   countriesOfInterest: fromCountriesOfInterest.CountriesOfInterestState;
+  layout: fromLayout.LayoutState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   title: fromTitle.reducer,
-  countriesOfInterest: fromCountriesOfInterest.reducer
+  countriesOfInterest: fromCountriesOfInterest.reducer,
+  layout: fromLayout.reducer
 };
 
 // console.log all actions
@@ -56,4 +59,13 @@ export const getCountriesOfInterestState = createFeatureSelector<
 export const getCountriesOfInterest = createSelector(
   getCountriesOfInterestState,
   fromCountriesOfInterest.countriesOfInterest
+);
+
+export const getLayoutState = createFeatureSelector<fromLayout.LayoutState>(
+  'layout'
+);
+
+export const getShowSidenav = createSelector(
+  getLayoutState,
+  fromLayout.showSidenav
 );

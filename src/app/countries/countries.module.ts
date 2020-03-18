@@ -8,7 +8,8 @@ import {
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import {
   CountryCardComponent,
-  CountryStatsHistoryTableComponent
+  CountryStatsHistoryTableComponent,
+  CountryStatsStackedBarChartComponent
 } from '@covid19/countries/components';
 import {
   CountryStatsHistoryOverviewComponent,
@@ -22,13 +23,15 @@ import { MaterialModule } from '@covid19/material/material.module';
 import { SharedModule } from '@covid19/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CountriesRoutingModule } from './countries-routing.module';
 
 const COMPONENTS = [
   CountryStatsOverviewComponent,
   CountryCardComponent,
   CountryStatsHistoryOverviewComponent,
-  CountryStatsHistoryTableComponent
+  CountryStatsHistoryTableComponent,
+  CountryStatsStackedBarChartComponent
 ];
 
 @NgModule({
@@ -39,6 +42,7 @@ const COMPONENTS = [
     MaterialModule,
     SharedModule,
     ReactiveFormsModule,
+    NgxChartsModule,
     StoreModule.forFeature('countries', fromCountries.reducers),
     EffectsModule.forFeature([CountryStatsEffects, CountryStatsHistoryEffects])
   ],
