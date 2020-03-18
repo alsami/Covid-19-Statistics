@@ -19,4 +19,9 @@
     <br />
     Last changed: {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
   </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button [routerLink]="countryStats.country">
+      Show history
+    </button>
+  </mat-card-actions>
 </mat-card>

@@ -1,0 +1,8 @@
+<covid19-page-loading-indicator
+  [loading]="loading$ | async"
+></covid19-page-loading-indicator>
+<div class="page-content">
+  <covid19-country-stats-history-table
+    [countryStats]="countryStats$ | async"
+  ></covid19-country-stats-history-table>
+</div>

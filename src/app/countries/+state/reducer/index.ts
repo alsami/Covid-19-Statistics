@@ -4,10 +4,12 @@ import {
   createFeatureSelector,
   createSelector
 } from '@ngrx/store';
+import * as fromCountryStatsHistory from './country-stats-history.reducer';
 import * as fromCountryStats from './country-stats.reducer';
 
 export interface CountryState {
   countryStats: fromCountryStats.CountryStatsState;
+  countryStatsHistory: fromCountryStatsHistory.CountryStatsHistoryState;
 }
 
 export interface State extends fromRoot.AppState {
@@ -15,16 +17,17 @@ export interface State extends fromRoot.AppState {
 }
 
 export const reducers: ActionReducerMap<CountryState> = {
-  countryStats: fromCountryStats.reducer
+  countryStats: fromCountryStats.reducer,
+  countryStatsHistory: fromCountryStatsHistory.reducer
 };
 
 export const getCountriesState = createFeatureSelector<CountryState>(
   'countries'
 );
 
-// /**
-//  * Country-Stats
-//  */
+/**
+ * Country-Stats
+ */
 export const getCountryState = createSelector(
   getCountriesState,
   state => state.countryStats
@@ -38,4 +41,22 @@ export const getCountryStats = createSelector(
 export const getCountryStatsLoading = createSelector(
   getCountryState,
   fromCountryStats.loading
+);
+
+/**
+ * Country-Stats History
+ */
+export const getCountryHistoryState = createSelector(
+  getCountriesState,
+  state => state.countryStatsHistory
+);
+
+export const getCountryHistoryStats = createSelector(
+  getCountryHistoryState,
+  fromCountryStatsHistory.countryStats
+);
+
+export const getCountryHistoryStatsLoading = createSelector(
+  getCountryHistoryState,
+  fromCountryStatsHistory.loading
 );
