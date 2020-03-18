@@ -56,6 +56,7 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
     this.loading$ = this.store.pipe(
       select(fromCountries.getCountryStatsLoading)
     );
+
     this.countryStats$ = this.store.pipe(select(fromCountries.getCountryStats));
 
     this.subscribeFormControlChanges();
@@ -136,9 +137,7 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
             .map(stat => stat.country)
         )
       )
-      .subscribe(countries => {
-        this.allCountries = countries;
-      });
+      .subscribe(countries => (this.allCountries = countries));
   }
 
   private subscribeFormControlChanges(): void {
