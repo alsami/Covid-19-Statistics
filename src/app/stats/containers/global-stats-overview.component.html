@@ -2,8 +2,9 @@
   [loading]="loading$ | async"
 ></covid19-page-loading-indicator>
 <mat-tab-group
+  #matTabGroup
   mat-stretch-tabs
-  (selectedTabChange)="tabChanged($event)"
+  (animationDone)="animationDone(matTabGroup.selectedIndex)"
   class="tab-custom-overflow"
 >
   <mat-tab [label]="tabLabelsFunc[0].label">

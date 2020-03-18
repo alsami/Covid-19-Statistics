@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import { TitleActions } from '@covid19/core/+state/actions';
 import {
   globalStatsActions,
@@ -62,7 +61,7 @@ export class GlobalStatsOverviewComponent implements OnInit {
     this.loadGlobalStats();
   }
 
-  public tabChanged(chane: MatTabChangeEvent): void {
-    this.tabLabelsFunc[chane.index].func();
+  public animationDone(index: number) {
+    this.tabLabelsFunc[index].func();
   }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import {
   activeCasesStatsActions,
   activeCasesStatsHistoryActions
@@ -64,7 +63,7 @@ export class ActiveCasesOverviewComponent implements OnInit {
     this.loadGlobalStats();
   }
 
-  public tabChanged(chane: MatTabChangeEvent): void {
-    this.tabLabelsFunc[chane.index].func();
+  public animationDone(index: number): void {
+    this.tabLabelsFunc[index].func();
   }
 }
