@@ -39,10 +39,6 @@ export class CountryStatsHistoryTableComponent implements OnInit {
     console.log(this.dataSource.data);
   }
 
-  public trackBy(globalStats: CountryStats): string {
-    return `${globalStats.fetchedAt}${globalStats.country}`;
-  }
-
   public getPreviousTotalDiff(current: CountryStats): number {
     const index = this.countryStats.findIndex(stat => stat === current);
 
