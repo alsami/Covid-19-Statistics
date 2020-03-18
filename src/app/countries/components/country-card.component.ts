@@ -1,10 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 import { CountryStats } from '@covid19/countries/models';
 
 @Component({
   selector: 'covid19-country-card',
   templateUrl: './country-card.component.html',
-  styleUrls: ['./country-card.component.scss']
+  styleUrls: ['./country-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CountryCardComponent implements OnInit {
   @Input() countryStats: CountryStats;

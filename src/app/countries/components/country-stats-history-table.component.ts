@@ -1,11 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CountryStats } from '@covid19/countries/models';
 
 @Component({
   selector: 'covid19-country-stats-history-table',
   templateUrl: './country-stats-history-table.component.html',
-  styleUrls: ['./country-stats-history-table.component.scss']
+  styleUrls: ['./country-stats-history-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CountryStatsHistoryTableComponent implements OnInit {
   @Input() countryStats: CountryStats[] = [];
