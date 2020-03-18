@@ -41,7 +41,10 @@
   <ng-container
     *ngFor="let countryStats of filteredCountryStats$ | async; let last = last"
   >
-    <covid19-country-card [countryStats]="countryStats"></covid19-country-card>
+    <covid19-country-card
+      [countryStats]="countryStats"
+      (addCountryOfInterest)="storeCountryOfInterest(countryStats.country)"
+    ></covid19-country-card>
     <div *ngIf="!last" style="margin-top: 10px; margin-bottom: 10px;"></div>
   </ng-container>
 </div>

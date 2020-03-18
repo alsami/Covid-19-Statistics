@@ -12,7 +12,10 @@ import {
   MatAutocompleteSelectedEvent
 } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { TitleActions } from '@covid19/core/+state/actions';
+import {
+  countriesOfInterestActions,
+  TitleActions
+} from '@covid19/core/+state/actions';
 import { countryStatsActions } from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountryStats } from '@covid19/countries/models';
@@ -66,7 +69,15 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  add(event: MatChipInputEvent): void {
+  public storeCountryOfInterest(country: string): void {
+    this.store.dispatch(
+      countriesOfInterestActions.store({
+        countryOfInterest: country
+      })
+    );
+  }
+
+  public add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 

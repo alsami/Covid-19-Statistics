@@ -1,4 +1,7 @@
-import { fromTitle } from '@covid19/core/+state/reducers';
+import {
+  fromCountriesOfInterest,
+  fromTitle
+} from '@covid19/core/+state/reducers';
 import {
   ActionReducer,
   ActionReducerMap,
@@ -10,10 +13,12 @@ import { environment } from '../../environments/environment';
 
 export interface AppState {
   title: fromTitle.TitleState;
+  countriesOfInterest: fromCountriesOfInterest.CountriesOfInterestState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  title: fromTitle.reducer
+  title: fromTitle.reducer,
+  countriesOfInterest: fromCountriesOfInterest.reducer
 };
 
 // console.log all actions
@@ -40,3 +45,15 @@ export const getTitleState = createFeatureSelector<fromTitle.TitleState>(
 );
 
 export const getTitle = createSelector(getTitleState, fromTitle.title);
+
+/**
+ * Title Reducers
+ */
+export const getCountriesOfInterestState = createFeatureSelector<
+  fromCountriesOfInterest.CountriesOfInterestState
+>('countriesOfInterest');
+
+export const getCountriesOfInterest = createSelector(
+  getCountriesOfInterestState,
+  fromCountriesOfInterest.countriesOfInterest
+);

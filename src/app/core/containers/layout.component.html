@@ -13,6 +13,7 @@
     [fixedTopGap]="layoutGap"
   >
     <covid19-sidenav-content
+      [countriesOfInterest]="countriesOfInterest$ | async"
       (linkClicked)="toggleSidenavBasedOnSize()"
     ></covid19-sidenav-content>
   </mat-sidenav>

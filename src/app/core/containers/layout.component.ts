@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as fromRoot from '@covid19/+state';
+import { countriesOfInterestActions } from '@covid19/core/+state/actions';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
@@ -16,6 +17,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   layoutGap = '64';
   fixedInViewport = true;
   title$: Observable<string>;
+  countriesOfInterest$: Observable<string[]>;
 
   public constructor(
     private bpo: BreakpointObserver,
@@ -23,6 +25,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   ) {}
 
   public ngOnInit(): void {
+    this.store.dispatch(countriesOfInterestActions.load());
+
     const breakpoints = Object.keys(Breakpoints).map(key => Breakpoints[key]);
     this.bpo
       .observe(breakpoints)
@@ -42,6 +46,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    this.countriesOfInterest$ = this.store.pipe(
+      delay(0),
+      select(fromRoot.getCountriesOfInterest)
+    );
     this.title$ = this.store.pipe(delay(0), select(fromRoot.getTitle));
   }
 

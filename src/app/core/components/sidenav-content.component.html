@@ -19,4 +19,16 @@
     <mat-icon mat-list-icon>flag</mat-icon>
     <h4 mat-line>Countries</h4>
   </mat-list-item>
+  <ng-container *ngIf="countriesOfInterest?.length">
+    <h4 mat-subheader>Countries of interest</h4>
+    <ng-container *ngFor="let country of countriesOfInterest">
+      <mat-list-item
+        [routerLink]="'/countries/' + country"
+        (click)="linkClicked.emit()"
+      >
+        <mat-icon mat-list-icon>flag</mat-icon>
+        <h4 mat-line>{{ country }}</h4>
+      </mat-list-item>
+    </ng-container>
+  </ng-container>
 </mat-nav-list>

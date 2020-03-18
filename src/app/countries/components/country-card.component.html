@@ -20,6 +20,9 @@
     Last changed: {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
   </mat-card-content>
   <mat-card-actions align="end">
+    <button mat-button (click)="addCountryOfInterest.emit()">
+      Add to countries of interest
+    </button>
     <button mat-button [routerLink]="countryStats.country">
       Show history
     </button>

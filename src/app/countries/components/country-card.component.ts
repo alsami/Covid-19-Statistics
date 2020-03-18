@@ -1,8 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
-  OnInit
+  Output
 } from '@angular/core';
 import { CountryStats } from '@covid19/countries/models';
 
@@ -12,10 +13,7 @@ import { CountryStats } from '@covid19/countries/models';
   styleUrls: ['./country-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountryCardComponent implements OnInit {
+export class CountryCardComponent {
   @Input() countryStats: CountryStats;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+  @Output() addCountryOfInterest = new EventEmitter();
 }

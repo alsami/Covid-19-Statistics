@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'covid19-sidenav-content',
@@ -6,5 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./sidenav-content.component.scss']
 })
 export class SidenavContentComponent {
+  @Input() countriesOfInterest: string[] = [];
+
   @Output() linkClicked = new EventEmitter();
 }
