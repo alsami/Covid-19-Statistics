@@ -15,7 +15,6 @@ import { StackedBarChartData } from '@covid19/shared/models';
 })
 export class CountryStatsStackedBarChartComponent implements OnChanges {
   @Input() countryStats: CountryStats[] = [];
-  @Input() adjustSize: boolean = false;
   public data: StackedBarChartData[] = [];
   public yAxisLabel: string = 'Country';
   public xAxisLabel: string = 'Cases, Deaths, Recovered';
@@ -24,20 +23,10 @@ export class CountryStatsStackedBarChartComponent implements OnChanges {
     domain: ['#AAAAAA', '#ff0000', '#5AA454']
   };
 
-  viewWidth: number = 100;
-
   public ngOnChanges(): void {
-    if (this.adjustSize) {
-      this.viewWidth = 80;
-    } else {
-      this.viewWidth = 100;
-    }
-
     if (!this.countryStats || !this.countryStats.length) {
       return;
     }
-
-    this.data = [];
 
     this.countryStats.forEach((countryStat, index) => {
       if (index > 10) return;

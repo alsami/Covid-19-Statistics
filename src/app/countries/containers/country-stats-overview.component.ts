@@ -1,5 +1,4 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {
   Component,
   ElementRef,
@@ -13,7 +12,6 @@ import {
   MatAutocompleteSelectedEvent
 } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import * as fromRoot from '@covid19/+state';
 import {
   countriesOfInterestActions,
   TitleActions
@@ -23,7 +21,7 @@ import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { delay, map, startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-country-stats-overview',
@@ -43,8 +41,6 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
   allCountries: string[] = [];
   filteredCountryStats$: Observable<CountryStats[]>;
   countryStatsSub: Subscription;
-  showSidenav$: Observable<boolean>;
-  adjustSize$: Observable<boolean>;
 
   tabLabelsFunc = [
     {
@@ -62,16 +58,11 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
   >;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
-  public constructor(
-    private store: Store<fromCountries.CountryState>,
-    private bpo: BreakpointObserver
-  ) {}
+  public constructor(private store: Store<fromCountries.CountryState>) {}
 
   public ngOnInit(): void {
     this.store.dispatch(new TitleActions.SetTitle('Countries'));
     this.store.dispatch(countryStatsActions.load());
-
-    this.showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav));
 
     this.loading$ = this.store.pipe(
       select(fromCountries.getCountryStatsLoading)
@@ -82,23 +73,6 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
     this.subscribeFormControlChanges();
     this.subscribeCountryStatsChanges();
     this.subscribeFilterCountryStatsChanges();
-
-    const breakpoints = Object.keys(Breakpoints).map(key => Breakpoints[key]);
-
-    this.adjustSize$ = this.bpo.observe(breakpoints).pipe(
-      delay(0),
-      map(bst => bst.matches),
-      map(() => !this.isExtraSmallDevice() && !this.isSmallDevice())
-    );
-
-    this.adjustSize$ = combineLatest(
-      this.bpo.observe(breakpoints).pipe(
-        delay(0),
-        map(bst => bst.matches),
-        map(() => this.isExtraSmallDevice() || this.isSmallDevice())
-      ),
-      this.showSidenav$
-    ).pipe(map(([smallScreen, showSidenav]) => smallScreen || showSidenav));
   }
 
   public ngOnDestroy(): void {
@@ -194,13 +168,5 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
     return this.allCountries.filter(
       country => country && country.toLowerCase().indexOf(filterValue) === 0
     );
-  }
-
-  public isExtraSmallDevice(): boolean {
-    return this.bpo.isMatched(Breakpoints.XSmall);
-  }
-
-  public isSmallDevice(): boolean {
-    return this.bpo.isMatched(Breakpoints.Small);
   }
 }
