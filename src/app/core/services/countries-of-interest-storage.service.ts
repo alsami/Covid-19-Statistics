@@ -52,7 +52,7 @@ export class CountriesOfInterestStorageService {
 
     const countries = JSON.parse(storageValue) as string[];
 
-    return countries.sort((a, b) => b.localeCompare(a));
+    return countries.sort((a, b) => a.localeCompare(b));
   }
 
   private override(countries: string[]): void {
