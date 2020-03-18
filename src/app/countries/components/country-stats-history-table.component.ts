@@ -34,7 +34,7 @@ export class CountryStatsHistoryTableComponent implements OnInit {
   }
 
   public trackBy(globalStats: CountryStats): string {
-    return globalStats.fetchedAt;
+    return `${globalStats.fetchedAt}${globalStats.country}`;
   }
 
   public getPreviousTotalDiff(current: CountryStats): number {
