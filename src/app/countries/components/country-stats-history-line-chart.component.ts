@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -39,6 +38,8 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
       return;
     }
 
+    this.data = [];
+
     const totalCasesLineChartData: LineChartData = {
       name: 'Total cases',
       series: []
@@ -70,10 +71,7 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
     };
 
     this.countryStats.forEach(countryStats => {
-      const isoString = new DatePipe('de-DE').transform(
-        countryStats.fetchedAt,
-        'dd.MMMM'
-      );
+      const isoString = new Date(countryStats.fetchedAt).toLocaleDateString();
 
       totalCasesLineChartData.series.push({
         name: isoString,

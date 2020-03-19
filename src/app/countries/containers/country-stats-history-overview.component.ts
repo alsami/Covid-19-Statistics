@@ -16,7 +16,7 @@ import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-country-stats-history-overview',
@@ -90,10 +90,16 @@ export class CountryStatsHistoryOverviewComponent
     this.paramSub = this.route.paramMap
       .pipe(
         delay(0),
-        map(paramMap => paramMap.get('country'))
+        map(paramMap => paramMap.get('country')),
+        distinctUntilChanged()
       )
       .subscribe(country => {
         this.store.dispatch(new TitleActions.SetTitle(`${country} History`));
+
+        if (this.selectedCountry && this.selectedCountry !== country) {
+          this.tabLabelsFunc[this.matTabGroup.selectedIndex].func(country);
+        }
+
         this.selectedCountry = country;
       });
   }
