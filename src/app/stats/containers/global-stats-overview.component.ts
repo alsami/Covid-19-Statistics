@@ -78,8 +78,6 @@ export class GlobalStatsOverviewComponent implements OnInit {
           globalStatsDayHistoryLoading
       )
     );
-
-    this.loadGlobalStats();
   }
 
   public animationDone(index: number) {
