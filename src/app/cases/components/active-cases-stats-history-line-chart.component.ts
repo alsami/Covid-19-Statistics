@@ -56,7 +56,10 @@ export class ActiveCasesStatsHistoryLineChartComponent implements OnChanges {
     };
 
     this.activeCasesStats.forEach(activeCase => {
-      const isoString = new Date(activeCase.fetchedAt).toLocaleDateString();
+      const isoString = activeCase.fetchedAt.slice(
+        0,
+        activeCase.fetchedAt.indexOf('T')
+      );
 
       casesLineChartData.series.push({
         name: isoString,

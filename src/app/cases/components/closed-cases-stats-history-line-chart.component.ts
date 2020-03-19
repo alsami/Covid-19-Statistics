@@ -55,22 +55,25 @@ export class ClosedCasesStatsHistoryLineChartComponent implements OnChanges {
       series: []
     };
 
-    this.closedCasesStats.forEach(activeCase => {
-      const isoString = new Date(activeCase.fetchedAt).toLocaleDateString();
+    this.closedCasesStats.forEach(closedCases => {
+      const isoString = closedCases.fetchedAt.slice(
+        0,
+        closedCases.fetchedAt.indexOf('T')
+      );
 
       casesLineChartData.series.push({
         name: isoString,
-        value: activeCase.total
+        value: closedCases.total
       });
 
       deathsLineChartData.series.push({
         name: isoString,
-        value: activeCase.deaths
+        value: closedCases.deaths
       });
 
       recoveredConditionLineChartData.series.push({
         name: isoString,
-        value: activeCase.recovered
+        value: closedCases.recovered
       });
     });
 

@@ -50,7 +50,10 @@ export class GlobalStatsHistoryLineChartComponent implements OnChanges {
     };
 
     this.globalStats.forEach(countryStats => {
-      const isoString = new Date(countryStats.fetchedAt).toLocaleDateString();
+      const isoString = countryStats.fetchedAt.slice(
+        0,
+        countryStats.fetchedAt.indexOf('T')
+      );
 
       totalCasesLineChartData.series.push({
         name: isoString,
@@ -73,5 +76,7 @@ export class GlobalStatsHistoryLineChartComponent implements OnChanges {
       deathsLineChartData,
       recoveredLineChartData
     );
+
+    console.log(this.data);
   }
 }
