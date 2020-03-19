@@ -35,8 +35,8 @@ export class CountryStatsStackedBarChartComponent implements OnChanges {
         name: countryStat.country,
         series: [
           {
-            name: 'Cases',
-            value: countryStat.totalCases
+            name: 'Active cases',
+            value: countryStat.activeCases
           },
           {
             name: 'Deaths',
