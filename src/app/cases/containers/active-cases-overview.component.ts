@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   activeCasesStatsActions,
+  activeCasesStatsDayHistoryActions,
   activeCasesStatsHistoryActions
 } from '@covid19/cases/+state/actions';
 import * as fromCases from '@covid19/cases/+state/reducer';
@@ -18,6 +19,7 @@ import { map } from 'rxjs/operators';
 export class ActiveCasesOverviewComponent implements OnInit {
   activeCasesStats$: Observable<ActiveCaseStats>;
   activeCasesStatsHistory$: Observable<ActiveCaseStats[]>;
+  activeCasesStatsDayHistory$: Observable<ActiveCaseStats[]>;
   loading$: Observable<boolean>;
 
   public loadGlobalStats = (): void => {
@@ -29,6 +31,12 @@ export class ActiveCasesOverviewComponent implements OnInit {
     this.store.dispatch(new TitleActions.SetTitle('Active cases history'));
     this.store.dispatch(activeCasesStatsHistoryActions.load());
   };
+  public loadGlobalStatsDayHistory = (): void => {
+    this.store.dispatch(
+      new TitleActions.SetTitle('Active cases history graph')
+    );
+    this.store.dispatch(activeCasesStatsDayHistoryActions.load());
+  };
 
   tabLabelsFunc = [
     {
@@ -38,6 +46,10 @@ export class ActiveCasesOverviewComponent implements OnInit {
     {
       label: 'History',
       func: this.loadGlobalStatsHistory
+    },
+    {
+      label: 'Graph',
+      func: this.loadGlobalStatsDayHistory
     }
   ];
 
@@ -50,17 +62,25 @@ export class ActiveCasesOverviewComponent implements OnInit {
     this.activeCasesStatsHistory$ = this.store.pipe(
       select(fromCases.getActiveCasesHistoryStats)
     );
+    this.activeCasesStatsDayHistory$ = this.store.pipe(
+      select(fromCases.getActiveCasesDayHistoryStats)
+    );
     this.loading$ = combineLatest(
       this.store.pipe(select(fromCases.getActiveCasesStatsLoading)),
-      this.store.pipe(select(fromCases.getActiveCasesHistoryStatsLoading))
+      this.store.pipe(select(fromCases.getActiveCasesHistoryStatsLoading)),
+      this.store.pipe(select(fromCases.getActiveCasesDayHistoryStatsLoading))
     ).pipe(
       map(
-        ([globalStatsLoading, globalStatsHistoryLoading]) =>
-          globalStatsLoading || globalStatsHistoryLoading
+        ([
+          globalStatsLoading,
+          globalStatsHistoryLoading,
+          globalStatsDayHistoryLoading
+        ]) =>
+          globalStatsLoading ||
+          globalStatsHistoryLoading ||
+          globalStatsDayHistoryLoading
       )
     );
-
-    this.loadGlobalStats();
   }
 
   public animationDone(index: number): void {

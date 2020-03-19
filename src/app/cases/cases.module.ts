@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
+  ActiveCasesStatsDayHistoryEffects,
   ActiveCasesStatsEffects,
   ActiveCasesStatsHistoryEffects,
   ClosedCasesStatsEffects,
@@ -8,6 +9,7 @@ import {
 } from '@covid19/cases/+state/effects';
 import * as fromCases from '@covid19/cases/+state/reducer';
 import {
+  ActiveCasesStatsDayHistoryService,
   ActiveCasesStatsHistoryService,
   ActiveCasesStatsService,
   ClosedCasesStatsHistoryService,
@@ -16,6 +18,7 @@ import {
 import { CasesRoutingModule } from '@covid19/cases/cases-routing.module';
 import {
   ActiveCasesStatsCardComponent,
+  ActiveCasesStatsHistoryLineChartComponent,
   ActiveCasesStatsHistoryTable,
   ClosedCasesStatsCardComponent,
   ClosedCasesStatsHistoryTable
@@ -28,11 +31,13 @@ import { MaterialModule } from '@covid19/material/material.module';
 import { SharedModule } from '@covid19/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const COMPONENTS = [
   ActiveCasesOverviewComponent,
   ActiveCasesStatsCardComponent,
   ActiveCasesStatsHistoryTable,
+  ActiveCasesStatsHistoryLineChartComponent,
   ClosedCasesOverviewComponent,
   ClosedCasesStatsCardComponent,
   ClosedCasesStatsHistoryTable
@@ -49,14 +54,17 @@ const COMPONENTS = [
     EffectsModule.forFeature([
       ActiveCasesStatsEffects,
       ActiveCasesStatsHistoryEffects,
+      ActiveCasesStatsDayHistoryEffects,
       ClosedCasesStatsEffects,
       ClosedCasesStatsHistoryEffects
-    ])
+    ]),
+    NgxChartsModule
   ],
   exports: [...COMPONENTS],
   providers: [
     ActiveCasesStatsService,
     ActiveCasesStatsHistoryService,
+    ActiveCasesStatsDayHistoryService,
     ClosedCasesStatsService,
     ClosedCasesStatsHistoryService
   ]
