@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   closedCasesStatsActions,
+  closedCasesStatsDayHistoryActions,
   closedCasesStatsHistoryActions
 } from '@covid19/cases/+state/actions';
 import * as fromCases from '@covid19/cases/+state/reducer';
@@ -18,6 +19,7 @@ import { map } from 'rxjs/operators';
 export class ClosedCasesOverviewComponent implements OnInit {
   closedCasesStats$: Observable<ClosedCaseStats>;
   closedCasesStatsHistory$: Observable<ClosedCaseStats[]>;
+  closedCasesStatsDayHistory$: Observable<ClosedCaseStats[]>;
   loading$: Observable<boolean>;
 
   public loadGlobalStats = (): void => {
@@ -30,6 +32,13 @@ export class ClosedCasesOverviewComponent implements OnInit {
     this.store.dispatch(closedCasesStatsHistoryActions.load());
   };
 
+  public loadGlobalStatsDayHistory = (): void => {
+    this.store.dispatch(
+      new TitleActions.SetTitle('Closed cases history graph')
+    );
+    this.store.dispatch(closedCasesStatsDayHistoryActions.load());
+  };
+
   tabLabelsFunc = [
     {
       label: 'Current',
@@ -38,6 +47,10 @@ export class ClosedCasesOverviewComponent implements OnInit {
     {
       label: 'History',
       func: this.loadGlobalStatsHistory
+    },
+    {
+      label: 'Graph',
+      func: this.loadGlobalStatsDayHistory
     }
   ];
 
@@ -50,17 +63,27 @@ export class ClosedCasesOverviewComponent implements OnInit {
     this.closedCasesStatsHistory$ = this.store.pipe(
       select(fromCases.getClosedCasesHistoryStats)
     );
-    this.loading$ = combineLatest(
-      this.store.pipe(select(fromCases.getClosedCasesStatsLoading)),
-      this.store.pipe(select(fromCases.getClosedCasesHistoryStatsLoading))
-    ).pipe(
-      map(
-        ([globalStatsLoading, globalStatsHistoryLoading]) =>
-          globalStatsLoading || globalStatsHistoryLoading
-      )
+
+    this.closedCasesStatsDayHistory$ = this.store.pipe(
+      select(fromCases.getClosedCasesDayHistoryStats)
     );
 
-    this.loadGlobalStats();
+    this.loading$ = combineLatest(
+      this.store.pipe(select(fromCases.getClosedCasesStatsLoading)),
+      this.store.pipe(select(fromCases.getClosedCasesHistoryStatsLoading)),
+      this.store.pipe(select(fromCases.getClosedCasesDayHistoryStatsLoading))
+    ).pipe(
+      map(
+        ([
+          globalStatsLoading,
+          globalStatsHistoryLoading,
+          globalStatsDayHistoryLoading
+        ]) =>
+          globalStatsLoading ||
+          globalStatsHistoryLoading ||
+          globalStatsDayHistoryLoading
+      )
+    );
   }
 
   public animationDone(index: number): void {

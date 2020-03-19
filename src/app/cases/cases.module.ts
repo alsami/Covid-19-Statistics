@@ -4,6 +4,7 @@ import {
   ActiveCasesStatsDayHistoryEffects,
   ActiveCasesStatsEffects,
   ActiveCasesStatsHistoryEffects,
+  ClosedCasesStatsDayHistoryEffects,
   ClosedCasesStatsEffects,
   ClosedCasesStatsHistoryEffects
 } from '@covid19/cases/+state/effects';
@@ -12,6 +13,7 @@ import {
   ActiveCasesStatsDayHistoryService,
   ActiveCasesStatsHistoryService,
   ActiveCasesStatsService,
+  ClosedCasesStatsDayHistoryService,
   ClosedCasesStatsHistoryService,
   ClosedCasesStatsService
 } from '@covid19/cases/+state/services';
@@ -21,6 +23,7 @@ import {
   ActiveCasesStatsHistoryLineChartComponent,
   ActiveCasesStatsHistoryTable,
   ClosedCasesStatsCardComponent,
+  ClosedCasesStatsHistoryLineChartComponent,
   ClosedCasesStatsHistoryTable
 } from '@covid19/cases/components';
 import {
@@ -40,7 +43,8 @@ const COMPONENTS = [
   ActiveCasesStatsHistoryLineChartComponent,
   ClosedCasesOverviewComponent,
   ClosedCasesStatsCardComponent,
-  ClosedCasesStatsHistoryTable
+  ClosedCasesStatsHistoryTable,
+  ClosedCasesStatsHistoryLineChartComponent
 ];
 
 @NgModule({
@@ -56,7 +60,8 @@ const COMPONENTS = [
       ActiveCasesStatsHistoryEffects,
       ActiveCasesStatsDayHistoryEffects,
       ClosedCasesStatsEffects,
-      ClosedCasesStatsHistoryEffects
+      ClosedCasesStatsHistoryEffects,
+      ClosedCasesStatsDayHistoryEffects
     ]),
     NgxChartsModule
   ],
@@ -66,7 +71,8 @@ const COMPONENTS = [
     ActiveCasesStatsHistoryService,
     ActiveCasesStatsDayHistoryService,
     ClosedCasesStatsService,
-    ClosedCasesStatsHistoryService
+    ClosedCasesStatsHistoryService,
+    ClosedCasesStatsDayHistoryService
   ]
 })
 export class CasesModule {}

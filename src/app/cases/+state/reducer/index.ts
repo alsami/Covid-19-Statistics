@@ -7,6 +7,7 @@ import {
 import * as fromActiveCasesStatsDayHistory from './active-cases-stats-day-history.reducer';
 import * as fromActiveCasesStatsHistory from './active-cases-stats-history.reducer';
 import * as fromActiveCasesStats from './active-cases-stats.reducer';
+import * as fromClosedCasesStatsDayHistory from './closed-cases-stats-day-history.reducer';
 import * as fromClosedCasesStatsHistory from './closed-cases-stats-history.reducer';
 import * as fromClosedCasesStats from './closed-cases-stats.reducer';
 
@@ -16,6 +17,7 @@ export interface CasesState {
   activeCasesDayHistory: fromActiveCasesStatsDayHistory.ActiveCasesStatsDayHistory;
   closedCases: fromClosedCasesStats.ClosedCasesStatsState;
   closedCasesHistory: fromClosedCasesStatsHistory.ClosedCasesStatsHistory;
+  closedCasesDayHistory: fromClosedCasesStatsDayHistory.ClosedCasesStatsDayHistory;
 }
 
 export interface State extends fromRoot.AppState {
@@ -27,7 +29,8 @@ export const reducers: ActionReducerMap<CasesState> = {
   activeCasesHistory: fromActiveCasesStatsHistory.reducer,
   activeCasesDayHistory: fromActiveCasesStatsDayHistory.reducer,
   closedCases: fromClosedCasesStats.reducer,
-  closedCasesHistory: fromClosedCasesStatsHistory.reducer
+  closedCasesHistory: fromClosedCasesStatsHistory.reducer,
+  closedCasesDayHistory: fromClosedCasesStatsDayHistory.reducer
 };
 
 export const getCasesState = createFeatureSelector<CasesState>('cases');
@@ -108,6 +111,10 @@ export const getClosedCasesStatsLoading = createSelector(
   fromClosedCasesStats.loading
 );
 
+/**
+ * Closed history
+ */
+
 export const getClosedCasesHistoryStatsState = createSelector(
   getCasesState,
   state => state.closedCasesHistory
@@ -121,4 +128,23 @@ export const getClosedCasesHistoryStats = createSelector(
 export const getClosedCasesHistoryStatsLoading = createSelector(
   getClosedCasesHistoryStatsState,
   fromClosedCasesStatsHistory.loading
+);
+
+/**
+ * Closed day history
+ */
+
+export const getClosedCasesDayHistoryStatsState = createSelector(
+  getCasesState,
+  state => state.closedCasesDayHistory
+);
+
+export const getClosedCasesDayHistoryStats = createSelector(
+  getClosedCasesDayHistoryStatsState,
+  fromClosedCasesStatsDayHistory.dayHistoryStats
+);
+
+export const getClosedCasesDayHistoryStatsLoading = createSelector(
+  getClosedCasesDayHistoryStatsState,
+  fromClosedCasesStatsDayHistory.loading
 );

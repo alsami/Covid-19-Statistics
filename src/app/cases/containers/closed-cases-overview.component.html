@@ -22,4 +22,9 @@
       ></covid19-closed-cases-stats-history-table>
     </div>
   </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[2].label">
+    <covid19-closed-cases-stats-history-line-chart
+      [closedCasesStats]="closedCasesStatsDayHistory$ | async"
+    ></covid19-closed-cases-stats-history-line-chart>
+  </mat-tab>
 </mat-tab-group>
