@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TitleActions } from '@covid19/core/+state/actions';
 import {
   globalStatsActions,
+  globalStatsDayHistoryActions,
   globalStatsHistoryActions
 } from '@covid19/stats/+state/actions/';
 import * as fromStats from '@covid19/stats/+state/reducer';
@@ -18,6 +19,7 @@ import { map } from 'rxjs/operators';
 export class GlobalStatsOverviewComponent implements OnInit {
   globalStats$: Observable<GlobalStats>;
   globalStatsHistory$: Observable<GlobalStats[]>;
+  globalStatsDayHistory$: Observable<GlobalStats[]>;
   loading$: Observable<boolean>;
 
   public loadGlobalStats = (): void => {
@@ -30,6 +32,11 @@ export class GlobalStatsOverviewComponent implements OnInit {
     this.store.dispatch(globalStatsHistoryActions.load());
   };
 
+  public loadGlobalStatsDayHistory = (): void => {
+    this.store.dispatch(new TitleActions.SetTitle('Global Graph'));
+    this.store.dispatch(globalStatsDayHistoryActions.load());
+  };
+
   tabLabelsFunc = [
     {
       label: 'Current',
@@ -38,6 +45,10 @@ export class GlobalStatsOverviewComponent implements OnInit {
     {
       label: 'History',
       func: this.loadGlobalStatsHistory
+    },
+    {
+      label: 'Graph',
+      func: this.loadGlobalStatsDayHistory
     }
   ];
 
@@ -48,13 +59,23 @@ export class GlobalStatsOverviewComponent implements OnInit {
     this.globalStatsHistory$ = this.store.pipe(
       select(fromStats.getGlobalHistoryStats)
     );
+    this.globalStatsDayHistory$ = this.store.pipe(
+      select(fromStats.getGlobalDayHistoryStats)
+    );
     this.loading$ = combineLatest(
       this.store.pipe(select(fromStats.getGlobalStatsLoading)),
-      this.store.pipe(select(fromStats.getGlobalHistoryStatsLoading))
+      this.store.pipe(select(fromStats.getGlobalHistoryStatsLoading)),
+      this.store.pipe(select(fromStats.getGlobalDayHistoryStatsLoading))
     ).pipe(
       map(
-        ([globalStatsLoading, globalStatsHistoryLoading]) =>
-          globalStatsLoading || globalStatsHistoryLoading
+        ([
+          globalStatsLoading,
+          globalStatsHistoryLoading,
+          globalStatsDayHistoryLoading
+        ]) =>
+          globalStatsLoading ||
+          globalStatsHistoryLoading ||
+          globalStatsDayHistoryLoading
       )
     );
 
