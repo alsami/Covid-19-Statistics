@@ -1,7 +1,3 @@
-export interface StackedBarChartData {
-  name: string;
-  series: {
-    name: string;
-    value: number;
-  }[];
-}
+import { MultiChartData } from '@covid19/shared/models';
+
+export interface StackedBarChartData extends MultiChartData {}

@@ -2,20 +2,23 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
+  CountryStatsDayHistoryEffects,
   CountryStatsEffects,
   CountryStatsHistoryEffects
 } from '@covid19/countries/+state/effects';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import {
   CountryCardComponent,
+  CountryStatsHistoryLineChartComponent,
   CountryStatsHistoryTableComponent,
-  CountryStatsStackedBarChartComponent
+  CountryStatsStackedBarChartComponent as CountryStatsHistoryStackedBarChartComponent
 } from '@covid19/countries/components';
 import {
   CountryStatsHistoryOverviewComponent,
   CountryStatsOverviewComponent
 } from '@covid19/countries/containers';
 import {
+  CountryStatsDayHistoryService,
   CountryStatsHistoryService,
   CountryStatsService
 } from '@covid19/countries/services';
@@ -31,7 +34,8 @@ const COMPONENTS = [
   CountryCardComponent,
   CountryStatsHistoryOverviewComponent,
   CountryStatsHistoryTableComponent,
-  CountryStatsStackedBarChartComponent
+  CountryStatsHistoryStackedBarChartComponent,
+  CountryStatsHistoryLineChartComponent
 ];
 
 @NgModule({
@@ -44,8 +48,16 @@ const COMPONENTS = [
     ReactiveFormsModule,
     NgxChartsModule,
     StoreModule.forFeature('countries', fromCountries.reducers),
-    EffectsModule.forFeature([CountryStatsEffects, CountryStatsHistoryEffects])
+    EffectsModule.forFeature([
+      CountryStatsEffects,
+      CountryStatsHistoryEffects,
+      CountryStatsDayHistoryEffects
+    ])
   ],
-  providers: [CountryStatsService, CountryStatsHistoryService]
+  providers: [
+    CountryStatsService,
+    CountryStatsHistoryService,
+    CountryStatsDayHistoryService
+  ]
 })
 export class CountriesModule {}

@@ -1,3 +1,5 @@
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +14,9 @@ import { MaterialModule } from '@covid19/material/material.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
+
+// the second parameter 'fr-FR' is optional
+registerLocaleData(localeDe, 'de-DE');
 
 @NgModule({
   declarations: [AppComponent],

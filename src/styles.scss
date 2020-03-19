@@ -40,7 +40,8 @@ body {
   overflow: visible !important;
 }
 
-covid19-country-stats-stacked-barchart .ngx-charts {
+covid19-country-stats-history-stacked-barchart,
+covid19-country-stats-line-chart .ngx-charts {
   text {
     fill: #fff !important;
   }

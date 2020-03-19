@@ -8,9 +8,9 @@ import { CountryStats } from '@covid19/countries/models';
 import { StackedBarChartData } from '@covid19/shared/models';
 
 @Component({
-  selector: 'covid19-country-stats-stacked-barchart',
-  templateUrl: './country-stats-stacked-bar-chart.component.html',
-  styleUrls: ['./country-stats-stacked-bar-chart.component.scss'],
+  selector: 'covid19-country-stats-history-stacked-barchart',
+  templateUrl: './country-stats-history-stacked-bar-chart.component.html',
+  styleUrls: ['./country-stats-history-stacked-bar-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CountryStatsStackedBarChartComponent implements OnChanges {
