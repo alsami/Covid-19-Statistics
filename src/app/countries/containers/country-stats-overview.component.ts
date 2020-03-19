@@ -12,6 +12,7 @@ import {
   MatAutocompleteSelectedEvent
 } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import * as fromRoot from '@covid19/+state';
 import {
   countriesOfInterestActions,
   TitleActions
@@ -41,6 +42,7 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
   allCountries: string[] = [];
   filteredCountryStats$: Observable<CountryStats[]>;
   countryStatsSub: Subscription;
+  countriesOfInterest$: Observable<string[]>;
 
   tabLabelsFunc = [
     {
@@ -70,6 +72,10 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
 
     this.countryStats$ = this.store.pipe(select(fromCountries.getCountryStats));
 
+    this.countriesOfInterest$ = this.store.pipe(
+      select(fromRoot.getCountriesOfInterest)
+    );
+
     this.subscribeFormControlChanges();
     this.subscribeCountryStatsChanges();
     this.subscribeFilterCountryStatsChanges();
@@ -84,6 +90,14 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
   public storeCountryOfInterest(country: string): void {
     this.store.dispatch(
       countriesOfInterestActions.store({
+        countryOfInterest: country
+      })
+    );
+  }
+
+  public removeCountryOfInterest(country: string): void {
+    this.store.dispatch(
+      countriesOfInterestActions.remove({
         countryOfInterest: country
       })
     );

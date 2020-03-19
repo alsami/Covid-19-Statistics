@@ -29,11 +29,15 @@ export class CountriesOfInterestStorageService {
 
     const clone = countriesOfInterest.slice();
 
-    clone.splice(
-      countriesOfInterest.findIndex(
-        existingCountry => existingCountry === country
-      )
+    const index = countriesOfInterest.findIndex(
+      existingCountry => existingCountry === country
     );
+
+    if (index === -1) {
+      return;
+    }
+
+    clone.splice(index, 1);
 
     this.override(clone);
   }

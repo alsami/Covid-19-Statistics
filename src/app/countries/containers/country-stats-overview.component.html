@@ -48,7 +48,11 @@
       >
         <covid19-country-card
           [countryStats]="countryStats"
+          [countriesOfInterest]="countriesOfInterest$ | async"
           (addCountryOfInterest)="storeCountryOfInterest(countryStats.country)"
+          (removeCountryOfInterest)="
+            removeCountryOfInterest(countryStats.country)
+          "
         ></covid19-country-card>
         <div *ngIf="!last" style="margin-top: 10px; margin-bottom: 10px;"></div>
       </ng-container>
