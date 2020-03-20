@@ -14,6 +14,8 @@ import { MaterialModule } from '@covid19/material/material.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 // the second parameter 'fr-FR' is optional
 registerLocaleData(localeDe, 'de-DE');
@@ -29,7 +31,8 @@ registerLocaleData(localeDe, 'de-DE');
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
-    EffectsModule.forRoot([TitleEffects, CountriesOfInterestEffects])
+    EffectsModule.forRoot([TitleEffects, CountriesOfInterestEffects]),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
