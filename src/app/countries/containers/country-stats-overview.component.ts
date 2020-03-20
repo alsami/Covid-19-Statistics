@@ -64,7 +64,6 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.store.dispatch(new TitleActions.SetTitle('Countries'));
-    this.store.dispatch(countryStatsActions.load());
 
     this.loading$ = this.store.pipe(
       select(fromCountries.getCountryStatsLoading)
@@ -85,6 +84,14 @@ export class CountryStatsOverviewComponent implements OnInit, OnDestroy {
     if (this.countryStatsSub) {
       this.countryStatsSub.unsubscribe();
     }
+  }
+
+  public animationDone(index: number) {
+    if (index !== 0) {
+      return;
+    }
+
+    this.store.dispatch(countryStatsActions.load());
   }
 
   public storeCountryOfInterest(country: string): void {

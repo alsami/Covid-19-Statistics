@@ -1,7 +1,12 @@
 <covid19-page-loading-indicator
   [loading]="loading$ | async"
 ></covid19-page-loading-indicator>
-<mat-tab-group #matTabGroup mat-stretch-tabs class="tab-custom-overflow">
+<mat-tab-group
+  #matTabGroup
+  mat-stretch-tabs
+  class="tab-custom-overflow"
+  (animationDone)="animationDone(matTabGroup.selectedIndex)"
+>
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
       <div class="sticky-container">
