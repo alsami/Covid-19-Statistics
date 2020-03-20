@@ -76,10 +76,22 @@ export class CountryAutoCompleteComponent
     const input = event.input;
     const value = event.value;
 
-    if ((value || '').trim()) {
-      this.selectedCountries.push(value.trim());
-      this.countriesSelected.emit(this.selectedCountries);
+    if (!(value || '').trim()) {
+      return;
     }
+
+    const trimmed = value.trim();
+
+    const wanted = this.allCountries.find(
+      country => country.toLowerCase() === trimmed.toLowerCase()
+    );
+
+    if (!wanted) {
+      return;
+    }
+
+    this.selectedCountries.push(wanted);
+    this.countriesSelected.emit(this.selectedCountries);
 
     if (input) {
       input.value = '';
