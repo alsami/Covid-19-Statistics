@@ -1,11 +1,17 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges
+} from '@angular/core';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
 import { GlobalStats } from '@covid19/stats/models';
 
 @Component({
   selector: 'covid19-global-stats-history-line-chart',
   templateUrl: './global-stats-history-line-chart.component.html',
-  styleUrls: ['./global-stats-history-line-chart.component.scss']
+  styleUrls: ['./global-stats-history-line-chart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalStatsHistoryLineChartComponent implements OnChanges {
   @Input() globalStats: GlobalStats[];

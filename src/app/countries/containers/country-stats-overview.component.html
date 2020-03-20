@@ -17,9 +17,9 @@
       <ng-container
         *ngFor="
           let countryStats of filteredCountryStats$ | async;
-          let last = last
+          let last = last;
+          trackBy: trackCountryStatsChanges
         "
-        [trackBy]="trackCountryStatsChanges"
       >
         <covid19-country-card
           [countryStats]="countryStats"
