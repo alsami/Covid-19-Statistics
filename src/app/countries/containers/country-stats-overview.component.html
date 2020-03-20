@@ -9,47 +9,17 @@
 >
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
-      <div class="sticky-container">
-        <mat-form-field>
-          <mat-chip-list #chipList>
-            <mat-chip
-              *ngFor="let country of selectedCountries$ | async"
-              [selectable]="selectable"
-              [removable]="removable"
-              (removed)="remove(country)"
-            >
-              {{ country }}
-              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-            <input
-              placeholder="Select countries... "
-              #countryInput
-              [formControl]="countriesCtrl"
-              [matAutocomplete]="auto"
-              [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="add($event)"
-            />
-          </mat-chip-list>
-          <mat-autocomplete
-            #auto="matAutocomplete"
-            (optionSelected)="selected($event)"
-          >
-            <mat-option
-              *ngFor="let fruit of filteredCountries$ | async"
-              [value]="fruit"
-            >
-              {{ fruit }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </div>
+      <covid19-country-autocomplete
+        #countryAutoComplete
+        [countryStats]="countryStats$ | async"
+      ></covid19-country-autocomplete>
       <div style="margin-top: 5px;"></div>
       <ng-container
         *ngFor="
           let countryStats of filteredCountryStats$ | async;
           let last = last
         "
+        [trackBy]="trackCountryStatsChanges"
       >
         <covid19-country-card
           [countryStats]="countryStats"

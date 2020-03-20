@@ -8,6 +8,7 @@ import {
 } from '@covid19/countries/+state/effects';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import {
+  CountryAutoCompleteComponent,
   CountryCardComponent,
   CountryStatsHistoryLineChartComponent,
   CountryStatsHistoryTableComponent,
@@ -32,6 +33,7 @@ import { CountriesRoutingModule } from './countries-routing.module';
 const COMPONENTS = [
   CountryStatsOverviewComponent,
   CountryCardComponent,
+  CountryAutoCompleteComponent,
   CountryStatsHistoryOverviewComponent,
   CountryStatsHistoryTableComponent,
   CountryStatsHistoryStackedBarChartComponent,
