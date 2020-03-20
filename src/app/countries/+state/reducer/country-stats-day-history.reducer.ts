@@ -14,8 +14,8 @@ const initialState: CountryStatsDayHistoryState = {
 
 const _reducer = createReducer(
   initialState,
-  on(countryStatsDayHistoryActions.load, _ => ({
-    stats: [],
+  on(countryStatsDayHistoryActions.load, state => ({
+    ...state,
     loading: true
   })),
   on(countryStatsDayHistoryActions.loaded, (_, { countryStats }) => ({

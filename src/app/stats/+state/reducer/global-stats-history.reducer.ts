@@ -14,8 +14,8 @@ const initialState: GlobalStatsHistoryState = {
 
 const _reducer = createReducer(
   initialState,
-  on(globalStatsHistoryActions.load, _ => ({
-    stats: [],
+  on(globalStatsHistoryActions.load, state => ({
+    ...state,
     loading: true
   })),
   on(globalStatsHistoryActions.loaded, (_, { globalStats }) => ({

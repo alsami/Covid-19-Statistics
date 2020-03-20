@@ -28,7 +28,6 @@ export class ClosedCasesStatsHistoryTable implements OnInit, OnChanges {
   public ngOnChanges(): void {
     console.log(this.closedCasesStats);
     if (!this.closedCasesStats || !this.closedCasesStats.length) {
-      this.dataSource.data = [];
       return;
     }
 

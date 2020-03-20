@@ -14,8 +14,8 @@ const initialState: ActiveCasesStatsHistory = {
 
 const _reducer = createReducer(
   initialState,
-  on(activeCasesStatsHistoryActions.load, _ => ({
-    stats: [],
+  on(activeCasesStatsHistoryActions.load, state => ({
+    ...state,
     loading: true
   })),
   on(activeCasesStatsHistoryActions.loaded, (_, { activeCaseStats }) => ({

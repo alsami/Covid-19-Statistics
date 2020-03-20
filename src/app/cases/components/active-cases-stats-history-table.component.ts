@@ -28,7 +28,6 @@ export class ActiveCasesStatsHistoryTable implements OnInit, OnChanges {
   public ngOnChanges(): void {
     console.log(this.activeCasesStats);
     if (!this.activeCasesStats || !this.activeCasesStats.length) {
-      this.dataSource.data = [];
       return;
     }
 

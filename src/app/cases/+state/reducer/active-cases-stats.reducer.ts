@@ -14,8 +14,8 @@ const initialState: ActiveCasesStatsState = {
 
 const _reducer = createReducer(
   initialState,
-  on(activeCasesStatsActions.load, _ => ({
-    stats: null,
+  on(activeCasesStatsActions.load, state => ({
+    ...state,
     loading: true
   })),
   on(activeCasesStatsActions.loaded, (_, { activeCaseStats }) => ({

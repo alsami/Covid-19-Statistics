@@ -27,7 +27,6 @@ export class GlobalStatsHistoryTableComponent implements OnInit, OnChanges {
 
   public ngOnChanges(): void {
     if (!this.globalStats || !this.globalStats.length) {
-      this.dataSource.data = [];
       return;
     }
 

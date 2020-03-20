@@ -14,8 +14,8 @@ const initialState: ClosedCasesStatsState = {
 
 const _reducer = createReducer(
   initialState,
-  on(closedCasesStatsActions.load, _ => ({
-    stats: null,
+  on(closedCasesStatsActions.load, state => ({
+    ...state,
     loading: true
   })),
   on(closedCasesStatsActions.loaded, (_, { closedCaseStats }) => ({

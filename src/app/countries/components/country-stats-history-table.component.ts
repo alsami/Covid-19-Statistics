@@ -32,7 +32,6 @@ export class CountryStatsHistoryTableComponent implements OnInit {
 
   public ngOnChanges(): void {
     if (!this.countryStats || !this.countryStats.length) {
-      this.dataSource.data = [];
       return;
     }
 
