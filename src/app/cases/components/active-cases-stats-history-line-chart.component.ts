@@ -22,7 +22,7 @@ export class ActiveCasesStatsHistoryLineChartComponent implements OnChanges {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Time';
+  xAxisLabel: string = 'UTC Days';
   yAxisLabel: string = 'Amount';
   timeline: boolean = true;
 
