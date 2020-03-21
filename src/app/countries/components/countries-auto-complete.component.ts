@@ -21,12 +21,13 @@ import { Observable, Subscription } from 'rxjs';
 import { delay, map, startWith } from 'rxjs/operators';
 
 @Component({
-  selector: 'covid19-country-autocomplete',
-  templateUrl: './country-auto-complete.component.html',
-  styleUrls: ['./country-auto-complete.component.scss'],
+  selector: 'covid19-countries-autocomplete',
+  templateUrl: './countries-auto-complete.component.html',
+  styleUrls: ['./countries-auto-complete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountryAutoCompleteComponent implements OnChanges, AfterViewInit {
+export class CountriesAutoCompleteComponent
+  implements OnChanges, AfterViewInit {
   @Input() countryStats: CountryStats[] = [];
   @Output() countriesSelected = new EventEmitter<string[]>();
   filteredCountries$: Observable<string[]>;

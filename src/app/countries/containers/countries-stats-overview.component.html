@@ -1,0 +1,49 @@
+<covid19-page-loading-indicator
+  [loading]="loading$ | async"
+></covid19-page-loading-indicator>
+<mat-tab-group
+  #matTabGroup
+  class="tab-custom-overflow"
+  (animationDone)="animationDone(matTabGroup.selectedIndex)"
+>
+  <mat-tab [label]="tabLabelsFunc[0].label">
+    <div class="page-content">
+      <covid19-countries-autocomplete
+        #countryAutoComplete
+        [countryStats]="countryStats$ | async"
+      ></covid19-countries-autocomplete>
+      <div style="margin-top: 5px;"></div>
+      <div class="display: flex; max-width: 100%">
+        <ng-container
+          *ngFor="
+            let countryStats of filteredCountryStats$ | async;
+            let last = last;
+            trackBy: trackCountryStatsChanges
+          "
+        >
+          <covid19-country-stats-card
+            [countryStats]="countryStats"
+            [countriesOfInterest]="countriesOfInterest$ | async"
+            (addCountryOfInterest)="
+              storeCountryOfInterest(countryStats.country)
+            "
+            (removeCountryOfInterest)="
+              removeCountryOfInterest(countryStats.country)
+            "
+          ></covid19-country-stats-card>
+          <div
+            *ngIf="!last"
+            style="margin-top: 10px; margin-bottom: 10px;"
+          ></div>
+        </ng-container>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[1].label">
+    <div style="display: flex">
+      <covid19-countries-stats-history-stacked-barchart
+        [countryStats]="countryStats$ | async"
+      ></covid19-countries-stats-history-stacked-barchart>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -2,21 +2,21 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
+  CountriesStatsEffects,
   CountryStatsDayHistoryEffects,
-  CountryStatsEffects,
   CountryStatsHistoryEffects
 } from '@covid19/countries/+state/effects';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import {
-  CountryAutoCompleteComponent,
-  CountryCardComponent,
+  CountriesAutoCompleteComponent,
+  CountriesStatsStackedBarChartComponent,
+  CountryStatsCardComponent,
   CountryStatsHistoryLineChartComponent,
   CountryStatsHistoryTableComponent,
-  CountryStatsPieChartComponent,
-  CountryStatsStackedBarChartComponent as CountryStatsHistoryStackedBarChartComponent
+  CountryStatsPieChartComponent
 } from '@covid19/countries/components';
 import {
-  CountryStatsHistoryOverviewComponent,
+  CountriesStatsOverviewComponent,
   CountryStatsOverviewComponent
 } from '@covid19/countries/containers';
 import {
@@ -32,13 +32,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CountriesRoutingModule } from './countries-routing.module';
 
 const COMPONENTS = [
-  CountryStatsOverviewComponent,
-  CountryCardComponent,
+  CountriesStatsOverviewComponent,
+  CountriesStatsStackedBarChartComponent,
+  CountryStatsCardComponent,
   CountryStatsPieChartComponent,
-  CountryAutoCompleteComponent,
-  CountryStatsHistoryOverviewComponent,
+  CountriesAutoCompleteComponent,
+  CountryStatsOverviewComponent,
   CountryStatsHistoryTableComponent,
-  CountryStatsHistoryStackedBarChartComponent,
   CountryStatsHistoryLineChartComponent
 ];
 
@@ -53,7 +53,7 @@ const COMPONENTS = [
     NgxChartsModule,
     StoreModule.forFeature('countries', fromCountries.reducers),
     EffectsModule.forFeature([
-      CountryStatsEffects,
+      CountriesStatsEffects,
       CountryStatsHistoryEffects,
       CountryStatsDayHistoryEffects
     ])

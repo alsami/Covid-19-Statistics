@@ -1,104 +1,116 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import * as fromRoot from '@covid19/+state';
 import {
-  countriesOfInterestActions,
-  TitleActions
-} from '@covid19/core/+state/actions';
-import { countryStatsActions } from '@covid19/countries/+state/actions';
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import { MatTabGroup } from '@angular/material/tabs';
+import { ActivatedRoute } from '@angular/router';
+import { TitleActions } from '@covid19/core/+state/actions';
+import {
+  countryStatsDayHistoryActions,
+  countryStatsHistoryActions
+} from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
-import { CountryAutoCompleteComponent } from '@covid19/countries/components';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { delay, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-country-stats-overview',
   templateUrl: './country-stats-overview.component.html',
   styleUrls: ['./country-stats-overview.component.scss']
 })
-export class CountryStatsOverviewComponent implements OnInit, AfterViewInit {
-  public loading$: Observable<boolean>;
+export class CountryStatsOverviewComponent
+  implements OnInit, AfterViewInit, OnDestroy {
+  private paramSub: Subscription;
+  private selectedCountry: string;
+
   public countryStats$: Observable<CountryStats[]>;
-  public filteredCountryStats$: Observable<CountryStats[]>;
-  public countriesOfInterest$: Observable<string[]>;
+  public countryStatsDayHistory$: Observable<CountryStats[]>;
+  public loading$: Observable<boolean>;
 
-  @ViewChild('countryAutoComplete', { static: false })
-  countryAutoComplete: CountryAutoCompleteComponent;
+  @ViewChild('matTabGroup', { static: false }) matTabGroup: MatTabGroup;
 
-  public tabLabelsFunc = [
+  public loadHistory = (country: string) => {
+    this.store.dispatch(
+      countryStatsHistoryActions.load({
+        country: country
+      })
+    );
+  };
+
+  public loadDayHistory = (country: string) => {
+    this.store.dispatch(
+      countryStatsDayHistoryActions.load({
+        country: country
+      })
+    );
+  };
+
+  tabLabelsFunc = [
     {
-      label: 'Overview',
-      func: console.log
+      label: 'History',
+      func: this.loadHistory
     },
     {
       label: 'Graph',
-      func: console.log
+      func: this.loadDayHistory
     }
   ];
 
-  public constructor(private store: Store<fromCountries.CountryState>) {}
+  public constructor(
+    private store: Store<fromCountries.CountryState>,
+    private route: ActivatedRoute
+  ) {}
 
   public ngOnInit(): void {
-    this.store.dispatch(new TitleActions.SetTitle('Countries'));
-
-    this.loading$ = this.store.pipe(
-      select(fromCountries.getCountryStatsLoading)
+    this.loading$ = combineLatest(
+      this.store.pipe(select(fromCountries.getCountryHistoryStatsLoading)),
+      this.store.pipe(select(fromCountries.getCountryDayHistoryStatsLoading))
+    ).pipe(
+      map(
+        ([countryStatsHistoryLoading, countryStatsDayHistoryLoading]) =>
+          countryStatsHistoryLoading || countryStatsDayHistoryLoading
+      )
     );
 
-    this.countryStats$ = this.store.pipe(select(fromCountries.getCountryStats));
+    this.countryStats$ = this.store.pipe(
+      select(fromCountries.getCountryHistoryStats)
+    );
 
-    this.countriesOfInterest$ = this.store.pipe(
-      select(fromRoot.getCountriesOfInterest)
+    this.countryStatsDayHistory$ = this.store.pipe(
+      select(fromCountries.getCountryDayHistoryStats)
     );
   }
 
   public ngAfterViewInit(): void {
-    this.subscribeFilterCountryStatsChanges();
-  }
+    this.paramSub = this.route.paramMap
+      .pipe(
+        delay(0),
+        map(paramMap => paramMap.get('country')),
+        distinctUntilChanged()
+      )
+      .subscribe(country => {
+        this.store.dispatch(new TitleActions.SetTitle(`${country} History`));
 
-  public animationDone(index: number) {
-    if (index !== 0) {
-      return;
-    }
-
-    this.store.dispatch(countryStatsActions.load());
-  }
-
-  public storeCountryOfInterest(country: string): void {
-    this.store.dispatch(
-      countriesOfInterestActions.store({
-        countryOfInterest: country
-      })
-    );
-  }
-
-  public removeCountryOfInterest(country: string): void {
-    this.store.dispatch(
-      countriesOfInterestActions.remove({
-        countryOfInterest: country
-      })
-    );
-  }
-
-  public trackCountryStatsChanges(countryStat: CountryStats): string {
-    return `${countryStat.country}_${countryStat.fetchedAt}`;
-  }
-
-  private subscribeFilterCountryStatsChanges(): void {
-    this.filteredCountryStats$ = combineLatest(
-      this.countryAutoComplete.countriesSelected.asObservable(),
-      this.countryStats$
-    ).pipe(
-      map(([selectedCountries, countryStats]) => {
-        if (!selectedCountries || !selectedCountries.length) {
-          return countryStats;
+        if (this.selectedCountry && this.selectedCountry !== country) {
+          this.tabLabelsFunc[this.matTabGroup.selectedIndex].func(country);
         }
 
-        return countryStats.filter(
-          s => selectedCountries.indexOf(s.country) > -1
-        );
-      })
-    );
+        this.selectedCountry = country;
+      });
+  }
+
+  public ngOnDestroy(): void {
+    if (this.paramSub) {
+      this.paramSub.unsubscribe();
+    }
+  }
+
+  public animationDone(index: number): void {
+    this.tabLabelsFunc[index].func(this.selectedCountry);
   }
 }

@@ -8,42 +8,16 @@
 >
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
-      <covid19-country-autocomplete
-        #countryAutoComplete
+      <covid19-country-stats-history-table
         [countryStats]="countryStats$ | async"
-      ></covid19-country-autocomplete>
-      <div style="margin-top: 5px;"></div>
-      <div class="display: flex; max-width: 100%">
-        <ng-container
-          *ngFor="
-            let countryStats of filteredCountryStats$ | async;
-            let last = last;
-            trackBy: trackCountryStatsChanges
-          "
-        >
-          <covid19-country-card
-            [countryStats]="countryStats"
-            [countriesOfInterest]="countriesOfInterest$ | async"
-            (addCountryOfInterest)="
-              storeCountryOfInterest(countryStats.country)
-            "
-            (removeCountryOfInterest)="
-              removeCountryOfInterest(countryStats.country)
-            "
-          ></covid19-country-card>
-          <div
-            *ngIf="!last"
-            style="margin-top: 10px; margin-bottom: 10px;"
-          ></div>
-        </ng-container>
-      </div>
+      ></covid19-country-stats-history-table>
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
-    <div style="display: flex">
-      <covid19-country-stats-history-stacked-barchart
-        [countryStats]="countryStats$ | async"
-      ></covid19-country-stats-history-stacked-barchart>
+    <div class="page-content">
+      <covid19-country-stats-line-chart
+        [countryStats]="countryStatsDayHistory$ | async"
+      ></covid19-country-stats-line-chart>
     </div>
   </mat-tab>
 </mat-tab-group>

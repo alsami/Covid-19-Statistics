@@ -8,12 +8,12 @@ import { CountryStats } from '@covid19/countries/models';
 import { StackedBarChartData } from '@covid19/shared/models';
 
 @Component({
-  selector: 'covid19-country-stats-history-stacked-barchart',
-  templateUrl: './country-stats-history-stacked-bar-chart.component.html',
-  styleUrls: ['./country-stats-history-stacked-bar-chart.component.scss'],
+  selector: 'covid19-countries-stats-history-stacked-barchart',
+  templateUrl: './countries-stats-history-stacked-bar-chart.component.html',
+  styleUrls: ['./countries-stats-history-stacked-bar-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountryStatsStackedBarChartComponent implements OnChanges {
+export class CountriesStatsStackedBarChartComponent implements OnChanges {
   @Input() countryStats: CountryStats[] = [];
   public data: StackedBarChartData[] = [];
   public yAxisLabel: string = 'Country';

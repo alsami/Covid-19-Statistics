@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  CountryStatsHistoryOverviewComponent,
+  CountriesStatsOverviewComponent,
   CountryStatsOverviewComponent
 } from '@covid19/countries/containers';
 
 const routes: Routes = [
   {
     path: '',
-    component: CountryStatsOverviewComponent
+    component: CountriesStatsOverviewComponent
   },
   {
     path: ':country',
-    component: CountryStatsHistoryOverviewComponent
+    component: CountryStatsOverviewComponent
   }
 ];
 

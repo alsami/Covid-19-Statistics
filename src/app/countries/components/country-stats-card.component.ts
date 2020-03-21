@@ -8,12 +8,12 @@ import {
 import { CountryStats } from '@covid19/countries/models';
 
 @Component({
-  selector: 'covid19-country-card',
-  templateUrl: './country-card.component.html',
-  styleUrls: ['./country-card.component.scss'],
+  selector: 'covid19-country-stats-card',
+  templateUrl: './country-stats-card.component.html',
+  styleUrls: ['./country-stats-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountryCardComponent {
+export class CountryStatsCardComponent {
   @Input() countryStats: CountryStats;
   @Input() countriesOfInterest: string[];
 
