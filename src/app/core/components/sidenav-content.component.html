@@ -21,7 +21,7 @@
   </mat-list-item>
   <ng-container *ngIf="countriesOfInterest?.length">
     <h4 mat-subheader>Countries of interest</h4>
-    <ng-container *ngFor="let country of countriesOfInterest">
+    <ng-container *ngFor="let country of countriesOfInterest; let last = last">
       <mat-list-item
         [routerLink]="'/countries/' + country"
         (click)="linkClicked.emit()"
@@ -29,6 +29,7 @@
         <mat-icon mat-list-icon>flag</mat-icon>
         <h4 mat-line>{{ country }}</h4>
       </mat-list-item>
+      <mat-divider *ngIf="!last"></mat-divider>
     </ng-container>
   </ng-container>
 </mat-nav-list>
