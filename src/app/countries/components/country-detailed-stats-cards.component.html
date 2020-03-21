@@ -17,6 +17,19 @@
       style="display: flex; flex-direction: column; align-content: center;"
     >
       <mat-card-title>
+        Active Cases: {{ countryStats.activeCases | number }}
+      </mat-card-title>
+      <br />
+      Last reported at:
+      {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
+    </mat-card-content>
+  </mat-card>
+  <div style="margin-top: 10px; margin-bottom: 10px;"></div>
+  <mat-card>
+    <mat-card-content
+      style="display: flex; flex-direction: column; align-content: center;"
+    >
+      <mat-card-title>
         New Cases: {{ countryStats.newCases | number }}
       </mat-card-title>
       <br />
