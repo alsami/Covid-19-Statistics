@@ -23,10 +23,6 @@
 .scale-wrapper {
   display: flex;
   justify-content: center;
-}
-
-.scale-container {
   flex-direction: row;
-  width: 475px;
-  height: 200px;
+  flex: 1 1 100%;
 }
