@@ -13,58 +13,62 @@
         [countryStats]="countryStats$ | async"
       ></covid19-countries-autocomplete>
       <div style="margin-top: 5px;"></div>
-      <div class="card-container">
-        <ng-container
-          *ngFor="
-            let countryStats of filteredCountryStats$ | async;
-            let last = last;
-            trackBy: trackCountryStatsChanges
-          "
-        >
-          <mat-card>
-            <mat-card-title>
-              {{ countryStats.country }}
-            </mat-card-title>
+      <cdk-virtual-scroll-viewport
+        itemSize="6"
+        class="virtual-scroll-container"
+      >
+        <div class="card-container">
+          <ng-container
+            *cdkVirtualFor="
+              let countryStats of filteredCountryStats$ | async;
+              trackBy: trackCountryStatsChanges
+            "
+          >
+            <mat-card>
+              <mat-card-title>
+                {{ countryStats.country }}
+              </mat-card-title>
 
-            <mat-card-content>
-              <covid19-country-stats-pie-chart
-                [countryStats]="countryStats"
-              ></covid19-country-stats-pie-chart>
-            </mat-card-content>
-            <mat-card-actions align="end">
-              <ng-container
-                *ngIf="
-                  countryOfInterest(countryStats.country);
-                  then remove;
-                  else add
-                "
-              ></ng-container>
-              <ng-template #add>
-                <button
-                  mat-button
-                  (click)="storeCountryOfInterest(countryStats.country)"
-                >
-                  <mat-icon>visibility</mat-icon>
-                  Add to list
-                </button>
-              </ng-template>
+              <mat-card-content>
+                <covid19-country-stats-pie-chart
+                  [countryStats]="countryStats"
+                ></covid19-country-stats-pie-chart>
+              </mat-card-content>
+              <mat-card-actions align="end">
+                <ng-container
+                  *ngIf="
+                    countryOfInterest(countryStats.country);
+                    then remove;
+                    else add
+                  "
+                ></ng-container>
+                <ng-template #add>
+                  <button
+                    mat-button
+                    (click)="storeCountryOfInterest(countryStats.country)"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                    Add to list
+                  </button>
+                </ng-template>
 
-              <ng-template #remove>
-                <button
-                  mat-button
-                  (click)="removeCountryOfInterest(countryStats.country)"
-                >
-                  <mat-icon>visibility_off</mat-icon>
-                  Remove from list
+                <ng-template #remove>
+                  <button
+                    mat-button
+                    (click)="removeCountryOfInterest(countryStats.country)"
+                  >
+                    <mat-icon>visibility_off</mat-icon>
+                    Remove from list
+                  </button>
+                </ng-template>
+                <button mat-button [routerLink]="countryStats.country">
+                  Show details
                 </button>
-              </ng-template>
-              <button mat-button [routerLink]="countryStats.country">
-                Show details
-              </button>
-            </mat-card-actions>
-          </mat-card>
-        </ng-container>
-      </div>
+              </mat-card-actions>
+            </mat-card>
+          </ng-container>
+        </div>
+      </cdk-virtual-scroll-viewport>
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">

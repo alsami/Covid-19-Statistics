@@ -20,10 +20,41 @@ mat-form-field {
 // $lg: 'screen and (min-width: 1280px) and (max-width: 1919px)';
 // $xl: 'screen and (min-width: 1920px) and (max-width: 5000px)';
 
+// $lt-sm: 'screen and (max-width: 599px)';
+// $lt-md: 'screen and (max-width: 959px)';
+// $lt-lg: 'screen and (max-width: 1279px)';
+// $lt-xl: 'screen and (max-width: 1919px)';
+
 // $gt-xs: 'screen and (min-width: 600px)';
 // $gt-sm: 'screen and (min-width: 960px)';
 // $gt-md: 'screen and (min-width: 1280px)';
 // $gt-lg: 'screen and (min-width: 1920px)';
+
+mat-card {
+  max-height: 370px;
+}
+
+@media #{gt-xs} {
+  mat-card {
+    max-height: 320px;
+  }
+}
+
+@media #{gt-sm} {
+  mat-card {
+    max-height: 270px;
+  }
+}
+
+@media #{gt-md} {
+  mat-card {
+    max-height: 270px;
+  }
+}
+
+.virtual-scroll-container {
+  height: 500px;
+}
 
 covid19-country-stats-pie-chart {
   display: flex;
