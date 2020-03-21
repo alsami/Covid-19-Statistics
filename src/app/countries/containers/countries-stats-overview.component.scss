@@ -25,6 +25,13 @@ mat-form-field {
 // $gt-md: 'screen and (min-width: 1280px)';
 // $gt-lg: 'screen and (min-width: 1920px)';
 
+covid19-country-stats-pie-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 100%;
+}
+
 @media #{$xs} {
   .card-container {
     flex-flow: column;
@@ -34,6 +41,10 @@ mat-form-field {
   mat-card {
     width: auto;
     margin-bottom: 5px;
+  }
+
+  covid19-country-stats-pie-chart {
+    height: 250px;
   }
 }
 
@@ -47,6 +58,10 @@ mat-form-field {
   mat-card {
     width: 44%;
     margin-bottom: 5px;
+  }
+
+  covid19-country-stats-pie-chart {
+    height: 200px;
   }
 }
 

@@ -1,4 +1,4 @@
-<div class="scale-wrapper">
+<!-- <div class="scale-wrapper">
   <ngx-charts-pie-chart
     *ngIf="this.data.length"
     [scheme]="colorScheme"
@@ -7,4 +7,13 @@
     [doughnut]="true"
     [animations]="false"
   ></ngx-charts-pie-chart>
-</div>
+</div> -->
+
+<ngx-charts-pie-chart
+  *ngIf="this.data.length"
+  [scheme]="colorScheme"
+  [results]="data"
+  [labels]="true"
+  [doughnut]="true"
+  [animations]="false"
+></ngx-charts-pie-chart>
