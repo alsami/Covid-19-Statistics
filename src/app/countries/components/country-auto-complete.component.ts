@@ -28,7 +28,7 @@ import { delay, map, startWith } from 'rxjs/operators';
 })
 export class CountryAutoCompleteComponent implements OnChanges, AfterViewInit {
   @Input() countryStats: CountryStats[] = [];
-  @Output() countriesSelected = new EventEmitter<string[]>(true);
+  @Output() countriesSelected = new EventEmitter<string[]>();
   filteredCountries$: Observable<string[]>;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   countriesCtrl = new FormControl();
