@@ -21,7 +21,7 @@ export class CountryStatsHistoryTableComponent implements OnInit {
   );
 
   public displayedColumns = [
-    'total',
+    'active',
     'deaths',
     'serious',
     'recovered',
@@ -39,7 +39,7 @@ export class CountryStatsHistoryTableComponent implements OnInit {
     console.log(this.dataSource.data);
   }
 
-  public getPreviousTotalDiff(current: CountryStats): number {
+  public getPreviousActiveDiff(current: CountryStats): number {
     const index = this.countryStats.findIndex(stat => stat === current);
 
     if (index === -1 || index === this.countryStats.length - 1) {
@@ -48,7 +48,7 @@ export class CountryStatsHistoryTableComponent implements OnInit {
 
     const previous = this.countryStats[index + 1];
 
-    const diff = current.totalCases - previous.totalCases;
+    const diff = current.activeCases - previous.activeCases;
 
     return diff;
   }

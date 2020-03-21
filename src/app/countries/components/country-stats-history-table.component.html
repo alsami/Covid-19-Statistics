@@ -3,12 +3,16 @@
   [dataSource]="dataSource"
   class="mat-elevation-z8"
 >
-  <ng-container matColumnDef="total">
-    <mat-header-cell *matHeaderCellDef>Cases</mat-header-cell>
+  <ng-container matColumnDef="active">
+    <mat-header-cell *matHeaderCellDef>
+      Active
+      <br />
+      Cases
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <div style="display: flex; flex-direction: column;">
-        <span>{{ element.totalCases | number }}</span>
-        <span covid19DiffNumberColor>{{ getPreviousTotalDiff(element) }}</span>
+        <span>{{ element.activeCases | number }}</span>
+        <span covid19DiffNumberColor>{{ getPreviousActiveDiff(element) }}</span>
       </div>
     </mat-cell>
   </ng-container>
