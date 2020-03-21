@@ -1,5 +1,10 @@
 @import '../../../scss/breakpoints';
 
+:host {
+  width: 100%;
+  height: 100%;
+}
+
 .sticky-container {
   position: -webkit-sticky; /* Safari */
   position: sticky;
@@ -54,6 +59,17 @@ mat-card {
 
 .virtual-scroll-container {
   height: 500px;
+}
+
+.virtual-scroll-container::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.virtual-scroll-container {
+  overflow: -moz-scrollbars-none;
+}
+.virtual-scroll-container {
+  -ms-overflow-style: none;
 }
 
 covid19-country-stats-pie-chart {
