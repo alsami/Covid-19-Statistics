@@ -12,6 +12,7 @@ import {
   CountryCardComponent,
   CountryStatsHistoryLineChartComponent,
   CountryStatsHistoryTableComponent,
+  CountryStatsPieChartComponent,
   CountryStatsStackedBarChartComponent as CountryStatsHistoryStackedBarChartComponent
 } from '@covid19/countries/components';
 import {
@@ -33,6 +34,7 @@ import { CountriesRoutingModule } from './countries-routing.module';
 const COMPONENTS = [
   CountryStatsOverviewComponent,
   CountryCardComponent,
+  CountryStatsPieChartComponent,
   CountryAutoCompleteComponent,
   CountryStatsHistoryOverviewComponent,
   CountryStatsHistoryTableComponent,
