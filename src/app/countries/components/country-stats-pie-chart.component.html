@@ -1,9 +1,10 @@
 <div class="scale-wrapper">
   <div class="scale-container">
     <ngx-charts-pie-chart
+      *ngIf="this.data.length"
       [scheme]="colorScheme"
-      [results]="single"
-      [labels]="showLabels"
+      [results]="data"
+      [labels]="true"
       [doughnut]="true"
       [animations]="false"
     ></ngx-charts-pie-chart>

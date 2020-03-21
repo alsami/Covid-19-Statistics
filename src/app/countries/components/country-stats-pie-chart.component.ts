@@ -2,9 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnChanges
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { CountryStats } from '@covid19/countries/models';
+import { RegularChartData } from '@covid19/shared/models';
 
 @Component({
   selector: 'covid19-country-stats-pie-chart',
@@ -14,37 +16,40 @@ import { CountryStats } from '@covid19/countries/models';
 })
 export class CountryStatsPieChartComponent implements OnChanges {
   @Input() countryStats: CountryStats;
-  single: any[] = [
-    {
-      name: 'Germany',
-      value: 8940000
-    },
-    {
-      name: 'USA',
-      value: 5000000
-    },
-    {
-      name: 'France',
-      value: 7200000
-    },
-    {
-      name: 'UK',
-      value: 6200000
-    }
-  ];
+  data: RegularChartData[] = [];
 
-  // options
-  gradient: boolean = false;
-  showLegend: boolean = false;
-  showLabels: boolean = true;
-  isDoughnut: boolean = true;
-  legendPosition: string = 'below';
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  // cases, deaths, recovered
+  public colorScheme = {
+    domain: ['#AAAAAA', '#ff0000', '#5AA454']
   };
 
-  public ngOnChanges(): void {
-    console.log(this.countryStats);
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (!this.countryStats) {
+      return;
+    }
+
+    if (
+      changes.countryStats.previousValue &&
+      changes.countryStats.previousValue === changes.countryStats.currentValue
+    ) {
+      return;
+    }
+
+    this.data = [];
+
+    this.data.push({
+      name: 'Active cases',
+      value: this.countryStats.activeCases
+    });
+
+    this.data.push({
+      name: 'Deaths',
+      value: this.countryStats.totalDeaths
+    });
+
+    this.data.push({
+      name: 'Recovered',
+      value: this.countryStats.recoveredCases
+    });
   }
 }
