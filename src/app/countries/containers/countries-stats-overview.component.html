@@ -13,7 +13,7 @@
         [countryStats]="countryStats$ | async"
       ></covid19-countries-autocomplete>
       <div style="margin-top: 5px;"></div>
-      <div class="display: flex; max-width: 100%">
+      <div class="card-container">
         <ng-container
           *ngFor="
             let countryStats of filteredCountryStats$ | async;
@@ -21,20 +21,20 @@
             trackBy: trackCountryStatsChanges
           "
         >
-          <covid19-country-stats-card
-            [countryStats]="countryStats"
-            [countriesOfInterest]="countriesOfInterest$ | async"
-            (addCountryOfInterest)="
-              storeCountryOfInterest(countryStats.country)
-            "
-            (removeCountryOfInterest)="
-              removeCountryOfInterest(countryStats.country)
-            "
-          ></covid19-country-stats-card>
-          <div
-            *ngIf="!last"
-            style="margin-top: 10px; margin-bottom: 10px;"
-          ></div>
+          <mat-card>
+            <mat-card-title>
+              {{ countryStats.country }}
+            </mat-card-title>
+
+            <mat-card-content>
+              <covid19-country-stats-pie-chart
+                [countryStats]="countryStats"
+              ></covid19-country-stats-pie-chart>
+            </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-button>Show details</button>
+            </mat-card-actions>
+          </mat-card>
         </ng-container>
       </div>
     </div>

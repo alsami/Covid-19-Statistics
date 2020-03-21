@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges
+} from '@angular/core';
+import { CountryStats } from '@covid19/countries/models';
 
 @Component({
   selector: 'covid19-country-stats-pie-chart',
@@ -6,7 +12,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./country-stats-pie-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountryStatsPieChartComponent implements OnInit {
+export class CountryStatsPieChartComponent implements OnChanges {
+  @Input() countryStats: CountryStats;
   single: any[] = [
     {
       name: 'Germany',
@@ -37,7 +44,7 @@ export class CountryStatsPieChartComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  public ngOnChanges(): void {
+    console.log(this.countryStats);
+  }
 }

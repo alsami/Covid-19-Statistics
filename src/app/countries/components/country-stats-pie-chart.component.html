@@ -1,6 +1,11 @@
-<ngx-charts-pie-chart
-  [scheme]="colorScheme"
-  [results]="single"
-  [labels]="showLabels"
-  [doughnut]="true"
-></ngx-charts-pie-chart>
+<div class="scale-wrapper">
+  <div class="scale-container">
+    <ngx-charts-pie-chart
+      [scheme]="colorScheme"
+      [results]="single"
+      [labels]="showLabels"
+      [doughnut]="true"
+      [animations]="false"
+    ></ngx-charts-pie-chart>
+  </div>
+</div>

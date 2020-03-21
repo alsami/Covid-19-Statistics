@@ -1,3 +1,5 @@
+@import '../../../scss/breakpoints';
+
 .sticky-container {
   position: -webkit-sticky; /* Safari */
   position: sticky;
@@ -10,4 +12,66 @@
 
 mat-form-field {
   width: 100%;
+}
+
+// $xs: 'screen and (max-width: 599px)';
+// $sm: 'screen and (min-width: 600px) and (max-width: 959px)';
+// $md: 'screen and (min-width: 960px) and (max-width: 1279px)';
+// $lg: 'screen and (min-width: 1280px) and (max-width: 1919px)';
+// $xl: 'screen and (min-width: 1920px) and (max-width: 5000px)';
+
+// $gt-xs: 'screen and (min-width: 600px)';
+// $gt-sm: 'screen and (min-width: 960px)';
+// $gt-md: 'screen and (min-width: 1280px)';
+// $gt-lg: 'screen and (min-width: 1920px)';
+
+@media #{$xs} {
+  .card-container {
+    flex-flow: column;
+    justify-content: center;
+  }
+
+  mat-card {
+    width: auto;
+    margin-bottom: 5px;
+  }
+}
+
+@media #{$sm} {
+  .card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  mat-card {
+    width: 44%;
+    margin-bottom: 5px;
+  }
+}
+
+@media #{$md} {
+  .card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  mat-card {
+    width: 29%;
+    margin-bottom: 5px;
+  }
+}
+
+@media #{$lg} {
+  .card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  mat-card {
+    width: 30%;
+    margin-bottom: 5px;
+  }
 }
