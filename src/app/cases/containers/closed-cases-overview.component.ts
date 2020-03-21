@@ -23,19 +23,14 @@ export class ClosedCasesOverviewComponent implements OnInit {
   loading$: Observable<boolean>;
 
   public loadGlobalStats = (): void => {
-    this.store.dispatch(new TitleActions.SetTitle('Closed cases'));
     this.store.dispatch(closedCasesStatsActions.load());
   };
 
   public loadGlobalStatsHistory = (): void => {
-    this.store.dispatch(new TitleActions.SetTitle('Closed cases history'));
     this.store.dispatch(closedCasesStatsHistoryActions.load());
   };
 
   public loadGlobalStatsDayHistory = (): void => {
-    this.store.dispatch(
-      new TitleActions.SetTitle('Closed cases history graph')
-    );
     this.store.dispatch(closedCasesStatsDayHistoryActions.load());
   };
 
@@ -57,6 +52,8 @@ export class ClosedCasesOverviewComponent implements OnInit {
   public constructor(private readonly store: Store<fromCases.CasesState>) {}
 
   public ngOnInit(): void {
+    this.store.dispatch(new TitleActions.SetTitle('Closed cases'));
+
     this.closedCasesStats$ = this.store.pipe(
       select(fromCases.getClosedCasesStats)
     );

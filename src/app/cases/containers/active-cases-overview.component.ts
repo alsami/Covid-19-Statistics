@@ -23,18 +23,13 @@ export class ActiveCasesOverviewComponent implements OnInit {
   loading$: Observable<boolean>;
 
   public loadGlobalStats = (): void => {
-    this.store.dispatch(new TitleActions.SetTitle('Active cases'));
     this.store.dispatch(activeCasesStatsActions.load());
   };
 
   public loadGlobalStatsHistory = (): void => {
-    this.store.dispatch(new TitleActions.SetTitle('Active cases history'));
     this.store.dispatch(activeCasesStatsHistoryActions.load());
   };
   public loadGlobalStatsDayHistory = (): void => {
-    this.store.dispatch(
-      new TitleActions.SetTitle('Active cases history graph')
-    );
     this.store.dispatch(activeCasesStatsDayHistoryActions.load());
   };
 
@@ -56,6 +51,8 @@ export class ActiveCasesOverviewComponent implements OnInit {
   public constructor(private readonly store: Store<fromCases.CasesState>) {}
 
   public ngOnInit(): void {
+    this.store.dispatch(new TitleActions.SetTitle('Active cases'));
+
     this.activeCasesStats$ = this.store.pipe(
       select(fromCases.getActiveCasesStats)
     );

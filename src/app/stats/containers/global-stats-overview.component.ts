@@ -23,17 +23,14 @@ export class GlobalStatsOverviewComponent implements OnInit {
   loading$: Observable<boolean>;
 
   public loadGlobalStats = (): void => {
-    this.store.dispatch(new TitleActions.SetTitle('Global'));
     this.store.dispatch(globalStatsActions.load());
   };
 
   public loadGlobalStatsHistory = (): void => {
-    this.store.dispatch(new TitleActions.SetTitle('Global History'));
     this.store.dispatch(globalStatsHistoryActions.load());
   };
 
   public loadGlobalStatsDayHistory = (): void => {
-    this.store.dispatch(new TitleActions.SetTitle('Global Graph'));
     this.store.dispatch(globalStatsDayHistoryActions.load());
   };
 
@@ -55,6 +52,7 @@ export class GlobalStatsOverviewComponent implements OnInit {
   public constructor(private readonly store: Store<fromStats.StatsState>) {}
 
   public ngOnInit(): void {
+    this.store.dispatch(new TitleActions.SetTitle('Global'));
     this.globalStats$ = this.store.pipe(select(fromStats.getGlobalStats));
     this.globalStatsHistory$ = this.store.pipe(
       select(fromStats.getGlobalHistoryStats)
