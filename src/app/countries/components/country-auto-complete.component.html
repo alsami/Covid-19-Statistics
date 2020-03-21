@@ -24,7 +24,10 @@
       #auto="matAutocomplete"
       (optionSelected)="selected($event)"
     >
-      <mat-option *ngFor="let country of filteredCountries" [value]="country">
+      <mat-option
+        *ngFor="let country of filteredCountries$ | async"
+        [value]="country"
+      >
         {{ country }}
       </mat-option>
     </mat-autocomplete>

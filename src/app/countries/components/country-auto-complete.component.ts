@@ -7,7 +7,6 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnDestroy,
   Output,
   ViewChild
 } from '@angular/core';
@@ -27,18 +26,16 @@ import { delay, map, startWith } from 'rxjs/operators';
   styleUrls: ['./country-auto-complete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountryAutoCompleteComponent
-  implements OnChanges, AfterViewInit, OnDestroy {
+export class CountryAutoCompleteComponent implements OnChanges, AfterViewInit {
   @Input() countryStats: CountryStats[] = [];
   @Output() countriesSelected = new EventEmitter<string[]>(true);
-  filteredCountries: string[] = [];
+  filteredCountries$: Observable<string[]>;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   countriesCtrl = new FormControl();
   selectedCountries: string[] = [];
   allCountries: string[] = [];
   countryStatsSub: Subscription;
   countriesOfInterest$: Observable<string[]>;
-  valueChangesSub: Subscription;
 
   @ViewChild('countryInput', { static: false }) countryInput: ElementRef<
     HTMLInputElement
@@ -64,12 +61,6 @@ export class CountryAutoCompleteComponent
 
   public ngAfterViewInit(): void {
     this.subscribeFormControlChanges();
-  }
-
-  public ngOnDestroy(): void {
-    if (this.valueChangesSub) {
-      this.valueChangesSub.unsubscribe();
-    }
   }
 
   public add(event: MatChipInputEvent): void {
@@ -119,17 +110,15 @@ export class CountryAutoCompleteComponent
   }
 
   private subscribeFormControlChanges(): void {
-    this.valueChangesSub = this.countriesCtrl.valueChanges
-      .pipe(
-        startWith(null),
-        delay(50),
-        map((filter: string | null) =>
-          filter && filter.length
-            ? this.filterCountries(filter)
-            : this.allCountries.slice()
-        )
+    this.filteredCountries$ = this.countriesCtrl.valueChanges.pipe(
+      startWith(null),
+      delay(50),
+      map((filter: string | null) =>
+        filter && filter.length
+          ? this.filterCountries(filter)
+          : this.allCountries.slice()
       )
-      .subscribe(countries => (this.filteredCountries = countries));
+    );
   }
 
   private filterCountries(value: string): string[] {
