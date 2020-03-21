@@ -5,14 +5,12 @@ import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class CountryStatsService {
+export class CountriesStatsService {
   private readonly baseUrl = environment.apiUrl;
 
   public constructor(private readonly http: HttpClient) {}
 
-  public load(country: string): Observable<CountryStats> {
-    return this.http.get<CountryStats>(
-      `${this.baseUrl}stats/countries/${country}`
-    );
+  public load(): Observable<CountryStats[]> {
+    return this.http.get<CountryStats[]>(`${this.baseUrl}stats/countries`);
   }
 }

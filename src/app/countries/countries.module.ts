@@ -4,12 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   CountriesStatsEffects,
   CountryStatsDayHistoryEffects,
+  CountryStatsEffects,
   CountryStatsHistoryEffects
 } from '@covid19/countries/+state/effects';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import {
   CountriesAutoCompleteComponent,
   CountriesStatsStackedBarChartComponent,
+  CountryDetailedStatsCardsComponent,
   CountryStatsCardComponent,
   CountryStatsHistoryLineChartComponent,
   CountryStatsHistoryTableComponent,
@@ -20,6 +22,7 @@ import {
   CountryStatsOverviewComponent
 } from '@covid19/countries/containers';
 import {
+  CountriesStatsService,
   CountryStatsDayHistoryService,
   CountryStatsHistoryService,
   CountryStatsService
@@ -35,6 +38,7 @@ const COMPONENTS = [
   CountriesStatsOverviewComponent,
   CountriesStatsStackedBarChartComponent,
   CountryStatsCardComponent,
+  CountryDetailedStatsCardsComponent,
   CountryStatsPieChartComponent,
   CountriesAutoCompleteComponent,
   CountryStatsOverviewComponent,
@@ -54,11 +58,13 @@ const COMPONENTS = [
     StoreModule.forFeature('countries', fromCountries.reducers),
     EffectsModule.forFeature([
       CountriesStatsEffects,
+      CountryStatsEffects,
       CountryStatsHistoryEffects,
       CountryStatsDayHistoryEffects
     ])
   ],
   providers: [
+    CountriesStatsService,
     CountryStatsService,
     CountryStatsHistoryService,
     CountryStatsDayHistoryService

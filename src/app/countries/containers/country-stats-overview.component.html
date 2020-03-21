@@ -8,12 +8,19 @@
 >
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
-      <covid19-country-stats-history-table
+      <covid19-country-detailed-stats-cards
         [countryStats]="countryStats$ | async"
-      ></covid19-country-stats-history-table>
+      ></covid19-country-detailed-stats-cards>
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
+    <div class="page-content">
+      <covid19-country-stats-history-table
+        [countryStats]="countryHistoryStats$ | async"
+      ></covid19-country-stats-history-table>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[2].label">
     <div class="page-content">
       <covid19-country-stats-line-chart
         [countryStats]="countryStatsDayHistory$ | async"

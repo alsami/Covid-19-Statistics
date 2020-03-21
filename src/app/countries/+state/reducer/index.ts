@@ -7,9 +7,11 @@ import {
 import * as fromCountriesStats from './countries-stats.reducer';
 import * as fromCountryStatsDayHistory from './country-stats-day-history.reducer';
 import * as fromCountryStatsHistory from './country-stats-history.reducer';
+import * as fromCountryStats from './country-stats.reducer';
 
 export interface CountryState {
   countriesStats: fromCountriesStats.CountriesStatsState;
+  countryStats: fromCountryStats.CountryStatsState;
   countryStatsHistory: fromCountryStatsHistory.CountryStatsHistoryState;
   countryStatsDayHistory: fromCountryStatsDayHistory.CountryStatsDayHistoryState;
 }
@@ -20,6 +22,7 @@ export interface State extends fromRoot.AppState {
 
 export const reducers: ActionReducerMap<CountryState> = {
   countriesStats: fromCountriesStats.reducer,
+  countryStats: fromCountryStats.reducer,
   countryStatsHistory: fromCountryStatsHistory.reducer,
   countryStatsDayHistory: fromCountryStatsDayHistory.reducer
 };
@@ -29,7 +32,7 @@ export const getCountriesState = createFeatureSelector<CountryState>(
 );
 
 /**
- * Country-Stats
+ * Countries-Stats
  */
 export const getCountriesStatsState = createSelector(
   getCountriesState,
@@ -44,6 +47,24 @@ export const getCountriesStats = createSelector(
 export const getCountriesStatsLoading = createSelector(
   getCountriesStatsState,
   fromCountriesStats.loading
+);
+
+/**
+ * Country-Stats
+ */
+export const getCountryStatsState = createSelector(
+  getCountriesState,
+  state => state.countryStats
+);
+
+export const getCountryStats = createSelector(
+  getCountryStatsState,
+  fromCountryStats.countryStats
+);
+
+export const getCountryStatsLoading = createSelector(
+  getCountryStatsState,
+  fromCountryStats.loading
 );
 
 /**

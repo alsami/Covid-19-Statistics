@@ -9,6 +9,7 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { TitleActions } from '@covid19/core/+state/actions';
 import {
+  countryStatsActions,
   countryStatsDayHistoryActions,
   countryStatsHistoryActions
 } from '@covid19/countries/+state/actions';
@@ -28,11 +29,20 @@ export class CountryStatsOverviewComponent
   private paramSub: Subscription;
   private selectedCountry: string;
 
-  public countryStats$: Observable<CountryStats[]>;
+  public countryStats$: Observable<CountryStats>;
+  public countryHistoryStats$: Observable<CountryStats[]>;
   public countryStatsDayHistory$: Observable<CountryStats[]>;
   public loading$: Observable<boolean>;
 
   @ViewChild('matTabGroup', { static: false }) matTabGroup: MatTabGroup;
+
+  public load = (country: string) => {
+    this.store.dispatch(
+      countryStatsActions.load({
+        country: country
+      })
+    );
+  };
 
   public loadHistory = (country: string) => {
     this.store.dispatch(
@@ -52,6 +62,10 @@ export class CountryStatsOverviewComponent
 
   tabLabelsFunc = [
     {
+      label: 'Overview',
+      func: this.load
+    },
+    {
       label: 'History',
       func: this.loadHistory
     },
@@ -68,6 +82,7 @@ export class CountryStatsOverviewComponent
 
   public ngOnInit(): void {
     this.loading$ = combineLatest(
+      this.store.pipe(select(fromCountries.getCountryStatsLoading)),
       this.store.pipe(select(fromCountries.getCountryHistoryStatsLoading)),
       this.store.pipe(select(fromCountries.getCountryDayHistoryStatsLoading))
     ).pipe(
@@ -77,7 +92,9 @@ export class CountryStatsOverviewComponent
       )
     );
 
-    this.countryStats$ = this.store.pipe(
+    this.countryStats$ = this.store.pipe(select(fromCountries.getCountryStats));
+
+    this.countryHistoryStats$ = this.store.pipe(
       select(fromCountries.getCountryHistoryStats)
     );
 
@@ -94,7 +111,7 @@ export class CountryStatsOverviewComponent
         distinctUntilChanged()
       )
       .subscribe(country => {
-        this.store.dispatch(new TitleActions.SetTitle(`${country} History`));
+        this.store.dispatch(new TitleActions.SetTitle(`${country}`));
 
         if (this.selectedCountry && this.selectedCountry !== country) {
           this.tabLabelsFunc[this.matTabGroup.selectedIndex].func(country);
