@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '@covid19/material/material.module';
 import {
@@ -16,6 +16,7 @@ const COMPONENTS = [
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [CommonModule, MaterialModule],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS],
+  providers: [DecimalPipe]
 })
 export class SharedModule {}

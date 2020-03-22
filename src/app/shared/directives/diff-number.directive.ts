@@ -1,17 +1,29 @@
-import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  Injector,
+  Input
+} from '@angular/core';
 import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
 
 @Directive({
   selector: '[covid19DiffNumberColor]'
 })
 export class DiffNumberColorDirective implements AfterViewInit {
-  public constructor(private elementRef: ElementRef) {}
+  public constructor(
+    private elementRef: ElementRef,
+    private injector: Injector
+  ) {}
 
   @Input('covid19DiffNumberColor') positiveChange = false;
 
   public ngAfterViewInit(): void {
     const htmlElement = this.elementRef.nativeElement as HTMLElement;
     const value = +htmlElement.innerHTML;
+
+    console.log(value);
 
     if (value === 0) {
       return;
@@ -21,15 +33,17 @@ export class DiffNumberColorDirective implements AfterViewInit {
 
     const decreaseColor = this.positiveChange ? PROPER_RED : PROPER_GREEN;
 
+    const pipe = this.injector.get(DecimalPipe);
+
     if (value > 0) {
       htmlElement.style.color = increaseColor;
-      htmlElement.innerHTML = `+${value}`;
+      htmlElement.innerHTML = `+${pipe.transform(value)}`;
       return;
     }
 
     if (value < 0) {
       htmlElement.style.color = decreaseColor;
-      htmlElement.innerHTML = `${value}`;
+      htmlElement.innerHTML = `${pipe.transform(value)}`;
       return;
     }
   }

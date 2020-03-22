@@ -9,7 +9,7 @@
             [matTooltip]="increase.text"
             [covid19DiffNumberColor]="increase.type === increaseType.Active"
           >
-            {{ increase.increase | number }}
+            {{ increase.increase }}
           </span>
           %
           <ng-container *ngIf="increase.increase !== 0">
