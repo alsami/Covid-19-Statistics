@@ -1,8 +1,46 @@
+@import '../../../scss/breakpoints';
+
 .scale-container {
-  height: 70vh;
-  width: 80vw;
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  overflow-x: hidden !important;
+}
+
+.chart-container {
+  display: flex;
+  align-self: center;
+}
+
+@media #{$xs} {
+  .chart-container {
+    width: 375px;
+    height: 80%;
+  }
+}
+
+@media #{$sm} {
+  .chart-container {
+    width: 580px;
+    height: 80%;
+  }
+}
+
+@media #{$md} {
+  .chart-container {
+    width: 940px;
+    height: 80%;
+  }
+}
+
+@media #{$lg} {
+  .chart-container {
+    width: 1080px;
+    height: 80%;
+  }
+}
+
+@media #{$xl} {
+  .chart-container {
+    width: 1720px;
+    height: 80%;
+  }
 }

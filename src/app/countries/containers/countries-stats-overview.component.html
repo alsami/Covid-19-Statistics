@@ -81,7 +81,7 @@
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
-    <div style="display: flex">
+    <div class="graph-container">
       <covid19-countries-stats-history-stacked-barchart
         [countryStats]="countryStats$ | async"
       ></covid19-countries-stats-history-stacked-barchart>
