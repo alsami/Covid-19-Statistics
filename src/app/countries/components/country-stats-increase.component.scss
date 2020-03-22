@@ -16,7 +16,7 @@
 
 @media #{$xs} {
   .increase-card {
-    width: 25.5%;
+    width: 25%;
   }
   mat-card-title {
     font-size: medium;
@@ -49,6 +49,6 @@
 
 @media #{$gt-lg} {
   .increase-card {
-    width: 30%;
+    width: 31%;
   }
 }
