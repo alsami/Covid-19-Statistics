@@ -1,93 +1,72 @@
 <ng-container *ngIf="countryStats">
   <mat-card>
+    <mat-card-title>
+      Cases: {{ countryStats.totalCases | number }}
+    </mat-card-title>
     <mat-card-content
       style="display: flex; flex-direction: column; align-content: center;"
     >
-      <mat-card-title>
-        Cases: {{ countryStats.totalCases | number }}
-      </mat-card-title>
-      <br />
       Last reported at:
       {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
     </mat-card-content>
   </mat-card>
-  <div style="margin-top: 10px; margin-bottom: 10px;"></div>
   <mat-card>
+    <mat-card-title>
+      Active Cases: {{ countryStats.activeCases | number }} ({{
+        (countryStats.activeCases / countryStats.totalCases) * 100 | number
+      }}%)
+    </mat-card-title>
+    <mat-card-subtitle>
+      New Cases:
+      <span covid19DiffNumberColor>{{ countryStats.newCases | number }}</span>
+    </mat-card-subtitle>
     <mat-card-content
       style="display: flex; flex-direction: column; align-content: center;"
     >
-      <mat-card-title>
-        Active Cases: {{ countryStats.activeCases | number }}
-      </mat-card-title>
-      <br />
       Last reported at:
       {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
     </mat-card-content>
   </mat-card>
-  <div style="margin-top: 10px; margin-bottom: 10px;"></div>
   <mat-card>
+    <mat-card-title>
+      Deaths:
+      {{ countryStats.totalDeaths | number }}
+      ({{
+        (countryStats.totalDeaths / countryStats.totalCases) * 100 | number
+      }}%)
+    </mat-card-title>
+    <mat-card-subtitle>
+      New Deaths:
+      <span covid19DiffNumberColor>{{ countryStats.newDeaths | number }}</span>
+    </mat-card-subtitle>
     <mat-card-content
       style="display: flex; flex-direction: column; align-content: center;"
     >
-      <mat-card-title>
-        New Cases: {{ countryStats.newCases | number }}
-      </mat-card-title>
-      <br />
       Last reported at:
       {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
     </mat-card-content>
   </mat-card>
-  <div style="margin-top: 10px; margin-bottom: 10px;"></div>
   <mat-card>
+    <mat-card-title>
+      Recovered: {{ countryStats.recoveredCases | number }}({{
+        (countryStats.recoveredCases / countryStats.totalCases) * 100 | number
+      }}%)
+    </mat-card-title>
     <mat-card-content
       style="display: flex; flex-direction: column; align-content: center;"
     >
-      <mat-card-title>
-        Deaths:
-        {{ countryStats.totalDeaths | number }}
-      </mat-card-title>
-      <br />
       Last reported at:
       {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
     </mat-card-content>
   </mat-card>
-  <div style="margin-top: 10px; margin-bottom: 10px;"></div>
   <mat-card>
+    <mat-card-title>
+      Serious condition:
+      {{ countryStats.seriousCases | number }}
+    </mat-card-title>
     <mat-card-content
       style="display: flex; flex-direction: column; align-content: center;"
     >
-      <mat-card-title>
-        New Deaths:
-        {{ countryStats.newDeaths | number }}
-      </mat-card-title>
-      <br />
-      Last reported at:
-      {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
-    </mat-card-content>
-  </mat-card>
-  <div style="margin-top: 10px; margin-bottom: 10px;"></div>
-  <mat-card>
-    <mat-card-content
-      style="display: flex; flex-direction: column; align-content: center;"
-    >
-      <mat-card-title>
-        Recovered: {{ countryStats.recoveredCases | number }}
-      </mat-card-title>
-      <br />
-      Last reported at:
-      {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
-    </mat-card-content>
-  </mat-card>
-  <div style="margin-top: 10px; margin-bottom: 10px;"></div>
-  <mat-card>
-    <mat-card-content
-      style="display: flex; flex-direction: column; align-content: center;"
-    >
-      <mat-card-title>
-        Serious condition:
-        {{ countryStats.seriousCases | number }}
-      </mat-card-title>
-      <br />
       Last reported at:
       {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}
     </mat-card-content>
