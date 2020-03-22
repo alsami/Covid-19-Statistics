@@ -1,12 +1,12 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import * as fromRoot from '@covid19/+state';
 import {
   countriesOfInterestActions,
   layoutActions
 } from '@covid19/core/+state/actions';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +14,7 @@ import { delay, map } from 'rxjs/operators';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, AfterViewInit {
+export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   mode = 'side';
   layoutGap = '64';
   fixedInViewport = true;
@@ -22,6 +22,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   title$: Observable<string>;
   countriesOfInterest$: Observable<string[]>;
+
+  private bpoSub: Subscription;
+  private showSidenabSub: Subscription;
 
   public constructor(
     private bpo: BreakpointObserver,
@@ -34,7 +37,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit(): void {
     const breakpoints = Object.keys(Breakpoints).map(key => Breakpoints[key]);
-    this.bpo
+
+    this.bpoSub = this.bpo
       .observe(breakpoints)
       .pipe(
         delay(0),
@@ -49,10 +53,22 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       delay(0),
       select(fromRoot.getCountriesOfInterest)
     );
+
     this.title$ = this.store.pipe(delay(0), select(fromRoot.getTitle));
-    this.store
+
+    this.showSidenabSub = this.store
       .pipe(delay(0), select(fromRoot.getShowSidenav))
       .subscribe(show => (this.showSidenav = show));
+  }
+
+  public ngOnDestroy(): void {
+    if (this.bpoSub) {
+      this.bpoSub.unsubscribe();
+    }
+
+    if (this.showSidenabSub) {
+      this.showSidenabSub.unsubscribe();
+    }
   }
 
   public toggleSidenav(): void {
