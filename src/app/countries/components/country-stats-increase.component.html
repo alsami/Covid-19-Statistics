@@ -17,12 +17,15 @@
             ></ng-container>
             <ng-template #up>
               <mat-icon>
-                arrow_upward
+                trending_up
               </mat-icon>
             </ng-template>
             <ng-template #down>
-              <mat-icon>arrow_downward</mat-icon>
+              <mat-icon>trending_down</mat-icon>
             </ng-template>
+          </ng-container>
+          <ng-container *ngIf="increase.increase === 0">
+            <mat-icon>trending_flat</mat-icon>
           </ng-container>
           <div>Time: {{ increase.time | date: 'dd.MM.yyyy':'UTC' }}</div>
         </mat-card-content>
