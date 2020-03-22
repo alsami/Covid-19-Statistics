@@ -13,9 +13,9 @@ import {
   CountriesStatsStackedBarChartComponent,
   CountryDetailedStatsCardsComponent,
   CountryStatsCardComponent,
+  CountryStatsDayToDayComponent,
   CountryStatsHistoryLineChartComponent,
   CountryStatsHistoryTableComponent,
-  CountryStatsIncreaseComponent,
   CountryStatsPieChartComponent
 } from '@covid19/countries/components';
 import {
@@ -41,7 +41,7 @@ const COMPONENTS = [
   CountryStatsCardComponent,
   CountryDetailedStatsCardsComponent,
   CountryStatsPieChartComponent,
-  CountryStatsIncreaseComponent,
+  CountryStatsDayToDayComponent,
   CountriesAutoCompleteComponent,
   CountryStatsOverviewComponent,
   CountryStatsHistoryTableComponent,

@@ -6,7 +6,8 @@
         <mat-card-content>
           <span
             class="increase"
-            [covid19DiffNumberColor]="increase.type === increaseType.Recovered"
+            [matTooltip]="increase.text"
+            covid19DiffNumberColor
           >
             {{ increase.increase | number }}
           </span>

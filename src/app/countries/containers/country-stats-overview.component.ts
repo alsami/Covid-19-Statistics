@@ -66,7 +66,7 @@ export class CountryStatsOverviewComponent
       func: this.load
     },
     {
-      label: 'Increase',
+      label: 'Day to Day',
       func: this.loadDayHistory
     },
     {
