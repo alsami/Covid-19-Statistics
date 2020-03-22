@@ -38,7 +38,7 @@ export class CountryStatsPieChartComponent implements OnChanges {
     this.data = [];
 
     this.data.push({
-      name: 'Active cases',
+      name: 'Active',
       value: this.countryStats.activeCases
     });
 

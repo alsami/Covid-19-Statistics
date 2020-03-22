@@ -22,7 +22,44 @@
 
 .scale-wrapper {
   display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex: 1 1 100%;
+  flex-direction: column;
+}
+
+.chart-container {
+  align-self: center;
+}
+
+@media #{$xs} {
+  .chart-container {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media #{$sm} {
+  .chart-container {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media #{$md} {
+  .chart-container {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media #{$lg} {
+  .chart-container {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media #{$xl} {
+  .chart-container {
+    width: 280px;
+    height: 280px;
+  }
 }

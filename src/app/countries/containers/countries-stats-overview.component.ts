@@ -16,7 +16,7 @@ import { CountriesAutoCompleteComponent } from '@covid19/countries/components';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { delay, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-countries-stats-overview',
@@ -37,12 +37,10 @@ export class CountriesStatsOverviewComponent
 
   public tabLabelsFunc = [
     {
-      label: 'Overview',
-      func: console.log
+      label: 'Overview'
     },
     {
-      label: 'Graph',
-      func: console.log
+      label: 'Graph'
     }
   ];
 
@@ -50,11 +48,6 @@ export class CountriesStatsOverviewComponent
 
   public ngOnInit(): void {
     this.store.dispatch(new TitleActions.SetTitle('Countries'));
-
-    this.loading$ = this.store.pipe(
-      select(fromCountries.getCountriesStatsLoading)
-    );
-
     this.countryStats$ = this.store.pipe(
       select(fromCountries.getCountriesStats)
     );
@@ -63,11 +56,15 @@ export class CountriesStatsOverviewComponent
       select(fromRoot.getCountriesOfInterest)
     );
 
-    this.countriesOfInterestSub = this.countriesOfInterest$.subscribe(
-      countriesOfInterest => {
-        this.countriesOfInterest = countriesOfInterest;
-      }
+    this.loading$ = this.store.pipe(
+      select(fromCountries.getCountriesStatsLoading)
     );
+
+    this.countriesOfInterestSub = this.countriesOfInterest$
+      .pipe(delay(50))
+      .subscribe(countriesOfInterest => {
+        this.countriesOfInterest = countriesOfInterest;
+      });
   }
 
   public ngAfterViewInit(): void {
@@ -125,7 +122,8 @@ export class CountriesStatsOverviewComponent
         return countryStats.filter(
           s => selectedCountries.indexOf(s.country) > -1
         );
-      })
+      }),
+      distinctUntilChanged()
     );
   }
 }

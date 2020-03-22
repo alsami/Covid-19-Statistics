@@ -42,7 +42,7 @@ mat-card {
 }
 
 .virtual-scroll-container {
-  height: 2000px;
+  height: 100vh;
 }
 
 .virtual-scroll-container::-webkit-scrollbar {
@@ -63,6 +63,11 @@ covid19-country-stats-pie-chart {
   flex: 1 1 100%;
 }
 
+.card-container {
+  display: flex;
+  width: 100%;
+}
+
 @media #{$xs} {
   .card-container {
     flex-flow: column;
@@ -70,7 +75,7 @@ covid19-country-stats-pie-chart {
   }
 
   mat-card {
-    flex: 1 1 100%;
+    flex: 1 0 100%;
     margin-bottom: 5px;
   }
 
@@ -118,6 +123,19 @@ covid19-country-stats-pie-chart {
 
   mat-card {
     width: 30%;
+    margin-bottom: 5px;
+  }
+}
+
+@media #{$xl} {
+  .card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  mat-card {
+    width: 31%;
     margin-bottom: 5px;
   }
 }
