@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnChanges
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { ClosedCaseStats } from '@covid19/cases/models';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
@@ -33,8 +34,16 @@ export class ClosedCasesStatsHistoryLineChartComponent implements OnChanges {
 
   public data: LineChartData[] = [];
 
-  ngOnChanges(): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (!this.closedCasesStats || !this.closedCasesStats.length) {
+      return;
+    }
+
+    if (
+      changes.closedCasesStats.previousValue &&
+      changes.closedCasesStats.previousValue ===
+        changes.closedCasesStats.currentValue
+    ) {
       return;
     }
 
