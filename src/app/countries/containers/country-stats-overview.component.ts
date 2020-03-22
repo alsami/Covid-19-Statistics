@@ -87,8 +87,8 @@ export class CountryStatsOverviewComponent
   public ngOnInit(): void {
     this.loading$ = combineLatest(
       this.store.pipe(select(fromCountries.getCountryStatsLoading)),
-      this.store.pipe(select(fromCountries.getCountryHistoryStatsLoading)),
-      this.store.pipe(select(fromCountries.getCountryDayHistoryStatsLoading))
+      this.store.pipe(select(fromCountries.getCountryStatsHistoryLoading)),
+      this.store.pipe(select(fromCountries.getCountryStatsDayHistoryLoading))
     ).pipe(
       map(
         ([countryStatsHistoryLoading, countryStatsDayHistoryLoading]) =>
@@ -99,11 +99,11 @@ export class CountryStatsOverviewComponent
     this.countryStats$ = this.store.pipe(select(fromCountries.getCountryStats));
 
     this.countryHistoryStats$ = this.store.pipe(
-      select(fromCountries.getCountryHistoryStats)
+      select(fromCountries.getCountryStatsHistory)
     );
 
     this.countryStatsDayHistory$ = this.store.pipe(
-      select(fromCountries.getCountryDayHistoryStats)
+      select(fromCountries.getCountryStatsDayHistory)
     );
   }
 

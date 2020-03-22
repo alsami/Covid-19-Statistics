@@ -70,35 +70,35 @@ export const getCountryStatsLoading = createSelector(
 /**
  * Country-Stats History
  */
-export const getCountryHistoryState = createSelector(
+export const getCountryStatsHistoryState = createSelector(
   getCountriesState,
   state => state.countryStatsHistory
 );
 
-export const getCountryHistoryStats = createSelector(
-  getCountryHistoryState,
+export const getCountryStatsHistory = createSelector(
+  getCountryStatsHistoryState,
   fromCountryStatsHistory.countryStats
 );
 
-export const getCountryHistoryStatsLoading = createSelector(
-  getCountryHistoryState,
+export const getCountryStatsHistoryLoading = createSelector(
+  getCountryStatsHistoryState,
   fromCountryStatsHistory.loading
 );
 
 /**
  * Country-Stats Day History
  */
-export const getCountryDayHistoryState = createSelector(
+export const getCountryStatsDayHistoryState = createSelector(
   getCountriesState,
   state => state.countryStatsDayHistory
 );
 
-export const getCountryDayHistoryStats = createSelector(
-  getCountryDayHistoryState,
+export const getCountryStatsDayHistory = createSelector(
+  getCountryStatsDayHistoryState,
   fromCountryStatsDayHistory.countryStats
 );
 
-export const getCountryDayHistoryStatsLoading = createSelector(
-  getCountryDayHistoryState,
+export const getCountryStatsDayHistoryLoading = createSelector(
+  getCountryStatsDayHistoryState,
   fromCountryStatsDayHistory.loading
 );
