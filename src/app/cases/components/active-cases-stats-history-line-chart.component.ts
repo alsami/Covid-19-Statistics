@@ -6,6 +6,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { ActiveCaseStats } from '@covid19/cases/models';
+import { PROPER_RED } from '@covid19/core/core.constants';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
 
 @Component({
@@ -29,7 +30,7 @@ export class ActiveCasesStatsHistoryLineChartComponent implements OnChanges {
 
   // cases, mild,serious
   public colorScheme = {
-    domain: ['#AAAAAA', '#ffff00', '#ff0000']
+    domain: ['#AAAAAA', '#ffff00', PROPER_RED]
   };
 
   public data: LineChartData[] = [];

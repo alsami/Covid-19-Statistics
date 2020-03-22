@@ -5,6 +5,7 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
+import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
 import { CountryStats } from '@covid19/countries/models';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
 
@@ -27,15 +28,23 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
   yAxisLabel: string = 'Amount';
   timeline: boolean = true;
 
-  // cases, active cases, new cases, deaths, new deats, recovered, serious
+  /* 
+  cases, 
+  active cases, 
+  new cases, 
+  deaths, 
+  new deats, 
+  recovered, 
+  serious 
+  */
   public colorScheme = {
     domain: [
       '#AAAAAA',
       '#0000ff',
       '#ffff00',
-      '#ff0000',
+      PROPER_RED,
       '#ff5800',
-      '#5AA454',
+      PROPER_GREEN,
       '#7b1fa2'
     ]
   };

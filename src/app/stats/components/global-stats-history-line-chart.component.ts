@@ -4,6 +4,7 @@ import {
   Input,
   OnChanges
 } from '@angular/core';
+import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
 import { GlobalStats } from '@covid19/stats/models';
 
@@ -28,7 +29,7 @@ export class GlobalStatsHistoryLineChartComponent implements OnChanges {
 
   // cases, deaths, recovered
   public colorScheme = {
-    domain: ['#AAAAAA', '#ff0000', '#5AA454']
+    domain: ['#AAAAAA', PROPER_RED, PROPER_GREEN]
   };
 
   public data: LineChartData[] = [];
