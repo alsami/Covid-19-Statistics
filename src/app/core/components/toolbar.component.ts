@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output
 } from '@angular/core';
 
@@ -13,11 +12,7 @@ import {
   styleUrls: ['./toolbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent {
   @Input() title: string = '';
   @Output() toggle = new EventEmitter();
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

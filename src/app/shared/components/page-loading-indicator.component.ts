@@ -7,6 +7,7 @@ import {
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   Input,
   OnDestroy,
@@ -20,7 +21,8 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'covid19-page-loading-indicator',
-  templateUrl: './page-loading-indicator.component.html'
+  templateUrl: './page-loading-indicator.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageLoadingIndicatorComponent
   implements OnInit, OnDestroy, AfterViewInit {

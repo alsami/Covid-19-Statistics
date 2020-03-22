@@ -100,8 +100,6 @@ export class CountryStatsDayToDayComponent implements OnChanges {
   }
 
   private calculateIncrease(current: number, previous: number): number {
-    console.log(current, previous);
-
     const diff = current - previous;
     const increase = (diff / current) * 100;
 

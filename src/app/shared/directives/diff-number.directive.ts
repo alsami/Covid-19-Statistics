@@ -23,8 +23,6 @@ export class DiffNumberColorDirective implements AfterViewInit {
     const htmlElement = this.elementRef.nativeElement as HTMLElement;
     const value = +htmlElement.innerHTML;
 
-    console.log(value);
-
     if (value === 0) {
       return;
     }

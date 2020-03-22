@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -19,7 +19,8 @@ const COMPONENTS = [LayoutComponent, ToolbarComponent, SidenavContentComponent];
 export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
-      ngModule: CoreModule
+      ngModule: CoreModule,
+      providers: [DecimalPipe]
     };
   }
 }
