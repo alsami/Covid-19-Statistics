@@ -1,0 +1,54 @@
+@import '../../../scss/breakpoints';
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.increase-card {
+  margin-bottom: 5px;
+}
+
+.increase {
+  font-weight: bold;
+}
+
+@media #{$xs} {
+  .increase-card {
+    width: 25.5%;
+  }
+  mat-card-title {
+    font-size: medium;
+  }
+}
+
+@media #{$sm} {
+  mat-card-title {
+    font-size: medium;
+  }
+}
+
+@media #{$gt-xs} {
+  .increase-card {
+    width: 25%;
+  }
+}
+
+@media #{$gt-sm} {
+  .increase-card {
+    width: 29%;
+  }
+}
+
+@media #{$gt-md} {
+  .increase-card {
+    width: 30%;
+  }
+}
+
+@media #{$gt-lg} {
+  .increase-card {
+    width: 30%;
+  }
+}

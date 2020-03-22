@@ -15,12 +15,19 @@
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
     <div class="page-content">
+      <covid19-country-stats-increase
+        [countryStats]="countryStatsDayHistory$ | async"
+      ></covid19-country-stats-increase>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[2].label">
+    <div class="page-content">
       <covid19-country-stats-history-table
         [countryStats]="countryHistoryStats$ | async"
       ></covid19-country-stats-history-table>
     </div>
   </mat-tab>
-  <mat-tab [label]="tabLabelsFunc[2].label">
+  <mat-tab [label]="tabLabelsFunc[3].label">
     <div class="page-content">
       <covid19-country-stats-line-chart
         [countryStats]="countryStatsDayHistory$ | async"

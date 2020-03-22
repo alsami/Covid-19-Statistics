@@ -1,0 +1,32 @@
+<ng-container *ngIf="increases?.length">
+  <div class="container">
+    <ng-container *ngFor="let increase of increases">
+      <mat-card class="increase-card">
+        <mat-card-title>{{ increase.type }}</mat-card-title>
+        <mat-card-content>
+          <span
+            class="increase"
+            [covid19DiffNumberColor]="increase.type === increaseType.Recovered"
+          >
+            {{ increase.increase | number }}
+          </span>
+          %
+          <ng-container *ngIf="increase.increase !== 0">
+            <ng-container
+              *ngIf="increase.increase > 0; then up; else down"
+            ></ng-container>
+            <ng-template #up>
+              <mat-icon>
+                arrow_upward
+              </mat-icon>
+            </ng-template>
+            <ng-template #down>
+              <mat-icon>arrow_downward</mat-icon>
+            </ng-template>
+          </ng-container>
+          <div>Time: {{ increase.time | date: 'dd.MM.yyyy':'UTC' }}</div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
+</ng-container>

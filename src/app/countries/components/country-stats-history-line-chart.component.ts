@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnChanges
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { CountryStats } from '@covid19/countries/models';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
@@ -33,8 +34,15 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
 
   public data: LineChartData[] = [];
 
-  ngOnChanges(): void {
+  public ngOnChanges(change: SimpleChanges): void {
     if (!this.countryStats || !this.countryStats.length) {
+      return;
+    }
+
+    if (
+      change.countryStats.previousValue &&
+      change.countryStats.previousValue === change.countryStats.currentValue
+    ) {
       return;
     }
 
@@ -115,6 +123,5 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
       recoveredLineChartData,
       seriousLineChartData
     );
-    console.log(this.data);
   }
 }

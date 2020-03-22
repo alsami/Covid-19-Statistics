@@ -66,6 +66,10 @@ export class CountryStatsOverviewComponent
       func: this.load
     },
     {
+      label: 'Increase',
+      func: this.loadDayHistory
+    },
+    {
       label: 'History',
       func: this.loadHistory
     },
