@@ -91,8 +91,14 @@ export class CountryStatsOverviewComponent
       this.store.pipe(select(fromCountries.getCountryStatsDayHistoryLoading))
     ).pipe(
       map(
-        ([countryStatsHistoryLoading, countryStatsDayHistoryLoading]) =>
-          countryStatsHistoryLoading || countryStatsDayHistoryLoading
+        ([
+          countryStatsLoading,
+          countryStatsHistoryLoading,
+          countryStatsDayHistoryLoading
+        ]) =>
+          countryStatsLoading ||
+          countryStatsHistoryLoading ||
+          countryStatsDayHistoryLoading
       )
     );
 
