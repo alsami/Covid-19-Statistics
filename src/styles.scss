@@ -58,3 +58,14 @@ ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
     font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   }
 }
+
+covid19-layout .mat-drawer-inner-container::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+covid19-layout .mat-drawer-inner-container {
+  overflow: -moz-scrollbars-none;
+}
+covid19-layout .mat-drawer-inner-container {
+  -ms-overflow-style: none;
+}
