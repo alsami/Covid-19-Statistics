@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -47,21 +48,27 @@ export class CountryStatsDayToDayComponent implements OnChanges {
 
         this.increases.push({
           type: IncreaseType.Total,
-          text: `Today: ${current.totalCases}, Yesterday: ${previous.totalCases}`,
+          text: `Today: ${this.transform(
+            current.totalCases
+          )} - Yesterday: ${this.transform(previous.totalCases)}`,
           increase: this.calculate(current.totalCases, previous.totalCases),
           time: current.fetchedAt
         });
 
         this.increases.push({
           type: IncreaseType.Active,
-          text: `Today: ${current.activeCases}, Yesterday: ${previous.activeCases}`,
+          text: `Today: ${this.transform(
+            current.activeCases
+          )} - Yesterday: ${this.transform(previous.activeCases)}`,
           increase: this.calculate(current.activeCases, previous.activeCases),
           time: current.fetchedAt
         });
 
         this.increases.push({
           type: IncreaseType.Deaths,
-          text: `Today: ${current.totalDeaths}, Yesterday: ${previous.totalDeaths}`,
+          text: `Today: ${this.transform(
+            current.totalDeaths
+          )} - Yesterday: ${this.transform(previous.totalDeaths)}`,
           increase: this.calculate(current.totalDeaths, previous.totalDeaths),
           time: current.fetchedAt
         });
@@ -103,5 +110,9 @@ export class CountryStatsDayToDayComponent implements OnChanges {
     const decrease = (diff / previous) * 100;
 
     return decrease;
+  }
+
+  private transform(value: number): string {
+    return new DecimalPipe('en-US').transform(value);
   }
 }

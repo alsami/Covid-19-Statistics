@@ -1,8 +1,9 @@
 import { registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
+import localEnUS from '@angular/common/locales/en';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { metaReducers, reducers } from '@covid19/+state';
 import { AppRoutingModule } from '@covid19/app-routing.module';
 import {
@@ -13,12 +14,11 @@ import { CoreModule } from '@covid19/core/core.module';
 import { MaterialModule } from '@covid19/material/material.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
 
 // the second parameter 'fr-FR' is optional
-registerLocaleData(localeDe, 'de-DE');
+registerLocaleData(localEnUS, 'en-US');
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +32,9 @@ registerLocaleData(localeDe, 'de-DE');
       metaReducers
     }),
     EffectsModule.forRoot([TitleEffects, CountriesOfInterestEffects]),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
