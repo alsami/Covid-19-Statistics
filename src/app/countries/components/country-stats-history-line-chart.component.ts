@@ -27,9 +27,17 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
   yAxisLabel: string = 'Amount';
   timeline: boolean = true;
 
-  // cases, new cases, deaths, new deats, recovered, serious
+  // cases, active cases, new cases, deaths, new deats, recovered, serious
   public colorScheme = {
-    domain: ['#AAAAAA', '#ffff00', '#ff0000', '#ff5800', '#5AA454', '#7b1fa2']
+    domain: [
+      '#AAAAAA',
+      '#0000ff',
+      '#ffff00',
+      '#ff0000',
+      '#ff5800',
+      '#5AA454',
+      '#7b1fa2'
+    ]
   };
 
   public data: LineChartData[] = [];
@@ -49,12 +57,17 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
     this.data = [];
 
     const totalCasesLineChartData: LineChartData = {
-      name: 'Total cases',
+      name: 'Total',
+      series: []
+    };
+
+    const activeCasesLineChartData: LineChartData = {
+      name: 'Active',
       series: []
     };
 
     const newCasesLineChartData: LineChartData = {
-      name: 'New cases',
+      name: 'New',
       series: []
     };
 
@@ -89,6 +102,11 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
         value: countryStats.totalCases
       });
 
+      activeCasesLineChartData.series.push({
+        name: isoString,
+        value: countryStats.activeCases
+      });
+
       newCasesLineChartData.series.push({
         name: isoString,
         value: countryStats.newCases
@@ -117,6 +135,7 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
 
     this.data.push(
       totalCasesLineChartData,
+      activeCasesLineChartData,
       newCasesLineChartData,
       deathLineChartData,
       newDeathsLineChartData,
