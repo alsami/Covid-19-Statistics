@@ -21,45 +21,10 @@ mat-form-field {
 }
 
 /*
-  Graph
-*/
-
-.graph-container {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
-
-covid19-countries-stats-history-stacked-barchart {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1 1 100%;
-}
-
-/*
   Overview
 */
 mat-card {
   max-height: 370px;
-}
-
-@media #{gt-xs} {
-  mat-card {
-    max-height: 320px;
-  }
-}
-
-@media #{gt-sm} {
-  mat-card {
-    max-height: 270px;
-  }
-}
-
-@media #{gt-md} {
-  mat-card {
-    max-height: 270px;
-  }
 }
 
 .virtual-scroll-container {
