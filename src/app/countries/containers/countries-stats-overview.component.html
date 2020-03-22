@@ -14,7 +14,7 @@
       ></covid19-countries-autocomplete>
       <div style="margin-top: 5px;"></div>
       <cdk-virtual-scroll-viewport
-        itemSize="10"
+        itemSize="6"
         class="virtual-scroll-container"
       >
         <div class="card-container">
@@ -30,9 +30,18 @@
               </mat-card-title>
 
               <mat-card-content>
-                <covid19-country-stats-pie-chart
-                  [countryStats]="countryStats"
-                ></covid19-country-stats-pie-chart>
+                <div class="card-content-container">
+                  <covid19-country-stats-pie-chart
+                    [countryStats]="countryStats"
+                  ></covid19-country-stats-pie-chart>
+                  <div class="value-container">
+                    <span>Active: {{ countryStats.activeCases | number }}</span>
+                    <span>Deaths: {{ countryStats.totalDeaths | number }}</span>
+                    <span>
+                      Recovered: {{ countryStats.recoveredCases | number }}
+                    </span>
+                  </div>
+                </div>
               </mat-card-content>
               <mat-card-actions align="end">
                 <ng-container

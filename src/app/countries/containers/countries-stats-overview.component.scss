@@ -68,10 +68,22 @@ covid19-country-stats-pie-chart {
   width: 100%;
 }
 
+.value-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 30%;
+  justify-content: center;
+}
+
 @media #{$xs} {
   .card-container {
     flex-flow: column;
     justify-content: center;
+  }
+
+  .card-content-container {
+    display: flex;
+    flex-direction: row;
   }
 
   mat-card {
@@ -96,8 +108,24 @@ covid19-country-stats-pie-chart {
     margin-bottom: 5px;
   }
 
+  .value-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 100%;
+    align-items: center;
+  }
+
   covid19-country-stats-pie-chart {
     height: 200px;
+  }
+}
+
+@media #{$gt-md} {
+  .value-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 100%;
+    align-items: center;
   }
 }
 
@@ -132,6 +160,18 @@ covid19-country-stats-pie-chart {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+  }
+
+  .card-content-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .value-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 30%;
+    justify-content: center;
   }
 
   mat-card {
