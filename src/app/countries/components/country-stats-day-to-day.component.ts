@@ -2,6 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  Injector,
   Input,
   OnChanges,
   SimpleChanges
@@ -21,6 +22,8 @@ export class CountryStatsDayToDayComponent implements OnChanges {
   public increases: IncreasedStats[] = [];
 
   public increaseType = IncreaseType;
+
+  public constructor(private injector: Injector) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (!this.countryStats || !this.countryStats.length) {
@@ -113,6 +116,6 @@ export class CountryStatsDayToDayComponent implements OnChanges {
   }
 
   private transform(value: number): string {
-    return new DecimalPipe('en-US').transform(value);
+    return this.injector.get(DecimalPipe).transform(value);
   }
 }

@@ -1,5 +1,3 @@
-import { registerLocaleData } from '@angular/common';
-import localEnUS from '@angular/common/locales/en';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,9 +14,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-
-// the second parameter 'fr-FR' is optional
-registerLocaleData(localEnUS, 'en-US');
 
 @NgModule({
   declarations: [AppComponent],
