@@ -1,0 +1,23 @@
+.grid {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  height: 100%;
+}
+
+.block {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.version {
+  margin-top: auto;
+  color: darken($color: #fff, $amount: 30);
+  display: flex;
+  justify-content: center;
+  font-size: small;
+}

@@ -5,6 +5,7 @@ import {
   Input,
   Output
 } from '@angular/core';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'covid19-sidenav-content',
@@ -13,6 +14,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavContentComponent {
+  public version = environment.version;
+
   @Input() countriesOfInterest: string[] = [];
 
   @Output() linkClicked = new EventEmitter();

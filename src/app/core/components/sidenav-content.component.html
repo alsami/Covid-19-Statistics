@@ -1,35 +1,46 @@
-<mat-nav-list>
-  <h4 mat-subheader>Statistics</h4>
-  <mat-list-item routerLink="/stats/global" (click)="linkClicked.emit()">
-    <mat-icon mat-list-icon>public</mat-icon>
-    <h4 mat-line>Global</h4>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item routerLink="/cases/active" (click)="linkClicked.emit()">
-    <mat-icon mat-list-icon>arrow_upward</mat-icon>
-    <h4 mat-line>Active cases</h4>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item routerLink="/cases/closed" (click)="linkClicked.emit()">
-    <mat-icon mat-list-icon>arrow_downward</mat-icon>
-    <h4 mat-line>Closed cases</h4>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item routerLink="/countries" (click)="linkClicked.emit()">
-    <mat-icon mat-list-icon>flag</mat-icon>
-    <h4 mat-line>Countries</h4>
-  </mat-list-item>
-  <ng-container *ngIf="countriesOfInterest?.length">
-    <h4 mat-subheader>Countries of interest</h4>
-    <ng-container *ngFor="let country of countriesOfInterest; let last = last">
-      <mat-list-item
-        [routerLink]="'/countries/' + country"
-        (click)="linkClicked.emit()"
-      >
-        <mat-icon mat-list-icon>flag</mat-icon>
-        <h4 mat-line>{{ country }}</h4>
-      </mat-list-item>
-      <mat-divider *ngIf="!last"></mat-divider>
-    </ng-container>
-  </ng-container>
-</mat-nav-list>
+<div class="grid">
+  <div class="block">
+    <div class="container">
+      <mat-nav-list>
+        <h4 mat-subheader>Statistics</h4>
+        <mat-list-item routerLink="/stats/global" (click)="linkClicked.emit()">
+          <mat-icon mat-list-icon>public</mat-icon>
+          <h4 mat-line>Global</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/cases/active" (click)="linkClicked.emit()">
+          <mat-icon mat-list-icon>arrow_upward</mat-icon>
+          <h4 mat-line>Active cases</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/cases/closed" (click)="linkClicked.emit()">
+          <mat-icon mat-list-icon>arrow_downward</mat-icon>
+          <h4 mat-line>Closed cases</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/countries" (click)="linkClicked.emit()">
+          <mat-icon mat-list-icon>flag</mat-icon>
+          <h4 mat-line>Countries</h4>
+        </mat-list-item>
+        <ng-container *ngIf="countriesOfInterest?.length">
+          <h4 mat-subheader>Countries of interest</h4>
+          <ng-container
+            *ngFor="let country of countriesOfInterest; let last = last"
+          >
+            <mat-list-item
+              [routerLink]="'/countries/' + country"
+              (click)="linkClicked.emit()"
+            >
+              <mat-icon mat-list-icon>flag</mat-icon>
+              <h4 mat-line>{{ country }}</h4>
+            </mat-list-item>
+            <mat-divider *ngIf="!last"></mat-divider>
+          </ng-container>
+        </ng-container>
+      </mat-nav-list>
+      <div class="version">
+        <span>Version {{ version }}</span>
+      </div>
+    </div>
+  </div>
+</div>
