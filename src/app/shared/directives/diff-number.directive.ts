@@ -1,4 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
+import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
 
 @Directive({
   selector: '[covid19DiffNumberColor]'
@@ -16,9 +17,9 @@ export class DiffNumberColorDirective implements AfterViewInit {
       return;
     }
 
-    const increaseColor = this.positiveChange ? 'green' : 'red';
+    const increaseColor = this.positiveChange ? PROPER_GREEN : PROPER_RED;
 
-    const decreaseColor = this.positiveChange ? 'red' : 'green';
+    const decreaseColor = this.positiveChange ? PROPER_RED : PROPER_GREEN;
 
     if (value > 0) {
       htmlElement.style.color = increaseColor;

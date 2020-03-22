@@ -47,21 +47,21 @@ export class CountryStatsDayToDayComponent implements OnChanges {
 
         this.increases.push({
           type: IncreaseType.Total,
-          text: `Current: ${current.totalCases}, Previous: ${previous.totalCases}`,
+          text: `Today: ${current.totalCases}, Yesterday: ${previous.totalCases}`,
           increase: this.calculate(current.totalCases, previous.totalCases),
           time: current.fetchedAt
         });
 
         this.increases.push({
           type: IncreaseType.Active,
-          text: `Current: ${current.activeCases}, Previous: ${previous.activeCases}`,
+          text: `Today: ${current.activeCases}, Yesterday: ${previous.activeCases}`,
           increase: this.calculate(current.activeCases, previous.activeCases),
           time: current.fetchedAt
         });
 
         this.increases.push({
           type: IncreaseType.Deaths,
-          text: `Current: ${current.totalDeaths}, Previous: ${previous.totalDeaths}`,
+          text: `Today: ${current.totalDeaths}, Yesterday: ${previous.totalDeaths}`,
           increase: this.calculate(current.totalDeaths, previous.totalDeaths),
           time: current.fetchedAt
         });
@@ -99,7 +99,8 @@ export class CountryStatsDayToDayComponent implements OnChanges {
   }
 
   private calculateDecrease(current: number, previous: number): number {
-    const decrease = (current / previous) * 100;
+    const diff = previous - current;
+    const decrease = (diff / previous) * 100;
 
     return decrease;
   }
