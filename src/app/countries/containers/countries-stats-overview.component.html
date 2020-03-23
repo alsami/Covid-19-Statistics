@@ -13,12 +13,6 @@
         [countryStats]="countryStats$ | async"
       ></covid19-countries-autocomplete>
       <div style="margin-top: 5px;"></div>
-      <!-- <cdk-virtual-scroll-viewport
-        itemSize="20"
-        minBufferPx="200"
-        maxBufferPx="1000"
-        class="virtual-scroll-container"
-      > -->
       <div class="card-container">
         <ng-container
           *ngFor="
@@ -79,7 +73,6 @@
           </mat-card>
         </ng-container>
       </div>
-      <!-- </cdk-virtual-scroll-viewport> -->
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
