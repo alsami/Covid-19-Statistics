@@ -26,7 +26,7 @@ export class CountryStatsDayToDayComponent implements OnChanges {
   public constructor(private injector: Injector) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (!this.countryStats || !this.countryStats.length) {
+    if (!this.countryStats) {
       return;
     }
 

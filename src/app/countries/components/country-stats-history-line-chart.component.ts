@@ -53,6 +53,8 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
 
   public ngOnChanges(change: SimpleChanges): void {
     if (!this.countryStats || !this.countryStats.length) {
+      this.data = [];
+
       return;
     }
 
@@ -62,8 +64,6 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
     ) {
       return;
     }
-
-    this.data = [];
 
     const totalCasesLineChartData: LineChartData = {
       name: 'Total',

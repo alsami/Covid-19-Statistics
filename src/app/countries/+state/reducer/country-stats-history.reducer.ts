@@ -5,20 +5,24 @@ import { createReducer, on } from '@ngrx/store';
 export interface CountryStatsHistoryState {
   loading: boolean;
   stats: CountryStats[];
+  selectedCountry: string;
 }
 
 const initialState: CountryStatsHistoryState = {
   loading: false,
-  stats: []
+  stats: [],
+  selectedCountry: null
 };
 
 const _reducer = createReducer(
   initialState,
-  on(countryStatsHistoryActions.load, state => ({
-    ...state,
-    loading: true
+  on(countryStatsHistoryActions.load, (state, { country }) => ({
+    stats: state.selectedCountry === country ? state.stats : [],
+    loading: true,
+    selectedCountry: country
   })),
-  on(countryStatsHistoryActions.loaded, (_, { countryStats }) => ({
+  on(countryStatsHistoryActions.loaded, (state, { countryStats }) => ({
+    ...state,
     stats: countryStats,
     loading: false
   })),

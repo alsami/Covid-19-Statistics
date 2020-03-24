@@ -31,12 +31,11 @@ export class CountryStatsHistoryTableComponent implements OnInit {
   public ngOnInit(): void {}
 
   public ngOnChanges(): void {
-    if (!this.countryStats || !this.countryStats.length) {
+    if (!this.countryStats) {
       return;
     }
 
     this.dataSource.data = this.countryStats;
-    console.log(this.dataSource.data);
   }
 
   public getPreviousActiveDiff(current: CountryStats): number {
