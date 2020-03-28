@@ -17,8 +17,8 @@ import { StackedBarChartData } from '@covid19/shared/models';
 export class CountriesStatsStackedBarChartComponent implements OnChanges {
   @Input() countryStats: CountryStats[] = [];
   public data: StackedBarChartData[] = [];
-  public yAxisLabel: string = 'Country';
-  public xAxisLabel: string = 'Cases, Deaths, Recovered';
+  public xAxisLabel: string = 'Country';
+  public yAxisLabel: string = 'Cases, Deaths, Recovered';
 
   // cases, deaths, recovered
   public colorScheme = {
