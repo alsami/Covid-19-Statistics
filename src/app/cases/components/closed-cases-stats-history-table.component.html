@@ -1,16 +1,15 @@
 <mat-table
-  *ngIf="dataSource"
   [dataSource]="dataSource"
   [trackBy]="trackBy"
   class="mat-elevation-z8"
 >
   <ng-container matColumnDef="total">
     <mat-header-cell *matHeaderCellDef>Cases</mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column;">
         <span>{{ element.total | number }}</span>
         <span [covid19DiffNumberColor]="true">
-          {{ getPreviousTotalDiff(element) }}
+          {{ dataSource.data | valueDiff: element.total:i:'total' }}
         </span>
       </div>
     </mat-cell>
@@ -18,21 +17,23 @@
 
   <ng-container matColumnDef="deaths">
     <mat-header-cell *matHeaderCellDef>Deaths</mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column;">
         <span>{{ element.deaths | number }}</span>
-        <span covid19DiffNumberColor>{{ getPreviousDeathsDiff(element) }}</span>
+        <span covid19DiffNumberColor>
+          {{ dataSource.data | valueDiff: element.deaths:i:'deaths' }}
+        </span>
       </div>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="recovered">
     <mat-header-cell *matHeaderCellDef>Recovered</mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column;">
         <span>{{ element.recovered | number }}</span>
         <span [covid19DiffNumberColor]="true">
-          {{ getPreviousRecoveredDiff(element) }}
+          {{ dataSource.data | valueDiff: element.recovered:i:'recovered' }}
         </span>
       </div>
     </mat-cell>
