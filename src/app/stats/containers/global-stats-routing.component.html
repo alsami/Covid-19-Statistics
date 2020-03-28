@@ -1,4 +1,4 @@
-<nav mat-tab-nav-bar>
+<nav mat-tab-nav-bar (updateActiveLink)="linkUpdate($event)">
   <a
     mat-tab-link
     *ngFor="let linkLabel of linkLabels"

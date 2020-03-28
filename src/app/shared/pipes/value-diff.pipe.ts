@@ -5,7 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: true
 })
 export class ValueDiffPipe implements PipeTransform {
-  transform(array: any[], current: number, index: number, key: string): number {
+  public transform(
+    array: any[],
+    current: number,
+    index: number,
+    key: string
+  ): number {
     if (!array) {
       return;
     }

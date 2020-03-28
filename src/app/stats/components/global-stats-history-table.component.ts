@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -17,16 +18,24 @@ import { GlobalStats } from '@covid19/stats/models';
 export class GlobalStatsHistoryTableComponent implements OnInit, OnChanges {
   @Input() globalStats: GlobalStats[] = [];
 
-  public dataSource: MatTableDataSource<GlobalStats> = new MatTableDataSource(
-    []
-  );
+  public dataSource: MatTableDataSource<GlobalStats>;
 
   public displayedColumns = ['total', 'deaths', 'recovered', 'fetchedAt'];
 
-  public ngOnInit(): void {}
+  public constructor(private readonly cdr: ChangeDetectorRef) {
+    this.cdr.detach();
+  }
+
+  public ngOnInit(): void {
+    this.dataSource = new MatTableDataSource(this.globalStats);
+  }
 
   public ngOnChanges(): void {
+    if (!this.dataSource) {
+      return;
+    }
     this.dataSource.data = this.globalStats;
+    this.cdr.detectChanges();
   }
 
   public trackBy(globalStats: GlobalStats): string {

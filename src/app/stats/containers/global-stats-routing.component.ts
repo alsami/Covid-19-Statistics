@@ -50,4 +50,8 @@ export class GlobalStatsRoutingComponent implements OnInit {
       select(fromStats.getGlobalDayHistoryStats)
     );
   }
+
+  linkUpdate(event): void {
+    console.log('UPDATE', event);
+  }
 }

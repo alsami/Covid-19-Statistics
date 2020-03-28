@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { globalStatsHistoryActions } from '@covid19/stats/+state/actions';
 import * as fromStats from '@covid19/stats/+state/reducer';
 import { GlobalStats } from '@covid19/stats/models';
@@ -8,9 +8,10 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'covid19-global-stats-history',
   templateUrl: './global-stats-history.component.html',
-  styleUrls: ['./global-stats-history.component.scss']
+  styleUrls: ['./global-stats-history.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GlobalStatsHistoryComponent implements OnInit, AfterViewInit {
+export class GlobalStatsHistoryComponent implements OnInit {
   globalStatsHistory$: Observable<GlobalStats[]>;
   loading$: Observable<boolean>;
 
@@ -25,6 +26,4 @@ export class GlobalStatsHistoryComponent implements OnInit, AfterViewInit {
       select(fromStats.getGlobalHistoryStats)
     );
   }
-
-  public ngAfterViewInit(): void {}
 }

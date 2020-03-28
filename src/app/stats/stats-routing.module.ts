@@ -14,7 +14,7 @@ import {
     RouterModule.forChild([
       {
         path: '',
-        redirectTo: 'global',
+        redirectTo: 'global/current',
         pathMatch: 'full'
       },
       {

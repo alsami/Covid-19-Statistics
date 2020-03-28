@@ -8,8 +8,10 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   TemplateRef,
@@ -25,7 +27,7 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageLoadingIndicatorComponent
-  implements OnInit, OnDestroy, AfterViewInit {
+  implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   @Input()
   loading: boolean;
 
@@ -40,11 +42,18 @@ export class PageLoadingIndicatorComponent
     private overlay: Overlay,
     private overlayBuilder: OverlayPositionBuilder,
     private breakpointService: BreakpointService,
-    private viewContainerRef: ViewContainerRef
-  ) {}
+    private viewContainerRef: ViewContainerRef,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.cdr.detach();
+  }
 
   public ngOnInit(): void {
     this.overlayRef = this.buildOverLayRef(56);
+  }
+
+  public ngOnChanges(): void {
+    this.cdr.detectChanges();
   }
 
   public ngAfterViewInit(): void {
