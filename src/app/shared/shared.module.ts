@@ -6,11 +6,13 @@ import {
   PageLoadingIndicatorComponent
 } from '@covid19/shared/components';
 import { DiffNumberColorDirective } from '@covid19/shared/directives';
+import { ValueDiffPipe } from '@covid19/shared/pipes';
 
 const COMPONENTS = [
   PageLoadingIndicatorComponent,
   ComponentLoaderOverlayComponent,
-  DiffNumberColorDirective
+  DiffNumberColorDirective,
+  ValueDiffPipe
 ];
 
 @NgModule({
