@@ -23,6 +23,8 @@
           <covid19-country-stats-card
             [countryStats]="countryStats"
             [countriesOfInterest]="countriesOfInterest$ | async"
+            (addCountryOfInterest)="storeCountryOfInterest($event)"
+            (removeCountryOfInterest)="removeCountryOfInterest($event)"
           ></covid19-country-stats-card>
         </ng-container>
       </div>
