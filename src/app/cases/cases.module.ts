@@ -9,14 +9,6 @@ import {
   ClosedCasesStatsHistoryEffects
 } from '@covid19/cases/+state/effects';
 import * as fromCases from '@covid19/cases/+state/reducer';
-import {
-  ActiveCasesStatsDayHistoryService,
-  ActiveCasesStatsHistoryService,
-  ActiveCasesStatsService,
-  ClosedCasesStatsDayHistoryService,
-  ClosedCasesStatsHistoryService,
-  ClosedCasesStatsService
-} from '@covid19/cases/+state/services';
 import { CasesRoutingModule } from '@covid19/cases/cases-routing.module';
 import {
   ActiveCasesStatsCardComponent,
@@ -30,6 +22,14 @@ import {
   ActiveCasesOverviewComponent,
   ClosedCasesOverviewComponent
 } from '@covid19/cases/containers';
+import {
+  ActiveCasesStatsDayHistoryService,
+  ActiveCasesStatsHistoryService,
+  ActiveCasesStatsService,
+  ClosedCasesStatsDayHistoryService,
+  ClosedCasesStatsHistoryService,
+  ClosedCasesStatsService
+} from '@covid19/cases/services';
 import { MaterialModule } from '@covid19/material/material.module';
 import { SharedModule } from '@covid19/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';

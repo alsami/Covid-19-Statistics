@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { activeCasesStatsActions } from '@covid19/cases/+state/actions';
-import { ActiveCasesStatsService } from '@covid19/cases/+state/services';
+import { ActiveCasesStatsService } from '@covid19/cases/services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';

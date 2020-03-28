@@ -9,16 +9,16 @@ import {
 } from '@covid19/stats/+state/effects';
 import * as fromStats from '@covid19/stats/+state/reducer';
 import {
-  GlobalStatsDayHistoryService,
-  GlobalStatsHistoryService,
-  GlobalStatsService
-} from '@covid19/stats/+state/services';
-import {
   GlobalStatsCardComponent,
   GlobalStatsHistoryLineChartComponent,
   GlobalStatsHistoryTableComponent
 } from '@covid19/stats/components';
 import { GlobalStatsOverviewComponent } from '@covid19/stats/containers';
+import {
+  GlobalStatsDayHistoryService,
+  GlobalStatsHistoryService,
+  GlobalStatsService
+} from '@covid19/stats/services';
 import { StatsRoutingModule } from '@covid19/stats/stats-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
