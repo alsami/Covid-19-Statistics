@@ -4,7 +4,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   Input,
   OnChanges,
   Output,
@@ -17,7 +16,7 @@ import {
 } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CountryStats } from '@covid19/countries/models';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { delay, map, startWith } from 'rxjs/operators';
 
 @Component({
@@ -29,7 +28,9 @@ import { delay, map, startWith } from 'rxjs/operators';
 export class CountriesAutoCompleteComponent
   implements OnChanges, AfterViewInit {
   @Input() countryStats: CountryStats[] = [];
-  @Output() countriesSelected = new EventEmitter<string[]>();
+  @Output() countriesSelected: BehaviorSubject<string[]> = new BehaviorSubject(
+    []
+  );
   filteredCountries$: Observable<string[]>;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   countriesCtrl = new FormControl();
@@ -57,7 +58,7 @@ export class CountriesAutoCompleteComponent
       return;
     }
 
-    this.countriesSelected.emit(this.allCountries);
+    this.countriesSelected.next(this.allCountries);
   }
 
   public ngAfterViewInit(): void {
@@ -83,7 +84,7 @@ export class CountriesAutoCompleteComponent
     }
 
     this.selectedCountries.push(wanted);
-    this.countriesSelected.emit(this.selectedCountries);
+    this.countriesSelected.next(this.selectedCountries);
 
     if (input) {
       input.value = '';
@@ -100,12 +101,12 @@ export class CountriesAutoCompleteComponent
     }
 
     this.selectedCountries.splice(index, 1);
-    this.countriesSelected.emit(this.selectedCountries);
+    this.countriesSelected.next(this.selectedCountries);
   }
 
   public selected(event: MatAutocompleteSelectedEvent): void {
     this.selectedCountries.push(event.option.viewValue);
-    this.countriesSelected.emit(this.selectedCountries);
+    this.countriesSelected.next(this.selectedCountries);
     this.countryInput.nativeElement.value = '';
     this.countriesCtrl.setValue(null);
   }

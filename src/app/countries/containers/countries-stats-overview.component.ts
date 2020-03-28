@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   OnDestroy,
   OnInit,
@@ -21,7 +22,8 @@ import { delay, distinctUntilChanged, map } from 'rxjs/operators';
 @Component({
   selector: 'covid19-countries-stats-overview',
   templateUrl: './countries-stats-overview.component.html',
-  styleUrls: ['./countries-stats-overview.component.scss']
+  styleUrls: ['./countries-stats-overview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CountriesStatsOverviewComponent
   implements OnInit, AfterViewInit, OnDestroy {
@@ -105,13 +107,13 @@ export class CountriesStatsOverviewComponent
     );
   }
 
-  public trackCountryStatsChanges(countryStat: CountryStats): string {
-    return `${countryStat.country}_${countryStat.fetchedAt}`;
+  public trackCountryStatsChanges(countryStats: CountryStats): string {
+    return `${countryStats.country}_${countryStats.fetchedAt}`;
   }
 
   private subscribeFilterCountryStatsChanges(): void {
     this.filteredCountryStats$ = combineLatest(
-      this.countryAutoComplete.countriesSelected.asObservable(),
+      this.countryAutoComplete.countriesSelected,
       this.countryStats$
     ).pipe(
       map(([selectedCountries, countryStats]) => {

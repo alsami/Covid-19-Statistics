@@ -20,57 +20,10 @@
             trackBy: trackCountryStatsChanges
           "
         >
-          <mat-card>
-            <mat-card-title>
-              {{ countryStats.country }}
-            </mat-card-title>
-
-            <mat-card-content>
-              <div class="card-content-container">
-                <covid19-country-stats-pie-chart
-                  [countryStats]="countryStats"
-                ></covid19-country-stats-pie-chart>
-                <div class="value-container">
-                  <span>Active: {{ countryStats.activeCases | number }}</span>
-                  <span>Deaths: {{ countryStats.totalDeaths | number }}</span>
-                  <span>
-                    Recovered: {{ countryStats.recoveredCases | number }}
-                  </span>
-                </div>
-              </div>
-            </mat-card-content>
-            <mat-card-actions align="end">
-              <ng-container
-                *ngIf="
-                  countryOfInterest(countryStats.country);
-                  then remove;
-                  else add
-                "
-              ></ng-container>
-              <ng-template #add>
-                <button
-                  mat-button
-                  (click)="storeCountryOfInterest(countryStats.country)"
-                >
-                  <mat-icon>visibility</mat-icon>
-                  Add to list
-                </button>
-              </ng-template>
-
-              <ng-template #remove>
-                <button
-                  mat-button
-                  (click)="removeCountryOfInterest(countryStats.country)"
-                >
-                  <mat-icon>visibility_off</mat-icon>
-                  Remove from list
-                </button>
-              </ng-template>
-              <button mat-button [routerLink]="countryStats.country">
-                Show details
-              </button>
-            </mat-card-actions>
-          </mat-card>
+          <covid19-country-stats-card
+            [countryStats]="countryStats"
+            [countriesOfInterest]="countriesOfInterest"
+          ></covid19-country-stats-card>
         </ng-container>
       </div>
     </div>

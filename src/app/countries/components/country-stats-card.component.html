@@ -2,22 +2,32 @@
   <mat-card-title>
     {{ countryStats.country }}
   </mat-card-title>
+
   <mat-card-content>
-    Total cases: {{ countryStats.totalCases | number }}
-    <br />
-    Active cases: {{ countryStats.activeCases | number }}
-    <br />
-    New cases: {{ countryStats.newCases | number }}
-    <br />
-    Recovered cases: {{ countryStats.recoveredCases | number }}
-    <br />
-    Serious cases: {{ countryStats.seriousCases | number }}
-    <br />
-    Total deaths: {{ countryStats.totalDeaths | number }}
-    <br />
-    New deaths: {{ countryStats.newDeaths | number }}
-    <br />
-    Last changed: {{ countryStats.fetchedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
+    <div class="value-container">
+      <span>Total: {{ countryStats.totalCases | number }}</span>
+      <span>
+        Active: {{ countryStats.activeCases | number }} ({{
+          countryStats.totalCases
+            | percentage: countryStats.activeCases
+            | number
+        }}%)
+      </span>
+      <span>
+        Deaths: {{ countryStats.totalDeaths | number }} ({{
+          countryStats.totalCases
+            | percentage: countryStats.totalDeaths
+            | number
+        }}%)
+      </span>
+      <span>
+        Recovered: {{ countryStats.recoveredCases | number }} ({{
+          countryStats.totalCases
+            | percentage: countryStats.recoveredCases
+            | number
+        }}%)
+      </span>
+    </div>
   </mat-card-content>
   <mat-card-actions align="end">
     <ng-container
@@ -25,23 +35,21 @@
     ></ng-container>
     <ng-template #add>
       <button
-        *ngIf="countriesOfInterest"
         mat-button
-        (click)="addCountryOfInterest.emit()"
+        (click)="addCountryOfInterest.emit(countryStats.country)"
       >
         <mat-icon>visibility</mat-icon>
-        Add to countries of interest
+        Add to list
       </button>
     </ng-template>
 
     <ng-template #remove>
       <button
-        *ngIf="countriesOfInterest"
         mat-button
-        (click)="removeCountryOfInterest.emit()"
+        (click)="removeCountryOfInterest.emit(countryStats.country)"
       >
         <mat-icon>visibility_off</mat-icon>
-        Remove from countries of interest
+        Remove from list
       </button>
     </ng-template>
     <button mat-button [routerLink]="countryStats.country">

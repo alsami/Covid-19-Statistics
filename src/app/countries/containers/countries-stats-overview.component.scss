@@ -27,146 +27,36 @@ mat-card {
   max-height: 370px;
 }
 
-.virtual-scroll-container {
-  height: 2000px;
-}
-
-.virtual-scroll-container::-webkit-scrollbar {
-  width: 0 !important;
-}
-
-.virtual-scroll-container {
-  overflow: -moz-scrollbars-none;
-}
-.virtual-scroll-container {
-  -ms-overflow-style: none;
-}
-
-covid19-country-stats-pie-chart {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1 1 100%;
-}
-
 .card-container {
   display: flex;
   width: 100%;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-content: center;
 }
 
-.value-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 30%;
-  justify-content: center;
+covid19-country-stats-card {
+  width: 33%;
+  margin-bottom: 5px;
 }
 
 @media #{$xs} {
-  .card-container {
-    flex-flow: column;
-    justify-content: center;
-  }
-
-  .card-content-container {
-    display: flex;
-    flex-direction: row;
-  }
-
-  mat-card {
-    flex: 1 0 100%;
+  covid19-country-stats-card {
+    width: 100%;
     margin-bottom: 5px;
-  }
-
-  covid19-country-stats-pie-chart {
-    height: 250px;
   }
 }
 
 @media #{$sm} {
-  .card-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-
-  mat-card {
-    width: 44%;
+  covid19-country-stats-card {
+    width: 49.5%;
     margin-bottom: 5px;
-  }
-
-  .value-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 100%;
-    align-items: center;
-  }
-
-  covid19-country-stats-pie-chart {
-    height: 200px;
   }
 }
 
 @media #{$md} {
-  .card-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-
-  mat-card {
-    width: 29%;
-    margin-bottom: 5px;
-  }
-
-  .value-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 100%;
-    align-items: center;
-  }
-}
-
-@media #{$lg} {
-  .card-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-
-  mat-card {
-    width: 30%;
-    margin-bottom: 5px;
-  }
-
-  .value-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 100%;
-    align-items: center;
-  }
-}
-
-@media #{$xl} {
-  .card-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-
-  .card-content-container {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .value-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 30%;
-    align-items: center;
-  }
-
-  mat-card {
-    width: 31%;
+  covid19-country-stats-card {
+    width: 33%;
     margin-bottom: 5px;
   }
 }
