@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
-  OnChanges,
-  OnInit
+  OnChanges
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActiveCaseStats } from '@covid19/cases/models';
@@ -14,7 +14,7 @@ import { ActiveCaseStats } from '@covid19/cases/models';
   styleUrls: ['./active-cases-stats-history-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActiveCasesStatsHistoryTable implements OnInit, OnChanges {
+export class ActiveCasesStatsHistoryTable implements OnChanges {
   @Input() activeCasesStats: ActiveCaseStats[] = [];
 
   public dataSource: MatTableDataSource<
@@ -23,16 +23,17 @@ export class ActiveCasesStatsHistoryTable implements OnInit, OnChanges {
 
   public displayedColumns = ['total', 'mild', 'serious', 'fetchedAt'];
 
-  public ngOnInit(): void {}
+  public constructor(private cdr: ChangeDetectorRef) {
+    this.cdr.detach();
+  }
 
   public ngOnChanges(): void {
-    console.log(this.activeCasesStats);
     if (!this.activeCasesStats || !this.activeCasesStats.length) {
       return;
     }
 
     this.dataSource.data = this.activeCasesStats;
-    console.log(this.dataSource.data);
+    this.cdr.detectChanges();
   }
 
   public trackBy(globalStats: ActiveCaseStats): string {
