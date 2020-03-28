@@ -1,5 +1,5 @@
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
@@ -7,9 +7,18 @@ import {
   ToolbarComponent
 } from '@covid19/core/components';
 import { LayoutComponent } from '@covid19/core/containers';
+import { HttpRetryInterceptor } from '@covid19/core/interceptor';
 import { MaterialModule } from '@covid19/material/material.module';
 
 const COMPONENTS = [LayoutComponent, ToolbarComponent, SidenavContentComponent];
+
+const interceptors = [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpRetryInterceptor,
+    multi: true
+  }
+];
 
 @NgModule({
   declarations: [...COMPONENTS],
@@ -20,7 +29,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
-      providers: [DecimalPipe]
+      providers: [DecimalPipe, ...interceptors]
     };
   }
 }

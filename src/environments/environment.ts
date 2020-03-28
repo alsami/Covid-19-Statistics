@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/api/v1/',
+  apiUrl: 'https://covid19-api.azurewebsites.net/api/v1/',
   version: '0.0.0'
 };
 
