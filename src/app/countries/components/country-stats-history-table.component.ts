@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit
@@ -28,69 +29,18 @@ export class CountryStatsHistoryTableComponent implements OnInit {
     'fetchedAt'
   ];
 
+  public constructor(private cdr: ChangeDetectorRef) {
+    this.cdr.detach();
+  }
+
   public ngOnInit(): void {}
 
   public ngOnChanges(): void {
-    if (!this.countryStats) {
+    if (!this.countryStats || !this.countryStats.length) {
       return;
     }
 
     this.dataSource.data = this.countryStats;
-  }
-
-  public getPreviousActiveDiff(current: CountryStats): number {
-    const index = this.countryStats.findIndex(stat => stat === current);
-
-    if (index === -1 || index === this.countryStats.length - 1) {
-      return;
-    }
-
-    const previous = this.countryStats[index + 1];
-
-    const diff = current.activeCases - previous.activeCases;
-
-    return diff;
-  }
-
-  public getPreviousDeathsDiff(current: CountryStats): number {
-    const index = this.countryStats.findIndex(stat => stat === current);
-
-    if (index === -1 || index === this.countryStats.length - 1) {
-      return;
-    }
-
-    const previous = this.countryStats[index + 1];
-
-    const diff = current.totalDeaths - previous.totalDeaths;
-
-    return diff;
-  }
-
-  public getPreviousSeriousDiff(current: CountryStats): number {
-    const index = this.countryStats.findIndex(stat => stat === current);
-
-    if (index === -1 || index === this.countryStats.length - 1) {
-      return;
-    }
-
-    const previous = this.countryStats[index + 1];
-
-    const diff = current.seriousCases - previous.seriousCases;
-
-    return diff;
-  }
-
-  public getPreviousRecoveredDiff(current: CountryStats): number {
-    const index = this.countryStats.findIndex(stat => stat === current);
-
-    if (index === -1 || index === this.countryStats.length - 1) {
-      return;
-    }
-
-    const previous = this.countryStats[index + 1];
-
-    const diff = current.recoveredCases - previous.recoveredCases;
-
-    return diff;
+    this.cdr.detectChanges();
   }
 }

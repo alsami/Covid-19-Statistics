@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges
+} from '@angular/core';
 import { CountryStats } from '@covid19/countries/models';
 
 @Component({
@@ -7,6 +13,14 @@ import { CountryStats } from '@covid19/countries/models';
   styleUrls: ['./country-detailed-stats-cards.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountryDetailedStatsCardsComponent {
+export class CountryDetailedStatsCardsComponent implements OnChanges {
   @Input() countryStats: CountryStats;
+
+  public constructor(private cdr: ChangeDetectorRef) {
+    this.cdr.detach();
+  }
+
+  public ngOnChanges(): void {
+    this.cdr.detectChanges();
+  }
 }

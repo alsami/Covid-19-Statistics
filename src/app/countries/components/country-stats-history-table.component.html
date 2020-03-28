@@ -9,31 +9,37 @@
       <br />
       Cases
     </mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column;">
         <span>{{ element.activeCases | number }}</span>
-        <span covid19DiffNumberColor>{{ getPreviousActiveDiff(element) }}</span>
+        <span covid19DiffNumberColor>
+          {{ dataSource.data | valueDiff: element.activeCases:i:'activeCases' }}
+        </span>
       </div>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="deaths">
     <mat-header-cell *matHeaderCellDef>Deaths</mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column;">
         <span>{{ element.totalDeaths | number }}</span>
-        <span covid19DiffNumberColor>{{ getPreviousDeathsDiff(element) }}</span>
+        <span covid19DiffNumberColor>
+          {{ dataSource.data | valueDiff: element.totalDeaths:i:'totalDeaths' }}
+        </span>
       </div>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="serious">
     <mat-header-cell *matHeaderCellDef>Serious</mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column;">
         <span>{{ element.seriousCases | number }}</span>
         <span covid19DiffNumberColor>
-          {{ getPreviousSeriousDiff(element) }}
+          {{
+            dataSource.data | valueDiff: element.seriousCases:i:'seriousCases'
+          }}
         </span>
       </div>
     </mat-cell>
@@ -41,11 +47,14 @@
 
   <ng-container matColumnDef="recovered">
     <mat-header-cell *matHeaderCellDef>Recovered</mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column;">
         <span>{{ element.recoveredCases | number }}</span>
         <span [covid19DiffNumberColor]="true">
-          {{ getPreviousRecoveredDiff(element) }}
+          {{
+            dataSource.data
+              | valueDiff: element.recoveredCases:i:'recoveredCases'
+          }}
         </span>
       </div>
     </mat-cell>

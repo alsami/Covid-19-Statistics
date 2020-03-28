@@ -1,36 +1,34 @@
-<ng-container *ngIf="increases?.length">
-  <div class="container">
-    <ng-container *ngFor="let increase of increases">
-      <mat-card class="increase-card">
-        <mat-card-title>{{ increase.type }}</mat-card-title>
-        <mat-card-content>
-          <span
-            class="increase"
-            [matTooltip]="increase.text"
-            covid19DiffNumberColor
-          >
-            {{ increase.increase }}
-          </span>
-          %
-          <ng-container *ngIf="increase.increase !== 0">
-            <ng-container
-              *ngIf="increase.increase > 0; then up; else down"
-            ></ng-container>
-            <ng-template #up>
-              <mat-icon>
-                trending_up
-              </mat-icon>
-            </ng-template>
-            <ng-template #down>
-              <mat-icon>trending_down</mat-icon>
-            </ng-template>
-          </ng-container>
-          <ng-container *ngIf="increase.increase === 0">
-            <mat-icon>trending_flat</mat-icon>
-          </ng-container>
-          <div>Time: {{ increase.time | date: 'dd.MM.yyyy':'UTC' }}</div>
-        </mat-card-content>
-      </mat-card>
-    </ng-container>
-  </div>
-</ng-container>
+<div class="container">
+  <ng-container *ngFor="let increase of increases">
+    <mat-card class="increase-card">
+      <mat-card-title>{{ increase.type }}</mat-card-title>
+      <mat-card-content>
+        <span
+          class="increase"
+          [matTooltip]="increase.text"
+          covid19DiffNumberColor
+        >
+          {{ increase.increase }}
+        </span>
+        %
+        <ng-container *ngIf="increase.increase !== 0">
+          <ng-container
+            *ngIf="increase.increase > 0; then up; else down"
+          ></ng-container>
+          <ng-template #up>
+            <mat-icon>
+              trending_up
+            </mat-icon>
+          </ng-template>
+          <ng-template #down>
+            <mat-icon>trending_down</mat-icon>
+          </ng-template>
+        </ng-container>
+        <ng-container *ngIf="increase.increase === 0">
+          <mat-icon>trending_flat</mat-icon>
+        </ng-container>
+        <div>Time: {{ increase.time | date: 'dd.MM.yyyy':'UTC' }}</div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

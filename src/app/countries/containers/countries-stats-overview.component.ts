@@ -61,7 +61,7 @@ export class CountriesStatsOverviewComponent
     );
 
     this.countriesOfInterestSub = this.countriesOfInterest$
-      .pipe(delay(50))
+      .pipe(delay(100))
       .subscribe(countriesOfInterest => {
         this.countriesOfInterest = countriesOfInterest;
       });
