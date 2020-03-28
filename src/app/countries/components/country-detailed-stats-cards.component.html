@@ -13,7 +13,7 @@
   <mat-card>
     <mat-card-title>
       Active Cases: {{ countryStats.activeCases | number }} ({{
-        (countryStats.activeCases / countryStats.totalCases) * 100 | number
+        countryStats.totalCases | percentage: countryStats.activeCases | number
       }}%)
     </mat-card-title>
     <mat-card-subtitle>
@@ -30,9 +30,8 @@
   <mat-card>
     <mat-card-title>
       Deaths:
-      {{ countryStats.totalDeaths | number }}
-      ({{
-        (countryStats.totalDeaths / countryStats.totalCases) * 100 | number
+      {{ countryStats.totalDeaths | number }} ({{
+        countryStats.totalCases | percentage: countryStats.totalDeaths | number
       }}%)
     </mat-card-title>
     <mat-card-subtitle>
@@ -49,7 +48,9 @@
   <mat-card>
     <mat-card-title>
       Recovered: {{ countryStats.recoveredCases | number }} ({{
-        (countryStats.recoveredCases / countryStats.totalCases) * 100 | number
+        countryStats.totalCases
+          | percentage: countryStats.recoveredCases
+          | number
       }}%)
     </mat-card-title>
     <mat-card-content
@@ -62,7 +63,11 @@
   <mat-card>
     <mat-card-title>
       Serious condition:
-      {{ countryStats.seriousCases | number }}
+      {{ countryStats.seriousCases | number }} ({{
+        countryStats.totalCases
+          | percentage: countryStats.seriousCases
+          | number
+      }}%)
     </mat-card-title>
     <mat-card-content
       style="display: flex; flex-direction: column; align-content: center;"

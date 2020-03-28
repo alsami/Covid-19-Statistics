@@ -20,8 +20,9 @@
       <h3 mat-sub-header>Active</h3>
       <mat-card-title>
         Mild condition:
-        {{ activeCasesStats.mild | number }} ({{
-          activeCasesStats.mildPercentage | number
+        {{ activeCasesStats.mild | number }}
+        ({{
+          activeCasesStats.total | percentage: activeCasesStats.mild | number
         }}%)
       </mat-card-title>
       <br />
@@ -37,7 +38,9 @@
       <h3 mat-sub-header>Active</h3>
       <mat-card-title>
         Serious condition: {{ activeCasesStats.serious | number }} ({{
-          activeCasesStats.seriousPercentage | number
+          activeCasesStats.total
+            | percentage: activeCasesStats.serious
+            | number
         }}%)
       </mat-card-title>
       <br />

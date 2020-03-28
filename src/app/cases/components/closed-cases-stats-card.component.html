@@ -20,7 +20,7 @@
       <h3 mat-sub-header>Closed</h3>
       <mat-card-title>
         Deaths: {{ closedCasesStats.deaths | number }} ({{
-          closedCasesStats.deathsPercentage | number
+          closedCasesStats.total | percentage: closedCasesStats.deaths | number
         }}%)
       </mat-card-title>
       <br />
@@ -35,9 +35,10 @@
     >
       <h3 mat-sub-header>Closed</h3>
       <mat-card-title>
-        Recovered:
-        {{ closedCasesStats.recovered | number }} ({{
-          closedCasesStats.recoveredPercentage | number
+        Recovered: ({{
+          closedCasesStats.total
+            | percentage: closedCasesStats.recovered
+            | number
         }}%)
       </mat-card-title>
       <br />

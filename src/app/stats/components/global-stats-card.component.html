@@ -20,7 +20,7 @@
       <mat-card-title>
         Deaths:
         {{ globalStats.deaths | number }}
-        ({{ globalStats.deathsPercentage | number }}%)
+        ({{ globalStats.total | percentage: globalStats.deaths | number }}%)
       </mat-card-title>
       <br />
       Last reported at:
@@ -36,7 +36,7 @@
       <mat-card-title>
         Recovered:
         {{ globalStats.recovered | number }}
-        ({{ globalStats.recoveredPercentage | number }}%)
+        ({{ globalStats.total | percentage: globalStats.recovered | number }}%)
       </mat-card-title>
       <br />
       Last reported at:
