@@ -18,14 +18,22 @@ import {
   GlobalStatsHistoryLineChartComponent,
   GlobalStatsHistoryTableComponent
 } from '@covid19/stats/components';
-import { GlobalStatsOverviewComponent } from '@covid19/stats/containers';
+import {
+  GlobalStatsCurrentComponent,
+  GlobalStatsDayHistoryComponent,
+  GlobalStatsHistoryComponent,
+  GlobalStatsRoutingComponent
+} from '@covid19/stats/containers';
 import { StatsRoutingModule } from '@covid19/stats/stats-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const COMPONENTS = [
-  GlobalStatsOverviewComponent,
+  GlobalStatsRoutingComponent,
+  GlobalStatsCurrentComponent,
+  GlobalStatsHistoryComponent,
+  GlobalStatsDayHistoryComponent,
   GlobalStatsCardComponent,
   GlobalStatsHistoryTableComponent,
   GlobalStatsHistoryLineChartComponent

@@ -3,7 +3,8 @@ import {
   Component,
   Input,
   OnChanges,
-  OnInit
+  OnInit,
+  SimpleChanges
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { GlobalStats } from '@covid19/stats/models';
@@ -25,13 +26,12 @@ export class GlobalStatsHistoryTableComponent implements OnInit, OnChanges {
 
   public ngOnInit(): void {}
 
-  public ngOnChanges(): void {
-    if (!this.globalStats || !this.globalStats.length) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.globalStats) {
       return;
     }
 
     this.dataSource.data = this.globalStats;
-    console.log(this.dataSource.data);
   }
 
   public trackBy(globalStats: GlobalStats): string {

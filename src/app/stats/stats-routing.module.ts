@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { GlobalStatsOverviewComponent } from '@covid19/stats/containers';
+import {
+  GlobalStatsCurrentComponent,
+  GlobalStatsDayHistoryComponent,
+  GlobalStatsHistoryComponent,
+  GlobalStatsRoutingComponent
+} from '@covid19/stats/containers';
 
 @NgModule({
   imports: [
@@ -14,9 +19,24 @@ import { GlobalStatsOverviewComponent } from '@covid19/stats/containers';
       },
       {
         path: 'global',
-        component: GlobalStatsOverviewComponent
+        component: GlobalStatsRoutingComponent,
+        children: [
+          {
+            path: 'current',
+            component: GlobalStatsCurrentComponent
+          },
+          {
+            path: 'history',
+            component: GlobalStatsHistoryComponent
+          },
+          {
+            path: 'graph',
+            component: GlobalStatsDayHistoryComponent
+          }
+        ]
       }
     ])
-  ]
+  ],
+  exports: [RouterModule]
 })
 export class StatsRoutingModule {}
