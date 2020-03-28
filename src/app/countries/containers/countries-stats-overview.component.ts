@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -16,8 +15,8 @@ import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountriesAutoCompleteComponent } from '@covid19/countries/components';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
-import { combineLatest, Observable, Subscription } from 'rxjs';
-import { delay, distinctUntilChanged, map } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-countries-stats-overview',
@@ -25,14 +24,11 @@ import { delay, distinctUntilChanged, map } from 'rxjs/operators';
   styleUrls: ['./countries-stats-overview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountriesStatsOverviewComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   public loading$: Observable<boolean>;
   public countryStats$: Observable<CountryStats[]>;
   public filteredCountryStats$: Observable<CountryStats[]>;
   public countriesOfInterest$: Observable<string[]>;
-  private countriesOfInterest: string[] = [];
-  private countriesOfInterestSub: Subscription;
 
   @ViewChild('countryAutoComplete', { static: false })
   countryAutoComplete: CountriesAutoCompleteComponent;
@@ -61,22 +57,10 @@ export class CountriesStatsOverviewComponent
     this.loading$ = this.store.pipe(
       select(fromCountries.getCountriesStatsLoading)
     );
-
-    this.countriesOfInterestSub = this.countriesOfInterest$
-      .pipe(delay(100))
-      .subscribe(countriesOfInterest => {
-        this.countriesOfInterest = countriesOfInterest;
-      });
   }
 
   public ngAfterViewInit(): void {
     this.subscribeFilterCountryStatsChanges();
-  }
-
-  public ngOnDestroy(): void {
-    if (this.countriesOfInterestSub) {
-      this.countriesOfInterestSub.unsubscribe();
-    }
   }
 
   public animationDone(index: number) {
@@ -86,11 +70,6 @@ export class CountriesStatsOverviewComponent
 
     this.store.dispatch(countriesStatsActions.load());
   }
-
-  public countryOfInterest(country: string): boolean {
-    return this.countriesOfInterest.indexOf(country) > -1;
-  }
-
   public storeCountryOfInterest(country: string): void {
     this.store.dispatch(
       countriesOfInterestActions.store({

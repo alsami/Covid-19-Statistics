@@ -22,7 +22,7 @@
         >
           <covid19-country-stats-card
             [countryStats]="countryStats"
-            [countriesOfInterest]="countriesOfInterest"
+            [countriesOfInterest]="countriesOfInterest$ | async"
           ></covid19-country-stats-card>
         </ng-container>
       </div>
