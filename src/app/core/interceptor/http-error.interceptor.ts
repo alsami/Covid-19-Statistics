@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RETRIES } from '@covid19/core/core.constants';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { delay, filter, last, retryWhen, take, tap } from 'rxjs/operators';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -31,7 +31,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
           this.retries = 0;
         }
-      })
+      }),
+      filter(e => e.type !== 0),
+      retryWhen(errors => errors.pipe(delay(1000), take(5))),
+      last()
     );
   }
 

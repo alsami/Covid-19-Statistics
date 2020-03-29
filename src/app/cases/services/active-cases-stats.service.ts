@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActiveCaseStats } from '@covid19/cases/models';
-import { retryHandler } from '@covid19/shared/functions';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
@@ -12,8 +11,6 @@ export class ActiveCasesStatsService {
   public constructor(private readonly http: HttpClient) {}
 
   public load(): Observable<ActiveCaseStats> {
-    return this.http
-      .get<ActiveCaseStats>(`${this.baseUrl}stats/activecases`)
-      .pipe(retryHandler());
+    return this.http.get<ActiveCaseStats>(`${this.baseUrl}stats/activecases`);
   }
 }
