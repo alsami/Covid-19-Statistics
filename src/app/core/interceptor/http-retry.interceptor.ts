@@ -7,9 +7,8 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { delay, last, retryWhen, take } from 'rxjs/operators';
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class HttpRetryInterceptor implements HttpInterceptor {
   public intercept(
     request: HttpRequest<any>,

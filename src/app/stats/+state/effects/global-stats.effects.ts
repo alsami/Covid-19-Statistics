@@ -11,7 +11,7 @@ export class GlobalStatsEffects {
     this.actions$.pipe(
       ofType(globalStatsActions.load),
       mergeMap(() =>
-        this.latestStatsService.load().pipe(
+        this.globalStatsService.load().pipe(
           map(stats =>
             globalStatsActions.loaded({
               latestStats: stats
@@ -25,6 +25,6 @@ export class GlobalStatsEffects {
 
   public constructor(
     private readonly actions$: Actions,
-    private readonly latestStatsService: GlobalStatsService
+    private readonly globalStatsService: GlobalStatsService
   ) {}
 }

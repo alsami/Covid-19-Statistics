@@ -1,8 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GlobalStats } from '@covid19/stats/models';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { GlobalStats } from '@covid19/stats/models';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GlobalStatsService {
