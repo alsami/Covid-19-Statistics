@@ -20,6 +20,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     httpHandler: HttpHandler
   ): Observable<HttpEvent<any>> {
+    this.retries = 0;
+
     return httpHandler.handle(request).pipe(
       tap(null, () => {
         this.retries++;
@@ -28,8 +30,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           setTimeout(() => {
             this.showSnackbar();
           }, 1000);
-
-          this.retries = 0;
         }
       }),
       filter(e => e.type !== 0),
