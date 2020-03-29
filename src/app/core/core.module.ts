@@ -7,7 +7,10 @@ import {
   ToolbarComponent
 } from '@covid19/core/components';
 import { LayoutComponent } from '@covid19/core/containers';
-import { NoopInterceptor } from '@covid19/core/interceptor/noop.interceptor';
+import {
+  HttpErrorInterceptor,
+  NoopInterceptor
+} from '@covid19/core/interceptor';
 import { MaterialModule } from '@covid19/material/material.module';
 
 const COMPONENTS = [LayoutComponent, ToolbarComponent, SidenavContentComponent];
@@ -17,12 +20,12 @@ const interceptors = [
     provide: HTTP_INTERCEPTORS,
     useClass: NoopInterceptor,
     multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpErrorInterceptor,
+    multi: true
   }
-  // {
-  //   provide: HTTP_INTERCEPTORS,
-  //   useClass: HttpRetryInterceptor,
-  //   multi: true
-  // }
 ];
 
 @NgModule({
