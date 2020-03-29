@@ -73,29 +73,9 @@ mat-form-field {
 
   mat-card {
     margin-bottom: 10px;
-  }
-
-  mat-card-content {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    align-self: center;
     justify-content: center;
-    height: 50vh;
-    width: 580px;
-  }
-}
-
-@media #{$small-iphone} {
-  .chart-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-  }
-
-  mat-card {
-    margin-bottom: 10px;
+    flex-flow: column;
   }
 
   mat-card-content {
