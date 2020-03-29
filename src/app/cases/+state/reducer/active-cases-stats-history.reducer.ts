@@ -22,10 +22,7 @@ const _reducer = createReducer(
     stats: activeCaseStats,
     loading: false
   })),
-  on(activeCasesStatsHistoryActions.loadFailed, state => ({
-    ...state,
-    loading: false
-  }))
+  on(activeCasesStatsHistoryActions.loadFailed, _ => initialState)
 );
 
 export function reducer(state: ActiveCasesStatsHistory, action: any) {

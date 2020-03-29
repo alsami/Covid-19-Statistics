@@ -22,10 +22,7 @@ const _reducer = createReducer(
     stats: countryStats,
     loading: false
   })),
-  on(countriesStatsActions.loadFailed, state => ({
-    ...state,
-    loading: false
-  }))
+  on(countriesStatsActions.loadFailed, _ => initialState)
 );
 
 export function reducer(state: CountriesStatsState, action: any) {
