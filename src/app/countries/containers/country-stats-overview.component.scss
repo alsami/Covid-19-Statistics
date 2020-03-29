@@ -35,8 +35,10 @@ mat-form-field {
 @media #{$md} {
   mat-card {
     margin-bottom: 10px;
+    justify-content: center;
+    display: flex;
+    flex-flow: column;
   }
-
   mat-card-content {
     display: flex;
     height: 60vh;
@@ -52,6 +54,9 @@ mat-form-field {
 
   mat-card {
     margin-bottom: 10px;
+    justify-content: center;
+    display: flex;
+    flex-flow: column;
   }
 
   mat-card-content {

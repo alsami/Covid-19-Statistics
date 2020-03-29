@@ -63,7 +63,7 @@ export class CountryStatsBarChartComponent implements OnChanges {
     });
 
     this.data.push({
-      name: 'New',
+      name: 'New deaths',
       value: this.countryStats.newDeaths
     });
 
