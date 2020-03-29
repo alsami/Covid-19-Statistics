@@ -1,7 +1,7 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
+  NgZone,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -16,13 +16,12 @@ import { CountriesAutoCompleteComponent } from '@covid19/countries/components';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-countries-stats-overview',
   templateUrl: './countries-stats-overview.component.html',
-  styleUrls: ['./countries-stats-overview.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./countries-stats-overview.component.scss']
 })
 export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   public loading$: Observable<boolean>;
@@ -42,20 +41,26 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
     }
   ];
 
-  public constructor(private store: Store<fromCountries.CountryState>) {}
+  public constructor(
+    private store: Store<fromCountries.CountryState>,
+    private zone: NgZone
+  ) {}
 
   public ngOnInit(): void {
+    console.log(this.countryAutoComplete);
+
     this.store.dispatch(new TitleActions.SetTitle('Countries'));
+
+    this.loading$ = this.store.pipe(
+      select(fromCountries.getCountriesStatsLoading)
+    );
+
     this.countryStats$ = this.store.pipe(
       select(fromCountries.getCountriesStats)
     );
 
     this.countriesOfInterest$ = this.store.pipe(
       select(fromRoot.getCountriesOfInterest)
-    );
-
-    this.loading$ = this.store.pipe(
-      select(fromCountries.getCountriesStatsLoading)
     );
   }
 
@@ -91,20 +96,24 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   }
 
   private subscribeFilterCountryStatsChanges(): void {
-    this.filteredCountryStats$ = combineLatest(
-      this.countryAutoComplete.countriesSelected,
-      this.countryStats$
-    ).pipe(
-      map(([selectedCountries, countryStats]) => {
-        if (!selectedCountries || !selectedCountries.length) {
-          return countryStats;
-        }
+    setTimeout(() => {});
 
-        return countryStats.filter(
-          s => selectedCountries.indexOf(s.country) > -1
-        );
-      }),
-      distinctUntilChanged()
-    );
+    this.zone.runOutsideAngular(() => {
+      this.filteredCountryStats$ = combineLatest(
+        this.countryAutoComplete.countriesSelected,
+        this.countryStats$
+      ).pipe(
+        map(([selectedCountries, countryStats]) => {
+          if (!selectedCountries || !selectedCountries.length) {
+            return countryStats;
+          }
+
+          return countryStats.filter(
+            s => selectedCountries.indexOf(s.country) > -1
+          );
+        }),
+        delay(0)
+      );
+    });
   }
 }

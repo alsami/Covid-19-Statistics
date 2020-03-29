@@ -39,10 +39,10 @@ export class CountriesAutoCompleteComponent
   countryStatsSub: Subscription;
   countriesOfInterest$: Observable<string[]>;
 
-  @ViewChild('countryInput', { static: false }) countryInput: ElementRef<
+  @ViewChild('countryInput', { static: true }) countryInput: ElementRef<
     HTMLInputElement
   >;
-  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+  @ViewChild('auto', { static: true }) matAutocomplete: MatAutocomplete;
 
   public ngOnChanges(): void {
     if (!this.countryStats || !this.countryStats.length) return;
@@ -58,7 +58,7 @@ export class CountriesAutoCompleteComponent
       return;
     }
 
-    this.countriesSelected.next(this.allCountries);
+    this.countriesSelected.next([]);
   }
 
   public ngAfterViewInit(): void {
@@ -114,7 +114,7 @@ export class CountriesAutoCompleteComponent
   private subscribeFormControlChanges(): void {
     this.filteredCountries$ = this.countriesCtrl.valueChanges.pipe(
       startWith(null),
-      delay(50),
+      delay(100),
       map((filter: string | null) =>
         filter && filter.length
           ? this.filterCountries(filter)
