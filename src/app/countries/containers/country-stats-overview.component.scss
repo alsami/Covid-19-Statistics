@@ -1,0 +1,110 @@
+@import '../../../scss/breakpoints';
+
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 100%;
+  justify-content: space-evenly;
+}
+
+@media #{$xl} {
+  mat-card-content {
+    display: flex;
+    height: 60vh;
+    width: 820px;
+  }
+}
+
+@media #{$lg} {
+  mat-card-content {
+    display: flex;
+    height: 60vh;
+    width: 500px;
+  }
+}
+
+@media #{$md} {
+  mat-card {
+    margin-bottom: 10px;
+  }
+
+  mat-card-content {
+    display: flex;
+    height: 60vh;
+    width: 420px;
+  }
+}
+
+@media #{$sm} {
+  .chart-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  mat-card {
+    margin-bottom: 10px;
+  }
+
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+
+    width: 500px;
+    height: 50vh;
+  }
+}
+
+@media #{$xs} {
+  .chart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+  mat-card {
+    margin-bottom: 10px;
+  }
+
+  mat-card-content {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    justify-content: center;
+    height: 50vh;
+    width: 580px;
+  }
+}
+
+@media #{$small-iphone} {
+  .chart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+  mat-card {
+    margin-bottom: 10px;
+  }
+
+  mat-card-content {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    justify-content: center;
+    height: 50vh;
+    width: 330px;
+  }
+}

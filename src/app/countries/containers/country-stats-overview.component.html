@@ -8,9 +8,47 @@
 >
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
+      <mat-form-field>
+        <mat-select
+          placeholder="Change view"
+          (selectionChange)="viewSelectionChanged($event)"
+        >
+          <mat-option
+            *ngFor="let viewOption of viewOptions"
+            [value]="viewOption.value"
+          >
+            {{ viewOption.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <covid19-country-detailed-stats-cards
+        *ngIf="viewOptions[0].selected"
         [countryStats]="countryStats$ | async"
       ></covid19-country-detailed-stats-cards>
+      <ng-container *ngIf="viewOptions[1].selected">
+        <div class="chart-container">
+          <mat-card>
+            <mat-card-title>
+              Bar chart
+            </mat-card-title>
+            <mat-card-content>
+              <covid19-country-stats-bar-chart
+                [countryStats]="countryStats$ | async"
+              ></covid19-country-stats-bar-chart>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-title>
+              Pie chart
+            </mat-card-title>
+            <mat-card-content>
+              <covid19-country-stats-pie-chart
+                [countryStats]="countryStats$ | async"
+              ></covid19-country-stats-pie-chart>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </ng-container>
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">

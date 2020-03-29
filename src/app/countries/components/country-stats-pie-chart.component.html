@@ -1,11 +1,7 @@
-<div class="scale-wrapper">
-  <div class="chart-container">
-    <ngx-charts-pie-chart
-      *ngIf="this.data.length"
-      [scheme]="colorScheme"
-      [results]="data"
-      [labels]="true"
-      [animations]="false"
-    ></ngx-charts-pie-chart>
-  </div>
-</div>
+<ngx-charts-pie-chart
+  *ngIf="this.data.length"
+  [scheme]="colorScheme"
+  [results]="data"
+  [labels]="true"
+  [animations]="true"
+></ngx-charts-pie-chart>

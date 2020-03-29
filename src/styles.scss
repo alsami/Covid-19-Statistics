@@ -45,7 +45,8 @@ covid19-country-stats-line-chart,
 covid19-global-stats-history-line-chart,
 covid19-active-cases-stats-history-line-chart,
 covid19-closed-cases-stats-history-line-chart,
-covid19-country-stats-pie-chart .ngx-charts {
+covid19-country-stats-pie-chart,
+covid19-country-stats-bar-chart .ngx-charts {
   text {
     fill: #fff !important;
   }
@@ -57,6 +58,11 @@ ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
   font: {
     font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   }
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #fff;
+  font-weight: bold;
 }
 
 covid19-layout .mat-drawer-inner-container::-webkit-scrollbar {

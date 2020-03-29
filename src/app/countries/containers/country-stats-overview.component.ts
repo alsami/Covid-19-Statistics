@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 import { MatTabGroup } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { TitleActions } from '@covid19/core/+state/actions';
@@ -33,6 +34,19 @@ export class CountryStatsOverviewComponent
   public countryHistoryStats$: Observable<CountryStats[]>;
   public countryStatsDayHistory$: Observable<CountryStats[]>;
   public loading$: Observable<boolean>;
+
+  public viewOptions: { label: string; value: string; selected: boolean }[] = [
+    {
+      label: 'Card view',
+      value: 'card',
+      selected: true
+    },
+    {
+      label: 'Chart view',
+      value: 'chart',
+      selected: false
+    }
+  ];
 
   @ViewChild('matTabGroup', { static: false }) matTabGroup: MatTabGroup;
 
@@ -135,6 +149,17 @@ export class CountryStatsOverviewComponent
     if (this.paramSub) {
       this.paramSub.unsubscribe();
     }
+  }
+
+  public viewSelectionChanged(option: MatSelectChange): void {
+    const index = this.viewOptions.findIndex(
+      viewOption => viewOption.value === option.value
+    );
+
+    this.viewOptions.forEach(
+      (viewOption, viewOptionIndex) =>
+        (viewOption.selected = viewOptionIndex === index)
+    );
   }
 
   public animationDone(index: number): void {
