@@ -14,23 +14,14 @@ export class CountryStatsBarChartComponent implements OnChanges {
 
   /* 
   active cases, 
-  new cases, 
   deaths, 
-  new deats, 
   recovered, 
   */
   public colorScheme = {
-    domain: [
-      '#0000ff',
-      '#ffff00',
-      PROPER_RED,
-      '#ff5800',
-      PROPER_GREEN,
-      '#7b1fa2'
-    ]
+    domain: ['#0000ff', PROPER_RED, PROPER_GREEN]
   };
 
-  public xAxisLabel = 'Active, New, Deaths, New deaths, Recovered';
+  public xAxisLabel = 'Active, Deaths, Recovered';
   public yAxisLabel = 'Amount';
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -53,20 +44,9 @@ export class CountryStatsBarChartComponent implements OnChanges {
     });
 
     this.data.push({
-      name: 'New',
-      value: this.countryStats.newCases
-    });
-
-    this.data.push({
       name: 'Deaths',
       value: this.countryStats.totalDeaths
     });
-
-    this.data.push({
-      name: 'New deaths',
-      value: this.countryStats.newDeaths
-    });
-
     this.data.push({
       name: 'Recovered',
       value: this.countryStats.recoveredCases

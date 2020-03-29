@@ -19,20 +19,13 @@ export class CountryStatsPieChartComponent implements OnChanges {
   @Input() countryStats: CountryStats;
   data: RegularChartData[] = [];
 
-  // // cases, deaths, recovered
-  // public colorScheme = {
-  //   domain: ['#AAAAAA', PROPER_RED, PROPER_GREEN]
-  // };
-
   /* 
   active cases, 
-  new cases, 
   deaths, 
-  new deats, 
   recovered, 
   */
   public colorScheme = {
-    domain: ['#0000ff', '#ffff00', PROPER_RED, '#ff5800', PROPER_GREEN]
+    domain: ['#0000ff', PROPER_RED, PROPER_GREEN]
   };
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -55,18 +48,8 @@ export class CountryStatsPieChartComponent implements OnChanges {
     });
 
     this.data.push({
-      name: 'New',
-      value: this.countryStats.newCases
-    });
-
-    this.data.push({
       name: 'Deaths',
       value: this.countryStats.totalDeaths
-    });
-
-    this.data.push({
-      name: 'New deaths',
-      value: this.countryStats.newDeaths
     });
 
     this.data.push({
