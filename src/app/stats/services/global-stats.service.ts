@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { retryHandler } from '@covid19/shared/functions';
 import { GlobalStats } from '@covid19/stats/models';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -11,6 +12,8 @@ export class GlobalStatsService {
   public constructor(private readonly http: HttpClient) {}
 
   public load(): Observable<GlobalStats> {
-    return this.http.get<GlobalStats>(`${this.baseUrl}stats`);
+    return this.http
+      .get<GlobalStats>(`${this.baseUrl}stats`)
+      .pipe(retryHandler());
   }
 }
