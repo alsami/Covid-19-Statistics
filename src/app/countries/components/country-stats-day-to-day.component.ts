@@ -1,7 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Injector,
   Input,
@@ -24,12 +23,7 @@ export class CountryStatsDayToDayComponent implements OnChanges {
 
   public increaseType = IncreaseType;
 
-  public constructor(
-    private injector: Injector,
-    private cdr: ChangeDetectorRef
-  ) {
-    this.cdr.detach();
-  }
+  public constructor(private injector: Injector) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (!this.countryStats) {
@@ -87,8 +81,6 @@ export class CountryStatsDayToDayComponent implements OnChanges {
     this.increases = this.increases.sort((left, right) =>
       right.time.localeCompare(left.time)
     );
-
-    this.cdr.detectChanges();
   }
 
   private calculate(current: number, previous: number): number {
