@@ -14,7 +14,7 @@ import {
   CountryDetailedStatsCardsComponent,
   CountryStatsBarChartComponent,
   CountryStatsCardComponent,
-  CountryStatsDayToDayComponent,
+  CountryStatsDayToDayCardsComponent,
   CountryStatsHistoryLineChartComponent,
   CountryStatsHistoryTableComponent,
   CountryStatsPieChartComponent
@@ -43,7 +43,7 @@ const COMPONENTS = [
   CountryDetailedStatsCardsComponent,
   CountryStatsPieChartComponent,
   CountryStatsBarChartComponent,
-  CountryStatsDayToDayComponent,
+  CountryStatsDayToDayCardsComponent,
   CountriesAutoCompleteComponent,
   CountryStatsOverviewComponent,
   CountryStatsHistoryTableComponent,

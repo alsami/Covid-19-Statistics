@@ -49,9 +49,9 @@
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
     <div class="page-content">
-      <covid19-country-stats-day-to-day
+      <covid19-country-stats-day-to-day-cards
         [countryStats]="countryStatsDayHistory$ | async"
-      ></covid19-country-stats-day-to-day>
+      ></covid19-country-stats-day-to-day-cards>
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[2].label">

@@ -11,12 +11,12 @@ import { CountryStats } from '@covid19/countries/models';
 import { IncreasedStats, IncreaseType } from '@covid19/stats/models';
 
 @Component({
-  selector: 'covid19-country-stats-day-to-day',
-  templateUrl: './country-stats-day-to-day.component.html',
-  styleUrls: ['./country-stats-day-to-day.component.scss'],
+  selector: 'covid19-country-stats-day-to-day-cards',
+  templateUrl: './country-stats-day-to-day-cards.component.html',
+  styleUrls: ['./country-stats-day-to-day-cards.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountryStatsDayToDayComponent implements OnChanges {
+export class CountryStatsDayToDayCardsComponent implements OnChanges {
   @Input() countryStats: CountryStats[];
 
   public increases: IncreasedStats[] = [];
