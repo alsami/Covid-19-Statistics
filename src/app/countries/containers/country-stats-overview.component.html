@@ -8,19 +8,21 @@
 >
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
-      <mat-form-field>
-        <mat-select
-          placeholder="Change view"
-          (selectionChange)="viewSelectionChanged($event)"
+      <div class="toggle-container">
+        <mat-button-toggle-group
+          [multiple]="false"
+          (change)="viewSelectionChanged($event)"
         >
-          <mat-option
+          <mat-button-toggle
             *ngFor="let viewOption of viewOptions"
+            [checked]="viewOption.selected"
             [value]="viewOption.value"
+            [matTooltip]="viewOption.tooltip"
           >
-            {{ viewOption.label }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <mat-icon>{{ viewOption.label }}</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
       <covid19-country-detailed-stats-cards
         *ngIf="viewOptions[0].selected"
         [countryStats]="countryStats$ | async"

@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { MatSelectChange } from '@angular/material/select';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatTabGroup } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { TitleActions } from '@covid19/core/+state/actions';
@@ -35,15 +35,22 @@ export class CountryStatsOverviewComponent
   public countryStatsDayHistory$: Observable<CountryStats[]>;
   public loading$: Observable<boolean>;
 
-  public viewOptions: { label: string; value: string; selected: boolean }[] = [
+  public viewOptions: {
+    label: string;
+    value: string;
+    tooltip: string;
+    selected: boolean;
+  }[] = [
     {
-      label: 'Card view',
+      label: 'view_agenda',
       value: 'card',
+      tooltip: 'Use card view',
       selected: true
     },
     {
-      label: 'Chart view',
+      label: 'show_chart',
       value: 'chart',
+      tooltip: 'Use chart view',
       selected: false
     }
   ];
@@ -151,7 +158,7 @@ export class CountryStatsOverviewComponent
     }
   }
 
-  public viewSelectionChanged(option: MatSelectChange): void {
+  public viewSelectionChanged(option: MatButtonToggleChange): void {
     const index = this.viewOptions.findIndex(
       viewOption => viewOption.value === option.value
     );
