@@ -30,9 +30,6 @@
       <ng-container *ngIf="viewOptions[1].selected">
         <div class="chart-container">
           <mat-card>
-            <mat-card-title>
-              Bar chart
-            </mat-card-title>
             <mat-card-content>
               <covid19-country-stats-bar-chart
                 [countryStats]="countryStats$ | async"
@@ -40,9 +37,6 @@
             </mat-card-content>
           </mat-card>
           <mat-card>
-            <mat-card-title>
-              Pie chart
-            </mat-card-title>
             <mat-card-content>
               <covid19-country-stats-pie-chart
                 [countryStats]="countryStats$ | async"

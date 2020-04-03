@@ -18,6 +18,11 @@
   justify-content: space-evenly;
 }
 
+.chart-container > mat-card {
+  background: none;
+  box-shadow: none;
+}
+
 @media #{$xl} {
   mat-card-content {
     display: flex;
