@@ -5,29 +5,31 @@ import {
   CountriesStatsEffects,
   CountryStatsDayHistoryEffects,
   CountryStatsEffects,
-  CountryStatsHistoryEffects
+  CountryStatsHistoryEffects,
 } from '@covid19/countries/+state/effects';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import {
   CountriesAutoCompleteComponent,
   CountriesStatsStackedBarChartComponent,
+  CountriesWorldCardComponent,
   CountryDetailedStatsCardsComponent,
   CountryStatsBarChartComponent,
   CountryStatsCardComponent,
   CountryStatsDayToDayCardsComponent,
   CountryStatsHistoryLineChartComponent,
   CountryStatsHistoryTableComponent,
-  CountryStatsPieChartComponent
+  CountryStatsPieChartComponent,
 } from '@covid19/countries/components';
 import {
   CountriesStatsOverviewComponent,
-  CountryStatsOverviewComponent
+  CountriesWorldMapComponent,
+  CountryStatsOverviewComponent,
 } from '@covid19/countries/containers';
 import {
   CountriesStatsService,
   CountryStatsDayHistoryService,
   CountryStatsHistoryService,
-  CountryStatsService
+  CountryStatsService,
 } from '@covid19/countries/services';
 import { MaterialModule } from '@covid19/material/material.module';
 import { SharedModule } from '@covid19/shared/shared.module';
@@ -38,6 +40,8 @@ import { CountriesRoutingModule } from './countries-routing.module';
 
 const COMPONENTS = [
   CountriesStatsOverviewComponent,
+  CountriesWorldMapComponent,
+  CountriesWorldCardComponent,
   CountriesStatsStackedBarChartComponent,
   CountryStatsCardComponent,
   CountryDetailedStatsCardsComponent,
@@ -47,7 +51,7 @@ const COMPONENTS = [
   CountriesAutoCompleteComponent,
   CountryStatsOverviewComponent,
   CountryStatsHistoryTableComponent,
-  CountryStatsHistoryLineChartComponent
+  CountryStatsHistoryLineChartComponent,
 ];
 
 @NgModule({
@@ -64,14 +68,14 @@ const COMPONENTS = [
       CountriesStatsEffects,
       CountryStatsEffects,
       CountryStatsHistoryEffects,
-      CountryStatsDayHistoryEffects
-    ])
+      CountryStatsDayHistoryEffects,
+    ]),
   ],
   providers: [
     CountriesStatsService,
     CountryStatsService,
     CountryStatsHistoryService,
-    CountryStatsDayHistoryService
-  ]
+    CountryStatsDayHistoryService,
+  ],
 })
 export class CountriesModule {}

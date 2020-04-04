@@ -1,0 +1,45 @@
+@import '../../../scss/breakpoints';
+
+.map-container {
+  display: flex;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 100%;
+}
+
+@media #{$xs} {
+  .map-sizer {
+    width: 350px;
+    overflow: hidden;
+  }
+}
+
+@media #{$sm} {
+  .map-sizer {
+    width: 500px;
+    overflow: hidden;
+  }
+}
+
+@media #{$md} {
+  .map-sizer {
+    width: 900px;
+    overflow: hidden;
+  }
+}
+
+@media #{$lg} {
+  .map-sizer {
+    width: 1160px;
+    overflow: hidden;
+  }
+}
+
+@media #{$xl} {
+  .map-sizer {
+    width: 1860px;
+    overflow: hidden;
+  }
+}

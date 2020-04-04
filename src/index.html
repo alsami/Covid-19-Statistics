@@ -5,6 +5,20 @@
     <title>COVID-19</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAw5fNXDSSFpOg1qThm9-7uCbq4_0DSqM"></script> -->
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script>
+      google.charts.load('current', {
+        packages: ['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        mapsApiKey: 'AIzaSyCAw5fNXDSSFpOg1qThm9-7uCbq4_0DSqM',
+      });
+    </script>
+
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
