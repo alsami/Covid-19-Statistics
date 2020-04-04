@@ -10,6 +10,7 @@ import {
 import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
 import { CountryStats } from '@covid19/countries/models';
 import { fromEvent, Observable, Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-countries-world-card',
@@ -24,6 +25,9 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
     ['UK']: 'United Kingdom',
     ['USA']: 'United States',
     ['UAE']: 'United Arab Emirates',
+    ['S. Korea']: 'South Korea',
+    ['Czechia']: 'Czech Republic',
+    ['DRC']: 'Republic of the Congo',
   };
 
   resizeObservable$: Observable<Event>;
@@ -43,8 +47,7 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
     },
     colorAxis: { colors: [PROPER_RED] },
     resolution: 'countries',
-    width: '100%',
-    height: '100%',
+    width: '100vw',
   };
 
   @ViewChild('card', { static: true }) element: ElementRef;
@@ -56,11 +59,11 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
       );
 
       this.resizeObservable$ = fromEvent(window, 'resize');
-      this.resizeSubscription$ = this.resizeObservable$.subscribe(() => {
-        this.dataTable = this.createDataTable();
-
-        this.draw(this.dataTable);
-      });
+      this.resizeSubscription$ = this.resizeObservable$
+        .pipe(delay(100))
+        .subscribe(() => {
+          this.draw(this.dataTable);
+        });
     }
 
     if (!this.countryStats) {
@@ -77,9 +80,23 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
 
   private createDataTable(): any {
     const array = [];
+    const filteredCountryStats = this.countryStats
+      .slice()
+      .filter((stats) => stats.country !== 'Réunion')
+      .filter((stats) => stats.country !== 'Ré;union')
+      .filter((stats) => stats.country !== 'Channel Islands')
+      .filter((stats) => stats.country !== 'Palestine')
+      .filter((stats) => stats.country !== 'Faeroe Islands')
+      .filter((stats) => stats.country !== 'Sint Maarten')
+      .filter((stats) => stats.country !== 'CAR')
+      .filter((stats) => stats.country !== 'Vatican City')
+      .filter((stats) => stats.country !== 'North Macedonia')
+      .filter((stats) => stats.country !== 'DRC')
+      .filter((stats) => stats.country !== 'St. Vincent Grenadines');
+
     array.push(['Country', 'Active Cases', 'Deaths']);
 
-    this.countryStats.forEach((stats) => {
+    filteredCountryStats.forEach((stats) => {
       array.push([
         this.getGeoCountry(stats),
         stats.activeCases,

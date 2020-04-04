@@ -6,38 +6,35 @@
   align-self: center;
   align-items: center;
   justify-content: center;
-  flex: 1 1 100%;
+  width: 100%;
+  height: 100vh;
+  zoom: 1;
 }
 
-@media #{$xs} {
+@media #{$lt-md} {
+  .map-container {
+    display: flex;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 1000px;
+    zoom: 2;
+  }
+
   .map-sizer {
-    width: 350px;
-    overflow: hidden;
+    width: 1000px;
   }
 }
 
-@media #{$sm} {
-  .map-sizer {
-    width: 500px;
-    overflow: hidden;
-  }
-}
-
-@media #{$md} {
-  .map-sizer {
-    width: 900px;
-    overflow: hidden;
-  }
-}
-
-@media #{$lg} {
+@media #{$lt-xl} {
   .map-sizer {
     width: 1160px;
     overflow: hidden;
   }
 }
 
-@media #{$xl} {
+@media #{$gt-lg} {
   .map-sizer {
     width: 1860px;
     overflow: hidden;
