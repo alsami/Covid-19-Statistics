@@ -1,0 +1,7 @@
+<covid19-page-loading-indicator
+  [loading]="loading$ | async"
+></covid19-page-loading-indicator>
+<covid19-countries-world-card
+  *ngIf="!(loading$ | async)"
+  [countryStats]="countryStats$ | async"
+></covid19-countries-world-card>
