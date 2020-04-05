@@ -11,6 +11,9 @@ import {
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import {
   CountriesAutoCompleteComponent,
+  CountriesStatsDailyActiveCasesBarChartComponent,
+  CountriesStatsDailyDeathsBarChartComponent,
+  CountriesStatsDailyRecoveredCasesBarChartComponent,
   CountriesStatsStackedBarChartComponent,
   CountriesWorldCardComponent,
   CountryDetailedStatsCardsComponent,
@@ -45,6 +48,9 @@ const COMPONENTS = [
   CountriesWorldMapComponent,
   CountriesWorldCardComponent,
   CountriesStatsStackedBarChartComponent,
+  CountriesStatsDailyDeathsBarChartComponent,
+  CountriesStatsDailyActiveCasesBarChartComponent,
+  CountriesStatsDailyRecoveredCasesBarChartComponent,
   CountryStatsCardComponent,
   CountryDetailedStatsCardsComponent,
   CountryStatsPieChartComponent,

@@ -29,8 +29,10 @@ import { delay, map } from 'rxjs/operators';
 export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   public loading$: Observable<boolean>;
   public countryStats$: Observable<CountryStats[]>;
+  public countryStatsHistory$: Observable<CountryStats[]>;
   public filteredCountryStats$: Observable<CountryStats[]>;
   public countriesOfInterest$: Observable<string[]>;
+  public selectedIndex: number = 0;
 
   @ViewChild('countryAutoComplete', { static: false })
   countryAutoComplete: CountriesAutoCompleteComponent;
@@ -49,7 +51,15 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
       func: () => {},
     },
     {
+      label: 'Daily Active',
+      func: this.loadCountriesStatsHistory,
+    },
+    {
       label: 'Daily Deaths',
+      func: this.loadCountriesStatsHistory,
+    },
+    {
+      label: 'Daily Recovered',
       func: this.loadCountriesStatsHistory,
     },
   ];
@@ -78,6 +88,10 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
       select(fromCountries.getCountriesStats)
     );
 
+    this.countryStatsHistory$ = this.store.pipe(
+      select(fromCountries.getCountriesStatsHistory)
+    );
+
     this.countriesOfInterest$ = this.store.pipe(
       select(fromRoot.getCountriesOfInterest)
     );
@@ -89,6 +103,8 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
 
   public animationDone(index: number) {
     this.tabLabelsFunc[index].func();
+
+    this.selectedIndex = index;
   }
 
   public storeCountryOfInterest(country: string): void {

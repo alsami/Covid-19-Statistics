@@ -35,5 +35,22 @@
       [countryStats]="countryStats$ | async"
     ></covid19-countries-stats-stacked-barchart>
   </mat-tab>
-  <mat-tab [label]="tabLabelsFunc[2].label"></mat-tab>
+  <mat-tab [label]="tabLabelsFunc[2].label">
+    <covid19-countries-stats-daily-activecases-barchart
+      *ngIf="selectedIndex === 2"
+      [countryStatsHistory]="countryStatsHistory$ | async"
+    ></covid19-countries-stats-daily-activecases-barchart>
+  </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[3].label">
+    <covid19-countries-stats-daily-deaths-barchart
+      *ngIf="selectedIndex === 3"
+      [countryStatsHistory]="countryStatsHistory$ | async"
+    ></covid19-countries-stats-daily-deaths-barchart>
+  </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[4].label">
+    <covid19-countries-stats-daily-recoveredcases-barchart
+      *ngIf="selectedIndex === 4"
+      [countryStatsHistory]="countryStatsHistory$ | async"
+    ></covid19-countries-stats-daily-recoveredcases-barchart>
+  </mat-tab>
 </mat-tab-group>

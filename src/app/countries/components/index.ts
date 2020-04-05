@@ -1,4 +1,7 @@
 export * from './countries-auto-complete.component';
+export * from './countries-stats-dail-activecases-bar-chart.component';
+export * from './countries-stats-dail-deaths-bar-chart.component';
+export * from './countries-stats-dail-recoveredcases-bar-chart.component';
 export * from './countries-stats-stacked-bar-chart.component';
 export * from './countries-world-card.component';
 export * from './country-detailed-stats-cards.component';
