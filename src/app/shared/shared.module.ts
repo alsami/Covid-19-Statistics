@@ -3,22 +3,24 @@ import { NgModule } from '@angular/core';
 import { MaterialModule } from '@covid19/material/material.module';
 import {
   ComponentLoaderOverlayComponent,
-  PageLoadingIndicatorComponent
+  PageLoaderOverlayComponent,
+  PageLoadingIndicatorComponent,
 } from '@covid19/shared/components';
 import { DiffNumberColorDirective } from '@covid19/shared/directives';
 import { PercentagePipe, ValueDiffPipe } from '@covid19/shared/pipes';
 
 const COMPONENTS = [
   PageLoadingIndicatorComponent,
+  PageLoaderOverlayComponent,
   ComponentLoaderOverlayComponent,
   DiffNumberColorDirective,
   ValueDiffPipe,
-  PercentagePipe
+  PercentagePipe,
 ];
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [CommonModule, MaterialModule],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS],
 })
 export class SharedModule {}
