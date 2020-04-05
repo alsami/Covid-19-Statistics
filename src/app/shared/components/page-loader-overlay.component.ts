@@ -54,9 +54,7 @@ export class PageLoaderOverlayComponent
     }
 
     if (changes.loading.previousValue && !changes.loading.currentValue) {
-      setTimeout(() => {
-        this.safeDetach();
-      }, 500);
+      this.safeDetach();
     }
   }
 

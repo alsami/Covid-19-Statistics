@@ -18,8 +18,8 @@ import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountriesAutoCompleteComponent } from '@covid19/countries/components';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-countries-stats-overview',
@@ -30,7 +30,7 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   public loading$: Observable<boolean>;
   public countryStats$: Observable<CountryStats[]>;
   public countryStatsHistory$: Observable<CountryStats[]>;
-  public filteredCountryStats$: Observable<CountryStats[]>;
+  public filteredCountryStats$: Observable<CountryStats[]> = of([]);
   public countriesOfInterest$: Observable<string[]>;
   public selectedIndex: number = 0;
 
@@ -128,24 +128,19 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   }
 
   private subscribeFilterCountryStatsChanges(): void {
-    setTimeout(() => {});
+    this.filteredCountryStats$ = combineLatest(
+      this.countryAutoComplete.countriesSelected,
+      this.countryStats$
+    ).pipe(
+      map(([selectedCountries, countryStats]) => {
+        if (!selectedCountries || !selectedCountries.length) {
+          return countryStats;
+        }
 
-    this.zone.runOutsideAngular(() => {
-      this.filteredCountryStats$ = combineLatest(
-        this.countryAutoComplete.countriesSelected,
-        this.countryStats$
-      ).pipe(
-        map(([selectedCountries, countryStats]) => {
-          if (!selectedCountries || !selectedCountries.length) {
-            return countryStats;
-          }
-
-          return countryStats.filter(
-            (s) => selectedCountries.indexOf(s.country) > -1
-          );
-        }),
-        delay(0)
-      );
-    });
+        return countryStats.filter(
+          (s) => selectedCountries.indexOf(s.country) > -1
+        );
+      })
+    );
   }
 }
