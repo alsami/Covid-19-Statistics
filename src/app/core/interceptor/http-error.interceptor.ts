@@ -2,7 +2,7 @@ import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
-  HttpRequest
+  HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -32,15 +32,15 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           }, 1000);
         }
       }),
-      filter(e => e.type !== 0),
-      retryWhen(errors => errors.pipe(delay(1000), take(5))),
+      filter((e) => e.type !== 0),
+      retryWhen((errors) => errors.pipe(delay(2000), take(5))),
       last()
     );
   }
 
   private showSnackbar(): void {
     this.snackbar.open('Failed to fetch data. Please try again!', null, {
-      duration: 2500
+      duration: 2500,
     });
   }
 }
