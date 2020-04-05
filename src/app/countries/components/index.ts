@@ -1,5 +1,5 @@
 export * from './countries-auto-complete.component';
-export * from './countries-stats-history-stacked-bar-chart.component';
+export * from './countries-stats-stacked-bar-chart.component';
 export * from './countries-world-card.component';
 export * from './country-detailed-stats-cards.component';
 export * from './country-stats-bar-chart.component';

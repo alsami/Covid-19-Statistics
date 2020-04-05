@@ -31,9 +31,9 @@
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
-    <covid19-countries-stats-history-stacked-barchart
+    <covid19-countries-stats-stacked-barchart
       [countryStats]="countryStats$ | async"
-    ></covid19-countries-stats-history-stacked-barchart>
+    ></covid19-countries-stats-stacked-barchart>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[2].label"></mat-tab>
 </mat-tab-group>
