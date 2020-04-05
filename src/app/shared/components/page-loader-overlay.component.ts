@@ -5,8 +5,8 @@ import {
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -25,7 +25,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageLoaderOverlayComponent
-  implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+  implements OnInit, OnChanges, OnDestroy {
   @Input()
   loading: boolean;
 
@@ -37,25 +37,28 @@ export class PageLoaderOverlayComponent
   public constructor(
     private overlay: Overlay,
     private overlayBuilder: OverlayPositionBuilder,
-    private viewContainerRef: ViewContainerRef
-  ) {}
+    private viewContainerRef: ViewContainerRef,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.cdr.detach();
+  }
 
   public ngOnInit(): void {
     this.overlayRef = this.buildOverLayRef();
-    this.overlayRef.attach(
-      new TemplatePortal(this.templateRef, this.viewContainerRef)
-    );
+    this.safeAttach();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
+    if (this.loading) {
+      this.safeAttach();
+    }
+
     if (changes.loading.previousValue && !changes.loading.currentValue) {
       setTimeout(() => {
         this.safeDetach();
-      }, 250);
+      }, 500);
     }
   }
-
-  public ngAfterViewInit(): void {}
 
   public ngOnDestroy(): void {
     this.safeDetach();
@@ -70,6 +73,16 @@ export class PageLoaderOverlayComponent
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-dark-backdrop',
     });
+  }
+
+  private safeAttach(): void {
+    if (!this.overlayRef || this.overlayRef.hasAttached()) {
+      return;
+    }
+
+    this.overlayRef.attach(
+      new TemplatePortal(this.templateRef, this.viewContainerRef)
+    );
   }
 
   private safeDetach(): void {
