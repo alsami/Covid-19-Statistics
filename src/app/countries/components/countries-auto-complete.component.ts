@@ -7,12 +7,12 @@ import {
   Input,
   OnChanges,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   MatAutocomplete,
-  MatAutocompleteSelectedEvent
+  MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CountryStats } from '@covid19/countries/models';
@@ -23,7 +23,7 @@ import { delay, map, startWith } from 'rxjs/operators';
   selector: 'covid19-countries-autocomplete',
   templateUrl: './countries-auto-complete.component.html',
   styleUrls: ['./countries-auto-complete.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountriesAutoCompleteComponent
   implements OnChanges, AfterViewInit {
@@ -49,10 +49,10 @@ export class CountriesAutoCompleteComponent
 
     this.allCountries = this.countryStats
       .filter(
-        stats =>
+        (stats) =>
           stats.country !== null && stats.country !== undefined && stats.country
       )
-      .map(country => country.country);
+      .map((country) => country.country);
 
     if (this.selectedCountries.length) {
       return;
@@ -76,7 +76,7 @@ export class CountriesAutoCompleteComponent
     const trimmed = value.trim();
 
     const wanted = this.allCountries.find(
-      country => country.toLowerCase() === trimmed.toLowerCase()
+      (country) => country.toLowerCase() === trimmed.toLowerCase()
     );
 
     if (!wanted) {
@@ -127,7 +127,7 @@ export class CountriesAutoCompleteComponent
     const filterValue = value.toLowerCase();
 
     return this.allCountries.filter(
-      country => country && country.toLowerCase().indexOf(filterValue) === 0
+      (country) => country && country.toLowerCase().indexOf(filterValue) === 0
     );
   }
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as fromRoot from '@covid19/+state';
 import {
   countriesOfInterestActions,
@@ -12,7 +12,7 @@ import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountriesAutoCompleteComponent } from '@covid19/countries/components';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -20,15 +20,15 @@ import { map } from 'rxjs/operators';
   templateUrl: './countries-stats-overview.component.html',
   styleUrls: ['./countries-stats-overview.component.scss'],
 })
-export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
+export class CountriesStatsOverviewComponent implements OnInit {
   public loading$: Observable<boolean>;
   public countryStats$: Observable<CountryStats[]>;
   public countryStatsHistory$: Observable<CountryStats[]>;
-  public filteredCountryStats$: Observable<CountryStats[]> = of([]);
+  public filteredCountryStats$: Observable<CountryStats[]>;
   public countriesOfInterest$: Observable<string[]>;
   public selectedIndex: number = 0;
 
-  @ViewChild('countryAutoComplete', { static: false })
+  @ViewChild('countryAutoComplete', { static: true })
   countryAutoComplete: CountriesAutoCompleteComponent;
 
   loadCountriesStats = () => this.store.dispatch(countriesStatsActions.load());
@@ -61,10 +61,6 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   public constructor(private store: Store<fromCountries.CountryState>) {}
 
   public ngOnInit(): void {
-    console.log(this.countryAutoComplete);
-
-    this.store.dispatch(new TitleActions.SetTitle('Countries'));
-
     this.loading$ = combineLatest(
       this.store.pipe(select(fromCountries.getCountriesStatsLoading)),
       this.store.pipe(select(fromCountries.getCountriesStatsHistoryLoading))
@@ -75,10 +71,6 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
       )
     );
 
-    this.countryStats$ = this.store.pipe(
-      select(fromCountries.getCountriesStats)
-    );
-
     this.countryStatsHistory$ = this.store.pipe(
       select(fromCountries.getCountriesStatsHistory)
     );
@@ -86,15 +78,15 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
     this.countriesOfInterest$ = this.store.pipe(
       select(fromRoot.getCountriesOfInterest)
     );
-  }
 
-  public ngAfterViewInit(): void {
     this.subscribeFilterCountryStatsChanges();
+
+    this.store.dispatch(new TitleActions.SetTitle('Countries'));
   }
 
   public animationDone(index: number) {
     this.selectedIndex = index;
-    this.tabLabelsFunc[index].func();
+    this.tabLabelsFunc[this.selectedIndex].func();
   }
 
   public storeCountryOfInterest(country: string): void {
@@ -118,6 +110,10 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   }
 
   private subscribeFilterCountryStatsChanges(): void {
+    this.countryStats$ = this.store.pipe(
+      select(fromCountries.getCountriesStats)
+    );
+
     this.filteredCountryStats$ = combineLatest(
       this.countryAutoComplete.countriesSelected,
       this.countryStats$

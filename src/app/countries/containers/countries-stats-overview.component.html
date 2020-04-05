@@ -1,5 +1,5 @@
 <covid19-page-loader-overlay
-  [loading]="loading$ | async"
+  *ngIf="loading$ | async"
 ></covid19-page-loader-overlay>
 <mat-tab-group
   #matTabGroup
@@ -32,6 +32,7 @@
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
     <covid19-countries-stats-stacked-barchart
+      *ngIf="selectedIndex === 1"
       [countryStats]="countryStats$ | async"
     ></covid19-countries-stats-stacked-barchart>
   </mat-tab>
