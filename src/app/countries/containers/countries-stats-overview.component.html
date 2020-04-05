@@ -22,7 +22,7 @@
         >
           <covid19-country-stats-card
             [countryStats]="countryStats"
-            [countriesOfInterest]="countriesOfInterest$ | async"
+            [countriesOfInterest]="countriesOfInterest"
             (addCountryOfInterest)="storeCountryOfInterest($event)"
             (removeCountryOfInterest)="removeCountryOfInterest($event)"
           ></covid19-country-stats-card>

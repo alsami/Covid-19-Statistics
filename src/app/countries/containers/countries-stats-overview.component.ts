@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import * as fromRoot from '@covid19/+state';
 import {
   countriesOfInterestActions,
@@ -12,7 +19,7 @@ import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountriesAutoCompleteComponent } from '@covid19/countries/components';
 import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -20,13 +27,15 @@ import { map } from 'rxjs/operators';
   templateUrl: './countries-stats-overview.component.html',
   styleUrls: ['./countries-stats-overview.component.scss'],
 })
-export class CountriesStatsOverviewComponent implements OnInit {
+export class CountriesStatsOverviewComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   public loading$: Observable<boolean>;
   public countryStats$: Observable<CountryStats[]>;
   public countryStatsHistory$: Observable<CountryStats[]>;
   public filteredCountryStats$: Observable<CountryStats[]>;
-  public countriesOfInterest$: Observable<string[]>;
+  public countriesOfInterest: string[] = [];
   public selectedIndex: number = 0;
+  coiSub$: Subscription;
 
   @ViewChild('countryAutoComplete', { static: true })
   countryAutoComplete: CountriesAutoCompleteComponent;
@@ -58,30 +67,36 @@ export class CountriesStatsOverviewComponent implements OnInit {
     },
   ];
 
-  public constructor(private store: Store<fromCountries.CountryState>) {}
+  public constructor(
+    private store: Store<fromCountries.CountryState>,
+    private zone: NgZone
+  ) {}
 
   public ngOnInit(): void {
-    this.loading$ = combineLatest(
-      this.store.pipe(select(fromCountries.getCountriesStatsLoading)),
-      this.store.pipe(select(fromCountries.getCountriesStatsHistoryLoading))
-    ).pipe(
-      map(
-        ([countriesLoading, countriesHistoryLoading]) =>
-          countriesLoading || countriesHistoryLoading
-      )
-    );
-
     this.countryStatsHistory$ = this.store.pipe(
       select(fromCountries.getCountriesStatsHistory)
     );
 
-    this.countriesOfInterest$ = this.store.pipe(
-      select(fromRoot.getCountriesOfInterest)
+    this.coiSub$ = this.store
+      .pipe(select(fromRoot.getCountriesOfInterest))
+      .subscribe((coi) => (this.countriesOfInterest = coi));
+
+    this.countryStats$ = this.store.pipe(
+      select(fromCountries.getCountriesStats)
     );
 
-    this.subscribeFilterCountryStatsChanges();
+    this.zone.runOutsideAngular(() => this.combineLoading());
+    this.zone.runOutsideAngular(() => this.combineCountryStats());
 
     this.store.dispatch(new TitleActions.SetTitle('Countries'));
+  }
+
+  public ngAfterViewInit(): void {
+    this.zone.runOutsideAngular(() => this.combineCountryStats());
+  }
+
+  public ngOnDestroy(): void {
+    this.coiSub$.unsubscribe();
   }
 
   public animationDone(index: number) {
@@ -109,11 +124,7 @@ export class CountriesStatsOverviewComponent implements OnInit {
     return `${countryStats.country}_${countryStats.fetchedAt}`;
   }
 
-  private subscribeFilterCountryStatsChanges(): void {
-    this.countryStats$ = this.store.pipe(
-      select(fromCountries.getCountriesStats)
-    );
-
+  private combineCountryStats(): void {
     this.filteredCountryStats$ = combineLatest(
       this.countryAutoComplete.countriesSelected,
       this.countryStats$
@@ -127,6 +138,18 @@ export class CountriesStatsOverviewComponent implements OnInit {
           (s) => selectedCountries.indexOf(s.country) > -1
         );
       })
+    );
+  }
+
+  private combineLoading(): void {
+    this.loading$ = combineLatest(
+      this.store.pipe(select(fromCountries.getCountriesStatsLoading)),
+      this.store.pipe(select(fromCountries.getCountriesStatsHistoryLoading))
+    ).pipe(
+      map(
+        ([countriesLoading, countriesHistoryLoading]) =>
+          countriesLoading || countriesHistoryLoading
+      )
     );
   }
 }

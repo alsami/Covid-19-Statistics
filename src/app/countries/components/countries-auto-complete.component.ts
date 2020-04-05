@@ -10,10 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-  MatAutocomplete,
-  MatAutocompleteSelectedEvent,
-} from '@angular/material/autocomplete';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CountryStats } from '@covid19/countries/models';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -39,10 +36,9 @@ export class CountriesAutoCompleteComponent
   countryStatsSub: Subscription;
   countriesOfInterest$: Observable<string[]>;
 
-  @ViewChild('countryInput', { static: true }) countryInput: ElementRef<
+  @ViewChild('countryInput', { static: false }) countryInput: ElementRef<
     HTMLInputElement
   >;
-  @ViewChild('auto', { static: true }) matAutocomplete: MatAutocomplete;
 
   public ngOnChanges(): void {
     if (!this.countryStats || !this.countryStats.length) return;
@@ -53,12 +49,6 @@ export class CountriesAutoCompleteComponent
           stats.country !== null && stats.country !== undefined && stats.country
       )
       .map((country) => country.country);
-
-    if (this.selectedCountries.length) {
-      return;
-    }
-
-    this.countriesSelected.next([]);
   }
 
   public ngAfterViewInit(): void {
