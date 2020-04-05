@@ -98,6 +98,7 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
       .filter((stats) => stats.country !== 'DRC')
       .filter((stats) => stats.country !== 'Saint Martin')
       .filter((stats) => stats.country !== 'Cabo Verde')
+      .filter((stats) => stats.country !== 'Curaçao')
       .filter((stats) => stats.country !== 'St. Vincent Grenadines');
 
     array.push(['Country', 'Active Cases', 'Deaths']);

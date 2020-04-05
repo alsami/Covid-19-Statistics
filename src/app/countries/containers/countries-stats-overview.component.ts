@@ -3,14 +3,17 @@ import {
   Component,
   NgZone,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import * as fromRoot from '@covid19/+state';
 import {
   countriesOfInterestActions,
-  TitleActions
+  TitleActions,
 } from '@covid19/core/+state/actions';
-import { countriesStatsActions } from '@covid19/countries/+state/actions';
+import {
+  countriesStatsActions,
+  countriesStatsHistoryActions,
+} from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountriesAutoCompleteComponent } from '@covid19/countries/components';
 import { CountryStats } from '@covid19/countries/models';
@@ -21,7 +24,7 @@ import { delay, map } from 'rxjs/operators';
 @Component({
   selector: 'covid19-countries-stats-overview',
   templateUrl: './countries-stats-overview.component.html',
-  styleUrls: ['./countries-stats-overview.component.scss']
+  styleUrls: ['./countries-stats-overview.component.scss'],
 })
 export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   public loading$: Observable<boolean>;
@@ -32,13 +35,23 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   @ViewChild('countryAutoComplete', { static: false })
   countryAutoComplete: CountriesAutoCompleteComponent;
 
+  loadCountriesStats = () => this.store.dispatch(countriesStatsActions.load());
+  loadCountriesStatsHistory = () =>
+    this.store.dispatch(countriesStatsHistoryActions.load());
+
   public tabLabelsFunc = [
     {
-      label: 'Overview'
+      label: 'Overview',
+      func: this.loadCountriesStats,
     },
     {
-      label: 'Graph'
-    }
+      label: 'Top 10',
+      func: () => {},
+    },
+    {
+      label: 'Daily Deaths',
+      func: this.loadCountriesStatsHistory,
+    },
   ];
 
   public constructor(
@@ -51,8 +64,14 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
 
     this.store.dispatch(new TitleActions.SetTitle('Countries'));
 
-    this.loading$ = this.store.pipe(
-      select(fromCountries.getCountriesStatsLoading)
+    this.loading$ = combineLatest(
+      this.store.pipe(select(fromCountries.getCountriesStatsLoading)),
+      this.store.pipe(select(fromCountries.getCountriesStatsHistoryLoading))
+    ).pipe(
+      map(
+        ([countriesLoading, countriesHistoryLoading]) =>
+          countriesLoading || countriesHistoryLoading
+      )
     );
 
     this.countryStats$ = this.store.pipe(
@@ -69,16 +88,13 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   }
 
   public animationDone(index: number) {
-    if (index !== 0) {
-      return;
-    }
-
-    this.store.dispatch(countriesStatsActions.load());
+    this.tabLabelsFunc[index].func();
   }
+
   public storeCountryOfInterest(country: string): void {
     this.store.dispatch(
       countriesOfInterestActions.store({
-        countryOfInterest: country
+        countryOfInterest: country,
       })
     );
   }
@@ -86,7 +102,7 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   public removeCountryOfInterest(country: string): void {
     this.store.dispatch(
       countriesOfInterestActions.remove({
-        countryOfInterest: country
+        countryOfInterest: country,
       })
     );
   }
@@ -109,7 +125,7 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
           }
 
           return countryStats.filter(
-            s => selectedCountries.indexOf(s.country) > -1
+            (s) => selectedCountries.indexOf(s.country) > -1
           );
         }),
         delay(0)

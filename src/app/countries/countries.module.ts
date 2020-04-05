@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   CountriesStatsEffects,
+  CountriesStatsHistoryEffects,
   CountryStatsDayHistoryEffects,
   CountryStatsEffects,
   CountryStatsHistoryEffects,
@@ -26,6 +27,7 @@ import {
   CountryStatsOverviewComponent,
 } from '@covid19/countries/containers';
 import {
+  CountriesStatsHistoryService,
   CountriesStatsService,
   CountryStatsDayHistoryService,
   CountryStatsHistoryService,
@@ -66,6 +68,7 @@ const COMPONENTS = [
     StoreModule.forFeature('countries', fromCountries.reducers),
     EffectsModule.forFeature([
       CountriesStatsEffects,
+      CountriesStatsHistoryEffects,
       CountryStatsEffects,
       CountryStatsHistoryEffects,
       CountryStatsDayHistoryEffects,
@@ -73,6 +76,7 @@ const COMPONENTS = [
   ],
   providers: [
     CountriesStatsService,
+    CountriesStatsHistoryService,
     CountryStatsService,
     CountryStatsHistoryService,
     CountryStatsDayHistoryService,
