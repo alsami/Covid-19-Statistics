@@ -7,7 +7,6 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -30,7 +29,7 @@ export class PageLoaderOverlayComponent
   @Input()
   loading: boolean;
 
-  @ViewChild('overlay', { static: false })
+  @ViewChild('overlay', { static: true })
   templateRef: TemplateRef<any>;
 
   private overlayRef: OverlayRef;
@@ -38,18 +37,17 @@ export class PageLoaderOverlayComponent
   public constructor(
     private overlay: Overlay,
     private overlayBuilder: OverlayPositionBuilder,
-    private viewContainerRef: ViewContainerRef,
-    private cdr: ChangeDetectorRef
-  ) {
-    this.cdr.detach();
-  }
+    private viewContainerRef: ViewContainerRef
+  ) {}
 
   public ngOnInit(): void {
     this.overlayRef = this.buildOverLayRef();
+    this.overlayRef.attach(
+      new TemplatePortal(this.templateRef, this.viewContainerRef)
+    );
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    this.cdr.detectChanges();
     if (changes.loading.previousValue && !changes.loading.currentValue) {
       setTimeout(() => {
         this.safeDetach();
@@ -57,11 +55,7 @@ export class PageLoaderOverlayComponent
     }
   }
 
-  public ngAfterViewInit(): void {
-    this.overlayRef.attach(
-      new TemplatePortal(this.templateRef, this.viewContainerRef)
-    );
-  }
+  public ngAfterViewInit(): void {}
 
   public ngOnDestroy(): void {
     this.safeDetach();
