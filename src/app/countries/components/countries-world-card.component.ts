@@ -27,7 +27,6 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
     ['UAE']: 'United Arab Emirates',
     ['S. Korea']: 'South Korea',
     ['Czechia']: 'Czech Republic',
-    ['DRC']: 'Republic of the Congo',
   };
 
   resizeObservable$: Observable<Event>;
@@ -99,6 +98,14 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
       .filter((stats) => stats.country !== 'Saint Martin')
       .filter((stats) => stats.country !== 'Cabo Verde')
       .filter((stats) => stats.country !== 'Curaçao')
+      .filter((stats) => stats.country !== 'Congo')
+      .filter((stats) => stats.country !== 'Eswatini')
+      .filter((stats) => stats.country !== 'St. Barth')
+      .filter((stats) => stats.country !== 'Turks and Caicos')
+      .filter((stats) => stats.country !== 'Caribbean Netherlands')
+      .filter((stats) => stats.country !== 'Saint Pierre Miquelon')
+      .filter((stats) => stats.country !== 'South Sudan')
+      .filter((stats) => stats.country !== 'Timor-Leste')
       .filter((stats) => stats.country !== 'St. Vincent Grenadines');
 
     array.push(['Country', 'Active Cases', 'Deaths']);

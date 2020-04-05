@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  NgZone,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import * as fromRoot from '@covid19/+state';
 import {
   countriesOfInterestActions,
@@ -64,10 +58,7 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  public constructor(
-    private store: Store<fromCountries.CountryState>,
-    private zone: NgZone
-  ) {}
+  public constructor(private store: Store<fromCountries.CountryState>) {}
 
   public ngOnInit(): void {
     console.log(this.countryAutoComplete);
@@ -102,9 +93,8 @@ export class CountriesStatsOverviewComponent implements OnInit, AfterViewInit {
   }
 
   public animationDone(index: number) {
-    this.tabLabelsFunc[index].func();
-
     this.selectedIndex = index;
+    this.tabLabelsFunc[index].func();
   }
 
   public storeCountryOfInterest(country: string): void {
