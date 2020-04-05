@@ -30,7 +30,7 @@ export class CountriesStatsStackedBarChartComponent implements OnChanges {
       return;
     }
 
-    this.countryStats.slice(0, 10).forEach((countryStat, index) => {
+    this.countryStats.slice(0, 10).forEach((countryStat) => {
       const stackedBarChartData: StackedBarChartData = {
         name: countryStat.country,
         series: [

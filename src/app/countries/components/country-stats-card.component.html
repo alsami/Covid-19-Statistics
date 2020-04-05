@@ -5,28 +5,32 @@
 
   <mat-card-content>
     <div class="value-container">
-      <span>Total: {{ countryStats.totalCases | number }}</span>
-      <span>
-        Active: {{ countryStats.activeCases | number }} ({{
-          countryStats.totalCases
-            | percentage: countryStats.activeCases
-            | number
-        }}%)
-      </span>
-      <span>
-        Deaths: {{ countryStats.totalDeaths | number }} ({{
-          countryStats.totalCases
-            | percentage: countryStats.totalDeaths
-            | number
-        }}%)
-      </span>
-      <span>
-        Recovered: {{ countryStats.recoveredCases | number }} ({{
-          countryStats.totalCases
-            | percentage: countryStats.recoveredCases
-            | number
-        }}%)
-      </span>
+      <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+        <mat-chip [style.background]="colorScheme[0]">
+          Total: {{ countryStats.totalCases | number }}
+        </mat-chip>
+        <mat-chip [style.background]="colorScheme[1]">
+          Active: {{ countryStats.activeCases | number }} ({{
+            countryStats.totalCases
+              | percentage: countryStats.activeCases
+              | number
+          }}%)
+        </mat-chip>
+        <mat-chip [style.background]="colorScheme[2]">
+          Deaths: {{ countryStats.totalDeaths | number }} ({{
+            countryStats.totalCases
+              | percentage: countryStats.totalDeaths
+              | number
+          }}%)
+        </mat-chip>
+        <mat-chip [style.background]="colorScheme[3]">
+          Recovered: {{ countryStats.recoveredCases | number }} ({{
+            countryStats.totalCases
+              | percentage: countryStats.recoveredCases
+              | number
+          }}%)
+        </mat-chip>
+      </mat-chip-list>
     </div>
   </mat-card-content>
   <mat-card-actions align="end">
