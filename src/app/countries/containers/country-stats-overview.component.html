@@ -63,6 +63,7 @@
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[3].label">
     <covid19-country-stats-line-chart
+      *ngIf="selectedIndex === 3"
       [countryStats]="countryStatsDayHistory$ | async"
     ></covid19-country-stats-line-chart>
   </mat-tab>

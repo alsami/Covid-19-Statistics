@@ -1,30 +1,44 @@
 import { Injectable } from '@angular/core';
 import { countryStatsHistoryActions } from '@covid19/countries/+state/actions';
+import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountryStatsHistoryService } from '@covid19/countries/services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { select, Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
 export class CountryStatsHistoryEffects {
   load$ = createEffect(() =>
     this.actions$.pipe(
       ofType(countryStatsHistoryActions.load),
-      mergeMap(action =>
-        this.countryStatsHistoryService.load(action.country).pipe(
-          map(stats =>
+      withLatestFrom(
+        this.store.pipe(select(fromCountries.getCountryStatsHistory))
+      ),
+      mergeMap(([action, existingStats]) => {
+        if (existingStats && existingStats.length) {
+          return of(
             countryStatsHistoryActions.loaded({
-              countryStats: stats
+              countryStats: existingStats,
+            })
+          );
+        }
+
+        return this.countryStatsHistoryService.load(action.country).pipe(
+          map((stats) =>
+            countryStatsHistoryActions.loaded({
+              countryStats: stats,
             })
           ),
           catchError(() => of(countryStatsHistoryActions.loadFailed()))
-        )
-      )
+        );
+      })
     )
   );
 
   public constructor(
     private readonly actions$: Actions,
-    private readonly countryStatsHistoryService: CountryStatsHistoryService
+    private readonly countryStatsHistoryService: CountryStatsHistoryService,
+    private readonly store: Store<fromCountries.CountryState>
   ) {}
 }

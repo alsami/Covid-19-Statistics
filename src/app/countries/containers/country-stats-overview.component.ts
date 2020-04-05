@@ -3,7 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatTabGroup } from '@angular/material/tabs';
@@ -12,7 +12,7 @@ import { TitleActions } from '@covid19/core/+state/actions';
 import {
   countryStatsActions,
   countryStatsDayHistoryActions,
-  countryStatsHistoryActions
+  countryStatsHistoryActions,
 } from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountryStats } from '@covid19/countries/models';
@@ -23,7 +23,7 @@ import { delay, distinctUntilChanged, map } from 'rxjs/operators';
 @Component({
   selector: 'covid19-country-stats-overview',
   templateUrl: './country-stats-overview.component.html',
-  styleUrls: ['./country-stats-overview.component.scss']
+  styleUrls: ['./country-stats-overview.component.scss'],
 })
 export class CountryStatsOverviewComponent
   implements OnInit, AfterViewInit, OnDestroy {
@@ -34,6 +34,7 @@ export class CountryStatsOverviewComponent
   public countryHistoryStats$: Observable<CountryStats[]>;
   public countryStatsDayHistory$: Observable<CountryStats[]>;
   public loading$: Observable<boolean>;
+  public selectedIndex: number = 0;
 
   public viewOptions: {
     label: string;
@@ -45,14 +46,14 @@ export class CountryStatsOverviewComponent
       label: 'view_agenda',
       value: 'card',
       tooltip: 'Use card view',
-      selected: true
+      selected: true,
     },
     {
       label: 'show_chart',
       value: 'chart',
       tooltip: 'Use chart view',
-      selected: false
-    }
+      selected: false,
+    },
   ];
 
   @ViewChild('matTabGroup', { static: false }) matTabGroup: MatTabGroup;
@@ -60,7 +61,7 @@ export class CountryStatsOverviewComponent
   public load = (country: string) => {
     this.store.dispatch(
       countryStatsActions.load({
-        country: country
+        country: country,
       })
     );
   };
@@ -68,7 +69,7 @@ export class CountryStatsOverviewComponent
   public loadHistory = (country: string) => {
     this.store.dispatch(
       countryStatsHistoryActions.load({
-        country: country
+        country: country,
       })
     );
   };
@@ -76,7 +77,7 @@ export class CountryStatsOverviewComponent
   public loadDayHistory = (country: string) => {
     this.store.dispatch(
       countryStatsDayHistoryActions.load({
-        country: country
+        country: country,
       })
     );
   };
@@ -84,20 +85,20 @@ export class CountryStatsOverviewComponent
   tabLabelsFunc = [
     {
       label: 'Overview',
-      func: this.load
+      func: this.load,
     },
     {
       label: 'Day to Day',
-      func: this.loadDayHistory
+      func: this.loadDayHistory,
     },
     {
       label: 'History',
-      func: this.loadHistory
+      func: this.loadHistory,
     },
     {
       label: 'Graph',
-      func: this.loadDayHistory
-    }
+      func: this.loadDayHistory,
+    },
   ];
 
   public constructor(
@@ -115,7 +116,7 @@ export class CountryStatsOverviewComponent
         ([
           countryStatsLoading,
           countryStatsHistoryLoading,
-          countryStatsDayHistoryLoading
+          countryStatsDayHistoryLoading,
         ]) =>
           countryStatsLoading ||
           countryStatsHistoryLoading ||
@@ -138,10 +139,10 @@ export class CountryStatsOverviewComponent
     this.paramSub = this.route.paramMap
       .pipe(
         delay(0),
-        map(paramMap => paramMap.get('country')),
+        map((paramMap) => paramMap.get('country')),
         distinctUntilChanged()
       )
-      .subscribe(country => {
+      .subscribe((country) => {
         this.store.dispatch(new TitleActions.SetTitle(`${country}`));
 
         if (this.selectedCountry && this.selectedCountry !== country) {
@@ -160,7 +161,7 @@ export class CountryStatsOverviewComponent
 
   public viewSelectionChanged(option: MatButtonToggleChange): void {
     const index = this.viewOptions.findIndex(
-      viewOption => viewOption.value === option.value
+      (viewOption) => viewOption.value === option.value
     );
 
     this.viewOptions.forEach(
@@ -171,5 +172,7 @@ export class CountryStatsOverviewComponent
 
   public animationDone(index: number): void {
     this.tabLabelsFunc[index].func(this.selectedCountry);
+
+    this.selectedIndex = index;
   }
 }
