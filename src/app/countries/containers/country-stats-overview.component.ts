@@ -6,9 +6,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { MatSelectChange } from '@angular/material/select';
 import { MatTabGroup } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { TitleActions } from '@covid19/core/+state/actions';
+import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
 import {
   countryStatsActions,
   countryStatsDayHistoryActions,
@@ -19,6 +21,12 @@ import { CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, map } from 'rxjs/operators';
+
+type BarChartType = {
+  label: string;
+  value: string;
+  color: string;
+};
 
 @Component({
   selector: 'covid19-country-stats-overview',
@@ -35,6 +43,7 @@ export class CountryStatsOverviewComponent
   public countryStatsDayHistory$: Observable<CountryStats[]>;
   public loading$: Observable<boolean>;
   public selectedIndex: number = 0;
+  public colors = ['#0000ff', PROPER_RED, PROPER_GREEN];
 
   public viewOptions: {
     label: string;
@@ -55,6 +64,46 @@ export class CountryStatsOverviewComponent
       selected: false,
     },
   ];
+
+  public chartOptions: {
+    label: string;
+    value: string;
+    tooltip: string;
+    selected: boolean;
+  }[] = [
+    {
+      label: 'multiline_chart',
+      value: 'multiline_chart',
+      tooltip: 'Multi Chart',
+      selected: true,
+    },
+    {
+      label: 'bar_chart',
+      value: 'bar_chart',
+      tooltip: 'Bar Chart',
+      selected: false,
+    },
+  ];
+
+  public chartTypes: BarChartType[] = [
+    {
+      label: 'Active Cases',
+      value: 'activeCases',
+      color: this.colors[0],
+    },
+    {
+      label: 'Deaths',
+      value: 'totalDeaths',
+      color: this.colors[1],
+    },
+    {
+      label: 'Recovered Cases',
+      value: 'recoveredCases',
+      color: this.colors[2],
+    },
+  ];
+
+  public selectedBarCharType: BarChartType = this.chartTypes[0];
 
   @ViewChild('matTabGroup', { static: false }) matTabGroup: MatTabGroup;
 
@@ -96,7 +145,7 @@ export class CountryStatsOverviewComponent
       func: this.loadHistory,
     },
     {
-      label: 'Graph',
+      label: 'Graphs',
       func: this.loadDayHistory,
     },
   ];
@@ -167,6 +216,24 @@ export class CountryStatsOverviewComponent
     this.viewOptions.forEach(
       (viewOption, viewOptionIndex) =>
         (viewOption.selected = viewOptionIndex === index)
+    );
+  }
+
+  public chartSelectionChanged(option: MatButtonToggleChange): void {
+    const index = this.chartOptions.findIndex(
+      (chartOptions) => chartOptions.value === option.value
+    );
+
+    this.chartOptions.forEach(
+      (chartOptions, chartOptionIndex) =>
+        (chartOptions.selected = chartOptionIndex === index)
+    );
+  }
+
+  public chartTypeSelectionChanged(option: MatSelectChange): void {
+    console.log(option);
+    this.selectedBarCharType = this.chartTypes.find(
+      (type) => type.value === option.value
     );
   }
 

@@ -62,9 +62,47 @@
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[3].label">
-    <covid19-country-stats-line-chart
-      *ngIf="selectedIndex === 3"
-      [countryStats]="countryStatsDayHistory$ | async"
-    ></covid19-country-stats-line-chart>
+    <div class="graph-toggle-container">
+      <mat-button-toggle-group
+        [multiple]="false"
+        (change)="chartSelectionChanged($event)"
+      >
+        <mat-button-toggle
+          *ngFor="let chartOption of chartOptions"
+          [checked]="chartOption.selected"
+          [value]="chartOption.value"
+          [matTooltip]="chartOption.tooltip"
+        >
+          <mat-icon>{{ chartOption.label }}</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <mat-form-field *ngIf="chartOptions[1].selected">
+        <mat-select
+          #select
+          placeholder="Chart selection"
+          (selectionChange)="chartTypeSelectionChanged($event)"
+        >
+          <mat-option
+            *ngFor="let chartType of chartTypes"
+            [value]="chartType.value"
+          >
+            {{ chartType.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <ng-container *ngIf="selectedIndex === 3">
+      <covid19-country-stats-line-chart
+        *ngIf="chartOptions[0].selected"
+        [countryStats]="countryStatsDayHistory$ | async"
+      ></covid19-country-stats-line-chart>
+      <covid19-country-stats-daily-values-bar-chart
+        *ngIf="chartOptions[1].selected"
+        [countryStatsHistory]="countryStatsDayHistory$ | async"
+        [key]="selectedBarCharType.value"
+        [color]="selectedBarCharType.color"
+        [yAxisLabel]="selectedBarCharType.label"
+      ></covid19-country-stats-daily-values-bar-chart>
+    </ng-container>
   </mat-tab>
 </mat-tab-group>
