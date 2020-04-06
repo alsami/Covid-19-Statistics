@@ -10,7 +10,11 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatTabGroup } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { TitleActions } from '@covid19/core/+state/actions';
-import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
+import {
+  PROPER_BLUE,
+  PROPER_GREEN,
+  PROPER_RED,
+} from '@covid19/core/core.constants';
 import {
   countryStatsActions,
   countryStatsDayHistoryActions,
@@ -43,7 +47,7 @@ export class CountryStatsOverviewComponent
   public countryStatsDayHistory$: Observable<CountryStats[]>;
   public loading$: Observable<boolean>;
   public selectedIndex: number = 0;
-  public colors = ['#0000ff', PROPER_RED, PROPER_GREEN];
+  public colors = [PROPER_BLUE, PROPER_RED, PROPER_GREEN];
 
   public viewOptions: {
     label: string;

@@ -3,9 +3,13 @@ import {
   Component,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
-import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
+import {
+  PROPER_BLUE,
+  PROPER_GREEN,
+  PROPER_RED,
+} from '@covid19/core/core.constants';
 import { CountryStats } from '@covid19/countries/models';
 import { RegularChartData } from '@covid19/shared/models';
 
@@ -13,7 +17,7 @@ import { RegularChartData } from '@covid19/shared/models';
   selector: 'covid19-country-stats-pie-chart',
   templateUrl: './country-stats-pie-chart.component.html',
   styleUrls: ['./country-stats-pie-chart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountryStatsPieChartComponent implements OnChanges {
   @Input() countryStats: CountryStats;
@@ -25,7 +29,7 @@ export class CountryStatsPieChartComponent implements OnChanges {
   recovered, 
   */
   public colorScheme = {
-    domain: ['#0000ff', PROPER_RED, PROPER_GREEN]
+    domain: [PROPER_BLUE, PROPER_RED, PROPER_GREEN],
   };
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -44,17 +48,17 @@ export class CountryStatsPieChartComponent implements OnChanges {
 
     this.data.push({
       name: 'Active',
-      value: this.countryStats.activeCases
+      value: this.countryStats.activeCases,
     });
 
     this.data.push({
       name: 'Deaths',
-      value: this.countryStats.totalDeaths
+      value: this.countryStats.totalDeaths,
     });
 
     this.data.push({
       name: 'Recovered',
-      value: this.countryStats.recoveredCases
+      value: this.countryStats.recoveredCases,
     });
   }
 }

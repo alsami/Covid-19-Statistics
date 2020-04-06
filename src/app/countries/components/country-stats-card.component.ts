@@ -5,7 +5,11 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
+import {
+  PROPER_BLUE,
+  PROPER_GREEN,
+  PROPER_RED,
+} from '@covid19/core/core.constants';
 import { CountryStats } from '@covid19/countries/models';
 
 @Component({
@@ -27,7 +31,7 @@ export class CountryStatsCardComponent {
   deaths, 
   recovered, 
   */
-  public colorScheme = ['#AAAAAA', '#0000ff', PROPER_RED, PROPER_GREEN];
+  public colorScheme = ['#AAAAAA', PROPER_BLUE, PROPER_RED, PROPER_GREEN];
 
   public containsCountry(value: string) {
     return (

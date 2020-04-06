@@ -3,9 +3,13 @@ import {
   Component,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
-import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
+import {
+  PROPER_BLUE,
+  PROPER_GREEN,
+  PROPER_RED,
+} from '@covid19/core/core.constants';
 import { CountryStats } from '@covid19/countries/models';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
 
@@ -13,7 +17,7 @@ import { LineChartData } from '@covid19/shared/models/linechart-data.model';
   selector: 'covid19-country-stats-line-chart',
   templateUrl: './country-stats-history-line-chart.component.html',
   styleUrls: ['./country-stats-history-line-chart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountryStatsHistoryLineChartComponent implements OnChanges {
   @Input() countryStats: CountryStats[];
@@ -40,13 +44,13 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
   public colorScheme = {
     domain: [
       '#AAAAAA',
-      '#0000ff',
+      PROPER_BLUE,
       '#ffff00',
       PROPER_RED,
       '#ff5800',
       PROPER_GREEN,
-      '#7b1fa2'
-    ]
+      '#7b1fa2',
+    ],
   };
 
   public data: LineChartData[] = [];
@@ -67,40 +71,40 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
 
     const totalCasesLineChartData: LineChartData = {
       name: 'Total',
-      series: []
+      series: [],
     };
 
     const activeCasesLineChartData: LineChartData = {
       name: 'Active',
-      series: []
+      series: [],
     };
 
     const newCasesLineChartData: LineChartData = {
       name: 'New',
-      series: []
+      series: [],
     };
 
     const deathLineChartData: LineChartData = {
       name: 'Deaths',
-      series: []
+      series: [],
     };
 
     const newDeathsLineChartData: LineChartData = {
       name: 'New Deaths',
-      series: []
+      series: [],
     };
 
     const recoveredLineChartData: LineChartData = {
       name: 'Recovered',
-      series: []
+      series: [],
     };
 
     const seriousLineChartData: LineChartData = {
       name: 'Serious condition',
-      series: []
+      series: [],
     };
 
-    this.countryStats.forEach(countryStats => {
+    this.countryStats.forEach((countryStats) => {
       const isoString = countryStats.fetchedAt.slice(
         0,
         countryStats.fetchedAt.indexOf('T')
@@ -108,37 +112,37 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
 
       totalCasesLineChartData.series.push({
         name: isoString,
-        value: countryStats.totalCases
+        value: countryStats.totalCases,
       });
 
       activeCasesLineChartData.series.push({
         name: isoString,
-        value: countryStats.activeCases
+        value: countryStats.activeCases,
       });
 
       newCasesLineChartData.series.push({
         name: isoString,
-        value: countryStats.newCases
+        value: countryStats.newCases,
       });
 
       deathLineChartData.series.push({
         name: isoString,
-        value: countryStats.totalDeaths
+        value: countryStats.totalDeaths,
       });
 
       newDeathsLineChartData.series.push({
         name: isoString,
-        value: countryStats.newDeaths
+        value: countryStats.newDeaths,
       });
 
       recoveredLineChartData.series.push({
         name: isoString,
-        value: countryStats.recoveredCases
+        value: countryStats.recoveredCases,
       });
 
       seriousLineChartData.series.push({
         name: isoString,
-        value: countryStats.seriousCases
+        value: countryStats.seriousCases,
       });
     });
 
