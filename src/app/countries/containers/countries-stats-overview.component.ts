@@ -11,6 +11,7 @@ import {
   countriesOfInterestActions,
   TitleActions,
 } from '@covid19/core/+state/actions';
+import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
 import {
   countriesStatsActions,
   countriesStatsHistoryActions,
@@ -35,7 +36,8 @@ export class CountriesStatsOverviewComponent
   public filteredCountryStats$: Observable<CountryStats[]>;
   public countriesOfInterest: string[] = [];
   public selectedIndex: number = 0;
-  coiSub$: Subscription;
+  public colors = ['#0000ff', PROPER_RED, PROPER_GREEN];
+  private coiSub$: Subscription;
 
   @ViewChild('countryAutoComplete', { static: true })
   countryAutoComplete: CountriesAutoCompleteComponent;

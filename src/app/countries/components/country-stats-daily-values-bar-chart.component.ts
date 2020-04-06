@@ -8,22 +8,23 @@ import { CountryStats } from '@covid19/countries/models';
 import { RegularChartData } from '@covid19/shared/models';
 
 @Component({
-  selector: 'covid19-countries-stats-daily-activecases-barchart',
-  templateUrl: './countries-stats-dail-activecases-bar-chart.component.html',
-  styleUrls: ['./countries-stats-dail-activecases-bar-chart.component.scss'],
+  selector: 'covid19-country-stats-daily-values-bar-chart',
+  templateUrl: './country-stats-daily-values-bar-chart.component.html',
+  styleUrls: ['./country-stats-daily-values-bar-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CountriesStatsDailyActiveCasesBarChartComponent
-  implements OnChanges {
+export class CountryStatsDailyValuesBarChartComponent implements OnChanges {
   @Input() countryStatsHistory: CountryStats[] = [];
+  @Input() key = '';
+  @Input() yAxisLabel = '';
+  @Input() color = '';
 
   public data: RegularChartData[] = [];
 
   public xAxisLabel: string = 'UTC Date';
-  public yAxisLabel: string = 'Active cases';
 
   public colorScheme = {
-    domain: ['#0000ff'],
+    domain: [],
   };
 
   public ngOnChanges(): void {
@@ -31,6 +32,12 @@ export class CountriesStatsDailyActiveCasesBarChartComponent
       return;
     }
 
+    if (!this.key || this.key === '') {
+      return;
+    }
+
+    this.colorScheme.domain = [];
+    this.colorScheme.domain.push(this.color);
     this.data = [];
 
     const sortedStats = this.countryStatsHistory
@@ -59,7 +66,7 @@ export class CountriesStatsDailyActiveCasesBarChartComponent
           continue;
         }
 
-        deathsChartData.value += stats.activeCases;
+        deathsChartData.value += stats[this.key];
       }
 
       this.data.push(deathsChartData);
