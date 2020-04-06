@@ -8,7 +8,11 @@ import {
 import {
   PROPER_BLUE,
   PROPER_GREEN,
+  PROPER_GREY,
+  PROPER_PURPLE,
   PROPER_RED,
+  PROPER_YELLOW,
+  SEMI_PROPER_RED,
 } from '@covid19/core/core.constants';
 import { CountryStats } from '@covid19/countries/models';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
@@ -43,13 +47,13 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
   */
   public colorScheme = {
     domain: [
-      '#AAAAAA',
+      PROPER_GREY,
       PROPER_BLUE,
-      '#ffff00',
+      PROPER_YELLOW,
       PROPER_RED,
-      '#ff5800',
+      SEMI_PROPER_RED,
       PROPER_GREEN,
-      '#7b1fa2',
+      PROPER_PURPLE,
     ],
   };
 
