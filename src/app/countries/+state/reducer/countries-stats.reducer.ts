@@ -9,20 +9,24 @@ export interface CountriesStatsState {
 
 const initialState: CountriesStatsState = {
   loading: false,
-  stats: []
+  stats: [],
 };
 
 const _reducer = createReducer(
   initialState,
-  on(countriesStatsActions.load, state => ({
+  on(countriesStatsActions.load, (state) => ({
     ...state,
-    loading: true
+    loading: true,
   })),
   on(countriesStatsActions.loaded, (_, { countryStats }) => ({
     stats: countryStats,
-    loading: false
+    loading: false,
   })),
-  on(countriesStatsActions.loadFailed, _ => initialState)
+  on(
+    countriesStatsActions.loadFailed,
+    countriesStatsActions.reset,
+    (_) => initialState
+  )
 );
 
 export function reducer(state: CountriesStatsState, action: any) {

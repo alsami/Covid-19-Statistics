@@ -102,6 +102,7 @@ export class CountriesStatsOverviewComponent
   }
 
   public ngOnDestroy(): void {
+    this.store.dispatch(countriesStatsActions.reset());
     this.coiSub$.unsubscribe();
   }
 

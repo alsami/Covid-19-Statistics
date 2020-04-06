@@ -7,3 +7,4 @@ export const loaded = createAction(
   props<{ countryStats: CountryStats[] }>()
 );
 export const loadFailed = createAction('[Countries cases stats] Load failed');
+export const reset = createAction('[Countries cases stats] Reset');
