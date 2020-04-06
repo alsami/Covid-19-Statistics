@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TitleActions } from '@covid19/core/+state/actions';
 import { countriesStatsActions } from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   templateUrl: './countries-world-map.component.html',
   styleUrls: ['./countries-world-map.component.scss'],
 })
-export class CountriesWorldMapComponent implements OnInit {
+export class CountriesWorldMapComponent implements OnInit, OnDestroy {
   public countryStats$: Observable<CountryStats[]>;
   public loading$: Observable<boolean>;
 
@@ -28,5 +28,9 @@ export class CountriesWorldMapComponent implements OnInit {
 
     this.store.dispatch(new TitleActions.SetTitle('World Map'));
     this.store.dispatch(countriesStatsActions.load());
+  }
+
+  public ngOnDestroy(): void {
+    this.store.dispatch(countriesStatsActions.reset());
   }
 }
