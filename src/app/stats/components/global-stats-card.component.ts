@@ -17,11 +17,4 @@ export class GlobalStatsCardComponent {
   @Input() globalStats: GlobalStats;
 
   @Output() refresh = new EventEmitter();
-
-  public getActiveCases(): number {
-    return (
-      this.globalStats.total -
-      (this.globalStats.deaths, this.globalStats.recovered)
-    );
-  }
 }

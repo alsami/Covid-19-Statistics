@@ -19,8 +19,8 @@
       <h3 mat-sub-header>Global</h3>
       <mat-card-title>
         Active:
-        {{ getActiveCases() | number }}
-        ({{ globalStats.total | percentage: getActiveCases() | number }}%)
+        {{ globalStats.active | number }}
+        ({{ globalStats.total | percentage: globalStats.active | number }}%)
       </mat-card-title>
       <br />
       Last reported at: {{ globalStats.fetchedAt | date: 'dd.MM.yyyy HH:mm' }}

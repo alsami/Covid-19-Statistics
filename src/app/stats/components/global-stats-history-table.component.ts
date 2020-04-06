@@ -3,7 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnChanges
+  OnChanges,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { GlobalStats } from '@covid19/stats/models';
@@ -12,7 +12,7 @@ import { GlobalStats } from '@covid19/stats/models';
   selector: 'covid19-global-stats-history-table',
   templateUrl: './global-stats-history-table.component.html',
   styleUrls: ['./global-stats-history-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlobalStatsHistoryTableComponent implements OnChanges {
   @Input() globalStats: GlobalStats[] = [];
@@ -21,7 +21,13 @@ export class GlobalStatsHistoryTableComponent implements OnChanges {
     []
   );
 
-  public displayedColumns = ['total', 'deaths', 'recovered', 'fetchedAt'];
+  public displayedColumns = [
+    'total',
+    'active',
+    'deaths',
+    'recovered',
+    'fetchedAt',
+  ];
 
   public constructor(private cdr: ChangeDetectorRef) {
     this.cdr.detach();

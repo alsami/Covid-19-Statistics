@@ -15,6 +15,22 @@
     </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="active">
+    <mat-header-cell *matHeaderCellDef>
+      Active
+      <br />
+      Cases
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index">
+      <div style="display: flex; flex-direction: column;">
+        <span>{{ element.active | number }}</span>
+        <span covid19DiffNumberColor>
+          {{ dataSource.data | valueDiff: element.active:i:'active' }}
+        </span>
+      </div>
+    </mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="deaths">
     <mat-header-cell *matHeaderCellDef>Deaths</mat-header-cell>
     <mat-cell *matCellDef="let element; let i = index">
