@@ -16,8 +16,15 @@
   padding: 0px 10px 0px 10px;
 }
 
+.select-container {
+  display: flex;
+  flex: 1 0 100%;
+  justify-content: center;
+  margin: 10px;
+}
+
 mat-form-field {
-  width: 100%;
+  width: 60%;
 }
 
 /*

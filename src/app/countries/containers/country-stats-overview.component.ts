@@ -11,26 +11,19 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { TitleActions } from '@covid19/core/+state/actions';
 import {
-  PROPER_BLUE,
-  PROPER_GREEN,
-  PROPER_RED,
-} from '@covid19/core/core.constants';
-import {
   countryStatsActions,
   countryStatsDayHistoryActions,
   countryStatsHistoryActions,
 } from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
-import { CountryStats } from '@covid19/countries/models';
+import {
+  BAR_CHART_COLORS,
+  BAR_CHART_TYPES,
+} from '@covid19/countries/countries.constants';
+import { BarChartType, CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, map } from 'rxjs/operators';
-
-type BarChartType = {
-  label: string;
-  value: string;
-  color: string;
-};
 
 @Component({
   selector: 'covid19-country-stats-overview',
@@ -47,7 +40,7 @@ export class CountryStatsOverviewComponent
   public countryStatsDayHistory$: Observable<CountryStats[]>;
   public loading$: Observable<boolean>;
   public selectedIndex: number = 0;
-  public colors = [PROPER_BLUE, PROPER_RED, PROPER_GREEN];
+  public colors = BAR_CHART_COLORS;
 
   @ViewChild('matTabGroup', { static: false }) matTabGroup: MatTabGroup;
 
@@ -134,23 +127,7 @@ export class CountryStatsOverviewComponent
     },
   ];
 
-  public chartTypes: BarChartType[] = [
-    {
-      label: 'Active Cases',
-      value: 'activeCases',
-      color: this.colors[0],
-    },
-    {
-      label: 'Deaths',
-      value: 'totalDeaths',
-      color: this.colors[1],
-    },
-    {
-      label: 'Recovered Cases',
-      value: 'recoveredCases',
-      color: this.colors[2],
-    },
-  ];
+  public chartTypes: BarChartType[] = BAR_CHART_TYPES;
 
   public selectedBarCharType: BarChartType = this.chartTypes[0];
 

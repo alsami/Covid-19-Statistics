@@ -6,23 +6,20 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 import * as fromRoot from '@covid19/+state';
 import {
   countriesOfInterestActions,
   TitleActions,
 } from '@covid19/core/+state/actions';
 import {
-  PROPER_BLUE,
-  PROPER_GREEN,
-  PROPER_RED,
-} from '@covid19/core/core.constants';
-import {
   countriesStatsActions,
   countriesStatsHistoryActions,
 } from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import { CountriesAutoCompleteComponent } from '@covid19/countries/components';
-import { CountryStats } from '@covid19/countries/models';
+import { BAR_CHART_TYPES } from '@covid19/countries/countries.constants';
+import { BarChartType, CountryStats } from '@covid19/countries/models';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -40,8 +37,10 @@ export class CountriesStatsOverviewComponent
   public filteredCountryStats$: Observable<CountryStats[]>;
   public countriesOfInterest: string[] = [];
   public selectedIndex: number = 0;
-  public colors = [PROPER_BLUE, PROPER_RED, PROPER_GREEN];
   private coiSub$: Subscription;
+  public chartTypes: BarChartType[] = BAR_CHART_TYPES;
+
+  public selectedBarCharType: BarChartType = this.chartTypes[0];
 
   @ViewChild('countryAutoComplete', { static: true })
   countryAutoComplete: CountriesAutoCompleteComponent;
@@ -60,15 +59,7 @@ export class CountriesStatsOverviewComponent
       func: () => {},
     },
     {
-      label: 'Daily Active',
-      func: this.loadCountriesStatsHistory,
-    },
-    {
-      label: 'Daily Deaths',
-      func: this.loadCountriesStatsHistory,
-    },
-    {
-      label: 'Daily Recovered',
+      label: 'Daily Graphs',
       func: this.loadCountriesStatsHistory,
     },
   ];
@@ -104,6 +95,12 @@ export class CountriesStatsOverviewComponent
   public ngOnDestroy(): void {
     this.store.dispatch(countriesStatsActions.reset());
     this.coiSub$.unsubscribe();
+  }
+
+  public chartTypeSelectionChanged(option: MatSelectChange): void {
+    this.selectedBarCharType = this.chartTypes.find(
+      (type) => type.value === option.value
+    );
   }
 
   public animationDone(index: number) {
