@@ -10,7 +10,6 @@ import {
 import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
 import { CountryStats } from '@covid19/countries/models';
 import { fromEvent, Observable, Subscription } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-countries-world-card',
@@ -32,16 +31,15 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
 
-  private chart: any;
+  private chart: google.visualization.GeoChart;
   private dataTable: any;
 
-  private options = {
+  private options: google.visualization.GeoChartOptions = {
     keepAspectRatio: true,
-    legend: 'none',
+    // legend: 'none',
     datalessRegionColor: PROPER_GREEN,
     backgroundColor: {
       fill: '#303030',
-      backgroundColor: 'red',
     },
     colorAxis: {
       colors: ['#ffd600', '#f8a900', '#e97c00', '#d35011', PROPER_RED],
@@ -50,7 +48,7 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
     },
     defaultColor: '#212121',
     resolution: 'countries',
-    width: '100%',
+    legend: 'none',
   };
 
   @ViewChild('card', { static: true }) element: ElementRef;
@@ -62,11 +60,10 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
       );
 
       this.resizeObservable$ = fromEvent(window, 'resize');
-      this.resizeSubscription$ = this.resizeObservable$
-        .pipe(delay(100))
-        .subscribe(() => {
-          this.draw(this.dataTable);
-        });
+      this.resizeSubscription$ = this.resizeObservable$.subscribe(() => {
+        this.chart.clearChart();
+        this.draw(this.dataTable);
+      });
     }
 
     if (!this.countryStats) {
