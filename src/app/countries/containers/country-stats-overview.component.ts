@@ -49,6 +49,51 @@ export class CountryStatsOverviewComponent
   public selectedIndex: number = 0;
   public colors = [PROPER_BLUE, PROPER_RED, PROPER_GREEN];
 
+  @ViewChild('matTabGroup', { static: false }) matTabGroup: MatTabGroup;
+
+  public load = (country: string) => {
+    this.store.dispatch(
+      countryStatsActions.load({
+        country: country,
+      })
+    );
+  };
+
+  public loadHistory = (country: string) => {
+    this.store.dispatch(
+      countryStatsHistoryActions.load({
+        country: country,
+      })
+    );
+  };
+
+  public loadDayHistory = (country: string) => {
+    this.store.dispatch(
+      countryStatsDayHistoryActions.load({
+        country: country,
+      })
+    );
+  };
+
+  tabLabelsFunc = [
+    {
+      label: 'Overview',
+      func: this.load,
+    },
+    {
+      label: 'Day to Day',
+      func: this.loadDayHistory,
+    },
+    {
+      label: 'History',
+      func: this.loadHistory,
+    },
+    {
+      label: 'Graphs',
+      func: this.loadDayHistory,
+    },
+  ];
+
   public viewOptions: {
     label: string;
     value: string;
@@ -108,51 +153,6 @@ export class CountryStatsOverviewComponent
   ];
 
   public selectedBarCharType: BarChartType = this.chartTypes[0];
-
-  @ViewChild('matTabGroup', { static: false }) matTabGroup: MatTabGroup;
-
-  public load = (country: string) => {
-    this.store.dispatch(
-      countryStatsActions.load({
-        country: country,
-      })
-    );
-  };
-
-  public loadHistory = (country: string) => {
-    this.store.dispatch(
-      countryStatsHistoryActions.load({
-        country: country,
-      })
-    );
-  };
-
-  public loadDayHistory = (country: string) => {
-    this.store.dispatch(
-      countryStatsDayHistoryActions.load({
-        country: country,
-      })
-    );
-  };
-
-  tabLabelsFunc = [
-    {
-      label: 'Overview',
-      func: this.load,
-    },
-    {
-      label: 'Day to Day',
-      func: this.loadDayHistory,
-    },
-    {
-      label: 'History',
-      func: this.loadHistory,
-    },
-    {
-      label: 'Graphs',
-      func: this.loadDayHistory,
-    },
-  ];
 
   public constructor(
     private store: Store<fromCountries.CountryState>,
@@ -235,7 +235,6 @@ export class CountryStatsOverviewComponent
   }
 
   public chartTypeSelectionChanged(option: MatSelectChange): void {
-    console.log(option);
     this.selectedBarCharType = this.chartTypes.find(
       (type) => type.value === option.value
     );

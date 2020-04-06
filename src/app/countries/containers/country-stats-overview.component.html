@@ -81,6 +81,7 @@
           #select
           placeholder="Chart selection"
           (selectionChange)="chartTypeSelectionChanged($event)"
+          [value]="selectedBarCharType.value"
         >
           <mat-option
             *ngFor="let chartType of chartTypes"
