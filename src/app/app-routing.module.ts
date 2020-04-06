@@ -11,29 +11,24 @@ import { RouterModule } from '@angular/router';
         {
           path: '',
           redirectTo: 'stats',
-          pathMatch: 'full'
+          pathMatch: 'full',
         },
         {
           path: 'stats',
           loadChildren: async () =>
-            (await import('./stats/stats.module')).StatsModule
-        },
-        {
-          path: 'cases',
-          loadChildren: async () =>
-            (await import('./cases/cases.module')).CasesModule
+            (await import('./stats/stats.module')).StatsModule,
         },
         {
           path: 'countries',
           loadChildren: async () =>
-            (await import('./countries/countries.module')).CountriesModule
-        }
+            (await import('./countries/countries.module')).CountriesModule,
+        },
       ],
       {
-        useHash: false
+        useHash: false,
       }
-    )
+    ),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -3,8 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import { GlobalStats } from '@covid19/stats/models';
 
@@ -12,14 +11,17 @@ import { GlobalStats } from '@covid19/stats/models';
   selector: 'covid19-global-stats-card',
   templateUrl: './global-stats-card.component.html',
   styleUrls: ['./global-stats-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlobalStatsCardComponent implements OnInit {
+export class GlobalStatsCardComponent {
   @Input() globalStats: GlobalStats;
 
   @Output() refresh = new EventEmitter();
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  public getActiveCases(): number {
+    return (
+      this.globalStats.total -
+      (this.globalStats.deaths, this.globalStats.recovered)
+    );
+  }
 }
