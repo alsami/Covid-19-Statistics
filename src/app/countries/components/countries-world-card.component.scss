@@ -8,7 +8,6 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  zoom: 1;
 }
 
 @media #{$lt-md} {
@@ -19,7 +18,6 @@
     align-items: center;
     justify-content: center;
     width: 800px;
-    zoom: 1.5;
   }
 
   .map-sizer {
