@@ -8,7 +8,10 @@
 >
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
-      <div class="view-options-container">
+      <div
+        class="view-options-container"
+        [class.sticky]="viewOptions[0].selected"
+      >
         <covid19-countries-autocomplete
           #countryAutoComplete
           [countryStats]="countryStats$ | async"

@@ -17,12 +17,14 @@ covid19-countries-autocomplete {
   flex: 1 1 auto;
   align-items: flex-start;
   flex-direction: row;
+  margin-bottom: 0.5em;
+  background: #424242;
+}
+
+.sticky {
   position: sticky;
   top: 0px;
   z-index: 100;
-  background: #424242;
-  padding: 0px 10px 0px 10px;
-  margin-bottom: 0.5em;
 }
 
 .toggle-container {

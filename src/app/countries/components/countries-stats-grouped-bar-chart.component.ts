@@ -31,7 +31,7 @@ export class CountriesStatsGroupedBarChartComponent implements OnChanges {
     checked: boolean;
   }[] = [
     {
-      label: 'Active cases',
+      label: 'Active Cases',
       key: 'activeCases',
       color: PROPER_BLUE,
       checked: true,
