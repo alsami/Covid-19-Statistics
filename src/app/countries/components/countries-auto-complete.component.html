@@ -1,35 +1,30 @@
-<div class="sticky-container">
-  <mat-form-field>
-    <mat-chip-list #chipList>
-      <mat-chip
-        *ngFor="let country of selectedCountries"
-        selectable
-        removeable
-        (removed)="remove(country)"
-      >
-        {{ country }}
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <input
-        placeholder="Select countries... "
-        #countryInput
-        [formControl]="countriesCtrl"
-        [matAutocomplete]="auto"
-        [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        (matChipInputTokenEnd)="add($event)"
-      />
-    </mat-chip-list>
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      (optionSelected)="selected($event)"
+<mat-form-field>
+  <mat-chip-list #chipList>
+    <mat-chip
+      *ngFor="let country of selectedCountries"
+      selectable
+      removeable
+      (removed)="remove(country)"
     >
-      <mat-option
-        *ngFor="let country of filteredCountries$ | async"
-        [value]="country"
-      >
-        {{ country }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</div>
+      {{ country }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input
+      placeholder="Select countries... "
+      #countryInput
+      [formControl]="countriesCtrl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option
+      *ngFor="let country of filteredCountries$ | async"
+      [value]="country"
+    >
+      {{ country }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

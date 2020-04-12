@@ -8,12 +8,28 @@
 >
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
-      <covid19-countries-autocomplete
-        #countryAutoComplete
-        [countryStats]="countryStats$ | async"
-      ></covid19-countries-autocomplete>
-      <div style="margin-top: 5px;"></div>
-      <div class="card-container">
+      <div class="view-options-container">
+        <covid19-countries-autocomplete
+          #countryAutoComplete
+          [countryStats]="countryStats$ | async"
+        ></covid19-countries-autocomplete>
+        <div class="toggle-container">
+          <mat-button-toggle-group
+            [multiple]="false"
+            (change)="viewSelectionChanged($event)"
+          >
+            <mat-button-toggle
+              *ngFor="let viewOption of viewOptions"
+              [checked]="viewOption.selected"
+              [value]="viewOption.value"
+              [matTooltip]="viewOption.tooltip"
+            >
+              <mat-icon>{{ viewOption.label }}</mat-icon>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div *ngIf="viewOptions[0].selected" class="card-container">
         <ng-container
           *ngFor="
             let countryStats of filteredCountryStats$ | async;
@@ -28,6 +44,10 @@
           ></covid19-country-stats-card>
         </ng-container>
       </div>
+      <covid19-countries-stats-grouped-bar-chart
+        *ngIf="viewOptions[1].selected"
+        [countryStats]="filteredCountryStats$ | async"
+      ></covid19-countries-stats-grouped-bar-chart>
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">

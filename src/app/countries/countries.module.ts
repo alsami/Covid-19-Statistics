@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   CountriesStatsEffects,
   CountriesStatsHistoryEffects,
@@ -11,6 +11,7 @@ import {
 import * as fromCountries from '@covid19/countries/+state/reducer';
 import {
   CountriesAutoCompleteComponent,
+  CountriesStatsGroupedBarChartComponent,
   CountriesStatsStackedBarChartComponent,
   CountriesWorldCardComponent,
   CountryDetailedStatsCardsComponent,
@@ -46,6 +47,7 @@ const COMPONENTS = [
   CountriesWorldMapComponent,
   CountriesWorldCardComponent,
   CountriesStatsStackedBarChartComponent,
+  CountriesStatsGroupedBarChartComponent,
   CountryStatsDailyValuesBarChartComponent,
   CountryStatsCardComponent,
   CountryDetailedStatsCardsComponent,
@@ -62,6 +64,7 @@ const COMPONENTS = [
   declarations: [...COMPONENTS],
   imports: [
     CommonModule,
+    FormsModule,
     CountriesRoutingModule,
     MaterialModule,
     SharedModule,

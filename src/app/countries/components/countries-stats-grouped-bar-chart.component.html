@@ -1,0 +1,26 @@
+<div class="options-container">
+  <mat-checkbox
+    *ngFor="let option of options"
+    [(ngModel)]="option.checked"
+    (change)="calculateChartData()"
+  >
+    {{ option.label }}
+  </mat-checkbox>
+</div>
+<div class="scale-container">
+  <div class="chart-container">
+    <ngx-charts-bar-horizontal-2d
+      #chart
+      *ngIf="data?.length"
+      [scheme]="colorScheme"
+      [results]="data"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [showDataLabel]="false"
+    ></ngx-charts-bar-horizontal-2d>
+  </div>
+</div>

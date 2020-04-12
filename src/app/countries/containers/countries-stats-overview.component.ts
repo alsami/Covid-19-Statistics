@@ -1,11 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  NgZone,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSelectChange } from '@angular/material/select';
 import * as fromRoot from '@covid19/+state';
 import {
@@ -29,8 +23,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './countries-stats-overview.component.html',
   styleUrls: ['./countries-stats-overview.component.scss'],
 })
-export class CountriesStatsOverviewComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   public loading$: Observable<boolean>;
   public countryStats$: Observable<CountryStats[]>;
   public countryStatsHistory$: Observable<CountryStats[]>;
@@ -62,6 +55,30 @@ export class CountriesStatsOverviewComponent
       label: 'Daily Graphs',
       func: this.loadCountriesStatsHistory,
     },
+    {
+      label: 'Comparison',
+      func: () => {},
+    },
+  ];
+
+  public viewOptions: {
+    label: string;
+    value: string;
+    tooltip: string;
+    selected: boolean;
+  }[] = [
+    {
+      label: 'view_agenda',
+      value: 'card',
+      tooltip: 'Card view',
+      selected: true,
+    },
+    {
+      label: 'show_chart',
+      value: 'chart',
+      tooltip: 'Comparison view',
+      selected: false,
+    },
   ];
 
   public constructor(
@@ -88,10 +105,6 @@ export class CountriesStatsOverviewComponent
     this.store.dispatch(new TitleActions.SetTitle('Countries'));
   }
 
-  public ngAfterViewInit(): void {
-    this.zone.runOutsideAngular(() => this.combineCountryStats());
-  }
-
   public ngOnDestroy(): void {
     this.store.dispatch(countriesStatsActions.reset());
     this.coiSub$.unsubscribe();
@@ -106,6 +119,17 @@ export class CountriesStatsOverviewComponent
   public animationDone(index: number) {
     this.selectedIndex = index;
     this.tabLabelsFunc[this.selectedIndex].func();
+  }
+
+  public viewSelectionChanged(option: MatButtonToggleChange): void {
+    const index = this.viewOptions.findIndex(
+      (viewOption) => viewOption.value === option.value
+    );
+
+    this.viewOptions.forEach(
+      (viewOption, viewOptionIndex) =>
+        (viewOption.selected = viewOptionIndex === index)
+    );
   }
 
   public storeCountryOfInterest(country: string): void {
