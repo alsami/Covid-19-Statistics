@@ -1,4 +1,4 @@
-import { GlobalStats } from '@covid19/stats/models';
+import { GlobalStats } from '@covid19/global/models';
 import { createAction, props } from '@ngrx/store';
 
 export const load = createAction('[Global stats day history] Load');

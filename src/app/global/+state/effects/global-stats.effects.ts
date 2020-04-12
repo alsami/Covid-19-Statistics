@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { globalStatsActions } from '@covid19/stats/+state/actions';
-import { GlobalStatsService } from '@covid19/stats/services';
+import { globalStatsActions } from '@covid19/global/+state/actions';
+import { GlobalStatsService } from '@covid19/global/services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
@@ -12,9 +12,9 @@ export class GlobalStatsEffects {
       ofType(globalStatsActions.load),
       mergeMap(() =>
         this.globalStatsService.load().pipe(
-          map(stats =>
+          map((stats) =>
             globalStatsActions.loaded({
-              latestStats: stats
+              latestStats: stats,
             })
           ),
           catchError(() => of(globalStatsActions.loadFailed()))

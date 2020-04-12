@@ -9,8 +9,8 @@ import {
   PROPER_GREEN,
   PROPER_RED,
 } from '@covid19/core/core.constants';
+import { GlobalStats } from '@covid19/global/models';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
-import { GlobalStats } from '@covid19/stats/models';
 
 @Component({
   selector: 'covid19-global-stats-history-line-chart',

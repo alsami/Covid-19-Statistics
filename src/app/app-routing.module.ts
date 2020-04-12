@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
         {
           path: 'stats',
           loadChildren: async () =>
-            (await import('./stats/stats.module')).StatsModule,
+            (await import('./global/global-stats.module')).GlobalStatsModule,
         },
         {
           path: 'countries',

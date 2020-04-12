@@ -6,7 +6,7 @@ import {
   OnChanges,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { GlobalStats } from '@covid19/stats/models';
+import { GlobalStats } from '@covid19/global/models';
 
 @Component({
   selector: 'covid19-global-stats-history-table',

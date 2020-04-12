@@ -3,10 +3,10 @@ import { TitleActions } from '@covid19/core/+state/actions';
 import {
   globalStatsActions,
   globalStatsDayHistoryActions,
-  globalStatsHistoryActions
-} from '@covid19/stats/+state/actions/';
-import * as fromStats from '@covid19/stats/+state/reducer';
-import { GlobalStats } from '@covid19/stats/models';
+  globalStatsHistoryActions,
+} from '@covid19/global/+state/actions';
+import * as fromStats from '@covid19/global/+state/reducer';
+import { GlobalStats } from '@covid19/global/models';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'covid19-global-stats-overview',
   templateUrl: './global-stats-overview.component.html',
-  styleUrls: ['./global-stats-overview.component.scss']
+  styleUrls: ['./global-stats-overview.component.scss'],
 })
 export class GlobalStatsOverviewComponent implements OnInit {
   globalStats$: Observable<GlobalStats>;
@@ -37,16 +37,16 @@ export class GlobalStatsOverviewComponent implements OnInit {
   tabLabelsFunc = [
     {
       label: 'Current',
-      func: this.loadGlobalStats
+      func: this.loadGlobalStats,
     },
     {
       label: 'History',
-      func: this.loadGlobalStatsHistory
+      func: this.loadGlobalStatsHistory,
     },
     {
       label: 'Graph',
-      func: this.loadGlobalStatsDayHistory
-    }
+      func: this.loadGlobalStatsDayHistory,
+    },
   ];
 
   public constructor(private readonly store: Store<fromStats.StatsState>) {}
@@ -69,7 +69,7 @@ export class GlobalStatsOverviewComponent implements OnInit {
         ([
           globalStatsLoading,
           globalStatsHistoryLoading,
-          globalStatsDayHistoryLoading
+          globalStatsDayHistoryLoading,
         ]) =>
           globalStatsLoading ||
           globalStatsHistoryLoading ||

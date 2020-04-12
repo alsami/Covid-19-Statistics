@@ -5,16 +5,16 @@ import {
   Injector,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { CountryStats } from '@covid19/countries/models';
-import { IncreasedStats, IncreaseType } from '@covid19/stats/models';
+import { IncreasedStats, IncreaseType } from '@covid19/global/models';
 
 @Component({
   selector: 'covid19-country-stats-day-to-day-cards',
   templateUrl: './country-stats-day-to-day-cards.component.html',
   styleUrls: ['./country-stats-day-to-day-cards.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountryStatsDayToDayCardsComponent implements OnChanges {
   @Input() countryStats: CountryStats[];
@@ -55,7 +55,7 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
             current.totalCases
           )} - Yesterday: ${this.transform(previous.totalCases)}`,
           increase: this.calculate(current.totalCases, previous.totalCases),
-          time: current.fetchedAt
+          time: current.fetchedAt,
         });
 
         this.increases.push({
@@ -64,7 +64,7 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
             current.activeCases
           )} - Yesterday: ${this.transform(previous.activeCases)}`,
           increase: this.calculate(current.activeCases, previous.activeCases),
-          time: current.fetchedAt
+          time: current.fetchedAt,
         });
 
         this.increases.push({
@@ -73,7 +73,7 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
             current.totalDeaths
           )} - Yesterday: ${this.transform(previous.totalDeaths)}`,
           increase: this.calculate(current.totalDeaths, previous.totalDeaths),
-          time: current.fetchedAt
+          time: current.fetchedAt,
         });
       }
     });

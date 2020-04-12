@@ -1,5 +1,5 @@
-import { globalStatsHistoryActions } from '@covid19/stats/+state/actions';
-import { GlobalStats } from '@covid19/stats/models';
+import { globalStatsHistoryActions } from '@covid19/global/+state/actions';
+import { GlobalStats } from '@covid19/global/models';
 import { createReducer, on } from '@ngrx/store';
 
 export interface GlobalStatsHistoryState {
@@ -9,20 +9,20 @@ export interface GlobalStatsHistoryState {
 
 const initialState: GlobalStatsHistoryState = {
   loading: false,
-  stats: []
+  stats: [],
 };
 
 const _reducer = createReducer(
   initialState,
-  on(globalStatsHistoryActions.load, state => ({
+  on(globalStatsHistoryActions.load, (state) => ({
     ...state,
-    loading: true
+    loading: true,
   })),
   on(globalStatsHistoryActions.loaded, (_, { globalStats }) => ({
     stats: globalStats,
-    loading: false
+    loading: false,
   })),
-  on(globalStatsHistoryActions.loadFailed, _ => initialState)
+  on(globalStatsHistoryActions.loadFailed, (_) => initialState)
 );
 
 export function reducer(state: GlobalStatsHistoryState, action: any) {

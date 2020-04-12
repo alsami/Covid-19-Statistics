@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { globalStatsDayHistoryActions } from '@covid19/stats/+state/actions';
-import { GlobalStatsDayHistoryService } from '@covid19/stats/services';
+import { globalStatsDayHistoryActions } from '@covid19/global/+state/actions';
+import { GlobalStatsDayHistoryService } from '@covid19/global/services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
@@ -12,9 +12,9 @@ export class GlobalStatsDayHistoryEffects {
       ofType(globalStatsDayHistoryActions.load),
       mergeMap(() =>
         this.globalStatsDayHistoryService.load().pipe(
-          map(stats =>
+          map((stats) =>
             globalStatsDayHistoryActions.loaded({
-              globalStats: stats
+              globalStats: stats,
             })
           ),
           catchError(() => of(globalStatsDayHistoryActions.loadFailed()))

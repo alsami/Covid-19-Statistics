@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { GlobalStatsOverviewComponent } from '@covid19/stats/containers';
+import { GlobalStatsOverviewComponent } from '@covid19/global/containers';
 
 @NgModule({
   imports: [
@@ -10,13 +10,13 @@ import { GlobalStatsOverviewComponent } from '@covid19/stats/containers';
       {
         path: '',
         redirectTo: 'global',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'global',
-        component: GlobalStatsOverviewComponent
-      }
-    ])
-  ]
+        component: GlobalStatsOverviewComponent,
+      },
+    ]),
+  ],
 })
-export class StatsRoutingModule {}
+export class GlobalStatsRoutingModule {}

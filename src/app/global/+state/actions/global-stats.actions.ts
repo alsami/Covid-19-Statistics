@@ -1,5 +1,5 @@
+import { GlobalStats } from '@covid19/global/models';
 import { createAction, props } from '@ngrx/store';
-import { GlobalStats } from '@covid19/stats/models';
 
 export const load = createAction('[Latest stats] Load');
 export const loaded = createAction(

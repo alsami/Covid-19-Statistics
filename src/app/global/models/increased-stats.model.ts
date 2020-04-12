@@ -1,4 +1,4 @@
-import { IncreaseType } from '@covid19/stats/models/increase-type.model';
+import { IncreaseType } from '@covid19/global/models/increase-type.model';
 
 export interface IncreasedStats {
   type: IncreaseType;

@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { GlobalStats } from '@covid19/stats/models';
+import { GlobalStats } from '@covid19/global/models';
 
 @Component({
   selector: 'covid19-global-stats-card',
