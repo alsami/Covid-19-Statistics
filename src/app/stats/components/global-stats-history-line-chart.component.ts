@@ -2,9 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnChanges
+  OnChanges,
 } from '@angular/core';
-import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
+import {
+  PROPER_BLUE,
+  PROPER_GREEN,
+  PROPER_RED,
+} from '@covid19/core/core.constants';
 import { LineChartData } from '@covid19/shared/models/linechart-data.model';
 import { GlobalStats } from '@covid19/stats/models';
 
@@ -12,7 +16,7 @@ import { GlobalStats } from '@covid19/stats/models';
   selector: 'covid19-global-stats-history-line-chart',
   templateUrl: './global-stats-history-line-chart.component.html',
   styleUrls: ['./global-stats-history-line-chart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlobalStatsHistoryLineChartComponent implements OnChanges {
   @Input() globalStats: GlobalStats[];
@@ -29,7 +33,7 @@ export class GlobalStatsHistoryLineChartComponent implements OnChanges {
 
   // cases, deaths, recovered
   public colorScheme = {
-    domain: ['#AAAAAA', PROPER_RED, PROPER_GREEN]
+    domain: ['#AAAAAA', PROPER_BLUE, PROPER_RED, PROPER_GREEN],
   };
 
   public data: LineChartData[] = [];
@@ -42,21 +46,26 @@ export class GlobalStatsHistoryLineChartComponent implements OnChanges {
     this.data = [];
 
     const totalCasesLineChartData: LineChartData = {
-      name: 'Cases',
-      series: []
+      name: 'Total Cases',
+      series: [],
+    };
+
+    const activeCasesLineChart: LineChartData = {
+      name: 'Active Cases',
+      series: [],
     };
 
     const deathsLineChartData: LineChartData = {
       name: 'Deaths',
-      series: []
+      series: [],
     };
 
     const recoveredLineChartData: LineChartData = {
       name: 'Recovered',
-      series: []
+      series: [],
     };
 
-    this.globalStats.forEach(countryStats => {
+    this.globalStats.forEach((countryStats) => {
       const isoString = countryStats.fetchedAt.slice(
         0,
         countryStats.fetchedAt.indexOf('T')
@@ -64,22 +73,28 @@ export class GlobalStatsHistoryLineChartComponent implements OnChanges {
 
       totalCasesLineChartData.series.push({
         name: isoString,
-        value: countryStats.total
+        value: countryStats.total,
+      });
+
+      activeCasesLineChart.series.push({
+        name: isoString,
+        value: countryStats.active,
       });
 
       deathsLineChartData.series.push({
         name: isoString,
-        value: countryStats.deaths
+        value: countryStats.deaths,
       });
 
       recoveredLineChartData.series.push({
         name: isoString,
-        value: countryStats.recovered
+        value: countryStats.recovered,
       });
     });
 
     this.data.push(
       totalCasesLineChartData,
+      activeCasesLineChart,
       deathsLineChartData,
       recoveredLineChartData
     );
