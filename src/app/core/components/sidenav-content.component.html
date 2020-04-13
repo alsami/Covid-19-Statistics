@@ -3,18 +3,29 @@
     <div class="container">
       <mat-nav-list>
         <h4 mat-subheader>Statistics</h4>
-        <mat-list-item routerLink="/stats/global" (click)="linkClicked.emit()">
+        <mat-list-item
+          routerLink="/stats/global"
+          routerLinkActive="selected-link"
+          (click)="linkClicked.emit()"
+        >
           <mat-icon mat-list-icon>public</mat-icon>
           <h4 mat-line>Global</h4>
         </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item routerLink="/countries" (click)="linkClicked.emit()">
+        <mat-list-item
+          routerLink="/countries"
+          routerLinkActive="selected-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="linkClicked.emit()"
+        >
           <mat-icon mat-list-icon>flag</mat-icon>
           <h4 mat-line>Countries</h4>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item
           routerLink="/countries/world-map"
+          routerLinkActive="selected-link"
+          [routerLinkActiveOptions]="{ exact: true }"
           (click)="linkClicked.emit()"
         >
           <mat-icon mat-list-icon>map</mat-icon>
@@ -27,6 +38,7 @@
           >
             <mat-list-item
               [routerLink]="'/countries/' + country"
+              routerLinkActive="selected-link"
               (click)="linkClicked.emit()"
             >
               <mat-icon mat-list-icon>flag</mat-icon>
