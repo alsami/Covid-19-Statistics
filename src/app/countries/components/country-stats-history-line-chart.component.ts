@@ -108,7 +108,11 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
       series: [],
     };
 
-    this.countryStats.forEach((countryStats) => {
+    const sortedStats = this.countryStats
+      .slice()
+      .sort((left, right) => left.fetchedAt.localeCompare(right.fetchedAt));
+
+    sortedStats.forEach((countryStats) => {
       const isoString = countryStats.fetchedAt.slice(
         0,
         countryStats.fetchedAt.indexOf('T')

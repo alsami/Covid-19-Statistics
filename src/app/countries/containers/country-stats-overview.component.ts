@@ -12,7 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 import { TitleActions } from '@covid19/core/+state/actions';
 import {
   countryStatsActions,
-  countryStatsDayHistoryActions,
   countryStatsHistoryActions,
 } from '@covid19/countries/+state/actions';
 import * as fromCountries from '@covid19/countries/+state/reducer';
@@ -37,7 +36,6 @@ export class CountryStatsOverviewComponent
 
   public countryStats$: Observable<CountryStats>;
   public countryHistoryStats$: Observable<CountryStats[]>;
-  public countryStatsDayHistory$: Observable<CountryStats[]>;
   public loading$: Observable<boolean>;
   public selectedIndex: number = 0;
   public colors = BAR_CHART_COLORS;
@@ -60,14 +58,6 @@ export class CountryStatsOverviewComponent
     );
   };
 
-  public loadDayHistory = (country: string) => {
-    this.store.dispatch(
-      countryStatsDayHistoryActions.load({
-        country: country,
-      })
-    );
-  };
-
   tabLabelsFunc = [
     {
       label: 'Overview',
@@ -75,7 +65,7 @@ export class CountryStatsOverviewComponent
     },
     {
       label: 'Day to Day',
-      func: this.loadDayHistory,
+      func: this.loadHistory,
     },
     {
       label: 'History',
@@ -83,7 +73,7 @@ export class CountryStatsOverviewComponent
     },
     {
       label: 'Graphs',
-      func: this.loadDayHistory,
+      func: this.loadHistory,
     },
   ];
 
@@ -139,18 +129,11 @@ export class CountryStatsOverviewComponent
   public ngOnInit(): void {
     this.loading$ = combineLatest(
       this.store.pipe(select(fromCountries.getCountryStatsLoading)),
-      this.store.pipe(select(fromCountries.getCountryStatsHistoryLoading)),
-      this.store.pipe(select(fromCountries.getCountryStatsDayHistoryLoading))
+      this.store.pipe(select(fromCountries.getCountryStatsHistoryLoading))
     ).pipe(
       map(
-        ([
-          countryStatsLoading,
-          countryStatsHistoryLoading,
-          countryStatsDayHistoryLoading,
-        ]) =>
-          countryStatsLoading ||
-          countryStatsHistoryLoading ||
-          countryStatsDayHistoryLoading
+        ([countryStatsLoading, countryStatsHistoryLoading]) =>
+          countryStatsLoading || countryStatsHistoryLoading
       )
     );
 
@@ -158,10 +141,6 @@ export class CountryStatsOverviewComponent
 
     this.countryHistoryStats$ = this.store.pipe(
       select(fromCountries.getCountryStatsHistory)
-    );
-
-    this.countryStatsDayHistory$ = this.store.pipe(
-      select(fromCountries.getCountryStatsDayHistory)
     );
   }
 

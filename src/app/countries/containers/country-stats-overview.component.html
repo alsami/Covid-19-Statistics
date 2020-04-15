@@ -50,7 +50,7 @@
   <mat-tab [label]="tabLabelsFunc[1].label">
     <div class="page-content">
       <covid19-country-stats-day-to-day-cards
-        [countryStats]="countryStatsDayHistory$ | async"
+        [countryStats]="countryHistoryStats$ | async"
       ></covid19-country-stats-day-to-day-cards>
     </div>
   </mat-tab>
@@ -95,11 +95,11 @@
     <ng-container *ngIf="selectedIndex === 3">
       <covid19-country-stats-line-chart
         *ngIf="chartOptions[0].selected"
-        [countryStats]="countryStatsDayHistory$ | async"
+        [countryStats]="countryHistoryStats$ | async"
       ></covid19-country-stats-line-chart>
       <covid19-country-stats-daily-values-bar-chart
         *ngIf="chartOptions[1].selected"
-        [countryStatsHistory]="countryStatsDayHistory$ | async"
+        [countryStatsHistory]="countryHistoryStats$ | async"
         [key]="selectedBarCharType.value"
         [color]="selectedBarCharType.color"
         [yAxisLabel]="selectedBarCharType.label"

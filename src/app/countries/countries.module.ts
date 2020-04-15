@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   CountriesStatsEffects,
   CountriesStatsHistoryEffects,
-  CountryStatsDayHistoryEffects,
   CountryStatsEffects,
   CountryStatsHistoryEffects,
 } from '@covid19/countries/+state/effects';
@@ -31,7 +30,6 @@ import {
 import {
   CountriesStatsHistoryService,
   CountriesStatsService,
-  CountryStatsDayHistoryService,
   CountryStatsHistoryService,
   CountryStatsService,
 } from '@covid19/countries/services';
@@ -76,7 +74,6 @@ const COMPONENTS = [
       CountriesStatsHistoryEffects,
       CountryStatsEffects,
       CountryStatsHistoryEffects,
-      CountryStatsDayHistoryEffects,
     ]),
   ],
   providers: [
@@ -84,7 +81,6 @@ const COMPONENTS = [
     CountriesStatsHistoryService,
     CountryStatsService,
     CountryStatsHistoryService,
-    CountryStatsDayHistoryService,
   ],
 })
 export class CountriesModule {}

@@ -6,7 +6,6 @@ import {
 } from '@ngrx/store';
 import * as fromCountriesStatsHistory from './countries-stats-history.reducer';
 import * as fromCountriesStats from './countries-stats.reducer';
-import * as fromCountryStatsDayHistory from './country-stats-day-history.reducer';
 import * as fromCountryStatsHistory from './country-stats-history.reducer';
 import * as fromCountryStats from './country-stats.reducer';
 
@@ -15,7 +14,6 @@ export interface CountryState {
   countriesStatsHistory: fromCountriesStatsHistory.CountriesStatsHistoryState;
   countryStats: fromCountryStats.CountryStatsState;
   countryStatsHistory: fromCountryStatsHistory.CountryStatsHistoryState;
-  countryStatsDayHistory: fromCountryStatsDayHistory.CountryStatsDayHistoryState;
 }
 
 export interface State extends fromRoot.AppState {
@@ -27,7 +25,6 @@ export const reducers: ActionReducerMap<CountryState> = {
   countriesStatsHistory: fromCountriesStatsHistory.reducer,
   countryStats: fromCountryStats.reducer,
   countryStatsHistory: fromCountryStatsHistory.reducer,
-  countryStatsDayHistory: fromCountryStatsDayHistory.reducer,
 };
 
 export const getCountriesState = createFeatureSelector<CountryState>(
@@ -104,22 +101,4 @@ export const getCountryStatsHistory = createSelector(
 export const getCountryStatsHistoryLoading = createSelector(
   getCountryStatsHistoryState,
   fromCountryStatsHistory.loading
-);
-
-/**
- * Country-Stats Day History
- */
-export const getCountryStatsDayHistoryState = createSelector(
-  getCountriesState,
-  (state) => state.countryStatsDayHistory
-);
-
-export const getCountryStatsDayHistory = createSelector(
-  getCountryStatsDayHistoryState,
-  fromCountryStatsDayHistory.countryStats
-);
-
-export const getCountryStatsDayHistoryLoading = createSelector(
-  getCountryStatsDayHistoryState,
-  fromCountryStatsDayHistory.loading
 );
