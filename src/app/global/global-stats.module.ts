@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
-  GlobalStatsDayHistoryEffects,
   GlobalStatsEffects,
   GlobalStatsHistoryEffects,
 } from '@covid19/global/+state/effects';
@@ -14,7 +13,6 @@ import {
 import { GlobalStatsOverviewComponent } from '@covid19/global/containers';
 import { GlobalStatsRoutingModule } from '@covid19/global/global-stats-routing.module';
 import {
-  GlobalStatsDayHistoryService,
   GlobalStatsHistoryService,
   GlobalStatsService,
 } from '@covid19/global/services';
@@ -39,18 +37,10 @@ const COMPONENTS = [
     MaterialModule,
     SharedModule,
     StoreModule.forFeature('stats', fromStats.reducers),
-    EffectsModule.forFeature([
-      GlobalStatsEffects,
-      GlobalStatsHistoryEffects,
-      GlobalStatsDayHistoryEffects,
-    ]),
+    EffectsModule.forFeature([GlobalStatsEffects, GlobalStatsHistoryEffects]),
     NgxChartsModule,
   ],
   exports: [...COMPONENTS],
-  providers: [
-    GlobalStatsService,
-    GlobalStatsHistoryService,
-    GlobalStatsDayHistoryService,
-  ],
+  providers: [GlobalStatsService, GlobalStatsHistoryService],
 })
 export class GlobalStatsModule {}

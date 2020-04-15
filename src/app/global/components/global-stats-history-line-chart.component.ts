@@ -65,7 +65,11 @@ export class GlobalStatsHistoryLineChartComponent implements OnChanges {
       series: [],
     };
 
-    this.globalStats.forEach((countryStats) => {
+    const sortedGlobalStats = this.globalStats
+      .slice()
+      .sort((left, right) => left.fetchedAt.localeCompare(right.fetchedAt));
+
+    sortedGlobalStats.forEach((countryStats) => {
       const isoString = countryStats.fetchedAt.slice(
         0,
         countryStats.fetchedAt.indexOf('T')
@@ -98,7 +102,5 @@ export class GlobalStatsHistoryLineChartComponent implements OnChanges {
       deathsLineChartData,
       recoveredLineChartData
     );
-
-    console.log(this.data);
   }
 }
