@@ -74,7 +74,11 @@ export class CountriesStatsGroupedBarChartComponent implements OnChanges {
       }
     });
 
-    this.countryStats.slice(0, 5).forEach((stats) => {
+    const sortedCountryStats = this.countryStats
+      .slice()
+      .sort((left, right) => left.fetchedAt.localeCompare(right.fetchedAt));
+
+    sortedCountryStats.slice(0, 5).forEach((stats) => {
       const groupedBarChartData: GroupedBarChartData = {
         name: stats.country,
         series: [],
