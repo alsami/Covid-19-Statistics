@@ -142,6 +142,8 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
       return 0;
     }
 
+    console.log(current > previous);
+
     if (current > previous) {
       return this.calculateIncrease(current, previous);
     }
@@ -159,8 +161,9 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
   private calculateDecrease(current: number, previous: number): number {
     const diff = previous - current;
     const decrease = (diff / previous) * 100;
+    console.log(decrease, diff, previous, current);
 
-    return decrease;
+    return decrease * -1;
   }
 
   private transform(value: number): string {
