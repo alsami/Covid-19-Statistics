@@ -10,6 +10,13 @@ import {
 import { CountryStats } from '@covid19/countries/models';
 import { IncreasedStats, IncreaseType } from '@covid19/global/models';
 
+type Accumulated = {
+  total: number;
+  active: number;
+  deaths: number;
+  fetchedAt: string;
+};
+
 @Component({
   selector: 'covid19-country-stats-day-to-day-cards',
   templateUrl: './country-stats-day-to-day-cards.component.html',
@@ -39,48 +46,92 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
 
     this.increases = [];
 
-    const orderedCountryStats = this.countryStats
+    const sortedCountryStats = this.countryStats
       .slice()
       .sort((left, right) => right.fetchedAt.localeCompare(left.fetchedAt));
 
-    orderedCountryStats.forEach((stats, index) => {
-      if (index < this.countryStats.length - 1) {
-        const current = stats;
+    const dates = sortedCountryStats
+      .slice()
+      .map((stats) => stats.fetchedAt.slice(0, stats.fetchedAt.indexOf('T')));
 
-        const previous = orderedCountryStats[index + 1];
+    const distinctDates = [...new Set(dates)];
 
+    const accumulated = this.calculateAccumulated(
+      distinctDates,
+      sortedCountryStats
+    );
+
+    this.calculatedIncreases(accumulated);
+  }
+
+  private calculateAccumulated(
+    distinctDates: string[],
+    sortedCountryStats: CountryStats[]
+  ): Accumulated[] {
+    const accumlatedValues: Accumulated[] = [];
+
+    distinctDates.forEach((utcDate) => {
+      const accumulated: Accumulated = {
+        total: 0,
+        active: 0,
+        deaths: 0,
+        fetchedAt: null,
+      };
+      sortedCountryStats.forEach((stats) => {
+        const currentUtcDate = stats.fetchedAt.slice(
+          0,
+          stats.fetchedAt.indexOf('T')
+        );
+        if (currentUtcDate === utcDate) {
+          console.log(currentUtcDate, utcDate);
+          accumulated.total += stats.totalCases;
+          accumulated.active += stats.activeCases;
+          accumulated.deaths += stats.totalDeaths;
+          accumulated.fetchedAt = stats.fetchedAt;
+        }
+      });
+      accumlatedValues.push(accumulated);
+    });
+
+    return accumlatedValues;
+  }
+
+  private calculatedIncreases(accumulated: Accumulated[]): void {
+    accumulated.forEach((value, index) => {
+      if (index < accumulated.length - 1) {
+        const previous = accumulated[index + 1];
         this.increases.push({
           type: IncreaseType.Total,
           text: `Today: ${this.transform(
-            current.totalCases
-          )} - Yesterday: ${this.transform(previous.totalCases)}`,
-          increase: this.calculate(current.totalCases, previous.totalCases),
-          time: current.fetchedAt,
+            value.total
+          )} - Yesterday: ${this.transform(previous.total)}`,
+          increase: this.calculate(value.total, previous.total),
+          time: value.fetchedAt,
         });
 
         this.increases.push({
           type: IncreaseType.Active,
           text: `Today: ${this.transform(
-            current.activeCases
-          )} - Yesterday: ${this.transform(previous.activeCases)}`,
-          increase: this.calculate(current.activeCases, previous.activeCases),
-          time: current.fetchedAt,
+            value.active
+          )} - Yesterday: ${this.transform(previous.active)}`,
+          increase: this.calculate(value.active, previous.active),
+          time: value.fetchedAt,
         });
 
         this.increases.push({
           type: IncreaseType.Deaths,
           text: `Today: ${this.transform(
-            current.totalDeaths
-          )} - Yesterday: ${this.transform(previous.totalDeaths)}`,
-          increase: this.calculate(current.totalDeaths, previous.totalDeaths),
-          time: current.fetchedAt,
+            value.deaths
+          )} - Yesterday: ${this.transform(previous.deaths)}`,
+          increase: this.calculate(value.deaths, previous.deaths),
+          time: value.fetchedAt,
         });
+
+        this.increases = this.increases.sort((left, right) =>
+          right.time.localeCompare(left.time)
+        );
       }
     });
-
-    this.increases = this.increases.sort((left, right) =>
-      right.time.localeCompare(left.time)
-    );
   }
 
   private calculate(current: number, previous: number): number {

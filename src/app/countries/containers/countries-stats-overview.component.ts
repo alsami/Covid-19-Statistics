@@ -52,7 +52,7 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
       func: () => {},
     },
     {
-      label: 'Daily Graphs',
+      label: 'Graphs',
       func: this.loadCountriesStatsHistory,
     },
     {
