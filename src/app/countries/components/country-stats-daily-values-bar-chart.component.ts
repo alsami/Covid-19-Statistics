@@ -51,7 +51,7 @@ export class CountryStatsDailyValuesBarChartComponent implements OnChanges {
     const distinctDates = [...new Set(dates)];
 
     distinctDates.forEach((utcDate) => {
-      const deathsChartData: RegularChartData = {
+      const keyedChartData: RegularChartData = {
         name: utcDate,
         value: 0,
       };
@@ -66,10 +66,10 @@ export class CountryStatsDailyValuesBarChartComponent implements OnChanges {
           continue;
         }
 
-        deathsChartData.value += stats[this.key];
+        keyedChartData.value += stats[this.key];
       }
 
-      this.data.push(deathsChartData);
+      this.data.push(keyedChartData);
     });
 
     console.log(this.data);

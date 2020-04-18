@@ -60,6 +60,12 @@
     ></covid19-countries-stats-stacked-barchart>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[2].label">
+    <covid19-country-stats-day-to-day-cards
+      *ngIf="selectedIndex === 2"
+      [countryStats]="countryStatsHistory$ | async"
+    ></covid19-country-stats-day-to-day-cards>
+  </mat-tab>
+  <mat-tab [label]="tabLabelsFunc[3].label">
     <div class="select-container">
       <mat-form-field>
         <mat-select
@@ -78,7 +84,7 @@
       </mat-form-field>
     </div>
     <covid19-country-stats-daily-values-bar-chart
-      *ngIf="selectedIndex === 2"
+      *ngIf="selectedIndex === 3"
       [key]="selectedBarCharType.value"
       [yAxisLabel]="selectedBarCharType.label"
       [color]="selectedBarCharType.color"

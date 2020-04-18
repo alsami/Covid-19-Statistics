@@ -83,7 +83,6 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
           stats.fetchedAt.indexOf('T')
         );
         if (currentUtcDate === utcDate) {
-          console.log(currentUtcDate, utcDate);
           accumulated.total += stats.totalCases;
           accumulated.active += stats.activeCases;
           accumulated.deaths += stats.totalDeaths;

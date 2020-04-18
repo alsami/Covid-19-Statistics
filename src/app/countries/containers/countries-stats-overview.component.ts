@@ -52,12 +52,12 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
       func: () => {},
     },
     {
-      label: 'Graphs',
+      label: 'Day to Day',
       func: this.loadCountriesStatsHistory,
     },
     {
-      label: 'Comparison',
-      func: () => {},
+      label: 'Graphs',
+      func: this.loadCountriesStatsHistory,
     },
   ];
 
@@ -106,8 +106,8 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.store.dispatch(countriesStatsActions.reset());
     this.coiSub$.unsubscribe();
+    this.store.dispatch(countriesStatsActions.reset());
   }
 
   public chartTypeSelectionChanged(option: MatSelectChange): void {
