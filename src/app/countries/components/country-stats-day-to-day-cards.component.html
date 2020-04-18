@@ -27,7 +27,7 @@
         <ng-container *ngIf="increase.increase === 0">
           <mat-icon>trending_flat</mat-icon>
         </ng-container>
-        <div>Time: {{ increase.time | date: 'dd.MM.yyyy':'UTC' }}</div>
+        <div>{{ increase.time | date: 'dd.MM.yyyy':'UTC' }}</div>
       </mat-card-content>
     </mat-card>
   </ng-container>

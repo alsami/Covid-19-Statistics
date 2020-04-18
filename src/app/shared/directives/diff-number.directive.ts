@@ -4,12 +4,12 @@ import {
   Directive,
   ElementRef,
   Injector,
-  Input
+  Input,
 } from '@angular/core';
 import { PROPER_GREEN, PROPER_RED } from '@covid19/core/core.constants';
 
 @Directive({
-  selector: '[covid19DiffNumberColor]'
+  selector: '[covid19DiffNumberColor]',
 })
 export class DiffNumberColorDirective implements AfterViewInit {
   public constructor(
@@ -35,13 +35,13 @@ export class DiffNumberColorDirective implements AfterViewInit {
 
     if (value > 0) {
       htmlElement.style.color = increaseColor;
-      htmlElement.innerHTML = `+${pipe.transform(value)}`;
+      htmlElement.innerHTML = `+${pipe.transform(value, '1.0-1')}`;
       return;
     }
 
     if (value < 0) {
       htmlElement.style.color = decreaseColor;
-      htmlElement.innerHTML = `${pipe.transform(value)}`;
+      htmlElement.innerHTML = `${pipe.transform(value, '1.0-1')}`;
       return;
     }
   }
