@@ -3,7 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CountryStats } from '@covid19/countries/models';
@@ -12,7 +12,7 @@ import { CountryStats } from '@covid19/countries/models';
   selector: 'covid19-country-stats-history-table',
   templateUrl: './country-stats-history-table.component.html',
   styleUrls: ['./country-stats-history-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountryStatsHistoryTableComponent implements OnInit {
   @Input() countryStats: CountryStats[] = [];
@@ -21,13 +21,7 @@ export class CountryStatsHistoryTableComponent implements OnInit {
     []
   );
 
-  public displayedColumns = [
-    'active',
-    'deaths',
-    'serious',
-    'recovered',
-    'fetchedAt'
-  ];
+  public displayedColumns = ['active', 'deaths', 'recovered', 'fetchedAt'];
 
   public constructor(private cdr: ChangeDetectorRef) {
     this.cdr.detach();

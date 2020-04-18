@@ -31,7 +31,7 @@ export class GlobalStatsOverviewComponent implements OnInit {
 
   tabLabelsFunc = [
     {
-      label: 'Current',
+      label: 'Overview',
       func: this.loadGlobalStats,
     },
     {

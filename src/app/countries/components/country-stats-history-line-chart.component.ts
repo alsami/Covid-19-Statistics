@@ -9,7 +9,6 @@ import {
   PROPER_BLUE,
   PROPER_GREEN,
   PROPER_GREY,
-  PROPER_PURPLE,
   PROPER_RED,
   PROPER_YELLOW,
   SEMI_PROPER_RED,
@@ -43,7 +42,6 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
   deaths, 
   new deats, 
   recovered, 
-  serious 
   */
   public colorScheme = {
     domain: [
@@ -53,7 +51,6 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
       PROPER_RED,
       SEMI_PROPER_RED,
       PROPER_GREEN,
-      PROPER_PURPLE,
     ],
   };
 
@@ -103,11 +100,6 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
       series: [],
     };
 
-    const seriousLineChartData: LineChartData = {
-      name: 'Serious condition',
-      series: [],
-    };
-
     const sortedStats = this.countryStats
       .slice()
       .sort((left, right) => left.fetchedAt.localeCompare(right.fetchedAt));
@@ -147,11 +139,6 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
         name: isoString,
         value: countryStats.recoveredCases,
       });
-
-      seriousLineChartData.series.push({
-        name: isoString,
-        value: countryStats.seriousCases,
-      });
     });
 
     this.data.push(
@@ -160,8 +147,7 @@ export class CountryStatsHistoryLineChartComponent implements OnChanges {
       newCasesLineChartData,
       deathLineChartData,
       newDeathsLineChartData,
-      recoveredLineChartData,
-      seriousLineChartData
+      recoveredLineChartData
     );
   }
 }

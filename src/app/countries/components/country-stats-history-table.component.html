@@ -31,20 +31,6 @@
     </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="serious">
-    <mat-header-cell *matHeaderCellDef>Serious</mat-header-cell>
-    <mat-cell *matCellDef="let element; let i = index">
-      <div style="display: flex; flex-direction: column;">
-        <span>{{ element.seriousCases | number }}</span>
-        <span covid19DiffNumberColor>
-          {{
-            dataSource.data | valueDiff: element.seriousCases:i:'seriousCases'
-          }}
-        </span>
-      </div>
-    </mat-cell>
-  </ng-container>
-
   <ng-container matColumnDef="recovered">
     <mat-header-cell *matHeaderCellDef>Recovered</mat-header-cell>
     <mat-cell *matCellDef="let element; let i = index">

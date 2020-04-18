@@ -6,6 +6,5 @@ export interface CountryStats {
   newDeaths: number;
   activeCases: number;
   recoveredCases: number;
-  seriousCases: number;
   fetchedAt: string;
 }
