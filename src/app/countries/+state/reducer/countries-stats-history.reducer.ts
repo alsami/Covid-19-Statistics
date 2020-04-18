@@ -22,7 +22,11 @@ const _reducer = createReducer(
     history: countryStats,
     loading: false,
   })),
-  on(countriesStatsHistoryActions.loadFailed, (_) => initialState)
+  on(
+    countriesStatsHistoryActions.loadFailed,
+    countriesStatsHistoryActions.reset,
+    (_) => initialState
+  )
 );
 
 export function reducer(state: CountriesStatsHistoryState, action: any) {

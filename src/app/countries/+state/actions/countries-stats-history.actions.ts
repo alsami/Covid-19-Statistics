@@ -9,3 +9,4 @@ export const loaded = createAction(
 export const loadFailed = createAction(
   '[Countries history cases stats] Load failed'
 );
+export const reset = createAction('[Countries history cases stats] Reset');
