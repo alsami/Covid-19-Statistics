@@ -117,8 +117,8 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   }
 
   public animationDone(index: number) {
-    this.selectedIndex = index;
     this.tabLabelsFunc[this.selectedIndex].func();
+    this.selectedIndex = index;
   }
 
   public viewSelectionChanged(option: MatButtonToggleChange): void {
