@@ -6,7 +6,7 @@
         <span
           class="increase"
           [matTooltip]="increase.text"
-          covid19DiffNumberColor
+          [covid19DiffNumberColor]="increase.type === increaseType.Recovered"
         >
           {{ increase.increase }}
         </span>

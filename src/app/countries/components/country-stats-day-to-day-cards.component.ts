@@ -11,9 +11,9 @@ import { CountryStats } from '@covid19/countries/models';
 import { IncreasedStats, IncreaseType } from '@covid19/global/models';
 
 type Accumulated = {
-  total: number;
   active: number;
   deaths: number;
+  recovered: number;
   fetchedAt: string;
 };
 
@@ -72,9 +72,9 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
 
     distinctDates.forEach((utcDate) => {
       const accumulated: Accumulated = {
-        total: 0,
         active: 0,
         deaths: 0,
+        recovered: 0,
         fetchedAt: null,
       };
       sortedCountryStats.forEach((stats) => {
@@ -83,9 +83,9 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
           stats.fetchedAt.indexOf('T')
         );
         if (currentUtcDate === utcDate) {
-          accumulated.total += stats.totalCases;
           accumulated.active += stats.activeCases;
           accumulated.deaths += stats.totalDeaths;
+          accumulated.recovered += stats.recoveredCases;
           accumulated.fetchedAt = stats.fetchedAt;
         }
       });
@@ -99,14 +99,6 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
     accumulated.forEach((value, index) => {
       if (index < accumulated.length - 1) {
         const previous = accumulated[index + 1];
-        this.increases.push({
-          type: IncreaseType.Total,
-          text: `Today: ${this.transform(
-            value.total
-          )} - Yesterday: ${this.transform(previous.total)}`,
-          increase: this.calculate(value.total, previous.total),
-          time: value.fetchedAt,
-        });
 
         this.increases.push({
           type: IncreaseType.Active,
@@ -126,11 +118,20 @@ export class CountryStatsDayToDayCardsComponent implements OnChanges {
           time: value.fetchedAt,
         });
 
-        this.increases = this.increases.sort((left, right) =>
-          right.time.localeCompare(left.time)
-        );
+        this.increases.push({
+          type: IncreaseType.Recovered,
+          text: `Today: ${this.transform(
+            value.recovered
+          )} - Yesterday: ${this.transform(previous.recovered)}`,
+          increase: this.calculate(value.recovered, previous.recovered),
+          time: value.fetchedAt,
+        });
       }
     });
+
+    this.increases = this.increases.sort((left, right) =>
+      right.time.localeCompare(left.time)
+    );
   }
 
   private calculate(current: number, previous: number): number {

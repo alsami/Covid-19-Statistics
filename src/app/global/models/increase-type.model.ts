@@ -1,5 +1,6 @@
 export enum IncreaseType {
   'Total' = 'Total',
   'Active' = 'Active',
-  'Deaths' = 'Deaths'
+  'Deaths' = 'Deaths',
+  'Recovered' = 'Recovered',
 }
