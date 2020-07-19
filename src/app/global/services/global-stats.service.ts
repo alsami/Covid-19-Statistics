@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 export class GlobalStatsService {
   private readonly baseUrl = environment.apiUrl;
 
-  public constructor(private readonly http: HttpClient) {}
+  public constructor(private readonly http: HttpClient) { }
 
   public load(): Observable<GlobalStats> {
-    return this.http.get<GlobalStats>(`${this.baseUrl}stats`);
+    return this.http.get<GlobalStats>(`${this.baseUrl}global`);
   }
 }

@@ -12,7 +12,7 @@ export class CountriesStatsHistoryService {
 
   public load(): Observable<CountryStats[]> {
     return this.http.get<CountryStats[]>(
-      `${this.baseUrl}stats/countries/history`
+      `${this.baseUrl}countries/history`
     );
   }
 }

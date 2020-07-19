@@ -11,6 +11,6 @@ export class CountriesStatsService {
   public constructor(private readonly http: HttpClient) {}
 
   public load(): Observable<CountryStats[]> {
-    return this.http.get<CountryStats[]>(`${this.baseUrl}stats/countries`);
+    return this.http.get<CountryStats[]>(`${this.baseUrl}countries`);
   }
 }
