@@ -9,11 +9,6 @@ import { GlobalStatsOverviewComponent } from '@covid19/global/containers';
     RouterModule.forChild([
       {
         path: '',
-        redirectTo: 'global',
-        pathMatch: 'full',
-      },
-      {
-        path: 'global',
         component: GlobalStatsOverviewComponent,
       },
     ]),

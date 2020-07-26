@@ -10,11 +10,11 @@ import { RouterModule } from '@angular/router';
       [
         {
           path: '',
-          redirectTo: 'stats',
+          redirectTo: 'global',
           pathMatch: 'full',
         },
         {
-          path: 'stats',
+          path: 'global',
           loadChildren: async () =>
             (await import('./global/global-stats.module')).GlobalStatsModule,
         },
