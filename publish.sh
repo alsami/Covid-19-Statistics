@@ -6,12 +6,12 @@ function build_app() {
 }
 
 function create_image() {
-    docker build -t ${REGISTRY}/covid19.statistics:${TRAVIS_TAG} -f ./Dockerfile .
+    docker build -t ${REGISTRY}/covid-19-statistics:${TRAVIS_TAG} -f ./Dockerfile .
     return ${?}
 }
 
 function publish_image() {
-    docker push ${REGISTRY}/covid19.statistics:${TRAVIS_TAG}
+    docker push ${REGISTRY}/covid-19-statistics:${TRAVIS_TAG}
     return ${?};
 }
 
@@ -23,7 +23,7 @@ function authenticate() {
 
 function set_container() {
     echo updating container to version ${TRAVIS_TAG}
-    az webapp config container set -c "${REGISTRY}/covid19.statistics:${TRAVIS_TAG}" -r https://${REGISTRY} -u ${REGISTRY_USER} -p "${REGISTRY_PASSWORD}" -n ${COVID19STATISTICS_SERVICE_NAME} -g ${COVID19STATISTICS_RESOURCE_NAME}
+    az webapp config container set -c "${REGISTRY}/covid-19-statistics:${TRAVIS_TAG}" -r https://${REGISTRY} -u ${REGISTRY_USER} -p "${REGISTRY_PASSWORD}" -n ${COVID19STATISTICS_SERVICE_NAME} -g ${COVID19STATISTICS_RESOURCE_NAME}
 }
 
 function restart_app() {
