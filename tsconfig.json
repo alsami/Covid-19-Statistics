@@ -1,11 +1,20 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "./projects",
     "paths": {
-      "@covid19/*": [
-          "app/*"
-      ]
+      "global-statistics-lib": [
+        "dist/global-statistics-lib/global-statistics-lib",
+        "dist/global-statistics-lib"
+      ],
+      "country-statistics-lib": [
+        "dist/country-statistics-lib/country-statistics-lib",
+        "dist/country-statistics-lib"
+      ],
+      "@covid19-statistics/*": ["covid-19-statistics/src/app/*"],
+      "@covid19-statistics-environment/*": ["environments/*"],
+      "@covid19-global-statistics-lib/*": ["global-statistics-lib/src/*"],
+      "@covid19-country-statistics-lib/*": ["country-statistics-lib/src/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -16,10 +25,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

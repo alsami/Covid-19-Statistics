@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 echo removing existing prod-config
+export path='./projects/environments/environment.prod.ts'
 
-rm ./src/environments/environment.prod.ts
+rm ${path}
 
 echo writing new environment file
 
@@ -10,6 +11,4 @@ echo "export const environment = {
     apiUrl: '${apiUrl}',
     mapsApiKey: '${mapsApiKey}',
     version : '${TRAVIS_TAG}'
-};" > src/environments/environment.prod.ts
-
-cat src/environments/environment.prod.ts
+};" > ${path}

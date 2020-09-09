@@ -11,28 +11,32 @@
         }
       },
       "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+      "sourceRoot": "projects/covid-19-statistics/src",
+      "prefix": "covid19",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/covid19-statistics",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "index": "projects/covid-19-statistics/src/index.html",
+            "main": "projects/covid-19-statistics/src/main.ts",
+            "polyfills": "projects/covid-19-statistics/src/polyfills.ts",
+            "tsConfig": "projects/covid-19-statistics/tsconfig.app.json",
             "aot": true,
-            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "projects/covid-19-statistics/src/favicon.ico",
+              "projects/covid-19-statistics/src/assets",
+              "projects/covid-19-statistics/src/manifest.webmanifest"
+            ],
+            "styles": ["projects/covid-19-statistics/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -80,36 +84,100 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "main": "projects/covid-19-statistics/src/test.ts",
+            "polyfills": "projects/covid-19-statistics/src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "projects/covid-19-statistics/src/favicon.ico",
+              "projects/covid-19-statistics/src/assets",
+              "projects/covid-19-statistics/src/manifest.webmanifest"
+            ],
+            "styles": ["projects/covid-19-statistics/styles.scss"],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        }
+      }
+    },
+    "global-statistics-lib": {
+      "projectType": "library",
+      "root": "projects/global-statistics-lib",
+      "sourceRoot": "projects/global-statistics-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "covid19-statistics:serve"
+            "tsConfig": "projects/global-statistics-lib/tsconfig.lib.json",
+            "project": "projects/global-statistics-lib/ng-package.json"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "covid19-statistics:serve:production"
+              "tsConfig": "projects/global-statistics-lib/tsconfig.lib.prod.json"
             }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/global-statistics-lib/src/test.ts",
+            "tsConfig": "projects/global-statistics-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/global-statistics-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/global-statistics-lib/tsconfig.lib.json",
+              "projects/global-statistics-lib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "country-statistics-lib": {
+      "projectType": "library",
+      "root": "projects/country-statistics-lib",
+      "sourceRoot": "projects/country-statistics-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/country-statistics-lib/tsconfig.lib.json",
+            "project": "projects/country-statistics-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/country-statistics-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/country-statistics-lib/src/test.ts",
+            "tsConfig": "projects/country-statistics-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/country-statistics-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/country-statistics-lib/tsconfig.lib.json",
+              "projects/country-statistics-lib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

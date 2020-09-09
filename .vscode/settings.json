@@ -10,5 +10,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.tslint": true,
     "source.organizeImports": true
-  }
+  },
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
