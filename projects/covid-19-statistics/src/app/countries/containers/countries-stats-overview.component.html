@@ -16,7 +16,7 @@
           #countryAutoComplete
           [countryStats]="countryStats$ | async"
         ></covid19-countries-autocomplete>
-        <div class="toggle-container">
+        <div class="toggle-container" style="padding-right: 1em">
           <mat-button-toggle-group
             [multiple]="false"
             (change)="viewSelectionChanged($event)"
