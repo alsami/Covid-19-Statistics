@@ -31,7 +31,9 @@
           <mat-icon mat-list-icon>map</mat-icon>
           <h4 mat-line>World Map</h4>
         </mat-list-item>
-        <ng-container *ngIf="countriesOfInterest?.length">
+      </mat-nav-list>
+      <ng-container *ngIf="countriesOfInterest?.length">
+        <mat-nav-list cdkDropList>
           <h4 mat-subheader>Countries of interest</h4>
           <ng-container
             *ngFor="let country of countriesOfInterest; let last = last"
@@ -40,14 +42,17 @@
               [routerLink]="'/countries/' + country"
               routerLinkActive="selected-link"
               (click)="linkClicked.emit()"
+              cdkDrag
+              (cdkDragDropped)="countryOfInterestOrdered($event)"
+              [cdkDragLockAxis]="'y'"
             >
               <mat-icon mat-list-icon>flag</mat-icon>
               <h4 mat-line>{{ country }}</h4>
             </mat-list-item>
             <mat-divider *ngIf="!last"></mat-divider>
           </ng-container>
-        </ng-container>
-      </mat-nav-list>
+        </mat-nav-list>
+      </ng-container>
       <div class="version">
         <span>Version {{ version }}</span>
       </div>

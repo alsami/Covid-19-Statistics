@@ -19,7 +19,7 @@ export class CountriesOfInterestEffects {
 
   store$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(countriesOfInterestActions.store),
+      ofType(countriesOfInterestActions.add),
       map((action) => {
         this.storage.store(action.countryOfInterest);
         return countriesOfInterestActions.loaded({
@@ -27,6 +27,19 @@ export class CountriesOfInterestEffects {
         });
       })
     )
+  );
+
+  replace$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(countriesOfInterestActions.replace),
+        map((action) => {
+          this.storage.override(action.countriesOfInterest);
+        })
+      ),
+    {
+      dispatch: false,
+    }
   );
 
   remove$ = createEffect(() =>

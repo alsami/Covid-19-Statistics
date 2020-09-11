@@ -72,3 +72,7 @@ covid19-layout .mat-drawer-inner-container {
 covid19-layout .mat-drawer-inner-container {
   -ms-overflow-style: none;
 }
+
+.cdk-drag-preview .mat-list-item-content mat-icon {
+  display: none;
+}

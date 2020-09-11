@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 const key = 'COUNTRIES_OF_INTEREST';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CountriesOfInterestStorageService {
   public store(country: string): void {
@@ -11,7 +11,7 @@ export class CountriesOfInterestStorageService {
 
     if (
       countriesOfInterest.findIndex(
-        existingCountry => existingCountry === country
+        (existingCountry) => existingCountry === country
       ) > -1
     ) {
       return;
@@ -30,7 +30,7 @@ export class CountriesOfInterestStorageService {
     const clone = countriesOfInterest.slice();
 
     const index = countriesOfInterest.findIndex(
-      existingCountry => existingCountry === country
+      (existingCountry) => existingCountry === country
     );
 
     if (index === -1) {
@@ -56,10 +56,10 @@ export class CountriesOfInterestStorageService {
 
     const countries = JSON.parse(storageValue) as string[];
 
-    return countries.sort((a, b) => a.localeCompare(b));
+    return countries;
   }
 
-  private override(countries: string[]): void {
+  public override(countries: string[]): void {
     console.log(countries);
     window.localStorage.setItem(key, JSON.stringify(countries));
   }

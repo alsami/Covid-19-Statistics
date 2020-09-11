@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LayoutModule } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
@@ -50,9 +51,6 @@ const modules = [
   MatMenuModule,
   MatSlideToggleModule,
   MatStepperModule,
-  OverlayModule,
-  PortalModule,
-  LayoutModule,
   MatTableModule,
   MatChipsModule,
   MatGridListModule,
@@ -61,6 +59,12 @@ const modules = [
   MatAutocompleteModule,
   MatSelectModule,
   MatCheckboxModule,
+  /** CDK  */
+
+  DragDropModule,
+  OverlayModule,
+  PortalModule,
+  LayoutModule,
 ];
 
 @NgModule({

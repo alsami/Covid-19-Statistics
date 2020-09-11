@@ -15,6 +15,7 @@
   >
     <covid19-sidenav-content
       [countriesOfInterest]="countriesOfInterest$ | async"
+      (countriesOfInterestOrdered)="saveCountriesOfInterest($event)"
       (linkClicked)="toggleSidenavBasedOnSize()"
     ></covid19-sidenav-content>
   </mat-sidenav>

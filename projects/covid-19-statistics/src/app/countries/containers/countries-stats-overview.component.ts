@@ -136,7 +136,7 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
 
   public storeCountryOfInterest(country: string): void {
     this.store.dispatch(
-      countriesOfInterestActions.store({
+      countriesOfInterestActions.add({
         countryOfInterest: country,
       })
     );

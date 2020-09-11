@@ -12,6 +12,9 @@ const initialState: CountriesOfInterestState = {
 const _reducer = createReducer(
   initialState,
   on(countriesOfInterestActions.load, (state) => state),
+  on(countriesOfInterestActions.replace, (_, { countriesOfInterest }) => ({
+    countriesOfInterest: countriesOfInterest,
+  })),
   on(countriesOfInterestActions.loaded, (_, { countriesOfInterest }) => ({
     countriesOfInterest: countriesOfInterest,
   }))

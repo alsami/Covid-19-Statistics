@@ -71,6 +71,14 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  public saveCountriesOfInterest(countriesOfInterest: string[]): void {
+    this.store.dispatch(
+      countriesOfInterestActions.replace({
+        countriesOfInterest: countriesOfInterest,
+      })
+    );
+  }
+
   public toggleSidenav(): void {
     this.store.dispatch(
       layoutActions.toggleSidenav({
