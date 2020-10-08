@@ -26,7 +26,20 @@
   border-left: 0.5em solid #7b1fa2;
 }
 
-/* CDK Drag */
+.country-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: auto;
+  justify-content: space-around;
+}
+
+.country-image {
+  height: 32px;
+  padding-right: 16px;
+}
+
+/* CDK Drag START */
 
 .cdk-drag-preview {
   display: flex;
@@ -44,3 +57,5 @@
 .cdk-drag-placeholder {
   opacity: 0;
 }
+
+/* CDK Drag END */

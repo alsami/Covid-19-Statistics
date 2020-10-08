@@ -46,8 +46,16 @@
               (cdkDragDropped)="countryOfInterestOrdered($event)"
               [cdkDragLockAxis]="'y'"
             >
-              <mat-icon mat-list-icon>flag</mat-icon>
-              <h4 mat-line>{{ country }}</h4>
+              <!-- <mat-icon mat-list-icon>flag</mat-icon> -->
+              <div class="country-container">
+                <img
+                  src="https://www.countryflags.io/be/flat/32.png"
+                  class="country-image"
+                />
+                <div mat-line style="font-size: 16px !important">
+                  {{ country }}
+                </div>
+              </div>
             </mat-list-item>
             <mat-divider *ngIf="!last"></mat-divider>
           </ng-container>

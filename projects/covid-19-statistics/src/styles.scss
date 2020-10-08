@@ -73,6 +73,14 @@ covid19-layout .mat-drawer-inner-container {
   -ms-overflow-style: none;
 }
 
+/* CDK PREVIEW FOR SIDENAV! START*/
+
 .cdk-drag-preview .mat-list-item-content mat-icon {
   display: none;
 }
+
+.cdk-drag-preview .mat-list-item-content img {
+  display: none;
+}
+
+/* CDK PREVIEW FOR SIDENAV END! */
