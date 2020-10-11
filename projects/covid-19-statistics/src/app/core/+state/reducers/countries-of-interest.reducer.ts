@@ -1,8 +1,9 @@
 import { countriesOfInterestActions } from '@covid19-statistics/core/+state/actions';
+import { CountryOfInterest } from '@covid19-statistics/countries/models';
 import { createReducer, on } from '@ngrx/store';
 
 export interface CountriesOfInterestState {
-  countriesOfInterest: string[];
+  countriesOfInterest: CountryOfInterest[];
 }
 
 const initialState: CountriesOfInterestState = {

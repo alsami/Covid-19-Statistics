@@ -9,8 +9,10 @@ import { CountryStats } from '@covid19-country-statistics-lib/public-api';
 import {
   PROPER_BLUE,
   PROPER_GREEN,
+  PROPER_GREY,
   PROPER_RED,
 } from '@covid19-statistics/core/core.constants';
+import { CountryOfInterest } from '@covid19-statistics/countries/models';
 
 @Component({
   selector: 'covid19-country-stats-card',
@@ -20,22 +22,25 @@ import {
 })
 export class CountryStatsCardComponent {
   @Input() countryStats: CountryStats;
-  @Input() countriesOfInterest: string[];
+  @Input() countriesOfInterest: CountryOfInterest[];
 
   @Output() addCountryOfInterest = new EventEmitter();
   @Output() removeCountryOfInterest = new EventEmitter();
 
-  /* 
-  cases, 
-  active cases, 
-  deaths, 
-  recovered, 
+  /*
+  cases,
+  active cases,
+  deaths,
+  recovered,
   */
-  public colorScheme = ['#AAAAAA', PROPER_BLUE, PROPER_RED, PROPER_GREEN];
+  public colorScheme = [PROPER_GREY, PROPER_BLUE, PROPER_RED, PROPER_GREEN];
 
   public containsCountry(value: string) {
     return (
-      this.countriesOfInterest && this.countriesOfInterest.indexOf(value) > -1
+      this.countriesOfInterest?.findIndex(
+        (existingCountryOfInterest) =>
+          existingCountryOfInterest.country === value
+      ) > -1
     );
   }
 }

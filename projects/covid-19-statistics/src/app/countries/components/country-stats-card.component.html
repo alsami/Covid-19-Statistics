@@ -1,8 +1,10 @@
-<mat-card>
-  <mat-card-title>
-    {{ countryStats.country }}
-  </mat-card-title>
-
+<mat-card *ngIf="countryStats">
+  <div class="header-container">
+    <img class="country-image" [src]="countryStats | countryFlag: '64'" />
+    <mat-card-title>
+      {{ countryStats.country }}
+    </mat-card-title>
+  </div>
   <mat-card-content>
     <div class="value-container">
       <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
@@ -38,26 +40,18 @@
       *ngIf="containsCountry(countryStats.country); then remove; else add"
     ></ng-container>
     <ng-template #add>
-      <button
-        mat-button
-        (click)="addCountryOfInterest.emit(countryStats.country)"
-      >
+      <button mat-button (click)="addCountryOfInterest.emit(countryStats)">
         <mat-icon>visibility</mat-icon>
         Add to list
       </button>
     </ng-template>
 
     <ng-template #remove>
-      <button
-        mat-button
-        (click)="removeCountryOfInterest.emit(countryStats.country)"
-      >
+      <button mat-button (click)="removeCountryOfInterest.emit(countryStats)">
         <mat-icon>visibility_off</mat-icon>
         Remove from list
       </button>
     </ng-template>
-    <button mat-button [routerLink]="countryStats.country">
-      Show details
-    </button>
+    <button mat-button [routerLink]="countryStats.country">Show details</button>
   </mat-card-actions>
 </mat-card>

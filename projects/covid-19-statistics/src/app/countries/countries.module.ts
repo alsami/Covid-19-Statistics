@@ -29,6 +29,7 @@ import {
   CountryStatsOverviewComponent,
 } from '@covid19-statistics/countries/containers';
 import { MaterialModule } from '@covid19-statistics/material/material.module';
+import { PipesModule } from '@covid19-statistics/pipes/pipes.module';
 import { SharedModule } from '@covid19-statistics/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -56,6 +57,7 @@ const COMPONENTS = [
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [
+    PipesModule,
     CommonModule,
     FormsModule,
     CountriesRoutingModule,

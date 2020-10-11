@@ -12,6 +12,8 @@ import {
   NoopInterceptor,
 } from '@covid19-statistics/core/interceptor';
 import { MaterialModule } from '@covid19-statistics/material/material.module';
+import { CountryFlagPipe } from '@covid19-statistics/pipes/country-flag.pipe';
+import { PipesModule } from '@covid19-statistics/pipes/pipes.module';
 
 const COMPONENTS = [LayoutComponent, ToolbarComponent, SidenavContentComponent];
 
@@ -30,14 +32,20 @@ const interceptors = [
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [CommonModule, MaterialModule, RouterModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    RouterModule,
+    HttpClientModule,
+    PipesModule,
+  ],
   exports: [...COMPONENTS],
 })
 export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
-      providers: [DecimalPipe, ...interceptors],
+      providers: [DecimalPipe, CountryFlagPipe, ...interceptors],
     };
   }
 }

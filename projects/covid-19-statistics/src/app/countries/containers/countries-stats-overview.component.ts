@@ -14,7 +14,10 @@ import {
 } from '@covid19-statistics/core/+state/actions';
 import { CountriesAutoCompleteComponent } from '@covid19-statistics/countries/components';
 import { BAR_CHART_TYPES } from '@covid19-statistics/countries/countries.constants';
-import { BarChartType } from '@covid19-statistics/countries/models';
+import {
+  BarChartType,
+  CountryOfInterest,
+} from '@covid19-statistics/countries/models';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -29,7 +32,7 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   public countryStats$: Observable<CountryStats[]>;
   public countryStatsHistory$: Observable<CountryStats[]>;
   public filteredCountryStats$: Observable<CountryStats[]>;
-  public countriesOfInterest: string[] = [];
+  public countriesOfInterest: CountryOfInterest[] = [];
   public selectedIndex: number = 0;
   private coiSub$: Subscription;
   public chartTypes: BarChartType[] = BAR_CHART_TYPES;
@@ -134,18 +137,21 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
     );
   }
 
-  public storeCountryOfInterest(country: string): void {
+  public storeCountryOfInterest(country: CountryStats): void {
     this.store.dispatch(
       countriesOfInterestActions.add({
-        countryOfInterest: country,
+        countryOfInterest: {
+          country: country.country,
+          countryCode: country.countryCode,
+        },
       })
     );
   }
 
-  public removeCountryOfInterest(country: string): void {
+  public removeCountryOfInterest(country: CountryStats): void {
     this.store.dispatch(
       countriesOfInterestActions.remove({
-        countryOfInterest: country,
+        countryOfInterest: country.country,
       })
     );
   }

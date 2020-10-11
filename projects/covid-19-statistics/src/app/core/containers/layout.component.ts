@@ -5,6 +5,7 @@ import {
   countriesOfInterestActions,
   layoutActions,
 } from '@covid19-statistics/core/+state/actions';
+import { CountryOfInterest } from '@covid19-statistics/countries/models';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
@@ -20,11 +21,11 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   fixedInViewport = true;
   showSidenav = false;
 
-  title$: Observable<string>;
-  countriesOfInterest$: Observable<string[]>;
-
   private bpoSub: Subscription;
   private showSidenabSub: Subscription;
+
+  public title$: Observable<string>;
+  public countriesOfInterest$: Observable<CountryOfInterest[]>;
 
   public constructor(
     private bpo: BreakpointObserver,
@@ -71,7 +72,9 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  public saveCountriesOfInterest(countriesOfInterest: string[]): void {
+  public saveCountriesOfInterest(
+    countriesOfInterest: CountryOfInterest[]
+  ): void {
     this.store.dispatch(
       countriesOfInterestActions.replace({
         countriesOfInterest: countriesOfInterest,

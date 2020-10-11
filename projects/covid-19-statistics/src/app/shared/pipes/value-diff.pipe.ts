@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'valueDiff',
-  pure: true
+  pure: true,
 })
 export class ValueDiffPipe implements PipeTransform {
   public transform(

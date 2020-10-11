@@ -8,6 +8,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { CountryOfInterest } from '@covid19-statistics/countries/models';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -21,10 +22,10 @@ export class SidenavContentComponent implements OnChanges {
 
   public dragging = false;
 
-  @Input() countriesOfInterest: string[] = [];
+  @Input() countriesOfInterest: CountryOfInterest[] = [];
   @Output() countriesOfInterestOrdered: EventEmitter<
-    string[]
-  > = new EventEmitter<string[]>();
+    CountryOfInterest[]
+  > = new EventEmitter<CountryOfInterest[]>();
 
   @Output() linkClicked = new EventEmitter();
 
@@ -40,6 +41,7 @@ export class SidenavContentComponent implements OnChanges {
       $event.previousIndex,
       $event.currentIndex
     );
+
     this.countriesOfInterestOrdered.emit(this.countriesOfInterest);
   }
 }

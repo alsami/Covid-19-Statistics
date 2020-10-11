@@ -1,3 +1,4 @@
+import { CountryOfInterest } from '@covid19-statistics/countries/models';
 import { createAction, props } from '@ngrx/store';
 
 export enum CountriesOfInterestActions {
@@ -12,17 +13,17 @@ export const load = createAction(CountriesOfInterestActions.Load);
 
 export const loaded = createAction(
   CountriesOfInterestActions.Loaded,
-  props<{ countriesOfInterest: string[] }>()
+  props<{ countriesOfInterest: CountryOfInterest[] }>()
 );
 
 export const replace = createAction(
   CountriesOfInterestActions.Replace,
-  props<{ countriesOfInterest: string[] }>()
+  props<{ countriesOfInterest: CountryOfInterest[] }>()
 );
 
 export const add = createAction(
   CountriesOfInterestActions.Store,
-  props<{ countryOfInterest: string }>()
+  props<{ countryOfInterest: CountryOfInterest }>()
 );
 
 export const remove = createAction(
