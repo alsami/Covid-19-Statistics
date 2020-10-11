@@ -161,10 +161,10 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   }
 
   private combineCountryStats(): void {
-    this.filteredCountryStats$ = combineLatest(
+    this.filteredCountryStats$ = combineLatest([
       this.countryAutoComplete.countriesSelected,
-      this.countryStats$
-    ).pipe(
+      this.countryStats$,
+    ]).pipe(
       map(([selectedCountries, countryStats]) => {
         if (!selectedCountries || !selectedCountries.length) {
           return countryStats;
@@ -178,12 +178,12 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   }
 
   private combineLoading(): void {
-    this.loading$ = combineLatest(
+    this.loading$ = combineLatest([
       this.store.pipe(select(fromCountryStatistics.getCountriesStatsLoading)),
       this.store.pipe(
         select(fromCountryStatistics.getCountriesStatsHistoryLoading)
-      )
-    ).pipe(
+      ),
+    ]).pipe(
       map(
         ([countriesLoading, countriesHistoryLoading]) =>
           countriesLoading || countriesHistoryLoading

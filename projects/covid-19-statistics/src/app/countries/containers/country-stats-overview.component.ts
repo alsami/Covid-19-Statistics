@@ -128,12 +128,12 @@ export class CountryStatsOverviewComponent
   ) {}
 
   public ngOnInit(): void {
-    this.loading$ = combineLatest(
+    this.loading$ = combineLatest([
       this.store.pipe(select(fromCountryStatistics.getCountryStatsLoading)),
       this.store.pipe(
         select(fromCountryStatistics.getCountryStatsHistoryLoading)
-      )
-    ).pipe(
+      ),
+    ]).pipe(
       map(
         ([countryStatsLoading, countryStatsHistoryLoading]) =>
           countryStatsLoading || countryStatsHistoryLoading

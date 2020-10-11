@@ -56,10 +56,12 @@ export class GlobalStatsOverviewComponent implements OnInit {
     this.globalStatsHistory$ = this.store.pipe(
       select(fromGlobalStatistics.getGlobalHistoryStats)
     );
-    this.loading$ = combineLatest(
+    this.loading$ = combineLatest([
       this.store.pipe(select(fromGlobalStatistics.getGlobalStatsLoading)),
-      this.store.pipe(select(fromGlobalStatistics.getGlobalHistoryStatsLoading))
-    ).pipe(
+      this.store.pipe(
+        select(fromGlobalStatistics.getGlobalHistoryStatsLoading)
+      ),
+    ]).pipe(
       map(
         ([globalStatsLoading, globalStatsHistoryLoading]) =>
           globalStatsLoading || globalStatsHistoryLoading
