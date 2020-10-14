@@ -8,6 +8,7 @@ import {
 } from '@covid19-statistics/shared/components';
 import { DiffNumberColorDirective } from '@covid19-statistics/shared/directives';
 import {
+  CountryFlagPipe,
   PercentagePipe,
   ValueDiffPipe,
 } from '@covid19-statistics/shared/pipes';
@@ -19,6 +20,7 @@ const COMPONENTS = [
   DiffNumberColorDirective,
   ValueDiffPipe,
   PercentagePipe,
+  CountryFlagPipe,
 ];
 
 @NgModule({
