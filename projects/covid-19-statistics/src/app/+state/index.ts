@@ -65,7 +65,17 @@ export const getLayoutState = createFeatureSelector<fromLayout.LayoutState>(
   'layout'
 );
 
-export const getShowSidenav = createSelector(
+export const getShowStartSidenav = createSelector(
   getLayoutState,
-  fromLayout.showSidenav
+  fromLayout.showStartSidenav
+);
+
+export const getShowEndSidenav = createSelector(
+  getLayoutState,
+  fromLayout.showEndSidenav
+);
+
+export const getLoaderType = createSelector(
+  getLayoutState,
+  fromLayout.loaderType
 );

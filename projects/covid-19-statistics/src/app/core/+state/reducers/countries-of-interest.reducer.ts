@@ -1,4 +1,4 @@
-import { countriesOfInterestActions } from '@covid19-statistics/core/+state/actions';
+import { CountriesOfInterestActions } from '@covid19-statistics/core/+state/actions';
 import { CountryOfInterest } from '@covid19-statistics/countries/models';
 import { createReducer, on } from '@ngrx/store';
 
@@ -12,11 +12,11 @@ const initialState: CountriesOfInterestState = {
 
 const _reducer = createReducer(
   initialState,
-  on(countriesOfInterestActions.load, (state) => state),
-  on(countriesOfInterestActions.replace, (_, { countriesOfInterest }) => ({
+  on(CountriesOfInterestActions.load, (state) => state),
+  on(CountriesOfInterestActions.replace, (_, { countriesOfInterest }) => ({
     countriesOfInterest: countriesOfInterest,
   })),
-  on(countriesOfInterestActions.loaded, (_, { countriesOfInterest }) => ({
+  on(CountriesOfInterestActions.loaded, (_, { countriesOfInterest }) => ({
     countriesOfInterest: countriesOfInterest,
   }))
 );

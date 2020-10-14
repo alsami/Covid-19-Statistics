@@ -15,4 +15,5 @@ import {
 export class ToolbarComponent {
   @Input() title: string = '';
   @Output() toggle = new EventEmitter();
+  @Output() toggleSettings = new EventEmitter();
 }

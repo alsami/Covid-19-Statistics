@@ -7,15 +7,18 @@ import { environment } from '@covid19-statistics-environment/environment';
 import { metaReducers, reducers } from '@covid19-statistics/+state';
 import { AppRoutingModule } from '@covid19-statistics/app-routing.module';
 import {
+  EndSidenavContentComponent,
   SidenavContentComponent,
   ToolbarComponent,
 } from '@covid19-statistics/components';
 import { LayoutComponent } from '@covid19-statistics/containers';
 import {
   CountriesOfInterestEffects,
+  LayoutEffects,
   TitleEffects,
 } from '@covid19-statistics/core/+state/effects';
 import { CoreModule } from '@covid19-statistics/core/core.module';
+import { LoadersModule } from '@covid19-statistics/loaders/loaders.module';
 import { MaterialModule } from '@covid19-statistics/material/material.module';
 import { CountryFlagPipe } from '@covid19-statistics/shared/pipes';
 import { SharedModule } from '@covid19-statistics/shared/shared.module';
@@ -28,6 +31,7 @@ const COMPONENTS = [
   LayoutComponent,
   SidenavContentComponent,
   ToolbarComponent,
+  EndSidenavContentComponent,
 ];
 
 @NgModule({
@@ -36,13 +40,18 @@ const COMPONENTS = [
     CoreModule.forRoot(),
     BrowserModule,
     SharedModule,
+    LoadersModule,
     MaterialModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
-    EffectsModule.forRoot([TitleEffects, CountriesOfInterestEffects]),
+    EffectsModule.forRoot([
+      TitleEffects,
+      CountriesOfInterestEffects,
+      LayoutEffects,
+    ]),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),

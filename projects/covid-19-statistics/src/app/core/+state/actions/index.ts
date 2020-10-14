@@ -1,5 +1,5 @@
-import * as countriesOfInterestActions from './countries-of-interest.actions';
-import * as layoutActions from './layout.actions';
+import * as CountriesOfInterestActions from './countries-of-interest.actions';
+import * as LayoutActions from './layout.actions';
 import * as TitleActions from './title.actions';
 
-export { TitleActions, countriesOfInterestActions, layoutActions };
+export { TitleActions, CountriesOfInterestActions, LayoutActions };

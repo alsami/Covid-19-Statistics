@@ -17,6 +17,10 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import * as fromRoot from '@covid19-statistics/+state';
+import { LoaderType } from '@covid19-statistics/loaders/models';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'covid19-page-loader-overlay',
@@ -29,8 +33,12 @@ export class PageLoaderOverlayComponent
   @Input()
   loading: boolean;
 
-  @ViewChild('overlay', { static: true })
+  @ViewChild('spinnerContainerOverlay', { static: true })
   templateRef: TemplateRef<any>;
+
+  public loaderType$: Observable<LoaderType>;
+
+  public loaderTypes = LoaderType;
 
   private overlayRef: OverlayRef;
 
@@ -38,14 +46,15 @@ export class PageLoaderOverlayComponent
     private overlay: Overlay,
     private overlayBuilder: OverlayPositionBuilder,
     private viewContainerRef: ViewContainerRef,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private store: Store<fromRoot.AppState>
   ) {
+    this.overlayRef = this.buildOverLayRef();
     this.cdr.detach();
   }
 
   public ngOnInit(): void {
-    this.overlayRef = this.buildOverLayRef();
-    this.safeAttach();
+    this.loaderType$ = this.store.pipe(select(fromRoot.getLoaderType));
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -56,6 +65,8 @@ export class PageLoaderOverlayComponent
     if (changes.loading.previousValue && !changes.loading.currentValue) {
       this.safeDetach();
     }
+
+    this.cdr.detectChanges();
   }
 
   public ngOnDestroy(): void {
@@ -69,12 +80,16 @@ export class PageLoaderOverlayComponent
         .centerVertically()
         .centerHorizontally(),
       hasBackdrop: true,
-      backdropClass: 'cdk-overlay-dark-backdrop',
+      backdropClass: 'dark-backdrop',
     });
   }
 
   private safeAttach(): void {
-    if (!this.overlayRef || this.overlayRef.hasAttached()) {
+    if (!this.overlayRef) {
+      return;
+    }
+
+    if (this.overlayRef.hasAttached()) {
       return;
     }
 

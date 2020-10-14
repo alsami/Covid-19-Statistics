@@ -1,0 +1,34 @@
+<div style="display: flex; justify-content: center">
+  <section class="mat-typography">
+    <h2>Choose your loader</h2>
+  </section>
+</div>
+<mat-radio-group [value]="loaderType" (change)="changeLayoutType($event)">
+  <div class="container">
+    <div class="loader-wrapper">
+      <mat-radio-button [value]="loaderTypes.MatSpinner">
+        <div class="loader-container">
+          <mat-spinner color="accent" diameter="50"></mat-spinner>
+        </div>
+      </mat-radio-button>
+      <mat-radio-button class="hacked-space-radio" [value]="loaderTypes.Pulse">
+        <div class="loader-container">
+          <covid19-pulse-loader></covid19-pulse-loader>
+        </div>
+      </mat-radio-button>
+    </div>
+    <div class="loader-wrapper">
+      <mat-radio-button [value]="loaderTypes.Ellipsis">
+        <div class="loader-container">
+          <covid19-ellipsis-loader></covid19-ellipsis-loader>
+        </div>
+      </mat-radio-button>
+      <mat-divider></mat-divider>
+      <mat-radio-button [value]="loaderTypes.Rectangle">
+        <div class="loader-container">
+          <covid19-rectangle-loader></covid19-rectangle-loader>
+        </div>
+      </mat-radio-button>
+    </div>
+  </div>
+</mat-radio-group>

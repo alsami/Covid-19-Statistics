@@ -4,4 +4,8 @@
   </button>
   COVID-19
   <span *ngIf="title?.length">&nbsp;| {{ title }}</span>
+  <span style="flex: 1 1 100%"></span>
+  <button mat-icon-button (click)="toggleSettings.emit()">
+    <mat-icon>settings</mat-icon>
+  </button>
 </mat-toolbar>

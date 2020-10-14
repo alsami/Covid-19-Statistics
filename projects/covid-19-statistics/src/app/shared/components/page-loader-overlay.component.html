@@ -1,9 +1,16 @@
-<ng-template #overlay>
-  <div class="spinner">
-    <div class="rect1"></div>
-    <div class="rect2"></div>
-    <div class="rect3"></div>
-    <div class="rect4"></div>
-    <div class="rect5"></div>
-  </div>
+<ng-template #spinnerContainerOverlay>
+  <ng-container [ngSwitch]="loaderType$ | async">
+    <ng-container *ngSwitchCase="loaderTypes.MatSpinner">
+      <mat-spinner color="accent"></mat-spinner>
+    </ng-container>
+    <ng-container *ngSwitchCase="loaderTypes.Rectangle">
+      <covid19-rectangle-loader></covid19-rectangle-loader>
+    </ng-container>
+    <ng-container *ngSwitchCase="loaderTypes.Ellipsis">
+      <covid19-ellipsis-loader></covid19-ellipsis-loader>
+    </ng-container>
+    <ng-container *ngSwitchCase="loaderTypes.Pulse">
+      <covid19-pulse-loader></covid19-pulse-loader>
+    </ng-container>
+  </ng-container>
 </ng-template>

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { LoadersModule } from '@covid19-statistics/loaders/loaders.module';
 import { MaterialModule } from '@covid19-statistics/material/material.module';
 import {
   ComponentLoaderOverlayComponent,
@@ -25,7 +26,7 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, LoadersModule],
   exports: [...COMPONENTS],
 })
 export class SharedModule {}

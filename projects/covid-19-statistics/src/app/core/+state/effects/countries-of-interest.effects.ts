@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { countriesOfInterestActions } from '@covid19-statistics/core/+state/actions';
+import { CountriesOfInterestActions } from '@covid19-statistics/core/+state/actions';
 import { CountriesOfInterestStorageService } from '@covid19-statistics/core/services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map } from 'rxjs/operators';
@@ -8,9 +8,9 @@ import { map } from 'rxjs/operators';
 export class CountriesOfInterestEffects {
   load$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(countriesOfInterestActions.load),
+      ofType(CountriesOfInterestActions.load),
       map(() =>
-        countriesOfInterestActions.loaded({
+        CountriesOfInterestActions.loaded({
           countriesOfInterest: this.storage.load(),
         })
       )
@@ -19,10 +19,10 @@ export class CountriesOfInterestEffects {
 
   store$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(countriesOfInterestActions.add),
+      ofType(CountriesOfInterestActions.add),
       map((action) => {
         this.storage.store(action.countryOfInterest);
-        return countriesOfInterestActions.loaded({
+        return CountriesOfInterestActions.loaded({
           countriesOfInterest: this.storage.load(),
         });
       })
@@ -32,7 +32,7 @@ export class CountriesOfInterestEffects {
   replace$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(countriesOfInterestActions.replace),
+        ofType(CountriesOfInterestActions.replace),
         map((action) => {
           this.storage.override(action.countriesOfInterest);
         })
@@ -44,10 +44,10 @@ export class CountriesOfInterestEffects {
 
   remove$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(countriesOfInterestActions.remove),
+      ofType(CountriesOfInterestActions.remove),
       map((action) => {
         this.storage.remove(action.countryOfInterest);
-        return countriesOfInterestActions.loaded({
+        return CountriesOfInterestActions.loaded({
           countriesOfInterest: this.storage.load(),
         });
       })

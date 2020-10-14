@@ -1,24 +1,40 @@
 <covid19-toolbar
   [title]="title$ | async"
-  (toggle)="toggleSidenav()"
+  (toggle)="toggleStartSidenav()"
+  (toggleSettings)="toggleEndSidenav()"
 ></covid19-toolbar>
 <mat-sidenav-container
-  class="main-sidenav-container"
-  (backdropClick)="toggleSidenav()"
+  class="sidenav-container"
+  (backdropClick)="hideSidenavs()"
 >
   <mat-sidenav
     [mode]="mode"
-    [opened]="showSidenav"
+    [opened]="showStartSidenav"
     [fixedInViewport]="fixedInViewport"
     [fixedTopGap]="layoutGap"
     [autoFocus]="false"
-    class="main-sidenav"
+    [position]="'start'"
+    class="start-sidenav"
   >
     <covid19-sidenav-content
       [countriesOfInterest]="countriesOfInterest$ | async"
       (countriesOfInterestOrdered)="saveCountriesOfInterest($event)"
       (linkClicked)="toggleSidenavBasedOnSize()"
     ></covid19-sidenav-content>
+  </mat-sidenav>
+  <mat-sidenav
+    [mode]="mode"
+    [opened]="showEndSidenav"
+    [fixedInViewport]="fixedInViewport"
+    [fixedTopGap]="layoutGap"
+    [autoFocus]="false"
+    [position]="'end'"
+    class="end-sidenav"
+  >
+    <covid19-end-sidenav-content
+      [loaderType]="loaderType$ | async"
+      (loaderTypeChosen)="saveLoaderType($event)"
+    ></covid19-end-sidenav-content>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>

@@ -1,15 +1,19 @@
-.main-sidenav {
+.start-sidenav {
   width: 160px;
 }
 
-.main-sidenav-container {
+.end-sidenav {
+  width: 250px;
+}
+
+.sidenav-container {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
 @media screen and (max-width: 599px) {
-  .main-sidenav-container {
+  .sidenav-container {
     width: 100%;
     height: calc(100% - 56px);
     z-index: 100;
@@ -17,7 +21,7 @@
 }
 
 @media screen and (min-width: 600px) {
-  .main-sidenav-container {
+  .sidenav-container {
     width: 100%;
     height: calc(100% - 64px);
   }

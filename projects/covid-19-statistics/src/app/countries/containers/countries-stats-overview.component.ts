@@ -9,7 +9,7 @@ import {
 } from '@covid19-country-statistics-lib/public-api';
 import * as fromRoot from '@covid19-statistics/+state';
 import {
-  countriesOfInterestActions,
+  CountriesOfInterestActions,
   TitleActions,
 } from '@covid19-statistics/core/+state/actions';
 import { CountriesAutoCompleteComponent } from '@covid19-statistics/countries/components';
@@ -139,7 +139,7 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
 
   public storeCountryOfInterest(country: CountryStats): void {
     this.store.dispatch(
-      countriesOfInterestActions.add({
+      CountriesOfInterestActions.add({
         countryOfInterest: {
           country: country.country,
           countryCode: country.countryCode,
@@ -150,7 +150,7 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
 
   public removeCountryOfInterest(country: CountryStats): void {
     this.store.dispatch(
-      countriesOfInterestActions.remove({
+      CountriesOfInterestActions.remove({
         countryOfInterest: country.country,
       })
     );

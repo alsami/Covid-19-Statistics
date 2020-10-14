@@ -2,13 +2,14 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import * as fromRoot from '@covid19-statistics/+state';
 import {
-  countriesOfInterestActions,
-  layoutActions,
+  CountriesOfInterestActions,
+  LayoutActions,
 } from '@covid19-statistics/core/+state/actions';
 import { CountryOfInterest } from '@covid19-statistics/countries/models';
+import { LoaderType } from '@covid19-statistics/loaders/models';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-layout',
@@ -19,13 +20,16 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   mode = 'side';
   layoutGap = '64';
   fixedInViewport = true;
-  showSidenav = false;
+  showStartSidenav = false;
+  showEndSidenav = false;
 
   private bpoSub: Subscription;
-  private showSidenabSub: Subscription;
+  private showStartSidenavSub: Subscription;
+  private showEndSidenavSub: Subscription;
 
   public title$: Observable<string>;
   public countriesOfInterest$: Observable<CountryOfInterest[]>;
+  public loaderType$: Observable<LoaderType>;
 
   public constructor(
     private bpo: BreakpointObserver,
@@ -33,7 +37,8 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.store.dispatch(countriesOfInterestActions.load());
+    this.store.dispatch(LayoutActions.restoreLoaderType());
+    this.store.dispatch(CountriesOfInterestActions.load());
   }
 
   public ngAfterViewInit(): void {
@@ -43,6 +48,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
       .observe(breakpoints)
       .pipe(
         delay(0),
+        distinctUntilChanged(),
         map((bst) => bst.matches)
       )
       .subscribe(() => {
@@ -57,9 +63,18 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.title$ = this.store.pipe(delay(0), select(fromRoot.getTitle));
 
-    this.showSidenabSub = this.store
-      .pipe(delay(0), select(fromRoot.getShowSidenav))
-      .subscribe((show) => (this.showSidenav = show));
+    this.showStartSidenavSub = this.store
+      .pipe(delay(0), select(fromRoot.getShowStartSidenav))
+      .subscribe((show) => (this.showStartSidenav = show));
+
+    this.showEndSidenavSub = this.store
+      .pipe(delay(0), select(fromRoot.getShowEndSidenav))
+      .subscribe((show) => (this.showEndSidenav = show));
+
+    this.loaderType$ = this.store.pipe(
+      delay(0),
+      select(fromRoot.getLoaderType)
+    );
   }
 
   public ngOnDestroy(): void {
@@ -67,45 +82,94 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
       this.bpoSub.unsubscribe();
     }
 
-    if (this.showSidenabSub) {
-      this.showSidenabSub.unsubscribe();
+    if (this.showStartSidenavSub) {
+      this.showStartSidenavSub.unsubscribe();
     }
+
+    if (this.showEndSidenavSub) {
+      this.showEndSidenavSub.unsubscribe();
+    }
+  }
+
+  public saveLoaderType(loaderType: LoaderType): void {
+    console.log(loaderType);
+    this.store.dispatch(
+      LayoutActions.setLoaderType({
+        loaderType,
+      })
+    );
   }
 
   public saveCountriesOfInterest(
     countriesOfInterest: CountryOfInterest[]
   ): void {
     this.store.dispatch(
-      countriesOfInterestActions.replace({
+      CountriesOfInterestActions.replace({
         countriesOfInterest: countriesOfInterest,
       })
     );
   }
 
-  public toggleSidenav(): void {
+  public hideSidenavs(): void {
     this.store.dispatch(
-      layoutActions.toggleSidenav({
-        show: this.showSidenav ? false : true,
+      LayoutActions.toggleStartSidenav({
+        show: false,
+      })
+    );
+
+    this.store.dispatch(
+      LayoutActions.toggleEndSidenav({
+        show: false,
+      })
+    );
+  }
+
+  public toggleStartSidenav(): void {
+    this.store.dispatch(
+      LayoutActions.toggleStartSidenav({
+        show: this.showStartSidenav ? false : true,
+      })
+    );
+  }
+
+  public toggleEndSidenav(): void {
+    this.store.dispatch(
+      LayoutActions.toggleEndSidenav({
+        show: this.showEndSidenav ? false : true,
       })
     );
   }
 
   public toggleSidenavBasedOnSize(): void {
-    if (this.isExtraSmallDevice() || this.isSmallDevice()) {
-      this.store.dispatch(
-        layoutActions.toggleSidenav({
-          show: false,
-        })
-      );
+    if (!this.limitedDeviceSize()) {
+      return;
     }
+
+    this.store.dispatch(
+      LayoutActions.toggleStartSidenav({
+        show: false,
+      })
+    );
+
+    this.store.dispatch(
+      LayoutActions.toggleEndSidenav({
+        show: false,
+      })
+    );
   }
 
   private determineSidenavMode(): void {
-    if (this.isExtraSmallDevice() || this.isSmallDevice()) {
+    if (this.limitedDeviceSize()) {
       this.fixedInViewport = false;
       this.mode = 'over';
       this.store.dispatch(
-        layoutActions.toggleSidenav({
+        LayoutActions.toggleStartSidenav({
+          show: false,
+        })
+      );
+
+      this.store.dispatch(
+        LayoutActions.toggleEndSidenav({
           show: false,
         })
       );
@@ -117,7 +181,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private determineLayoutGap(): void {
-    if (this.isExtraSmallDevice() || this.isSmallDevice()) {
+    if (this.limitedDeviceSize()) {
       this.layoutGap = '56';
       return;
     }
@@ -125,11 +189,15 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.layoutGap = '64';
   }
 
-  public isExtraSmallDevice(): boolean {
+  private limitedDeviceSize(): boolean {
+    return this.extraSmallDevice() || this.smallDevice();
+  }
+
+  private extraSmallDevice(): boolean {
     return this.bpo.isMatched(Breakpoints.XSmall);
   }
 
-  public isSmallDevice(): boolean {
+  private smallDevice(): boolean {
     return this.bpo.isMatched(Breakpoints.Small);
   }
 }
