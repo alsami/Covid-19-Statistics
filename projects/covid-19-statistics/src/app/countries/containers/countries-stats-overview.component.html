@@ -1,5 +1,5 @@
 <covid19-page-loader-overlay
-  *ngIf="loading$ | async"
+  [loading]="loading$ | async"
 ></covid19-page-loader-overlay>
 <mat-tab-group
   #matTabGroup

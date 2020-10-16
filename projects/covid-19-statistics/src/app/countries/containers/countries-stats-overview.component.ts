@@ -1,4 +1,4 @@
-import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSelectChange } from '@angular/material/select';
 import {
@@ -86,11 +86,13 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   ];
 
   public constructor(
-    private store: Store<fromCountryStatistics.CountryState>,
-    private zone: NgZone
+    private store: Store<fromCountryStatistics.CountryState>
   ) {}
 
   public ngOnInit(): void {
+    this.store.dispatch(new TitleActions.SetTitle('Countries'));
+    this.combineLoading();
+
     this.countryStatsHistory$ = this.store.pipe(
       select(fromCountryStatistics.getCountriesStatsHistory)
     );
@@ -102,11 +104,7 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
     this.countryStats$ = this.store.pipe(
       select(fromCountryStatistics.getCountriesStats)
     );
-
-    this.zone.runOutsideAngular(() => this.combineLoading());
-    this.zone.runOutsideAngular(() => this.combineCountryStats());
-
-    this.store.dispatch(new TitleActions.SetTitle('Countries'));
+    this.combineCountryStats();
   }
 
   public ngOnDestroy(): void {
@@ -182,10 +180,14 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
         select(fromCountryStatistics.getCountriesStatsHistoryLoading)
       ),
     ]).pipe(
-      map(
-        ([countriesLoading, countriesHistoryLoading]) =>
+      map(([countriesLoading, countriesHistoryLoading]) => {
+        console.log(
+          countriesLoading,
+          countriesHistoryLoading,
           countriesLoading || countriesHistoryLoading
-      )
+        );
+        return countriesLoading || countriesHistoryLoading;
+      })
     );
   }
 }
