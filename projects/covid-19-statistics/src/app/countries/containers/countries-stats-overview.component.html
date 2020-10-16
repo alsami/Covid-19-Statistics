@@ -32,20 +32,30 @@
           </mat-button-toggle-group>
         </div>
       </div>
-      <div *ngIf="viewOptions[0].selected" class="card-container">
-        <ng-container
-          *ngFor="
-            let countryStats of filteredCountryStats$ | async;
-            trackBy: trackCountryStatsChanges
-          "
+      <div *ngIf="viewOptions[0].selected">
+        <cdk-virtual-scroll-viewport
+          [itemSize]="100"
+          [minBufferPx]="200"
+          [maxBufferPx]="300"
+          [orientation]="'vertical'"
+          class="view-port"
         >
-          <covid19-country-stats-card
-            [countryStats]="countryStats"
-            [countriesOfInterest]="countriesOfInterest"
-            (addCountryOfInterest)="storeCountryOfInterest($event)"
-            (removeCountryOfInterest)="removeCountryOfInterest($event)"
-          ></covid19-country-stats-card>
-        </ng-container>
+          <div class="card-container">
+            <ng-container
+              *cdkVirtualFor="
+                let countryStats of filteredCountryStats$ | async;
+                trackBy: trackCountryStatsChanges
+              "
+            >
+              <covid19-country-stats-card
+                [countryStats]="countryStats"
+                [countriesOfInterest]="countriesOfInterest"
+                (addCountryOfInterest)="storeCountryOfInterest($event)"
+                (removeCountryOfInterest)="removeCountryOfInterest($event)"
+              ></covid19-country-stats-card>
+            </ng-container>
+          </div>
+        </cdk-virtual-scroll-viewport>
       </div>
       <covid19-countries-stats-grouped-bar-chart
         *ngIf="viewOptions[1].selected"

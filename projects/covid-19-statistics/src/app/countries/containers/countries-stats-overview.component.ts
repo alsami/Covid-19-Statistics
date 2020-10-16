@@ -111,8 +111,6 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.coiSub$.unsubscribe();
-    this.store.dispatch(countriesStatsActions.reset());
-    this.store.dispatch(countriesStatsHistoryActions.reset());
   }
 
   public chartTypeSelectionChanged(option: MatSelectChange): void {

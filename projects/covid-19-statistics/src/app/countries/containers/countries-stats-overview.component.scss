@@ -1,5 +1,16 @@
 @import '../../../scss/breakpoints';
 
+.view-port {
+  height: 1200px;
+  width: 100%;
+  scrollbar-width: none;
+}
+
+.view-port::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
 /*
   General
 */
