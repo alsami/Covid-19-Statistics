@@ -61,6 +61,9 @@ export const getCountriesOfInterest = createSelector(
   fromCountriesOfInterest.countriesOfInterest
 );
 
+/**
+ * Layout Reducwers
+ */
 export const getLayoutState = createFeatureSelector<fromLayout.LayoutState>(
   'layout'
 );
@@ -78,4 +81,11 @@ export const getShowEndSidenav = createSelector(
 export const getLoaderType = createSelector(
   getLayoutState,
   fromLayout.loaderType
+);
+
+export const getTheme = createSelector(getLayoutState, fromLayout.themeType);
+
+export const getDarkThemeSelected = createSelector(
+  getLayoutState,
+  fromLayout.darkTheme
 );

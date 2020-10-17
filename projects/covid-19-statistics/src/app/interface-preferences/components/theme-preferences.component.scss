@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+.color-circle {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.color-button {
+  height: 60px;
+  width: 60px;
+}
+
+@mixin theme-preferences-component-theme($theme) {
+  $accent: map-get(
+    $map: $theme,
+    $key: accent,
+  );
+  .color-button {
+    color: mat-color($accent);
+  }
+}

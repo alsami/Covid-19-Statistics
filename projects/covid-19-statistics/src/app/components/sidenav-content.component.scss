@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 .grid {
   display: flex;
   justify-content: space-between;
@@ -12,18 +14,6 @@
 .container {
   display: flex;
   flex-direction: column;
-}
-
-.version {
-  margin-top: auto;
-  color: darken($color: #fff, $amount: 30);
-  display: flex;
-  justify-content: center;
-  font-size: small;
-}
-
-.selected-link {
-  border-left: 0.5em solid #7b1fa2;
 }
 
 .country-container {
@@ -59,3 +49,25 @@
 }
 
 /* CDK Drag END */
+
+@mixin sidenav-content-component-theme($theme) {
+  $foreground-palette: map-get($theme, foreground);
+  $default-color: mat-color($foreground-palette, base);
+
+  $accent: map-get(
+    $map: $theme,
+    $key: accent,
+  );
+
+  .selected-link {
+    border-left: 0.5em solid mat-color($accent);
+  }
+
+  .version {
+    margin-top: auto;
+    color: darken($default-color, $amount: 30);
+    display: flex;
+    justify-content: center;
+    font-size: small;
+  }
+}

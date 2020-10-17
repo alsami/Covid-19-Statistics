@@ -1,5 +1,6 @@
-@import '@angular/material/prebuilt-themes/purple-green.css';
+// @import '@angular/material/prebuilt-themes/purple-green.css';
 @import './scss/breakpoints.scss';
+@import '~@angular/material/theming';
 
 html,
 body {
@@ -40,25 +41,30 @@ body {
   overflow: visible !important;
 }
 
-covid19-countries-stats-stacked-barchart,
-covid19-countries-stats-grouped-bar-chart,
-covid19-country-stats-daily-values-bar-chart,
-covid19-country-stats-line-chart,
-covid19-global-stats-history-line-chart,
-covid19-active-cases-stats-history-line-chart,
-covid19-closed-cases-stats-history-line-chart,
-covid19-country-stats-pie-chart,
-covid19-country-stats-bar-chart .ngx-charts {
-  text {
-    fill: #fff !important;
+@mixin app-root-theme($theme) {
+  $foreground-palette: map-get($theme, foreground);
+  $default-color: mat-color($foreground-palette, base);
+
+  covid19-countries-stats-stacked-barchart,
+  covid19-countries-stats-grouped-bar-chart,
+  covid19-country-stats-daily-values-bar-chart,
+  covid19-country-stats-line-chart,
+  covid19-global-stats-history-line-chart,
+  covid19-active-cases-stats-history-line-chart,
+  covid19-closed-cases-stats-history-line-chart,
+  covid19-country-stats-pie-chart,
+  covid19-country-stats-bar-chart .ngx-charts {
+    text {
+      fill: $default-color !important;
+    }
+    font: {
+      font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    }
   }
-  font: {
-    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
-  }
-}
-ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
-  font: {
-    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
+    font: {
+      font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    }
   }
 }
 

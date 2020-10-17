@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { LoaderType } from '@covid19-statistics/loaders/models';
 
@@ -6,6 +12,7 @@ import { LoaderType } from '@covid19-statistics/loaders/models';
   selector: 'covid19-loader-preferences',
   templateUrl: './loader-preferences.component.html',
   styleUrls: ['./loader-preferences.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoaderPreferencesComponent {
   @Input() loaderType: LoaderType;

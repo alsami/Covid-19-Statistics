@@ -1,11 +1,13 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import * as fromRoot from '@covid19-statistics/+state';
 import {
   CountriesOfInterestActions,
   LayoutActions,
 } from '@covid19-statistics/core/+state/actions';
 import { CountryOfInterest } from '@covid19-statistics/countries/models';
+import { InterfacePreferencesOverviewComponent } from '@covid19-statistics/interface-preferences/containers';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, map } from 'rxjs/operators';
@@ -31,6 +33,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public constructor(
     private bpo: BreakpointObserver,
+    private dialog: MatDialog,
     private store: Store<fromRoot.AppState>
   ) {}
 
@@ -82,6 +85,14 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.showEndSidenavSub) {
       this.showEndSidenavSub.unsubscribe();
     }
+  }
+
+  public openInterfacePreferenceDialog(): void {
+    this.dialog.open(InterfacePreferencesOverviewComponent, {
+      hasBackdrop: true,
+      closeOnNavigation: true,
+      autoFocus: false,
+    });
   }
 
   public saveCountriesOfInterest(

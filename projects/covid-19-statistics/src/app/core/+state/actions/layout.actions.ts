@@ -1,3 +1,4 @@
+import { LayoutThemeType } from '@covid19-statistics/core/models';
 import { LoaderType } from '@covid19-statistics/loaders/models';
 import { createAction, props } from '@ngrx/store';
 
@@ -6,6 +7,8 @@ enum LayoutActions {
   ToggleEndSidenav = '[Layout] Toggle end-sidenav',
   SetLoaderType = '[Layout] Set loader type',
   RestoreLoader = '[Layout] Restore loader type',
+  RestoreTheme = '[Layout] Restore theme',
+  SetTheme = '[Layout] Set theme',
 }
 
 export const toggleStartSidenav = createAction(
@@ -24,3 +27,10 @@ export const setLoaderType = createAction(
 );
 
 export const restoreLoaderType = createAction(LayoutActions.RestoreLoader);
+
+export const setTheme = createAction(
+  LayoutActions.SetTheme,
+  props<{ theme: LayoutThemeType }>()
+);
+
+export const restoreTheme = createAction(LayoutActions.RestoreTheme);

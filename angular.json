@@ -28,7 +28,10 @@
               "projects/covid-19-statistics/src/assets",
               "projects/covid-19-statistics/src/manifest.webmanifest"
             ],
-            "styles": ["projects/covid-19-statistics/src/styles.scss"],
+            "styles": [
+              "projects/covid-19-statistics/src/styles.scss",
+              "projects/covid-19-statistics/src/material-themes.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -93,7 +96,10 @@
               "projects/covid-19-statistics/src/assets",
               "projects/covid-19-statistics/src/manifest.webmanifest"
             ],
-            "styles": ["projects/covid-19-statistics/styles.scss"],
+            "styles": [
+              "projects/covid-19-statistics/src/styles.scss",
+              "projects/covid-19-statistics/src/material-themes.scss"
+            ],
             "scripts": []
           }
         },

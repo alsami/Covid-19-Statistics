@@ -1,0 +1,10 @@
+$grey-light-primary: mat-palette($mat-blue-grey);
+$grey-light-accent: mat-palette($mat-deep-orange, A700);
+
+$grey-light-warn: mat-palette($mat-red);
+
+$grey-light-theme: mat-light-theme(
+  $grey-light-primary,
+  $grey-light-accent,
+  $grey-light-warn
+);

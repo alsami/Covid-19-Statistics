@@ -1,7 +1,7 @@
 <covid19-toolbar
   [title]="title$ | async"
   (toggle)="toggleStartSidenav()"
-  (toggleSettings)="toggleEndSidenav()"
+  (paletteClicked)="openInterfacePreferenceDialog()"
 ></covid19-toolbar>
 <mat-sidenav-container
   class="sidenav-container"

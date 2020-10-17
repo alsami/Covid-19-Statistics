@@ -1,0 +1,41 @@
+<div style="display: flex">
+  <button
+    mat-icon-button
+    class="color-button"
+    (click)="themeSelected.emit(layoutThemeTypes.GreyLight)"
+    style="background-color: #607d8b"
+  >
+    <mat-icon *ngIf="selected(layoutThemeTypes.GreyLight)">check</mat-icon>
+  </button>
+  &nbsp;
+  <button
+    mat-icon-button
+    class="color-button"
+    (click)="themeSelected.emit(layoutThemeTypes.DeepPurpleAmber)"
+    style="background-color: #673ab7"
+  >
+    <mat-icon *ngIf="selected(layoutThemeTypes.DeepPurpleAmber)">
+      check
+    </mat-icon>
+  </button>
+  &nbsp;
+  <button
+    mat-icon-button
+    class="color-button"
+    (click)="themeSelected.emit(layoutThemeTypes.BlackDark)"
+    style="background-color: #212121"
+  >
+    <mat-icon *ngIf="selected(layoutThemeTypes.BlackDark)">check</mat-icon>
+  </button>
+  &nbsp;
+  <button
+    mat-icon-button
+    class="color-button"
+    (click)="themeSelected.emit(layoutThemeTypes.PurpleGreenDark)"
+    style="background-color: #7b1fa2"
+  >
+    <mat-icon *ngIf="selected(layoutThemeTypes.PurpleGreenDark)">
+      check
+    </mat-icon>
+  </button>
+</div>

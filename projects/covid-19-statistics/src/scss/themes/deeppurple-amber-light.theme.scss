@@ -1,0 +1,7 @@
+$deeppurple-amber-light-primary: mat-palette($mat-deep-purple);
+$deeppurple-amber-light-accent: mat-palette($mat-amber, A200, A100, A400);
+
+$deeppurple-amber-light: mat-light-theme(
+  $deeppurple-amber-light-primary,
+  $deeppurple-amber-light-accent
+);

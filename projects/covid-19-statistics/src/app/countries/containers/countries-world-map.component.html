@@ -4,4 +4,5 @@
 <covid19-countries-world-card
   *ngIf="!(loading$ | async)"
   [countryStats]="countryStats$ | async"
+  [darkThemeSelected]="darkThemeSelected$ | async"
 ></covid19-countries-world-card>

@@ -5,10 +5,13 @@ import {
   Input,
   OnChanges,
   OnDestroy,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { CountryStats } from '@covid19-country-statistics-lib/public-api';
 import {
+  DARK_BACKGROUND,
+  LIGHT_BACKGROUND,
   PROPER_GREEN,
   PROPER_RED,
 } from '@covid19-statistics/core/core.constants';
@@ -22,6 +25,11 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
 })
 export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
   @Input() countryStats: CountryStats[];
+  @Input() darkThemeSelected: boolean;
+
+  private chart: google.visualization.GeoChart;
+  private dataTable: any;
+  private fillColor: string = '';
 
   validMaps: { [key: string]: string } = {
     ['UK']: 'United Kingdom',
@@ -34,15 +42,13 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
 
-  private chart: google.visualization.GeoChart;
-  private dataTable: any;
-
   private options: google.visualization.GeoChartOptions = {
     keepAspectRatio: true,
     // legend: 'none',
     datalessRegionColor: PROPER_GREEN,
     backgroundColor: {
-      fill: '#303030',
+      // TODO THEME
+      fill: this.fillColor,
     },
     colorAxis: {
       colors: ['#ffd600', '#f8a900', '#e97c00', '#d35011', PROPER_RED],
@@ -56,7 +62,13 @@ export class CountriesWorldCardComponent implements OnChanges, OnDestroy {
 
   @ViewChild('card', { static: true }) element: ElementRef;
 
-  public ngOnChanges(): void {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.darkThemeSelected) {
+      this.fillColor = this.darkThemeSelected
+        ? DARK_BACKGROUND
+        : LIGHT_BACKGROUND;
+    }
+
     if (!this.chart) {
       this.chart = new google.visualization.GeoChart(
         this.element.nativeElement

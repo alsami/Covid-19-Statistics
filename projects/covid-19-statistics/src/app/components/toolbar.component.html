@@ -5,7 +5,7 @@
   COVID-19
   <span *ngIf="title?.length">&nbsp;| {{ title }}</span>
   <span style="flex: 1 1 100%"></span>
-  <button mat-icon-button routerLink="/interface-preferences">
+  <button mat-icon-button (click)="paletteClicked.emit()">
     <mat-icon>palette</mat-icon>
   </button>
 </mat-toolbar>

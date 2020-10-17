@@ -1,11 +1,29 @@
-<div class="page-content">
-  <mat-card>
-    <mat-card-title>Choose your loader</mat-card-title>
-    <mat-card-content class="loader-content">
+<h1 mat-dialog-title>Layout customizations</h1>
+<div mat-dialog-content>
+  <mat-tab-group
+    #matTabGroup
+    (selectedTabChange)="selectedIndex = $event.index"
+  >
+    <mat-tab label="Theme">
+      <div
+        *ngIf="selectedIndex === 0"
+        style="display: flex; justify-content: center; padding: 20px"
+      >
+        <covid19-theme-preferences
+          [selectedTheme]="themeType | async"
+          (themeSelected)="changeTheme($event)"
+        ></covid19-theme-preferences>
+      </div>
+    </mat-tab>
+    <mat-tab label="Loader">
       <covid19-loader-preferences
+        *ngIf="selectedIndex === 1"
         [loaderType]="loaderType$ | async"
         (loaderTypeChosen)="saveLoaderType($event)"
       ></covid19-loader-preferences>
-    </mat-card-content>
-  </mat-card>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true">Done</button>
 </div>

@@ -1,18 +1,12 @@
+@import '~@angular/material/theming';
+
 .lds-ellipsis {
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
 }
-.lds-ellipsis div {
-  position: absolute;
-  top: 33px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #69f0ae;
-  animation-timing-function: cubic-bezier(0, 1, 1, 0);
-}
+
 .lds-ellipsis div:nth-child(1) {
   left: 8px;
   animation: lds-ellipsis1 0.6s infinite;
@@ -51,5 +45,22 @@
   }
   100% {
     transform: translate(24px, 0);
+  }
+}
+
+@mixin ellipsis-loader-component-theme($theme) {
+  $accent: map-get(
+    $map: $theme,
+    $key: accent,
+  );
+
+  .lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: mat-color($accent);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
 }
