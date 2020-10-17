@@ -23,6 +23,7 @@
     ></covid19-sidenav-content>
   </mat-sidenav>
   <mat-sidenav
+    *ngIf="false"
     [mode]="mode"
     [opened]="showEndSidenav"
     [fixedInViewport]="fixedInViewport"
@@ -31,10 +32,7 @@
     [position]="'end'"
     class="end-sidenav"
   >
-    <covid19-end-sidenav-content
-      [loaderType]="loaderType$ | async"
-      (loaderTypeChosen)="saveLoaderType($event)"
-    ></covid19-end-sidenav-content>
+    <covid19-end-sidenav-content></covid19-end-sidenav-content>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>

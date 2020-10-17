@@ -23,6 +23,15 @@ import { RouterModule } from '@angular/router';
           loadChildren: async () =>
             (await import('./countries/countries.module')).CountriesModule,
         },
+        {
+          path: 'interface-preferences',
+          loadChildren: async () =>
+            (
+              await import(
+                './interface-preferences/interface-preferences.module'
+              )
+            ).InterfacePreferencesModule,
+        },
       ],
       {
         useHash: false,

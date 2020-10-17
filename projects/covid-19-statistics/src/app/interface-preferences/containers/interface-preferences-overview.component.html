@@ -1,0 +1,11 @@
+<div class="page-content">
+  <mat-card>
+    <mat-card-title>Choose your loader</mat-card-title>
+    <mat-card-content class="loader-content">
+      <covid19-loader-preferences
+        [loaderType]="loaderType$ | async"
+        (loaderTypeChosen)="saveLoaderType($event)"
+      ></covid19-loader-preferences>
+    </mat-card-content>
+  </mat-card>
+</div>

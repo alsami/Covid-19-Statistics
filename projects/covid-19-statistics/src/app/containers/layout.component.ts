@@ -6,7 +6,6 @@ import {
   LayoutActions,
 } from '@covid19-statistics/core/+state/actions';
 import { CountryOfInterest } from '@covid19-statistics/countries/models';
-import { LoaderType } from '@covid19-statistics/loaders/models';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, map } from 'rxjs/operators';
@@ -29,7 +28,6 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public title$: Observable<string>;
   public countriesOfInterest$: Observable<CountryOfInterest[]>;
-  public loaderType$: Observable<LoaderType>;
 
   public constructor(
     private bpo: BreakpointObserver,
@@ -70,11 +68,6 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showEndSidenavSub = this.store
       .pipe(delay(0), select(fromRoot.getShowEndSidenav))
       .subscribe((show) => (this.showEndSidenav = show));
-
-    this.loaderType$ = this.store.pipe(
-      delay(0),
-      select(fromRoot.getLoaderType)
-    );
   }
 
   public ngOnDestroy(): void {
@@ -89,15 +82,6 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.showEndSidenavSub) {
       this.showEndSidenavSub.unsubscribe();
     }
-  }
-
-  public saveLoaderType(loaderType: LoaderType): void {
-    console.log(loaderType);
-    this.store.dispatch(
-      LayoutActions.setLoaderType({
-        loaderType,
-      })
-    );
   }
 
   public saveCountriesOfInterest(

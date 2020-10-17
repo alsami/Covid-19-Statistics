@@ -4,38 +4,38 @@
 }
 
 .spinner > div {
-  background-color: #fff;
+  background-color: #69f0ae;
   height: 100%;
   width: 6px;
   display: inline-block;
 
   -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
   animation: sk-stretchdelay 1.2s infinite ease-in-out;
-  color: white;
+  color: #69f0ae;
 }
 
 .spinner .rect2 {
   -webkit-animation-delay: -1.1s;
   animation-delay: -1.1s;
-  color: white;
+  color: #69f0ae;
 }
 
 .spinner .rect3 {
   -webkit-animation-delay: -1s;
   animation-delay: -1s;
-  color: white;
+  color: #69f0ae;
 }
 
 .spinner .rect4 {
   -webkit-animation-delay: -0.9s;
   animation-delay: -0.9s;
-  color: white;
+  color: #69f0ae;
 }
 
 .spinner .rect5 {
   -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
-  color: white;
+  color: #69f0ae;
 }
 
 @-webkit-keyframes sk-stretchdelay {
