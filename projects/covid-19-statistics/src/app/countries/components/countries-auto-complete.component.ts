@@ -14,7 +14,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CountryStats } from '@covid19-country-statistics-lib/public-api';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { delay, map, startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'covid19-countries-autocomplete',
@@ -101,10 +101,13 @@ export class CountriesAutoCompleteComponent
     this.countriesCtrl.setValue(null);
   }
 
+  public getCountryStatistics(country: string): CountryStats {
+    return this.countryStats.find((stats) => stats.country === country);
+  }
+
   private subscribeFormControlChanges(): void {
     this.filteredCountries$ = this.countriesCtrl.valueChanges.pipe(
       startWith(null),
-      delay(100),
       map((filter: string | null) =>
         filter && filter.length
           ? this.filterCountries(filter)

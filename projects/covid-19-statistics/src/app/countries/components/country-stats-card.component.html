@@ -7,7 +7,11 @@
   </div>
   <mat-card-content>
     <div class="value-container">
-      <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+      <mat-chip-list
+        class="mat-chip-list-stacked"
+        [selectable]="false"
+        aria-label="Color selection"
+      >
         <mat-chip [style.background]="colorScheme[0]">
           Total: {{ countryStats.totalCases | number }}
         </mat-chip>

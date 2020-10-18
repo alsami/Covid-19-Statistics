@@ -9,7 +9,7 @@ import { CountryOfInterest } from '@covid19-statistics/countries/models';
 export class CountryFlagPipe implements PipeTransform {
   public transform(
     countryOfInterest: CountryOfInterest,
-    size: '32' | '64' = '32'
+    size: '16' | '32' | '64' = '32'
   ): string {
     if (
       !countryOfInterest?.countryCode ||

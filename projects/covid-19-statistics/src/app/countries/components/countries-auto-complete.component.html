@@ -6,6 +6,11 @@
       removeable
       (removed)="remove(country)"
     >
+      <img
+        [src]="getCountryStatistics(country) | countryFlag: '16'"
+        style="height: 16px"
+      />
+      &nbsp;
       {{ country }}
       <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
@@ -24,7 +29,14 @@
       *ngFor="let country of filteredCountries$ | async"
       [value]="country"
     >
-      {{ country }}
+      <div class="auto-complete-option">
+        <img
+          [src]="getCountryStatistics(country) | countryFlag: '32'"
+          style="height: 32px"
+        />
+        &nbsp;
+        {{ country }}
+      </div>
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
