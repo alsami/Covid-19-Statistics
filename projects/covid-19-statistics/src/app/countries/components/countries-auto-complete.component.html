@@ -15,7 +15,7 @@
       <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
     <input
-      placeholder="Select countries... "
+      placeholder="Type to select countries... "
       #countryInput
       [formControl]="countriesCtrl"
       [matAutocomplete]="auto"
@@ -25,18 +25,28 @@
     />
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option
-      *ngFor="let country of filteredCountries$ | async"
-      [value]="country"
+    <cdk-virtual-scroll-viewport
+      class="view-port"
+      [style.height.px]="
+        calculateDropDownHeightPx((filteredCountries$ | async)?.length)
+      "
+      [itemSize]="48"
+      [minBufferPx]="200"
+      [orientation]="'vertical'"
     >
-      <div class="auto-complete-option">
-        <img
-          [src]="getCountryStatistics(country) | countryFlag: '32'"
-          style="height: 32px"
-        />
-        &nbsp;
-        {{ country }}
-      </div>
-    </mat-option>
+      <mat-option
+        *cdkVirtualFor="let country of filteredCountries$ | async"
+        [value]="country"
+      >
+        <div class="auto-complete-option">
+          <img
+            [src]="getCountryStatistics(country) | countryFlag: '32'"
+            style="height: 32px"
+          />
+          &nbsp;
+          {{ country }}
+        </div>
+      </mat-option>
+    </cdk-virtual-scroll-viewport>
   </mat-autocomplete>
 </mat-form-field>

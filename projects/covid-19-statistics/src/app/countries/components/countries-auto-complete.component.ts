@@ -13,7 +13,7 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CountryStats } from '@covid19-country-statistics-lib/public-api';
-import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
@@ -24,6 +24,8 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class CountriesAutoCompleteComponent
   implements OnChanges, AfterViewInit {
+  private readonly elementSize = 48;
+
   @Input() countryStats: CountryStats[] = [];
   @Output() countriesSelected: BehaviorSubject<string[]> = new BehaviorSubject(
     []
@@ -40,6 +42,10 @@ export class CountriesAutoCompleteComponent
     HTMLInputElement
   >;
 
+  public constructor() {
+    this.subscribeFormControlChanges();
+  }
+
   public ngOnChanges(): void {
     if (!this.countryStats || !this.countryStats.length) return;
 
@@ -49,13 +55,9 @@ export class CountriesAutoCompleteComponent
           stats.country !== null && stats.country !== undefined && stats.country
       )
       .map((country) => country.country);
-
-    this.filteredCountries$ = from([this.allCountries]);
   }
 
-  public ngAfterViewInit(): void {
-    this.subscribeFormControlChanges();
-  }
+  public ngAfterViewInit(): void {}
 
   public add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -107,11 +109,15 @@ export class CountriesAutoCompleteComponent
     return this.countryStats.find((stats) => stats.country === country);
   }
 
+  public calculateDropDownHeightPx(length: number | null): number {
+    return length * this.elementSize >= 190 ? 190 : length * this.elementSize;
+  }
+
   private subscribeFormControlChanges(): void {
     this.filteredCountries$ = this.countriesCtrl.valueChanges.pipe(
-      startWith(null),
+      startWith(''),
       map((filter: string | null) =>
-        filter && filter.length
+        filter?.length
           ? this.filterCountries(filter)
           : this.allCountries.slice()
       )
