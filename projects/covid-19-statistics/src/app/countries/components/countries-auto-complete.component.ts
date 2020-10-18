@@ -13,7 +13,7 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CountryStats } from '@covid19-country-statistics-lib/public-api';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
@@ -49,6 +49,8 @@ export class CountriesAutoCompleteComponent
           stats.country !== null && stats.country !== undefined && stats.country
       )
       .map((country) => country.country);
+
+    this.filteredCountries$ = from([this.allCountries]);
   }
 
   public ngAfterViewInit(): void {
