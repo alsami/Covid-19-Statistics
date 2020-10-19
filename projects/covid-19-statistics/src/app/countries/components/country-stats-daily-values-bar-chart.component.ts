@@ -71,7 +71,5 @@ export class CountryStatsDailyValuesBarChartComponent implements OnChanges {
 
       this.data.push(keyedChartData);
     });
-
-    console.log(this.data);
   }
 }

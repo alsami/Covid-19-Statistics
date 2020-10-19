@@ -11,6 +11,8 @@ import {
   PROPER_GREEN,
   PROPER_GREY,
   PROPER_RED,
+  PROPER_YELLOW,
+  SEMI_PROPER_RED,
 } from '@covid19-statistics/core/core.constants';
 import { CountryOfInterest } from '@covid19-statistics/countries/models';
 
@@ -30,10 +32,19 @@ export class CountryStatsCardComponent {
   /*
   cases,
   active cases,
+  new cases,
   deaths,
+  new deaths,
   recovered,
   */
-  public colorScheme = [PROPER_GREY, PROPER_BLUE, PROPER_RED, PROPER_GREEN];
+  public colorScheme = [
+    PROPER_GREY,
+    PROPER_BLUE,
+    PROPER_YELLOW,
+    PROPER_RED,
+    SEMI_PROPER_RED,
+    PROPER_GREEN,
+  ];
 
   public containsCountry(value: string) {
     return (

@@ -23,13 +23,19 @@
           }}%)
         </mat-chip>
         <mat-chip [style.background]="colorScheme[2]">
+          New: {{ countryStats.newCases | number }}
+        </mat-chip>
+        <mat-chip [style.background]="colorScheme[3]">
           Deaths: {{ countryStats.totalDeaths | number }} ({{
             countryStats.totalCases
               | percentage: countryStats.totalDeaths
               | number
           }}%)
         </mat-chip>
-        <mat-chip [style.background]="colorScheme[3]">
+        <mat-chip [style.background]="colorScheme[4]">
+          New Deaths: {{ countryStats.newDeaths | number }}
+        </mat-chip>
+        <mat-chip [style.background]="colorScheme[5]">
           Recovered: {{ countryStats.recoveredCases | number }} ({{
             countryStats.totalCases
               | percentage: countryStats.recoveredCases
