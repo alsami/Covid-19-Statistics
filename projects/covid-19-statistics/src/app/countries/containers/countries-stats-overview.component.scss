@@ -1,4 +1,5 @@
 @import '../../../scss/breakpoints';
+@import '~@angular/material/theming';
 
 .view-port {
   height: 1200px;
@@ -23,13 +24,18 @@ covid19-countries-autocomplete {
   flex: 1 1 auto;
 }
 
-.view-options-container {
-  display: flex;
-  flex: 1 1 auto;
-  align-items: flex-start;
-  flex-direction: row;
-  margin-bottom: 0.5em;
-  // background: #424242;
+@mixin countries-stats-overview-component-theme($theme) {
+  $background-palette: map-get($theme, background);
+  $background: map-get($background-palette, background);
+
+  .view-options-container {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-bottom: 0.5em;
+    background: $background !important;
+  }
 }
 
 .sticky {

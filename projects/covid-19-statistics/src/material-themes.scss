@@ -4,15 +4,23 @@
 @import './scss/themes/grey-light.theme.scss';
 @import './scss/themes/purple-green-dark.theme.scss';
 @import './scss/themes/deeppurple-amber-light.theme.scss';
+
+@import './app/countries/containers/countries-stats-overview.component.scss';
+
 @import './app/interface-preferences/components/theme-preferences.component.scss';
 @import './app/loaders/components/rectangle-loader.component.scss';
 @import './app/loaders/components/pulse-loader.component.scss';
 @import './app/loaders/components/ellipsis-loader.component.scss';
 @import './app/components/sidenav-content.component.scss';
+@import './app/global/components/global-stats-history-table.component.scss';
+@import './app/countries/components/country-stats-history-table.component.scss';
 @import './styles.scss';
 
 @mixin component-themes($theme) {
   @include app-root-theme($theme);
+  @include countries-stats-overview-component-theme($theme);
+  @include global-stats-history-table-component-theme($theme);
+  @include country-stats-history-table-component-theme($theme);
   @include sidenav-content-component-theme($theme);
   @include theme-preferences-component-theme($theme);
   @include rectangle-loader-component-theme($theme);
