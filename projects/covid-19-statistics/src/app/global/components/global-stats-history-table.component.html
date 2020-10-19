@@ -4,7 +4,7 @@
   [trackBy]="trackBy"
 >
   <ng-container matColumnDef="total">
-    <mat-header-cell *matHeaderCellDef>Cases</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
     <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column">
         <span>{{ element.total | number }}</span>
@@ -16,11 +16,7 @@
   </ng-container>
 
   <ng-container matColumnDef="active">
-    <mat-header-cell *matHeaderCellDef>
-      Active
-      <br />
-      Cases
-    </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
     <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column">
         <span>{{ element.active | number }}</span>

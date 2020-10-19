@@ -21,7 +21,13 @@ export class CountryStatsHistoryTableComponent implements OnInit {
     []
   );
 
-  public displayedColumns = ['active', 'deaths', 'recovered', 'fetchedAt'];
+  public displayedColumns = [
+    'total',
+    'active',
+    'deaths',
+    'recovered',
+    'fetchedAt',
+  ];
 
   public constructor(private cdr: ChangeDetectorRef) {
     this.cdr.detach();

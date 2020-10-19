@@ -3,6 +3,17 @@
   class="no-background-table"
   [dataSource]="dataSource"
 >
+  <ng-container matColumnDef="total">
+    <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index">
+      <div style="display: flex; flex-direction: column">
+        <span>{{ element.totalCases | number }}</span>
+        <span covid19DiffNumberColor>
+          {{ dataSource.data | valueDiff: element.totalCases:i:'totalCases' }}
+        </span>
+      </div>
+    </mat-cell>
+  </ng-container>
   <ng-container matColumnDef="active">
     <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
     <mat-cell *matCellDef="let element; let i = index">
