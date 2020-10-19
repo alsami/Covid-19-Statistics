@@ -34,7 +34,7 @@
       </div>
       <div *ngIf="viewOptions[0].selected">
         <cdk-virtual-scroll-viewport
-          [itemSize]="50"
+          [itemSize]="calculateItemSize()"
           [orientation]="'vertical'"
           class="view-port"
         >

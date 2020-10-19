@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSelectChange } from '@angular/material/select';
@@ -86,6 +87,7 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   ];
 
   public constructor(
+    private bpo: BreakpointObserver,
     private store: Store<fromCountryStatistics.CountryState>
   ) {}
 
@@ -154,6 +156,18 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
 
   public trackCountryStatsChanges(countryStats: CountryStats): string {
     return `${countryStats.country}_${countryStats.fetchedAt}`;
+  }
+
+  public calculateItemSize(): number {
+    if (this.bpo.isMatched(Breakpoints.XSmall)) {
+      return 300;
+    }
+
+    if (this.bpo.isMatched(Breakpoints.Small)) {
+      return 150;
+    }
+
+    return 100;
   }
 
   private combineCountryStats(): void {
