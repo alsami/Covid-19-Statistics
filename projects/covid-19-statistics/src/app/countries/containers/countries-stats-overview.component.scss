@@ -52,6 +52,12 @@ covid19-countries-autocomplete {
   align-items: center;
 }
 
+.view-toggle-container {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
 .select-container {
   display: flex;
   flex: 1 0 100%;

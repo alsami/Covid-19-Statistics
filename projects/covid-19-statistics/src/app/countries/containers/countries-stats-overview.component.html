@@ -10,7 +10,7 @@
     <div class="page-content">
       <div
         class="view-options-container"
-        [class.sticky]="viewOptions[0].selected"
+        [class.sticky]="overviewViewOptions[0].selected"
       >
         <covid19-countries-autocomplete
           #countryAutoComplete
@@ -19,10 +19,10 @@
         <div class="toggle-container" style="padding-right: 1em">
           <mat-button-toggle-group
             [multiple]="false"
-            (change)="viewSelectionChanged($event)"
+            (change)="viewSelectionChanged($event, overviewViewOptions)"
           >
             <mat-button-toggle
-              *ngFor="let viewOption of viewOptions"
+              *ngFor="let viewOption of overviewViewOptions"
               [checked]="viewOption.selected"
               [value]="viewOption.value"
               [matTooltip]="viewOption.tooltip"
@@ -32,7 +32,7 @@
           </mat-button-toggle-group>
         </div>
       </div>
-      <div *ngIf="viewOptions[0].selected">
+      <div *ngIf="overviewViewOptions[0].selected">
         <cdk-virtual-scroll-viewport
           [itemSize]="calculateItemSize()"
           [orientation]="'vertical'"
@@ -56,7 +56,7 @@
         </cdk-virtual-scroll-viewport>
       </div>
       <covid19-countries-stats-grouped-bar-chart
-        *ngIf="viewOptions[1].selected"
+        *ngIf="overviewViewOptions[1].selected"
         [countryStats]="filteredCountryStats$ | async"
       ></covid19-countries-stats-grouped-bar-chart>
     </div>
@@ -68,10 +68,31 @@
     ></covid19-countries-stats-stacked-barchart>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[2].label">
-    <covid19-country-stats-day-to-day-cards
-      *ngIf="selectedIndex === 2"
-      [countryStats]="countryStatsHistory$ | async"
-    ></covid19-country-stats-day-to-day-cards>
+    <div class="view-toggle-container">
+      <mat-button-toggle-group
+        [multiple]="false"
+        (change)="viewSelectionChanged($event, historyViewOptions)"
+      >
+        <mat-button-toggle
+          *ngFor="let viewOption of historyViewOptions"
+          [checked]="viewOption.selected"
+          [value]="viewOption.value"
+          [matTooltip]="viewOption.tooltip"
+        >
+          <mat-icon>{{ viewOption.label }}</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="page-content">
+      <covid19-country-stats-day-to-day-cards
+        *ngIf="historyViewOptions[0].selected || historyViewOptions[2].selected"
+        [countryStats]="countryStatsHistory$ | async"
+      ></covid19-country-stats-day-to-day-cards>
+      <covid19-country-stats-history-table
+        *ngIf="historyViewOptions[1].selected || historyViewOptions[2].selected"
+        [countryStats]="countryStatsHistory$ | async"
+      ></covid19-country-stats-history-table>
+    </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[3].label">
     <div class="select-container">
