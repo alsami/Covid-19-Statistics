@@ -11,10 +11,10 @@
       <div class="toggle-container">
         <mat-button-toggle-group
           [multiple]="false"
-          (change)="viewSelectionChanged($event)"
+          (change)="viewSelectionChange($event, overviewViewOptions)"
         >
           <mat-button-toggle
-            *ngFor="let viewOption of viewOptions"
+            *ngFor="let viewOption of overviewViewOptions"
             [checked]="viewOption.selected"
             [value]="viewOption.value"
             [matTooltip]="viewOption.tooltip"
@@ -24,10 +24,10 @@
         </mat-button-toggle-group>
       </div>
       <covid19-country-detailed-stats-cards
-        *ngIf="viewOptions[0].selected"
+        *ngIf="overviewViewOptions[0].selected"
         [countryStats]="countryStats$ | async"
       ></covid19-country-detailed-stats-cards>
-      <ng-container *ngIf="viewOptions[1].selected">
+      <ng-container *ngIf="overviewViewOptions[1].selected">
         <div class="chart-container">
           <mat-card>
             <mat-card-content>
@@ -48,20 +48,34 @@
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
+    <div class="toggle-container">
+      <mat-button-toggle-group
+        [multiple]="false"
+        (change)="viewSelectionChange($event, historyViewOptions)"
+      >
+        <mat-button-toggle
+          *ngFor="let viewOption of historyViewOptions"
+          [checked]="viewOption.selected"
+          [value]="viewOption.value"
+          [matTooltip]="viewOption.tooltip"
+        >
+          <mat-icon>{{ viewOption.label }}</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
     <div class="page-content">
       <covid19-country-stats-day-to-day-cards
+        *ngIf="historyViewOptions[0].selected || historyViewOptions[2].selected"
         [countryStats]="countryHistoryStats$ | async"
       ></covid19-country-stats-day-to-day-cards>
-    </div>
-  </mat-tab>
-  <mat-tab [label]="tabLabelsFunc[2].label">
-    <div class="page-content">
+
       <covid19-country-stats-history-table
+        *ngIf="historyViewOptions[1].selected || historyViewOptions[2].selected"
         [countryStats]="countryHistoryStats$ | async"
       ></covid19-country-stats-history-table>
     </div>
   </mat-tab>
-  <mat-tab [label]="tabLabelsFunc[3].label">
+  <mat-tab [label]="tabLabelsFunc[2].label">
     <div class="graph-toggle-container">
       <mat-button-toggle-group
         [multiple]="false"
@@ -92,7 +106,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <ng-container *ngIf="selectedIndex === 3">
+    <ng-container *ngIf="selectedIndex === 2">
       <covid19-country-stats-line-chart
         *ngIf="chartOptions[0].selected"
         [countryStats]="countryHistoryStats$ | async"

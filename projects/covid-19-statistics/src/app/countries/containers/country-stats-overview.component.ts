@@ -25,6 +25,20 @@ import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, map } from 'rxjs/operators';
 
+type ViewOption = {
+  label: string;
+  value: string;
+  tooltip: string;
+  selected: boolean;
+};
+
+type ChartOption = {
+  label: string;
+  value: string;
+  tooltip: string;
+  selected: boolean;
+};
+
 @Component({
   selector: 'covid19-country-stats-overview',
   templateUrl: './country-stats-overview.component.html',
@@ -65,25 +79,16 @@ export class CountryStatsOverviewComponent
       func: this.load,
     },
     {
-      label: 'Day to Day',
+      label: '10 Days',
       func: this.loadHistory,
     },
     {
-      label: 'History',
-      func: this.loadHistory,
-    },
-    {
-      label: 'Graphs',
+      label: '10 Days Graphs',
       func: this.loadHistory,
     },
   ];
 
-  public viewOptions: {
-    label: string;
-    value: string;
-    tooltip: string;
-    selected: boolean;
-  }[] = [
+  public overviewViewOptions: ViewOption[] = [
     {
       label: 'view_agenda',
       value: 'card',
@@ -98,12 +103,28 @@ export class CountryStatsOverviewComponent
     },
   ];
 
-  public chartOptions: {
-    label: string;
-    value: string;
-    tooltip: string;
-    selected: boolean;
-  }[] = [
+  public historyViewOptions: ViewOption[] = [
+    {
+      label: 'view_agenda',
+      value: 'card',
+      tooltip: 'Use card view',
+      selected: true,
+    },
+    {
+      label: 'table_rows',
+      value: 'table',
+      tooltip: 'Use table view',
+      selected: false,
+    },
+    {
+      label: 'view_module',
+      value: 'module-view',
+      tooltip: 'Use card and table view',
+      selected: false,
+    },
+  ];
+
+  public chartOptions: ChartOption[] = [
     {
       label: 'multiline_chart',
       value: 'multiline_chart',
@@ -173,12 +194,15 @@ export class CountryStatsOverviewComponent
     }
   }
 
-  public viewSelectionChanged(option: MatButtonToggleChange): void {
-    const index = this.viewOptions.findIndex(
+  public viewSelectionChange(
+    option: MatButtonToggleChange,
+    viewOptions: ViewOption[]
+  ): void {
+    const index = viewOptions.findIndex(
       (viewOption) => viewOption.value === option.value
     );
 
-    this.viewOptions.forEach(
+    viewOptions.forEach(
       (viewOption, viewOptionIndex) =>
         (viewOption.selected = viewOptionIndex === index)
     );
