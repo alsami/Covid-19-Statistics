@@ -7,8 +7,8 @@
       (removed)="remove(country)"
     >
       <img
-        [src]="getCountryStatistics(country) | countryFlag: '16'"
-        style="height: 16px"
+        [src]="getCountryStatistics(country) | countryFlag"
+        style="height: 16px; width: 16px"
       />
       &nbsp;
       {{ country }}
@@ -40,8 +40,8 @@
       >
         <div class="auto-complete-option">
           <img
-            [src]="getCountryStatistics(country) | countryFlag: '32'"
-            style="height: 32px"
+            [src]="getCountryStatistics(country) | countryFlag"
+            style="height: 32px; width: 32px"
           />
           &nbsp;
           {{ country }}

@@ -7,17 +7,13 @@ import { CountryOfInterest } from '@covid19-statistics/countries/models';
   pure: true,
 })
 export class CountryFlagPipe implements PipeTransform {
-  public transform(
-    countryOfInterest: CountryOfInterest,
-    size: '16' | '32' | '64' = '32'
-  ): string {
+  public transform(countryOfInterest: CountryOfInterest): string {
     if (
       !countryOfInterest?.countryCode ||
       countryOfInterest.countryCode === COUNTRY_CODE_UNAVAILABLE
     ) {
       return '';
     }
-
-    return `https://www.countryflags.io/${countryOfInterest.countryCode}/flat/${size}.png`;
+    return `assets/country-svgs/${countryOfInterest.countryCode.toLowerCase()}.svg`;
   }
 }

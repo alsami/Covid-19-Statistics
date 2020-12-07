@@ -1,6 +1,10 @@
 <mat-card *ngIf="countryStats">
   <div class="header-container">
-    <img class="country-image" [src]="countryStats | countryFlag: '64'" />
+    <img
+      class="country-image"
+      [src]="countryStats | countryFlag"
+      style="width: 64px; height: 64px"
+    />
     <mat-card-title>
       {{ countryStats.country }}
     </mat-card-title>
