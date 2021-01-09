@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { COUNTRY_CODE_UNAVAILABLE } from '@covid19-country-statistics-lib/lib/models';
+import { environment } from '@covid19-statistics-environment/environment';
 import { CountryOfInterest } from '@covid19-statistics/countries/models';
 
 @Pipe({
@@ -14,6 +15,8 @@ export class CountryFlagPipe implements PipeTransform {
     ) {
       return '';
     }
-    return `assets/country-svgs/${countryOfInterest.countryCode.toLowerCase()}.svg`;
+    return `${
+      environment.apiUrl
+    }countries/${countryOfInterest.countryCode.toLowerCase()}/flag`;
   }
 }

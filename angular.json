@@ -26,12 +26,7 @@
             "assets": [
               "projects/covid-19-statistics/src/favicon.ico",
               "projects/covid-19-statistics/src/assets",
-              "projects/covid-19-statistics/src/manifest.webmanifest",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/svg-country-flags/svg",
-                "output": "./assets/country-svgs"
-              }
+              "projects/covid-19-statistics/src/manifest.webmanifest"
             ],
             "styles": [
               "projects/covid-19-statistics/src/styles.scss",
@@ -98,12 +93,7 @@
             "assets": [
               "projects/covid-19-statistics/src/favicon.ico",
               "projects/covid-19-statistics/src/assets",
-              "projects/covid-19-statistics/src/manifest.webmanifest",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/svg-country-flags/svg",
-                "output": "./assets/country-svgs"
-              }
+              "projects/covid-19-statistics/src/manifest.webmanifest"
             ],
             "styles": [
               "projects/covid-19-statistics/src/styles.scss",
