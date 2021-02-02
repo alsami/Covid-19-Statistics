@@ -5,6 +5,7 @@ import {
   CountriesStatsEffects,
   CountriesStatsHistoryEffects,
   CountryStatisticsLibModule,
+  CountryStatisticsVaryEffects,
   CountryStatsEffects,
   CountryStatsHistoryEffects,
   fromCountryStatistics,
@@ -73,6 +74,7 @@ const COMPONENTS = [
       CountriesStatsHistoryEffects,
       CountryStatsEffects,
       CountryStatsHistoryEffects,
+      CountryStatisticsVaryEffects,
     ]),
   ],
 })

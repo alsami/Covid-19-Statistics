@@ -10,6 +10,8 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatTabGroup } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import {
+  countryStatisticsVaryActions,
+  CountryStatisticsVaryContainer,
   CountryStats,
   countryStatsActions,
   countryStatsHistoryActions,
@@ -51,6 +53,7 @@ export class CountryStatsOverviewComponent
 
   public countryStats$: Observable<CountryStats>;
   public countryHistoryStats$: Observable<CountryStats[]>;
+  public countryStatisticsVary$: Observable<CountryStatisticsVaryContainer[]>;
   public loading$: Observable<boolean>;
   public selectedIndex: number = 0;
   public colors = BAR_CHART_COLORS;
@@ -68,6 +71,12 @@ export class CountryStatsOverviewComponent
   public loadHistory = (country: string) => {
     this.store.dispatch(
       countryStatsHistoryActions.load({
+        country: country,
+      })
+    );
+
+    this.store.dispatch(
+      countryStatisticsVaryActions.loadForCountry({
         country: country,
       })
     );
@@ -154,10 +163,19 @@ export class CountryStatsOverviewComponent
       this.store.pipe(
         select(fromCountryStatistics.getCountryStatsHistoryLoading)
       ),
+      this.store.pipe(
+        select(fromCountryStatistics.getCountryStatisticsVaryLoading)
+      ),
     ]).pipe(
       map(
-        ([countryStatsLoading, countryStatsHistoryLoading]) =>
-          countryStatsLoading || countryStatsHistoryLoading
+        ([
+          countryStatsLoading,
+          countryStatsHistoryLoading,
+          countryStatisticsVaryLoading,
+        ]) =>
+          countryStatsLoading ||
+          countryStatsHistoryLoading ||
+          countryStatisticsVaryLoading
       )
     );
 
@@ -167,6 +185,10 @@ export class CountryStatsOverviewComponent
 
     this.countryHistoryStats$ = this.store.pipe(
       select(fromCountryStatistics.getCountryStatsHistory)
+    );
+
+    this.countryStatisticsVary$ = this.store.pipe(
+      select(fromCountryStatistics.getCountryStatisticsVaryForCountry)
     );
   }
 

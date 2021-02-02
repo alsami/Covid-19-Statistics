@@ -6,6 +6,7 @@ import {
 } from '@ngrx/store';
 import * as fromCountriesStatsHistory from './countries-stats-history.reducer';
 import * as fromCountriesStats from './countries-stats.reducer';
+import * as fromCountryStatisticsVary from './country-statistics-vary.reducer';
 import * as fromCountryStatsHistory from './country-stats-history.reducer';
 import * as fromCountryStats from './country-stats.reducer';
 
@@ -14,6 +15,7 @@ export interface CountryState {
   countriesStatsHistory: fromCountriesStatsHistory.CountriesStatsHistoryState;
   countryStats: fromCountryStats.CountryStatsState;
   countryStatsHistory: fromCountryStatsHistory.CountryStatsHistoryState;
+  countryStatisticsVary: fromCountryStatisticsVary.CountryStatisticsVaryState;
 }
 
 export interface State extends fromRoot.AppState {
@@ -25,6 +27,7 @@ export const reducers: ActionReducerMap<CountryState> = {
   countriesStatsHistory: fromCountriesStatsHistory.reducer,
   countryStats: fromCountryStats.reducer,
   countryStatsHistory: fromCountryStatsHistory.reducer,
+  countryStatisticsVary: fromCountryStatisticsVary.reducer,
 };
 
 export const COUNTRIES_FEATURE_SELECTOR = 'countries';
@@ -103,4 +106,27 @@ export const getCountryStatsHistory = createSelector(
 export const getCountryStatsHistoryLoading = createSelector(
   getCountryStatsHistoryState,
   fromCountryStatsHistory.loading
+);
+
+/**
+ * Country-Statistics Vary
+ */
+export const getCountryStatisticsVaryState = createSelector(
+  getCountriesState,
+  (state) => state.countryStatisticsVary
+);
+
+export const getCountryStatisticsVaryForCountry = createSelector(
+  getCountryStatisticsVaryState,
+  fromCountryStatisticsVary.countryVary
+);
+
+export const getCountryStatisticsVaryForCountries = createSelector(
+  getCountryStatisticsVaryState,
+  fromCountryStatisticsVary.countriesVary
+);
+
+export const getCountryStatisticsVaryLoading = createSelector(
+  getCountryStatisticsVaryState,
+  fromCountryStatisticsVary.loading
 );

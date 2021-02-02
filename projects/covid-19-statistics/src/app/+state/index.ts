@@ -28,11 +28,15 @@ export const reducers: ActionReducerMap<AppState> = {
 export function logger(
   reducer: ActionReducer<AppState>
 ): ActionReducer<AppState> {
-  return function (state: AppState, action: any): AppState {
-    console.log('state', state);
+  return (state, action) => {
+    const result = reducer(state, action);
+    console.groupCollapsed(action.type);
+    console.log('prev state', state);
     console.log('action', action);
+    console.log('next state', result);
+    console.groupEnd();
 
-    return reducer(state, action);
+    return result;
   };
 }
 
@@ -52,9 +56,9 @@ export const getTitle = createSelector(getTitleState, fromTitle.title);
 /**
  * Title Reducers
  */
-export const getCountriesOfInterestState = createFeatureSelector<
-  fromCountriesOfInterest.CountriesOfInterestState
->('countriesOfInterest');
+export const getCountriesOfInterestState = createFeatureSelector<fromCountriesOfInterest.CountriesOfInterestState>(
+  'countriesOfInterest'
+);
 
 export const getCountriesOfInterest = createSelector(
   getCountriesOfInterestState,

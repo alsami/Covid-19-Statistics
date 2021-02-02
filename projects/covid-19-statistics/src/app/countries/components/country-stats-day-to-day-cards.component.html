@@ -1,34 +1,34 @@
 <div class="container">
-  <ng-container *ngFor="let increase of increases">
-    <mat-card class="increase-card">
-      <mat-card-title>{{ increase.type }}</mat-card-title>
-      <mat-card-content>
-        <span
-          class="increase"
-          [matTooltip]="increase.text"
-          [covid19DiffNumberColor]="increase.type === increaseType.Recovered"
-        >
-          {{ increase.increase }}
-        </span>
-        %
-        <ng-container *ngIf="increase.increase !== 0">
-          <ng-container
-            *ngIf="increase.increase > 0; then up; else down"
-          ></ng-container>
-          <ng-template #up>
-            <mat-icon>
-              trending_up
-            </mat-icon>
-          </ng-template>
-          <ng-template #down>
-            <mat-icon>trending_down</mat-icon>
-          </ng-template>
-        </ng-container>
-        <ng-container *ngIf="increase.increase === 0">
-          <mat-icon>trending_flat</mat-icon>
-        </ng-container>
-        <div>{{ increase.time | date: 'dd.MM.yyyy':'UTC' }}</div>
-      </mat-card-content>
-    </mat-card>
+  <ng-container *ngFor="let varyContainer of countryStatisticsVaryContainers">
+    <ng-container *ngFor="let vary of relevantVary(varyContainer)">
+      <mat-card class="increase-card">
+        <mat-card-title>{{ vary.varyType }}</mat-card-title>
+        <mat-card-content>
+          <span
+            class="increase"
+            [matTooltip]="varyText(vary)"
+            [covid19DiffNumberColor]="vary.varyType === varyType.Recovered"
+          >
+            {{ vary.vary }}
+          </span>
+          %
+          <ng-container *ngIf="vary.vary !== 0">
+            <ng-container
+              *ngIf="vary.vary > 0; then up; else down"
+            ></ng-container>
+            <ng-template #up>
+              <mat-icon>trending_up</mat-icon>
+            </ng-template>
+            <ng-template #down>
+              <mat-icon>trending_down</mat-icon>
+            </ng-template>
+          </ng-container>
+          <ng-container *ngIf="vary.vary === 0">
+            <mat-icon>trending_flat</mat-icon>
+          </ng-container>
+          <div>{{ varyContainer.time | date: 'dd.MM.yyyy':'UTC' }}</div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
   </ng-container>
 </div>

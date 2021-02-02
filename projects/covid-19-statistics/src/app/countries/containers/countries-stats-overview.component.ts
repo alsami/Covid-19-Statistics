@@ -5,6 +5,8 @@ import { MatSelectChange } from '@angular/material/select';
 import {
   countriesStatsActions,
   countriesStatsHistoryActions,
+  countryStatisticsVaryActions,
+  CountryStatisticsVaryContainer,
   CountryStats,
   fromCountryStatistics,
 } from '@covid19-country-statistics-lib/public-api';
@@ -51,6 +53,9 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   public selectedIndex: number = 0;
   private coiSub$: Subscription;
   public chartTypes: BarChartType[] = BAR_CHART_TYPES;
+  public countryStatisticsVaryContainers$: Observable<
+    CountryStatisticsVaryContainer[]
+  >;
 
   public selectedBarCharType: BarChartType = this.chartTypes[0];
 
@@ -58,8 +63,13 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
   countryAutoComplete: CountriesAutoCompleteComponent;
 
   loadCountriesStats = () => this.store.dispatch(countriesStatsActions.load());
-  loadCountriesStatsHistory = () =>
+  loadCountriesStatsHistory = () => {
     this.store.dispatch(countriesStatsHistoryActions.load());
+  };
+
+  loadCountriesVary = () => {
+    this.store.dispatch(countryStatisticsVaryActions.loadForCountries());
+  };
 
   public tabLabelsFunc = [
     {
@@ -72,7 +82,7 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
     },
     {
       label: '10 Days',
-      func: this.loadCountriesStatsHistory,
+      func: this.loadCountriesVary,
     },
     {
       label: '10 Days Graphs',
@@ -127,6 +137,10 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
 
     this.countryStatsHistory$ = this.store.pipe(
       select(fromCountryStatistics.getCountriesStatsHistory)
+    );
+
+    this.countryStatisticsVaryContainers$ = this.store.pipe(
+      select(fromCountryStatistics.getCountryStatisticsVaryForCountries)
     );
 
     this.coiSub$ = this.store
@@ -226,15 +240,23 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
       this.store.pipe(
         select(fromCountryStatistics.getCountriesStatsHistoryLoading)
       ),
+      this.store.pipe(
+        select(fromCountryStatistics.getCountryStatisticsVaryLoading)
+      ),
     ]).pipe(
-      map(([countriesLoading, countriesHistoryLoading]) => {
-        console.log(
+      map(
+        ([
           countriesLoading,
           countriesHistoryLoading,
-          countriesLoading || countriesHistoryLoading
-        );
-        return countriesLoading || countriesHistoryLoading;
-      })
+          countryStatisticsVaryLoading,
+        ]) => {
+          return (
+            countriesLoading ||
+            countriesHistoryLoading ||
+            countryStatisticsVaryLoading
+          );
+        }
+      )
     );
   }
 }

@@ -66,7 +66,7 @@
     <div class="page-content">
       <covid19-country-stats-day-to-day-cards
         *ngIf="historyViewOptions[0].selected || historyViewOptions[2].selected"
-        [countryStats]="countryHistoryStats$ | async"
+        [countryStatisticsVaryContainers]="countryStatisticsVary$ | async"
       ></covid19-country-stats-day-to-day-cards>
 
       <covid19-country-stats-history-table
