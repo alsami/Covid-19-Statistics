@@ -82,7 +82,10 @@ export class CountriesStatsOverviewComponent implements OnInit, OnDestroy {
     },
     {
       label: '10 Days',
-      func: this.loadCountriesVary,
+      func: () => {
+        this.loadCountriesVary();
+        this.loadCountriesStatsHistory();
+      },
     },
     {
       label: '10 Days Graphs',
