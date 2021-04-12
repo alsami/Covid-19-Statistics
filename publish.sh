@@ -1,41 +1,39 @@
-#!/usr/bin/env bash
+#!/bin/bash
 function build_app() {
     echo build application in production mode, this might take a while
     ng build --prod --output-hashing bundles
     return ${?}
 }
 
-function create_image() {
-    docker build -t ${REGISTRY}/covid-19-statistics:${TRAVIS_TAG} -f ./Dockerfile .
-    return ${?}
-}
-
-function publish_image() {
-    docker push ${REGISTRY}/covid-19-statistics:${TRAVIS_TAG}
-    return ${?};
+function zip_files() {
+  cd ./dist/covid19-statistics/
+  zip -r ../../${1} *
+  cd ../../
+  return ${?}
 }
 
 function authenticate() {
     echo authenticating with service-principal
     az login --service-principal -u ${SERVICE_PRINCIPAL_USER} -p ${SERVICE_PRINCIPAL_PASSWORD} --tenant ${SERVICE_PRINCIPAL_TENANT}
+    return ${?}
 }
 
-
-function set_container() {
-    echo updating container to version ${TRAVIS_TAG}
-    az webapp config container set -c "${REGISTRY}/covid-19-statistics:${TRAVIS_TAG}" -r https://${REGISTRY} -u ${REGISTRY_USER} -p "${REGISTRY_PASSWORD}" -n ${COVID19STATISTICS_SERVICE_NAME} -g ${COVID19STATISTICS_RESOURCE_NAME}
+upload_zip() {
+  echo uploading file
+  az storage blob upload --connection-string ${STORAGE_CONNECTION} --container-name versions --file ${1} --name ${1}
+  return ${?}
 }
 
-function restart_app() {
-    echo restarting application
-    az webapp restart --name ${COVID19STATISTICS_SERVICE_NAME} --resource-group ${COVID19STATISTICS_RESOURCE_NAME}
+function invoke() {
+  az iot hub invoke-device-method -n ${IOT_HUB_NAME} -d ${IOT_DEVICE_NAME} --mn ${IOT_DEVICE_METHOD_NAME} --mp '{ "tag": "'${TRAVIS_TAG}'" }' --to 60
 }
 
 build_app
-create_image
-publish_image
+file_name=${TRAVIS_TAG}.zip
+zip_files ${file_name}
+upload_zip ${file_name}
 authenticate
-set_container
-restart_app
+invoke
+exit ${?}
 
 
