@@ -15,11 +15,9 @@ jobs:
     - stage: publish
       name: publish-app
       if: tag IS present
-      services:
-        - docker
       before_script:
-        - docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD} ${REGISTRY}
         - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+        - az config set extension.use_dynamic_install=yes_without_prompt
         - sh create-environment-prod-file.sh
         - npm i
       script: ./publish.sh
