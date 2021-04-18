@@ -18,9 +18,9 @@ function authenticate() {
     return ${?}
 }
 
-upload_zip() {
+function upload_zip() {
   echo uploading file
-  az storage blob upload --connection-string ${STORAGE_CONNECTION} --container-name versions --file ${1} --name ${1}
+  az storage blob upload --account-name "${STORAGE_ACCOUNT_NAME}" --account-key "${STORAGE_ACCOUNT_KEY}" --container-name versions --file ${1} --name ${1}
   return ${?}
 }
 
@@ -29,10 +29,10 @@ function invoke() {
 }
 
 build_app
+authenticate
 file_name=${TRAVIS_TAG}.zip
 zip_files ${file_name}
 upload_zip ${file_name}
-authenticate
 invoke
 exit ${?}
 
