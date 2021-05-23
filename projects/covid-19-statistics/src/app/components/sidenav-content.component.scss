@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 .grid {
   display: flex;
@@ -53,7 +53,7 @@
 
 @mixin sidenav-content-component-theme($theme) {
   $foreground-palette: map-get($theme, foreground);
-  $default-color: mat-color($foreground-palette, base);
+  $default-color: mat.get-color-from-palette($foreground-palette, base);
 
   $accent: map-get(
     $map: $theme,
@@ -61,7 +61,7 @@
   );
 
   .selected-link {
-    border-left: 0.5em solid mat-color($accent);
+    border-left: 0.5em solid mat.get-color-from-palette($accent);
   }
 
   .version {

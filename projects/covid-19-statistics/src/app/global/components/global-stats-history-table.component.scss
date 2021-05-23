@@ -1,5 +1,3 @@
-@import '~@angular/material/theming';
-
 @mixin global-stats-history-table-component-theme($theme) {
   $background-palette: map-get($theme, background);
   $background: map-get($background-palette, background);

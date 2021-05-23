@@ -1,5 +1,6 @@
-@import '~@angular/material/theming';
-@include mat-core();
+@use '~@angular/material' as mat;
+
+@include mat.core();
 @import './scss/themes/black-dark.theme.scss';
 @import './scss/themes/grey-light.theme.scss';
 @import './scss/themes/purple-green-dark.theme.scss';
@@ -29,21 +30,21 @@
 }
 
 .grey-light-theme {
-  @include angular-material-theme($grey-light-theme);
+  @include mat.all-component-themes($grey-light-theme);
   @include component-themes($grey-light-theme);
 }
 
 .deeppurple-amber-light-theme {
-  @include angular-material-theme($deeppurple-amber-light);
+  @include mat.all-component-themes($deeppurple-amber-light);
   @include component-themes($deeppurple-amber-light);
 }
 
 .black-dark-theme {
-  @include angular-material-theme($black-dark-theme);
+  @include mat.all-component-themes($black-dark-theme);
   @include component-themes($black-dark-theme);
 }
 
 .purple-green-dark-theme {
-  @include angular-material-theme($purple-green-dark-theme);
+  @include mat.all-component-themes($purple-green-dark-theme);
   @include component-themes($purple-green-dark-theme);
 }

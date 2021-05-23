@@ -1,8 +1,9 @@
-$black-dark-primary: mat-palette($mat-grey, 900);
-$black-dark-accent: mat-palette($mat-deep-orange, 400);
-$black-dark-warn: mat-palette($mat-red, A700);
+@use '~@angular/material' as mat;
+$black-dark-primary: mat.define-palette(mat.$grey-palette, 900);
+$black-dark-accent: mat.define-palette(mat.$deep-orange-palette, 400);
+$black-dark-warn: mat.define-palette(mat.$red-palette, A700);
 
-$black-dark-theme: mat-dark-theme(
+$black-dark-theme: mat.define-dark-theme(
   $black-dark-primary,
   $black-dark-accent,
   $black-dark-warn

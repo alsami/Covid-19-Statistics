@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 .color-circle {
   height: 50px;
@@ -18,6 +18,6 @@
     $key: accent,
   );
   .color-button {
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 }

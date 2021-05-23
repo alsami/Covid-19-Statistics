@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 .lds-ellipsis {
   display: inline-block;
@@ -60,7 +60,7 @@
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: mat-color($accent);
+    background: mat.get-color-from-palette($accent);
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
 }

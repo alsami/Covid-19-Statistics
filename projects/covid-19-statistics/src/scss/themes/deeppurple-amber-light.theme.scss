@@ -1,7 +1,8 @@
-$deeppurple-amber-light-primary: mat-palette($mat-deep-purple);
-$deeppurple-amber-light-accent: mat-palette($mat-amber, A200, A100, A400);
+@use '~@angular/material' as mat;
+$deeppurple-amber-light-primary: mat.define-palette(mat.$deep-purple-palette);
+$deeppurple-amber-light-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
 
-$deeppurple-amber-light: mat-light-theme(
+$deeppurple-amber-light: mat.define-light-theme(
   $deeppurple-amber-light-primary,
   $deeppurple-amber-light-accent
 );

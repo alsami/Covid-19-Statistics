@@ -22,7 +22,6 @@
             "main": "projects/covid-19-statistics/src/main.ts",
             "polyfills": "projects/covid-19-statistics/src/polyfills.ts",
             "tsConfig": "projects/covid-19-statistics/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/covid-19-statistics/src/favicon.ico",
               "projects/covid-19-statistics/src/assets",
@@ -32,7 +31,13 @@
               "projects/covid-19-statistics/src/styles.scss",
               "projects/covid-19-statistics/src/material-themes.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {

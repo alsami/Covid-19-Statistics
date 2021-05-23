@@ -1,6 +1,6 @@
-// @import '@angular/material/prebuilt-themes/purple-green.css';
+// @use '~@angular/material' as mat;
+@import '@angular/material/prebuilt-themes/purple-green.css';
 @import './scss/breakpoints.scss';
-@import '~@angular/material/theming';
 
 html,
 body {
@@ -43,7 +43,7 @@ body {
 
 @mixin app-root-theme($theme) {
   $foreground-palette: map-get($theme, foreground);
-  $default-color: mat-color($foreground-palette, base);
+  $default-color: mat.get-color-from-palette($foreground-palette, base);
 
   covid19-countries-stats-stacked-barchart,
   covid19-countries-stats-grouped-bar-chart,

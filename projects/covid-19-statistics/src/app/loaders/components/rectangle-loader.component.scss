@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 .spinner {
   height: 40px;
@@ -36,37 +36,37 @@
   );
 
   .spinner > div {
-    background-color: mat-color($accent);
+    background-color: mat.get-color-from-palette($accent);
     height: 100%;
     width: 6px;
     display: inline-block;
 
     -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
     animation: sk-stretchdelay 1.2s infinite ease-in-out;
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 
   .spinner .rect2 {
     -webkit-animation-delay: -1.1s;
     animation-delay: -1.1s;
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 
   .spinner .rect3 {
     -webkit-animation-delay: -1s;
     animation-delay: -1s;
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 
   .spinner .rect4 {
     -webkit-animation-delay: -0.9s;
     animation-delay: -0.9s;
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 
   .spinner .rect5 {
     -webkit-animation-delay: -0.8s;
     animation-delay: -0.8s;
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 }
