@@ -10,7 +10,7 @@ jobs:
     - stage: build
       name: build app
       before_script: npm i
-      script: ng build --prod
+      script: ng build --configuration production
       if: tag IS NOT present
     - stage: publish
       name: publish-app

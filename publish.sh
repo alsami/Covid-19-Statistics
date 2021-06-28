@@ -1,7 +1,7 @@
 #!/bin/bash
 function build_app() {
     echo build application in production mode, this might take a while
-    ng build --prod --output-hashing bundles
+    ng build --configuration production --output-hashing bundles
     return ${?}
 }
 
