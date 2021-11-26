@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 $grey-light-primary: mat.define-palette(mat.$blue-grey-palette);
 $grey-light-accent: mat.define-palette(mat.$deep-orange-palette, A700);
 
