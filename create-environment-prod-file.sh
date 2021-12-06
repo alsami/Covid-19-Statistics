@@ -10,5 +10,5 @@ echo "export const environment = {
     production: true,
     apiUrl: '${apiUrl}',
     mapsApiKey: '${mapsApiKey}',
-    version : '${TRAVIS_TAG}'
+    version : '${TAG}'
 };" > ${path}
