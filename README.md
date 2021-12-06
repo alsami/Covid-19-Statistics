@@ -1,6 +1,6 @@
 # COVID-19-Statistics
 
-[![Build Status](https://travis-ci.com/alsami/Covid-19-Statistics.svg?branch=main)](https://travis-ci.com/alsami/Covid-19-Statistics)
+[![Build Status](https://github.com/alsami/Covid-19-Statistics/actions/workflows/push.yml/badge.svg)](https://github.com/alsami/Covid-19-Statistics/actions/workflows/push.yml)
 
 This web-application is showing historical data using the [Covid19Api](https://github.com/alsami/Covid-19-API).
 

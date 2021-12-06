@@ -1,0 +1,53 @@
+on:
+  push:
+    tags:
+      - '*'
+name: Build and deploy
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['12.x']
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          # client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          # client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          # tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          # subscription-id: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          allow-no-subscriptions: true
+
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install and npm run build
+        run: |
+          npm i
+          npm run build
+
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            export TAG=${{github.ref_name}}
+            echo 'Tag is:'
+            echo ${TAG}
+            az config set extension.use_dynamic_install=yes_without_prompt
+            chmod +x ./create-environment-prod-file.sh
+            ./create-environment-prod-file.sh
+            export STORAGE_ACCOUNT_NAME=${{secrets.AZURE_STORAGE_ACCOUNT_NAME}}
+            export STORAGE_ACCOUNT_KEY=${{secrets.AZURE_STORAGE_ACCOUNT_KEY}}
+            export IOT_HUB_NAME=${{secrets.AZURE_IOT_HUB_NAME}}
+            export IOT_DEVICE_NAME=${{secrets.AZURE_IOT_DEVICE_NAME}}
+            export IOT_DEVICE_METHOD_NAME=${{secrets.AZURE_IOT_DEVICE_METHOD_NAME}}
+            chmod +x ./publish.sh
+            ./publish.sh
