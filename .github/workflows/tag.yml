@@ -33,7 +33,6 @@ jobs:
           ./create-environment-prod-file.sh
           npm i
           npm run build
-
       - name: Azure CLI script
         uses: azure/CLI@v1
         with:
