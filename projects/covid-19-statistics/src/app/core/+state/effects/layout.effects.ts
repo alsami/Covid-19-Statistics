@@ -68,11 +68,6 @@ export class LayoutEffects {
         map((action) => {
           localStorage.setItem(LAYOUT_THEME_TYPE_KEY, action.theme);
           let color = '';
-          console.warn(
-            action.theme.valueOf(),
-            LayoutThemeType.PurpleGreenDark.valueOf(),
-            action.theme.valueOf() === LayoutThemeType.PurpleGreenDark.valueOf()
-          );
 
           switch (action.theme.valueOf()) {
             case LayoutThemeType.GreyLight.valueOf():
@@ -88,7 +83,6 @@ export class LayoutEffects {
               color = '#7b1fa2';
               break;
           }
-          console.warn(color);
           document
             .querySelector("meta[name='theme-color']")
             .setAttribute('content', color);
