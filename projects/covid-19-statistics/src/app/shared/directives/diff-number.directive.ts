@@ -23,8 +23,23 @@ export class DiffNumberColorDirective implements AfterViewInit {
   @Input('covid19DiffNumberColor') positiveChange = false;
 
   public ngAfterViewInit(): void {
+    const suffixes: string[] = ['k', 'M', 'G', 'T', 'P', 'E'];
     const htmlElement = this.elementRef.nativeElement as HTMLElement;
-    const value = +htmlElement.innerHTML;
+    let value: string | number = htmlElement.innerHTML;
+    let givenSuffix = '';
+    if (typeof value === 'string') {
+      for (let suffix of suffixes) {
+        if (value.indexOf(suffix) > -1) {
+          givenSuffix = suffix;
+        }
+        value = value.replace(suffix, '');
+      }
+      value = +value;
+    }
+
+    if (Number.isNaN(value)) {
+      return;
+    }
 
     if (value === 0) {
       return;
@@ -38,13 +53,16 @@ export class DiffNumberColorDirective implements AfterViewInit {
 
     if (value > 0) {
       htmlElement.style.color = increaseColor;
-      htmlElement.innerHTML = `+${pipe.transform(value, '1.0-1')}`;
+      htmlElement.innerHTML = `+${pipe.transform(
+        value,
+        '1.0-1'
+      )}${givenSuffix}`;
       return;
     }
 
     if (value < 0) {
       htmlElement.style.color = decreaseColor;
-      htmlElement.innerHTML = `${pipe.transform(value, '1.0-1')}`;
+      htmlElement.innerHTML = `${pipe.transform(value, '1.0-1')}${givenSuffix}`;
       return;
     }
   }

@@ -7,9 +7,13 @@
     <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
     <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column">
-        <span>{{ element.total | number }}</span>
-        <span covid19DiffNumberColor>
-          {{ dataSource.data | valueDiff: element.total:i:'total' }}
+        <span>{{ element.total | thousandSuff: 1 }}</span>
+        <span class="increase-decrease-number" covid19DiffNumberColor>
+          {{
+            dataSource.data
+              | valueDiff: element.total:i:'total'
+              | thousandSuff: 1
+          }}
         </span>
       </div>
     </mat-cell>
@@ -19,9 +23,13 @@
     <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
     <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column">
-        <span>{{ element.active | number }}</span>
-        <span covid19DiffNumberColor>
-          {{ dataSource.data | valueDiff: element.active:i:'active' }}
+        <span>{{ element.active | thousandSuff: 1 }}</span>
+        <span class="increase-decrease-number" covid19DiffNumberColor>
+          {{
+            dataSource.data
+              | valueDiff: element.active:i:'active'
+              | thousandSuff: 1
+          }}
         </span>
       </div>
     </mat-cell>
@@ -31,9 +39,13 @@
     <mat-header-cell *matHeaderCellDef>Deaths</mat-header-cell>
     <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column">
-        <span>{{ element.deaths | number }}</span>
-        <span covid19DiffNumberColor>
-          {{ dataSource.data | valueDiff: element.deaths:i:'deaths' }}
+        <span>{{ element.deaths | thousandSuff: 1 }}</span>
+        <span class="increase-decrease-number" covid19DiffNumberColor>
+          {{
+            dataSource.data
+              | valueDiff: element.deaths:i:'deaths'
+              | thousandSuff: 1
+          }}
         </span>
       </div>
     </mat-cell>
@@ -43,9 +55,13 @@
     <mat-header-cell *matHeaderCellDef>Recovered</mat-header-cell>
     <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column">
-        <span>{{ element.recovered | number }}</span>
+        <span>{{ element.recovered | thousandSuff: 1 }}</span>
         <span [covid19DiffNumberColor]="true">
-          {{ dataSource.data | valueDiff: element.recovered:i:'recovered' }}
+          {{
+            dataSource.data
+              | valueDiff: element.recovered:i:'recovered'
+              | thousandSuff: 1
+          }}
         </span>
       </div>
     </mat-cell>
