@@ -5,14 +5,97 @@
   width: 100%;
 }
 
-mat-form-field {
-  width: 80%;
+@media #{$gt-md} {
+  .view-container {
+    display: flex;
+  }
 }
 
-.toggle-container {
-  display: flex;
-  justify-content: center;
-  margin: 5px;
+@media #{$md} {
+  .view-container {
+    display: flex;
+    flex-flow: column;
+  }
+}
+
+@media #{$xl} {
+  .bar-chart-container {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    min-width: 750px;
+  }
+
+  .pie-chart-container {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    min-width: 750px;
+  }
+}
+
+@media #{$lg} {
+  .bar-chart-container {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    width: 400px;
+  }
+
+  .pie-chart-container {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    width: 400px;
+  }
+}
+
+@media #{$md} {
+  .bar-chart-container {
+    display: flex;
+    align-items: center;
+    height: 500px;
+    width: 400px;
+  }
+
+  .pie-chart-container {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    width: 400px;
+  }
+}
+
+@media #{$sm} {
+  .bar-chart-container {
+    display: flex;
+    align-self: center;
+    height: 500px;
+    width: 400px;
+  }
+
+  .pie-chart-container {
+    display: flex;
+    align-self: center;
+    height: 500px;
+    width: 400px;
+  }
+}
+
+@media #{$xs} {
+  .bar-chart-container {
+    display: flex;
+    align-self: center;
+    height: 500px;
+    width: 320px;
+  }
+
+  .pie-chart-container {
+    display: flex;
+    align-self: center;
+    height: 500px;
+    width: 320px;
+  }
 }
 
 .graph-toggle-container {
@@ -28,63 +111,13 @@ mat-form-field {
   display: flex;
   flex-direction: row;
   flex: 1 1 100%;
-  justify-content: space-evenly;
-}
-
-.chart-container > mat-card {
-  background: none;
-  box-shadow: none;
-}
-
-@media #{$xl} {
-  mat-card-content {
-    display: flex;
-    height: 60vh;
-    width: 820px;
-  }
-}
-
-@media #{$lg} {
-  mat-card-content {
-    display: flex;
-    height: 60vh;
-    width: 500px;
-  }
-}
-
-@media #{$md} {
-  mat-card {
-    margin-bottom: 10px;
-    justify-content: center;
-    display: flex;
-    flex-flow: column;
-  }
-  mat-card-content {
-    display: flex;
-    height: 60vh;
-    width: 420px;
-  }
+  align-items: center;
 }
 
 @media #{$sm} {
   .chart-container {
     display: flex;
     flex-direction: column;
-  }
-
-  mat-card {
-    margin-bottom: 10px;
-    justify-content: center;
-    display: flex;
-    flex-flow: column;
-  }
-
-  mat-card-content {
-    display: flex;
-    justify-content: center;
-
-    width: 500px;
-    height: 50vh;
   }
 }
 
@@ -94,22 +127,5 @@ mat-form-field {
     flex-direction: column;
     justify-content: center;
     align-content: center;
-  }
-
-  mat-card {
-    margin-bottom: 10px;
-    justify-content: center;
-    display: flex;
-    flex-flow: column;
-  }
-
-  mat-card-content {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    align-self: center;
-    justify-content: center;
-    height: 50vh;
-    width: 330px;
   }
 }

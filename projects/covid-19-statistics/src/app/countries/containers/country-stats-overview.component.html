@@ -8,43 +8,23 @@
 >
   <mat-tab [label]="tabLabelsFunc[0].label">
     <div class="page-content">
-      <div class="toggle-container">
-        <mat-button-toggle-group
-          [multiple]="false"
-          (change)="viewSelectionChange($event, overviewViewOptions)"
-        >
-          <mat-button-toggle
-            *ngFor="let viewOption of overviewViewOptions"
-            [checked]="viewOption.selected"
-            [value]="viewOption.value"
-            [matTooltip]="viewOption.tooltip"
-          >
-            <mat-icon>{{ viewOption.label }}</mat-icon>
-          </mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-      <covid19-country-detailed-stats-cards
-        *ngIf="overviewViewOptions[0].selected"
-        [countryStats]="countryStats$ | async"
-      ></covid19-country-detailed-stats-cards>
-      <ng-container *ngIf="overviewViewOptions[1].selected">
+      <div class="view-container">
+        <covid19-country-detailed-stats-cards
+          [countryStats]="countryStats$ | async"
+        ></covid19-country-detailed-stats-cards>
         <div class="chart-container">
-          <mat-card>
-            <mat-card-content>
-              <covid19-country-stats-bar-chart
-                [countryStats]="countryStats$ | async"
-              ></covid19-country-stats-bar-chart>
-            </mat-card-content>
-          </mat-card>
-          <mat-card>
-            <mat-card-content>
-              <covid19-country-stats-pie-chart
-                [countryStats]="countryStats$ | async"
-              ></covid19-country-stats-pie-chart>
-            </mat-card-content>
-          </mat-card>
+          <div class="bar-chart-container">
+            <covid19-country-stats-bar-chart
+              [countryStats]="countryStats$ | async"
+            ></covid19-country-stats-bar-chart>
+          </div>
+          <div class="bar-chart-container">
+            <covid19-country-stats-pie-chart
+              [countryStats]="countryStats$ | async"
+            ></covid19-country-stats-pie-chart>
+          </div>
         </div>
-      </ng-container>
+      </div>
     </div>
   </mat-tab>
   <mat-tab [label]="tabLabelsFunc[1].label">
