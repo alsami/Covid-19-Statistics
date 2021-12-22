@@ -56,7 +56,7 @@
     <mat-cell *matCellDef="let element; let i = index">
       <div style="display: flex; flex-direction: column">
         <span>{{ element.recovered | thousandSuff: 1 }}</span>
-        <span [covid19DiffNumberColor]="true">
+        <span class="increase-decrease-number" [covid19DiffNumberColor]="true">
           {{
             dataSource.data
               | valueDiff: element.recovered:i:'recovered'
