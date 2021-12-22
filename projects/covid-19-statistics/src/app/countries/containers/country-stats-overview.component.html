@@ -7,11 +7,13 @@
   (animationDone)="animationDone(matTabGroup.selectedIndex)"
 >
   <mat-tab [label]="tabLabelsFunc[0].label">
-    <div class="page-content">
+    <div class="page-content page-content-container">
       <div class="view-container">
-        <covid19-country-detailed-stats-cards
-          [countryStats]="countryStats$ | async"
-        ></covid19-country-detailed-stats-cards>
+        <div class="cards-container">
+          <covid19-country-detailed-stats-cards
+            [countryStats]="countryStats$ | async"
+          ></covid19-country-detailed-stats-cards>
+        </div>
         <div class="chart-container">
           <div class="bar-chart-container">
             <covid19-country-stats-bar-chart

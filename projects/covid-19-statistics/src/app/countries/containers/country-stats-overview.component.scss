@@ -5,9 +5,21 @@
   width: 100%;
 }
 
+covid19-country-detailed-stats-cards {
+  width: 100%;
+}
+
+@media #{$gt-sm} {
+  .page-content-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 @media #{$gt-md} {
   .view-container {
     display: flex;
+    align-items: center;
   }
 }
 
@@ -19,34 +31,44 @@
 }
 
 @media #{$xl} {
+  .cards-container {
+    display: flex;
+    min-width: 560px;
+  }
+
   .bar-chart-container {
     display: flex;
     justify-content: center;
     height: 500px;
-    min-width: 750px;
+    min-width: 560px;
   }
 
   .pie-chart-container {
     display: flex;
     justify-content: center;
     height: 500px;
-    min-width: 750px;
+    min-width: 560px;
   }
 }
 
 @media #{$lg} {
+  .cards-container {
+    display: flex;
+    width: 360px;
+  }
+
   .bar-chart-container {
     display: flex;
     justify-content: center;
     height: 500px;
-    width: 400px;
+    width: 360px;
   }
 
   .pie-chart-container {
     display: flex;
     justify-content: center;
     height: 500px;
-    width: 400px;
+    width: 360px;
   }
 }
 
