@@ -3,7 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSelectChange } from '@angular/material/select';
@@ -15,17 +15,17 @@ import {
   CountryStats,
   countryStatsActions,
   countryStatsHistoryActions,
-  fromCountryStatistics,
+  fromCountryStatistics
 } from '@covid19-country-statistics-lib/public-api';
 import { TitleActions } from '@covid19-statistics/core/+state/actions';
 import {
   BAR_CHART_COLORS,
-  BAR_CHART_TYPES,
+  BAR_CHART_TYPES
 } from '@covid19-statistics/countries/countries.constants';
 import { BarChartType } from '@covid19-statistics/countries/models';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { delay, distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 type ViewOption = {
   label: string;
@@ -61,6 +61,7 @@ export class CountryStatsOverviewComponent
   @ViewChild('matTabGroup', { static: false }) matTabGroup: MatTabGroup;
 
   public load = (country: string) => {
+    console.log('COUNTRY', country)
     this.store.dispatch(
       countryStatsActions.load({
         country: country,
@@ -195,7 +196,6 @@ export class CountryStatsOverviewComponent
   public ngAfterViewInit(): void {
     this.paramSub = this.route.paramMap
       .pipe(
-        delay(0),
         map((paramMap) => paramMap.get('country')),
         distinctUntilChanged()
       )
@@ -248,6 +248,7 @@ export class CountryStatsOverviewComponent
   }
 
   public animationDone(index: number): void {
+    console.log(this.selectedCountry);
     this.tabLabelsFunc[index].func(this.selectedCountry);
 
     this.selectedIndex = index;
