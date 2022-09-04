@@ -31,7 +31,7 @@ jobs:
           export mapsApiKey=${{secrets.MAPS_API_KEY}}
           export TAG=${{github.ref_name}}
           ./create-environment-prod-file.sh
-          npm i --legacy-peer-deps
+          npm i
           npm run build
 
       - name: Azure CLI script
