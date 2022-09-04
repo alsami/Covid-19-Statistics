@@ -175,8 +175,10 @@
       }
     }
   },
-  "defaultProject": "covid19-statistics",
   "cli": {
-    "defaultCollection": "@ngrx/schematics"
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ],
+    "analytics": false
   }
 }
