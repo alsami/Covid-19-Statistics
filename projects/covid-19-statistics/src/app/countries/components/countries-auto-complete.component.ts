@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CountryStats } from '@covid19-country-statistics-lib/public-api';
@@ -32,7 +32,7 @@ export class CountriesAutoCompleteComponent
   );
   filteredCountries$: Observable<string[]>;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  countriesCtrl = new FormControl();
+  countriesCtrl = new UntypedFormControl();
   selectedCountries: string[] = [];
   allCountries: string[] = [];
   countryStatsSub: Subscription;
