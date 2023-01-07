@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { MatRadioChange } from '@angular/material/radio';
+import { MatLegacyRadioChange as MatRadioChange } from '@angular/material/legacy-radio';
 import { LoaderType } from '@covid19-statistics/loaders/models';
 
 @Component({

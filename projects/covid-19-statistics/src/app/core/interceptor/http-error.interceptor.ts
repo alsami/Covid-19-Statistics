@@ -5,7 +5,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { RETRIES } from '@covid19-statistics/core/core.constants';
 import { Observable } from 'rxjs';
 import { delay, filter, last, retryWhen, take, tap } from 'rxjs/operators';

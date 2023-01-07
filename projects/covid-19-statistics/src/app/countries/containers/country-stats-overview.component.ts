@@ -6,8 +6,8 @@ import {
   ViewChild
 } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
-import { MatSelectChange } from '@angular/material/select';
-import { MatTabGroup } from '@angular/material/tabs';
+import { MatLegacySelectChange as MatSelectChange } from '@angular/material/legacy-select';
+import { MatLegacyTabGroup as MatTabGroup } from '@angular/material/legacy-tabs';
 import { ActivatedRoute } from '@angular/router';
 import {
   countryStatisticsVaryActions,

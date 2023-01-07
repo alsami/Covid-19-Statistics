@@ -11,10 +11,18 @@
         "dist/country-statistics-lib/country-statistics-lib",
         "dist/country-statistics-lib"
       ],
-      "@covid19-statistics/*": ["covid-19-statistics/src/app/*"],
-      "@covid19-statistics-environment/*": ["environments/*"],
-      "@covid19-global-statistics-lib/*": ["global-statistics-lib/src/*"],
-      "@covid19-country-statistics-lib/*": ["country-statistics-lib/src/*"]
+      "@covid19-statistics/*": [
+        "covid-19-statistics/src/app/*"
+      ],
+      "@covid19-statistics-environment/*": [
+        "environments/*"
+      ],
+      "@covid19-global-statistics-lib/*": [
+        "global-statistics-lib/src/*"
+      ],
+      "@covid19-country-statistics-lib/*": [
+        "country-statistics-lib/src/*"
+      ]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -24,8 +32,12 @@
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
-    "lib": ["es2018", "dom"]
+    "target": "ES2022",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

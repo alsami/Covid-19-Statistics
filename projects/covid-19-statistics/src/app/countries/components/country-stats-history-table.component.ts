@@ -4,7 +4,7 @@ import {
   Input,
   OnChanges,
 } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { CountryStats } from '@covid19-country-statistics-lib/public-api';
 
 @Component({

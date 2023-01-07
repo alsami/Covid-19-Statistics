@@ -34,8 +34,7 @@ import { RouterModule } from '@angular/router';
         },
       ],
       {
-    useHash: false,
-    relativeLinkResolution: 'legacy'
+    useHash: false
 }
     ),
   ],
